@@ -15,7 +15,16 @@ app.use(express.json())
 app.use(cors())
 app.use(routes)
 
-
 app.listen(port, host, () => {
     console.log(`API funcionando no host:`, host, `e na porta:`, port)
 })
+
+const Client = require('pg').Client
+const cliente = new Client({
+    user: "postgres",
+    password: "admin123",
+    host: "localhost",
+    port: 5432,
+    database: "SysProjetos"
+})
+

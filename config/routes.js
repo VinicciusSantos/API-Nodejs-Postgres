@@ -1,33 +1,14 @@
 const express = require('express')
 const routes = express.Router()
 
-var pessoas = [
-    {Id:'1',  Nome: 'Larissa',   Profissao: 'frontEnd',  Equipe: '25',    Tarefa: '14'}, 
-    {Id:'2',  Nome: 'Dayanne',   Profissao: 'BackEnd',   Equipe: '3',     Tarefa: '20'},
-    {Id:'45', Nome: 'Iara',      Profissao: 'BD',        Equipe: '3',     Tarefa: '1'},
-    {Id:'4',  Nome: 'Caio',      Profissao: 'frontEnd',  Equipe: '25',    Tarefa: '14'},
-    {Id:'5',  Nome: 'Pedro',     Profissao: 'BackEnd',   Equipe: '21',    Tarefa: '20'},
-    {Id:'6',  Nome: 'Bruno',     Profissao: 'DevOps',    Equipe: '3',     Tarefa: '1' },
-    {Id:'7',  Nome: 'Carlos',    Profissao: 'frontEnd',  Equipe: '21',    Tarefa: '14'}
-]
-
-var equipes = [
-    {Id:'25',   Nome: 'equipe 25', Projetos: '8'},
-    {Id:'21',   Nome: 'equipe 21', Projetos: '7'},
-    {Id:'3',    Nome: 'equipe 3', Projetos: '4'}
-]
-
-var projetos = [
-    {Id:'4', Nome: 'Pousada'},
-    {Id:'8', Nome: 'API'},
-    {Id:'7', Nome: 'GP-Inovação'}
-]
-
-var tarefas = [
-    {Id:'14', Nome: 'Fazer tal coisa', Descrição: 'Descrição task 14'},
-    {Id:'20', Nome: 'Organizar aquilo ali', Descrição: 'Descrição task 20'},
-    {Id:'1',  Nome: 'Olhar o negoço', Descrição: 'Descrição task 1'}
-]
+const Client = require('pg').Client
+const cliente = new Client({
+    user: "postgres",
+    password: "admin123",
+    host: "localhost",
+    port: 5432,
+    database: "SysProjetos"
+})
 
 
 // Tela Principal
@@ -35,15 +16,16 @@ routes.get('/', (req, res) => {
     return res.json(`Menu Principal, Acesse: https://github.com/VinicciusSantos/API-NodeJs para saber mais`)
 })
 
-
 /* ------------------------------ Pessoas ------------------------------ */
 
 // Mostrando todas as pessoas
 routes.get('/pessoas', (req, res) => {
-    if (pessoas.length == 0) {
-        return res.json("Não existem cadastros de pessoas!")
-    }
-    return res.json(pessoas)
+    cliente.connect()
+    cliente.query("SELECT * FROM pessoas")
+    .then(results => {
+        return res.json(results.rows)
+    })
+    .finally(() => cliente.end())
 })
 
 // Mostrando pessoas com um ID específico
