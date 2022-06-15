@@ -18,14 +18,58 @@ routes.get('/', (req, res) => {
 /* ------------------------------ Pessoas ------------------------------ */
 
 // Mostrando todas as pessoas
+routes.get('/pessoas', (req, res) => { 
+    cliente.connect()
+    cliente.query("SELECT * FROM pessoas")
+    .then(results => {
+        return res.json(results.rows)
+    })
+})
 
 // Mostrando pessoas com um ID específico
+routes.get('/pessoas/:id', (req, res) => { 
+    const id = req.params.id
+
+    cliente.connect()
+    cliente.query('SELECT * FROM pessoas WHERE id = $1', [id])
+    .then(results => {
+        return res.json(results.rows)
+    })
+})
 
 // Inserindo pessoas
+routes.post('/pessoas', (req, res) => { 
+    const body = req.body
+
+    cliente.connect()
+    cliente.query('INSERT INTO pessoas (nome) values ($1)', [body.nome])
+    .then(results => {
+        return res.json("Inserido com sucesso!")
+    })
+})
 
 // Deletando pessoas
+routes.delete('/pessoas:id', (req, res) => { 
+    const id = req.params.id
+
+    cliente.connect()
+    cliente.query('DELETE FROM pessoas WHERE id = $1', [id])
+    .then(results => {
+        return res.json("Deletado com sucesso!")
+    })
+})
 
 // Editando pessoas
+routes.put('/pessoas/:id', (req, res) => { 
+    const id = req.params.id
+    const body = req.body
+
+    cliente.connect()
+    cliente.query('UPDATE pessoas SET nome = $1 WHERE id = $2', [body.nome, id])
+    .then(results => {
+        return res.json("Alterado com sucesso!")
+    })
+})
 
 
 /* ------------------------------ Projetos ------------------------------ */
