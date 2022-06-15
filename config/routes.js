@@ -39,7 +39,6 @@ routes.get('/projetos', (req, res) => {
     })
 })
 
-
 // Mostrando projetos pelo ID
 
 // Inserindo projetos
