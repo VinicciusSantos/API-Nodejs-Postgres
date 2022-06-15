@@ -40,6 +40,15 @@ routes.get('/projetos', (req, res) => {
 })
 
 // Mostrando projetos pelo ID
+routes.get('/projetos', (req, res) => { 
+    const id = req.params.id
+
+    cliente.connect()
+    cliente.query('select * from blog.post where id = $1', [id])
+    .then(results => {
+        return res.json(results.rows)
+    })
+})
 
 // Inserindo projetos
 
@@ -82,4 +91,5 @@ routes.get('/projetos', (req, res) => {
 
 // Mostrar pessoas com uma mesma tarefa
 
+cliente.end()
 module.exports = routes
