@@ -37,7 +37,6 @@ routes.get('/projetos', (req, res) => {
     .then(results => {
         return res.json(results.rows)
     })
-    .finally(cliente.end())
 })
 
 // Mostrando projetos pelo ID
@@ -45,14 +44,22 @@ routes.get('/projetos/:id', (req, res) => {
     const id = req.params.id
 
     cliente.connect()
-    cliente.query('select * from blog.post where id = $1', [id])
+    cliente.query('SELECT * FROM projetos WHERE id = $1', [id])
     .then(results => {
         return res.json(results.rows)
     })
-    .finally(cliente.end())
 })
 
 // Inserindo projetos
+routes.post('/projetos', (req, res) => { 
+    const body = req.body
+
+    cliente.connect()
+    cliente.query('INSERT INTO projetos (nome) values ($1)', [body.nome])
+    .then(results => {
+        return res.json("Inserido com sucesso!")
+    })
+})
 
 // Deletando projetos
 
