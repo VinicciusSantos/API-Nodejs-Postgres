@@ -4,7 +4,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const routes = require('./config/routes')
 
-const host = 'localhost';
+const host = '0.0.0.0';
 const port = process.env.PORT || 3000;
 
 const app = express()
