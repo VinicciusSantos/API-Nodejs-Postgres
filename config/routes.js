@@ -12,64 +12,21 @@ const cliente = new Client({
 
 // Tela Principal
 routes.get('/', (req, res) => {
-    return res.json(`Menu Principal, Acesse: https://github.com/VinicciusSantos/API-NodeJs-postgres para saber mais`)
+    return res.json(`Menu Principal, Acesse: https://github.com/VinicciusSantos/API-NodeJs para saber mais`)
 })
 
 /* ------------------------------ Pessoas ------------------------------ */
 
 // Mostrando todas as pessoas
-routes.get('/pessoas', (req, res) => { 
-    cliente.connect()
-    cliente.query("SELECT * FROM pessoas")
-    .then(results => {
-        return res.json(results.rows)
-    })
-})
 
 // Mostrando pessoas com um ID específico
-routes.get('/pessoas/:id', (req, res) => { 
-    const id = req.params.id
-
-    cliente.connect()
-    cliente.query('SELECT * FROM pessoas WHERE id = $1', [id])
-    .then(results => {
-        return res.json(results.rows)
-    })
-})
 
 // Inserindo pessoas
-routes.post('/pessoas', (req, res) => { 
-    const body = req.body
-
-    cliente.connect()
-    cliente.query('INSERT INTO pessoas (nome) values ($1)', [body.nome])
-    .then(results => {
-        return res.json("Inserido com sucesso!")
-    })
-})
 
 // Deletando pessoas
-routes.delete('/pessoas:id', (req, res) => { 
-    const id = req.params.id
-
-    cliente.connect()
-    cliente.query('DELETE FROM pessoas WHERE id = $1', [id])
-    .then(results => {
-        return res.json("Deletado com sucesso!")
-    })
-})
 
 // Editando pessoas
-routes.put('/pessoas/:id', (req, res) => { 
-    const id = req.params.id
-    const body = req.body
 
-    cliente.connect()
-    cliente.query('UPDATE pessoas SET nome = $1 WHERE id = $2', [body.nome, id])
-    .then(results => {
-        return res.json("Alterado com sucesso!")
-    })
-})
 
 /* ------------------------------ Projetos ------------------------------ */
 
@@ -82,12 +39,12 @@ routes.get('/projetos', (req, res) => {
     })
 })
 
-// Mostrando projetos pelo ID específico
+// Mostrando projetos pelo ID
 routes.get('/projetos/:id', (req, res) => { 
     const id = req.params.id
 
     cliente.connect()
-    cliente.query('SELECT * FROM projetos WHERE id_projeto = $1', [id])
+    cliente.query('SELECT * FROM projetos WHERE id = $1', [id])
     .then(results => {
         return res.json(results.rows)
     })
@@ -109,7 +66,7 @@ routes.delete('/projetos/:id', (req, res) => {
     const id = req.params.id
 
     cliente.connect()
-    cliente.query('DELETE FROM projetos WHERE id_projeto = $1', [id])
+    cliente.query('DELETE FROM projetos WHERE id = $1', [id])
     .then(results => {
         return res.json("Deletado com sucesso!")
     })
@@ -122,7 +79,7 @@ routes.put('/projetos/:id', (req, res) => {
     const body = req.body
 
     cliente.connect()
-    cliente.query('UPDATE projetos SET nome = $1 WHERE id_projeto = $2', [body.nome, id])
+    cliente.query('UPDATE projetos SET nome = $1 WHERE id = $2', [body.nome, id])
     .then(results => {
         return res.json("Alterado com sucesso!")
     })
@@ -139,7 +96,7 @@ routes.get('/equipes', (req, res) => {
     })
 })
 
-// Mostrando equipes específicas pelo ID específico
+// Mostrando equipes específicas pelo ID
 routes.get('/equipes/:id', (req, res) => { 
     const id = req.params.id
 
@@ -150,12 +107,12 @@ routes.get('/equipes/:id', (req, res) => {
     })
 })
 
-// Inserindo equipes
+//Inserindo equipes
 routes.post('/equipes', (req, res) => { 
     const body = req.body
 
     cliente.connect()
-    cliente.query('INSERT INTO equipes (nome) values ($1)', [body.nome])
+    cliente.query('INSERT INTO equipes (nome, projetos) values ($1, $2)', [body.nome, body.projetos])
     .then(results => {
         return res.json("Inserido com sucesso!")
     })
@@ -178,7 +135,7 @@ routes.put('/equipes/:id', (req, res) => {
     const body = req.body
 
     cliente.connect()
-    cliente.query('UPDATE equipes SET nome = $1 WHERE id = $2', [body.nome, id])
+    cliente.query('UPDATE equipes SET nome = $1, projetos = $2 WHERE id = $3', [body.nome, body.projetos, id])
     .then(results => {
         return res.json("Alterado com sucesso!")
     })
@@ -195,7 +152,7 @@ routes.get('/tarefas', (req, res) => {
     })
 })
 
-// Mostrando tarefas com um ID específico
+// Mostrando tarefas pelo ID
 routes.get('/tarefas/:id', (req, res) => { 
     const id = req.params.id
 
@@ -205,13 +162,12 @@ routes.get('/tarefas/:id', (req, res) => {
         return res.json(results.rows)
     })
 })
-
 // Inserindo tarefas
-routes.post('/tarefas', (req, res) => { 
+routes.post('/tarefass', (req, res) => { 
     const body = req.body
 
     cliente.connect()
-    cliente.query('INSERT INTO tarefas (nome) values ($1)', [body.nome])
+    cliente.query('INSERT INTO tarefas (nome, descricao) values ($1, $2)', [body.nome, body.descricao])
     .then(results => {
         return res.json("Inserido com sucesso!")
     })
@@ -234,11 +190,12 @@ routes.put('/tarefas/:id', (req, res) => {
     const body = req.body
 
     cliente.connect()
-    cliente.query('UPDATE tarefas SET nome = $1 WHERE id = $2', [body.nome, id])
+    cliente.query('UPDATE tarefas SET nome = $1, descricao = $2  WHERE id = $3', [body.nome, body.descricao, id])
     .then(results => {
         return res.json("Alterado com sucesso!")
     })
 })
+
 
 /* --------------------- Rotas Relacionadas com a interação de duas listas --------------------- */
 
@@ -252,4 +209,5 @@ routes.put('/tarefas/:id', (req, res) => {
 
 // Mostrar pessoas com uma mesma tarefa
 
+cliente.end()
 module.exports = routes
