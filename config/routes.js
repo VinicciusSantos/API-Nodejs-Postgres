@@ -12,7 +12,7 @@ const cliente = new Client({
 
 // Tela Principal
 routes.get('/', (req, res) => {
-    return res.json(`Menu Principal, Acesse: https://github.com/VinicciusSantos/API-NodeJs para saber mais`)
+    return res.json(`Menu Principal, Acesse: https://github.com/VinicciusSantos/API-NodeJs-postgres para saber mais`)
 })
 
 /* ------------------------------ Pessoas ------------------------------ */
