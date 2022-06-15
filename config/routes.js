@@ -253,5 +253,4 @@ routes.put('/tarefas/:id', (req, res) => {
 
 // Mostrar pessoas com uma mesma tarefa
 
-cliente.end()
 module.exports = routes
