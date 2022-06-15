@@ -37,6 +37,7 @@ routes.get('/projetos', (req, res) => {
     .then(results => {
         return res.json(results.rows)
     })
+    .finally(cliente.end())
 })
 
 // Mostrando projetos pelo ID
@@ -48,6 +49,7 @@ routes.get('/projetos/:id', (req, res) => {
     .then(results => {
         return res.json(results.rows)
     })
+    .finally(cliente.end())
 })
 
 // Inserindo projetos
@@ -91,5 +93,4 @@ routes.get('/projetos/:id', (req, res) => {
 
 // Mostrar pessoas com uma mesma tarefa
 
-cliente.end()
 module.exports = routes
