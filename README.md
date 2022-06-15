@@ -1,17 +1,17 @@
-<p align="center">
-  <img height="70px" src='https://assets.scoutapm.com/assets/landing/nodejs-1-logo-png-transparent-f020d2b7316a421caec0621ca667663be68ac4b4e107e78dd07886faa6feb006.png'>
-  <h1 align="center">API com Node.js</h1>
-</p>
+<div align="center" display="flex">
+  <img height="70px" src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/1200px-Postgresql_elephant.svg.png'>
+  <h1 align="center">API com Node.js e PostgreSQL</h1>
+</div>
 
 ![Badge Concluido](http://img.shields.io/static/v1?label=STATUS&message=CONCLUIDO&color=GREEN&style=for-the-badge)
 
-<p>Disponível em: https://api-brisa-nodejs.herokuapp.com/</p>
+<p>Disponível em: https://api-brisa-nodejs-postgresql.herokuapp.com/</p>
 
 # Desenvolvedores
 <ul>
-  <li><a href="https://github.com/larissacard">Larissa Cardoso</a>: Desenvolver as funções principais com os metodos GET, PUT, POST e DELETE</li>
-  <li><a href="https://github.com/Lucassec1">Lucas Emanuel</a>: Desenvolver as funções principais com os metodos GET, PUT, POST e DELETE</li>
-  <li><a href="https://github.com/VinicciusSantos">Vinicius Guedes</a>: validação dos IDs, relacionamento dos grupos, GETs com os relacionamentos e Deploy</li>
+  <li><a href="https://github.com/larissacard">Larissa Cardoso</a></li>
+  <li><a href="https://github.com/Lucassec1">Lucas Emanuel</a></li>
+  <li><a href="https://github.com/VinicciusSantos">Vinicius Guedes</a></li>
 </ul>
 
 # Menu
