@@ -74,7 +74,16 @@ routes.delete('/projetos/:id', (req, res) => {
 
 
 // Editando projetos
+routes.put('/projetos/:id', (req, res) => { 
+    const id = req.params.id
+    const body = req.body
 
+    cliente.connect()
+    cliente.query('UPDATE projetos SET nome = $1 WHERE id = $2', [body.nome, id])
+    .then(results => {
+        return res.json("Alterado com sucesso!")
+    })
+})
 
 /* ------------------------------ Equipes ------------------------------ */
 
