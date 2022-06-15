@@ -62,6 +62,16 @@ routes.post('/projetos', (req, res) => {
 })
 
 // Deletando projetos
+routes.delete('/projetos/:id', (req, res) => { 
+    const id = req.params.id
+
+    cliente.connect()
+    cliente.query('DELETE FROM projetos WHERE id = $1', [id])
+    .then(results => {
+        return res.json("Deletado com sucesso!")
+    })
+})
+
 
 // Editando projetos
 
