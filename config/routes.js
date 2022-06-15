@@ -42,7 +42,7 @@ routes.post('/pessoas', (req, res) => {
     const body = req.body
 
     cliente.connect()
-    cliente.query('INSERT INTO pessoas (nome) values ($1)', [body.nome])
+    cliente.query('INSERT INTO pessoas (nome, profissao) values ($1, $2)', [body.nome, body.profissao])
     .then(results => {
         return res.json("Inserido com sucesso!")
     })
@@ -65,7 +65,7 @@ routes.put('/pessoas/:id', (req, res) => {
     const body = req.body
 
     cliente.connect()
-    cliente.query('UPDATE pessoas SET nome = $1 WHERE id = $2', [body.nome, id])
+    cliente.query('UPDATE pessoas SET nome = $1, profissao = $2 WHERE id = $2', [body.nome, body.profissao, id])
     .then(results => {
         return res.json("Alterado com sucesso!")
     })
