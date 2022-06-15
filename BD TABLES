@@ -1,34 +1,28 @@
 CREATE TABLE projetos(
-    "id" SERIALNOT NULL,
-    "nome" VARCHAR NOT NULL,
-    PRIMARY KEY("ID")  
+    "id_projeto" SERIAL NOT NULL PRIMARY KEY,
+    "nome" VARCHAR NOT NULL
 );
 
 CREATE TABLE equipes(
-    "id_equipe" SERIAL NOT NULL,
+    "id_equipe" SERIAL NOT NULL PRIMARY KEY,
     "nome" VARCHAR NOT NULL,
     "projetos" VARCHAR NOT NULL,
-    "id_projetos" INT NOT NULL,
-    PRIMARY KEY("id_equipe"), 
-    FOREIGN KEY ("id_projetos") REFERENCES projetos("id_projetos")
+    "id_projeto" INT NOT NULL,
+    FOREIGN KEY ("id_projeto") REFERENCES projetos("id_projeto")
 );
 
 CREATE TABLE tarefas(
-    "id_tarefas" SERIAL NOT NULL,
+    "id_tarefa" SERIAL NOT NULL PRIMARY KEY,
     "nome" VARCHAR NOT NULL,
-    "descricao" VARCHAR NOT NULL,
-    PRIMARY KEY("id_tarefas")
+    "descricao" VARCHAR NOT NULL
 );
 
 CREATE TABLE pessoas(
-    "id_pessoas" SERIAL NOT NULL,
+    "id_pessoa" SERIAL NOT NULL PRIMARY KEY,
     "nome" VARCHAR NOT NULL,
     "profissao" VARCHAR NOT NULL,
-    "id_equipes" INT NOT NULL,
-    "id_tarefas" INT NOT NULL,
-    PRIMARY KEY("id_pesssoas"),
-    FOREIGN KEY ("id_equipes") REFERENCES equipes("id_equipes"),
-    FOREIGN KEY ("id_tarefas") REFERENCES tarefas("id_tarefas")
-    
+    "id_equipe" INT NOT NULL,
+    "id_tarefa" INT NOT NULL,
+    FOREIGN KEY ("id_equipe") REFERENCES equipes("id_equipe"),
+    FOREIGN KEY ("id_tarefa") REFERENCES tarefas("id_tarefa")
 );
-
