@@ -87,7 +87,7 @@ routes.get('/projetos/:id', (req, res) => {
     const id = req.params.id
 
     cliente.connect()
-    cliente.query('SELECT * FROM projetos WHERE id = $1', [id])
+    cliente.query('SELECT * FROM projetos WHERE id_projeto = $1', [id])
     .then(results => {
         return res.json(results.rows)
     })
@@ -109,7 +109,7 @@ routes.delete('/projetos/:id', (req, res) => {
     const id = req.params.id
 
     cliente.connect()
-    cliente.query('DELETE FROM projetos WHERE id = $1', [id])
+    cliente.query('DELETE FROM projetos WHERE id_projeto = $1', [id])
     .then(results => {
         return res.json("Deletado com sucesso!")
     })
@@ -122,7 +122,7 @@ routes.put('/projetos/:id', (req, res) => {
     const body = req.body
 
     cliente.connect()
-    cliente.query('UPDATE projetos SET nome = $1 WHERE id = $2', [body.nome, id])
+    cliente.query('UPDATE projetos SET nome = $1 WHERE id_projeto = $2', [body.nome, id])
     .then(results => {
         return res.json("Alterado com sucesso!")
     })
