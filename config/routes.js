@@ -8,7 +8,8 @@ const cliente = new Client({
   ssl: {
     rejectUnauthorized: false
   }
-});
+})
+cliente.connect()
 
 // Tela Principal
 routes.get('/', (req, res) => {
@@ -19,7 +20,6 @@ routes.get('/', (req, res) => {
 
 // Mostrando todas as pessoas
 routes.get('/pessoas', (req, res) => { 
-    cliente.connect()
     cliente.query("SELECT * FROM pessoas")
     .then(results => {
         return res.json(results.rows)
@@ -30,7 +30,6 @@ routes.get('/pessoas', (req, res) => {
 routes.get('/pessoas/:id', (req, res) => { 
     const id = req.params.id
 
-    cliente.connect()
     cliente.query('SELECT * FROM pessoas WHERE id = $1', [id])
     .then(results => {
         return res.json(results.rows)
@@ -41,7 +40,6 @@ routes.get('/pessoas/:id', (req, res) => {
 routes.post('/pessoas', (req, res) => { 
     const body = req.body
 
-    cliente.connect()
     cliente.query('INSERT INTO pessoas (nome, profissao) values ($1, $2)', [body.nome, body.profissao])
     .then(results => {
         return res.json("Inserido com sucesso!")
@@ -52,7 +50,6 @@ routes.post('/pessoas', (req, res) => {
 routes.delete('/pessoas:id', (req, res) => { 
     const id = req.params.id
 
-    cliente.connect()
     cliente.query('DELETE FROM pessoas WHERE id = $1', [id])
     .then(results => {
         return res.json("Deletado com sucesso!")
@@ -64,7 +61,6 @@ routes.put('/pessoas/:id', (req, res) => {
     const id = req.params.id
     const body = req.body
 
-    cliente.connect()
     cliente.query('UPDATE pessoas SET nome = $1, profissao = $2 WHERE id = $2', [body.nome, body.profissao, id])
     .then(results => {
         return res.json("Alterado com sucesso!")
@@ -76,7 +72,6 @@ routes.put('/pessoas/:id', (req, res) => {
 
 // Mostrando todos os Projetos
 routes.get('/projetos', (req, res) => { 
-    cliente.connect()
     cliente.query("SELECT * FROM projetos")
     .then(results => {
         return res.json(results.rows)
@@ -87,7 +82,6 @@ routes.get('/projetos', (req, res) => {
 routes.get('/projetos/:id', (req, res) => { 
     const id = req.params.id
 
-    cliente.connect()
     cliente.query('SELECT * FROM projetos WHERE id = $1', [id])
     .then(results => {
         return res.json(results.rows)
@@ -98,7 +92,6 @@ routes.get('/projetos/:id', (req, res) => {
 routes.post('/projetos', (req, res) => { 
     const body = req.body
 
-    cliente.connect()
     cliente.query('INSERT INTO projetos (nome) values ($1)', [body.nome])
     .then(results => {
         return res.json("Inserido com sucesso!")
@@ -109,7 +102,6 @@ routes.post('/projetos', (req, res) => {
 routes.delete('/projetos/:id', (req, res) => { 
     const id = req.params.id
 
-    cliente.connect()
     cliente.query('DELETE FROM projetos WHERE id = $1', [id])
     .then(results => {
         return res.json("Deletado com sucesso!")
@@ -122,7 +114,6 @@ routes.put('/projetos/:id', (req, res) => {
     const id = req.params.id
     const body = req.body
 
-    cliente.connect()
     cliente.query('UPDATE projetos SET nome = $1 WHERE id = $2', [body.nome, id])
     .then(results => {
         return res.json("Alterado com sucesso!")
@@ -133,7 +124,6 @@ routes.put('/projetos/:id', (req, res) => {
 
 // Mostrando todas as equipes
 routes.get('/equipes', (req, res) => { 
-    cliente.connect()
     cliente.query("SELECT * FROM equipes")
     .then(results => {
         return res.json(results.rows)
@@ -144,7 +134,6 @@ routes.get('/equipes', (req, res) => {
 routes.get('/equipes/:id', (req, res) => { 
     const id = req.params.id
 
-    cliente.connect()
     cliente.query('SELECT * FROM equipes WHERE id = $1', [id])
     .then(results => {
         return res.json(results.rows)
@@ -155,7 +144,6 @@ routes.get('/equipes/:id', (req, res) => {
 routes.post('/equipes', (req, res) => { 
     const body = req.body
 
-    cliente.connect()
     cliente.query('INSERT INTO equipes (nome, projetos) values ($1, $2)', [body.nome, body.projetos])
     .then(results => {
         return res.json("Inserido com sucesso!")
@@ -166,7 +154,6 @@ routes.post('/equipes', (req, res) => {
 routes.delete('/equipes/:id', (req, res) => { 
     const id = req.params.id
 
-    cliente.connect()
     cliente.query('DELETE FROM equipes WHERE id = $1', [id])
     .then(results => {
         return res.json("Deletado com sucesso!")
@@ -178,7 +165,6 @@ routes.put('/equipes/:id', (req, res) => {
     const id = req.params.id
     const body = req.body
 
-    cliente.connect()
     cliente.query('UPDATE equipes SET nome = $1, projetos = $2 WHERE id = $3', [body.nome, body.projetos, id])
     .then(results => {
         return res.json("Alterado com sucesso!")
@@ -189,7 +175,6 @@ routes.put('/equipes/:id', (req, res) => {
 
 // Mostrando todas as tarefas
 routes.get('/tarefas', (req, res) => { 
-    cliente.connect()
     cliente.query("SELECT * FROM tarefas")
     .then(results => {
         return res.json(results.rows)
@@ -200,7 +185,6 @@ routes.get('/tarefas', (req, res) => {
 routes.get('/tarefas/:id', (req, res) => { 
     const id = req.params.id
 
-    cliente.connect()
     cliente.query('SELECT * FROM tarefas WHERE id = $1', [id])
     .then(results => {
         return res.json(results.rows)
@@ -210,7 +194,6 @@ routes.get('/tarefas/:id', (req, res) => {
 routes.post('/tarefass', (req, res) => { 
     const body = req.body
 
-    cliente.connect()
     cliente.query('INSERT INTO tarefas (nome, descricao) values ($1, $2)', [body.nome, body.descricao])
     .then(results => {
         return res.json("Inserido com sucesso!")
@@ -221,7 +204,6 @@ routes.post('/tarefass', (req, res) => {
 routes.delete('/tarefas/:id', (req, res) => { 
     const id = req.params.id
 
-    cliente.connect()
     cliente.query('DELETE FROM tarefas WHERE id = $1', [id])
     .then(results => {
         return res.json("Deletado com sucesso!")
@@ -233,7 +215,6 @@ routes.put('/tarefas/:id', (req, res) => {
     const id = req.params.id
     const body = req.body
 
-    cliente.connect()
     cliente.query('UPDATE tarefas SET nome = $1, descricao = $2  WHERE id = $3', [body.nome, body.descricao, id])
     .then(results => {
         return res.json("Alterado com sucesso!")
