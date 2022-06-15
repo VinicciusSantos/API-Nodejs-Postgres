@@ -6,7 +6,6 @@ CREATE TABLE projetos(
 CREATE TABLE equipes(
     "id_equipe" SERIAL NOT NULL PRIMARY KEY,
     "nome" VARCHAR NOT NULL,
-    "projetos" VARCHAR NOT NULL,
     "id_projeto" INT NOT NULL,
     FOREIGN KEY ("id_projeto") REFERENCES projetos("id_projeto")
 );
