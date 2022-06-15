@@ -40,7 +40,7 @@ routes.get('/projetos', (req, res) => {
 })
 
 // Mostrando projetos pelo ID
-routes.get('/projetos', (req, res) => { 
+routes.get('/projetos/:id', (req, res) => { 
     const id = req.params.id
 
     cliente.connect()
