@@ -306,6 +306,8 @@ https://api-brisa-nodejs.herokuapp.com/tarefas/:id
 <ul>
   <li>ID</li>
   <li>Nome</li>
+  <li>Descrição</li>
+  <li>Data de Criação</li>
 </ul>
 
 ## Estrutura das Equipes
@@ -313,6 +315,7 @@ https://api-brisa-nodejs.herokuapp.com/tarefas/:id
 <ul>
   <li>ID</li>
   <li>Nome</li>
+  <li>Lider*</li>
   <li>Projeto*</li>
 </ul>
 <p>* = Chave Estrangeira</p>
@@ -323,6 +326,7 @@ https://api-brisa-nodejs.herokuapp.com/tarefas/:id
   <li>ID</li>
   <li>Nome</li>
   <li>Profissão</li>
+  <li>Data de Nascimento</li>
   <li>Equipe*</li>
   <li>Tarefa*</li>
 </ul>
@@ -334,6 +338,8 @@ https://api-brisa-nodejs.herokuapp.com/tarefas/:id
   <li>ID</li>
   <li>Nome</li>
   <li>Descrição</li>
+  <li>Id do Projeto</li>
+  <li>Data de Criação</li>
 </ul>
 
 <br>
