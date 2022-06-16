@@ -95,11 +95,6 @@ https://api-brisa-nodejs.herokuapp.com/projetos/:id/equipes
 ```
 
 ## Cadastrar Projeto
-<p>Um projeto tem os seguintes campos:
-<ul>
-  <li>Id</li>
-  <li>Nome</li>
-</ul>
 <p>- Usando o método POST podemos acessar o seguinte endereço e cadastrar um elemento:</p>
 
 ```
@@ -156,12 +151,6 @@ https://api-brisa-nodejs.herokuapp.com/equipes/:id/tarefas
 ```
 
 ## Cadastrar Equipe
-<p>Uma equipe tem os seguintes campos:
-<ul>
-  <li>Id</li>
-  <li>Nome</li>
-  <li>Projetos</li>
-</ul>
 <p>- Usando o método POST podemos acessar o seguinte endereço e cadastrar um elemento:</p>
 
 ```
@@ -209,14 +198,6 @@ https://api-brisa-nodejs.herokuapp.com/pessoas/:id/tarefas
 ```
 
 ## Cadastrar Pessoa
-<p>Uma Pessoa tem os seguintes campos:
-<ul>
-  <li>Id</li>
-  <li>Nome</li>
-  <li>Profissão</li>
-  <li>Equipe</li>
-  <li>Tarefa</li>
-</ul>
 <p>- Usando o método POST podemos acessar o seguinte endereço e cadastrar um elemento:</p>
 
 ```
@@ -264,12 +245,6 @@ https://api-brisa-nodejs.herokuapp.com/tarefas/:id/pessoas
 ```
 
 ## Cadastrar Tarefa
-<p>Uma Tarefa tem os seguintes campos:
-<ul>
-  <li>Id</li>
-  <li>Nome</li>
-  <li>Descrição</li>
-</ul>
 <p>- Usando o método POST podemos acessar o seguinte endereço e cadastrar um elemento:</p>
 
 ```
