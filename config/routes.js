@@ -72,7 +72,7 @@ routes.put('/pessoas/:id', (req, res) => {
 
 // Mostrando todos os Projetos
 routes.get('/projetos', (req, res) => { 
-    cliente.query("SELECT * FROM projetos")
+    cliente.query("SELECT * FROM projetos ORDER BY id")
     .then(results => {
         return res.json(results.rows)
     })
@@ -92,7 +92,7 @@ routes.get('/projetos/:id', (req, res) => {
 routes.post('/projetos', (req, res) => { 
     const body = req.body
 
-    cliente.query('INSERT INTO projetos (nome) values ($1)', [body.nome])
+    cliente.query('INSERT INTO projetos (nome, descricao, data_criacao) values ($1, $2, $3)', [body.nome, body.descricao, body.data_criacao])
     .then(results => {
         return res.json("Inserido com sucesso!")
     })
@@ -114,7 +114,7 @@ routes.put('/projetos/:id', (req, res) => {
     const id = req.params.id
     const body = req.body
 
-    cliente.query('UPDATE projetos SET nome = $1 WHERE id = $2', [body.nome, id])
+    cliente.query('UPDATE projetos SET nome = $1, descricao = $2, data_criacao = $3 WHERE id = $4', [body.nome, body.descricao, body.data_criacao, id])
     .then(results => {
         return res.json("Alterado com sucesso!")
     })
