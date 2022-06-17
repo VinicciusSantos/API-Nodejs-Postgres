@@ -71,7 +71,7 @@ INSERT INTO possuem_projetos_tarefas (fk_projetos, fk_tarefas) VALUES
 (4, 1)
 
 INSERT INTO pessoas (nome, profissao, data_nasc) VALUES
-('Priscila Fernandes Rosado'pessoas, 'FrontEnd', '10-07-2003'),
+('Priscila Fernandes Rosado', 'FrontEnd', '10-07-2003'),
 ('Julieta Rangel Ribas', 'BackEnd', '02-21-1996'),
 ('Ana Almeida', 'Testes', '05-12-2000'),
 ('Maria Vitória Novaes', 'BackEnd', '07-10-1999'),
@@ -109,3 +109,24 @@ INSERT INTO pertencem_pessoas_equipes (fk_pessoas, fk_equipes) VALUES
 (6, 5), (2,5), (14,5), (17,5),
 (13, 6), (8,6), (15,6), (18,6),
 (16, 7), (7,7)
+
+UPDATE pessoas SET fk_tarefa = 5 WHERE id = 1
+UPDATE pessoas SET fk_tarefa =  WHERE id = 2
+UPDATE pessoas SET fk_tarefa = * WHERE id = 3
+UPDATE pessoas SET fk_tarefa =  WHERE id = 4
+UPDATE pessoas SET fk_tarefa =  WHERE id = 5
+UPDATE pessoas SET fk_tarefa =  WHERE id = 6
+UPDATE pessoas SET fk_tarefa =  WHERE id = 7
+UPDATE pessoas SET fk_tarefa =  WHERE id = 8
+UPDATE pessoas SET fk_tarefa =  WHERE id = 9
+UPDATE pessoas SET fk_tarefa = * WHERE id = 10
+UPDATE pessoas SET fk_tarefa =  WHERE id = 11
+UPDATE pessoas SET fk_tarefa = 6 WHERE id = 12
+UPDATE pessoas SET fk_tarefa =  WHERE id = 13
+UPDATE pessoas SET fk_tarefa =  WHERE id = 14
+UPDATE pessoas SET fk_tarefa =  WHERE id = 15
+UPDATE pessoas SET fk_tarefa =  WHERE id = 16
+UPDATE pessoas SET fk_tarefa =  WHERE id = 17
+UPDATE pessoas SET fk_tarefa =  WHERE id = 18
+UPDATE pessoas SET fk_tarefa = 2 WHERE id = 19
+UPDATE pessoas SET fk_tarefa =  WHERE id = 20
