@@ -192,27 +192,62 @@ routes.put('/tarefas/:id', (req, res) => {
 
 /* --------------------- Rotas Relacionadas com a interação de duas listas --------------------- */
 
-// Inserir Tarefa em um projeto
-routes.post('projetos/:id/tarefas', (req, res) => { 
-    const body = req.body
+// Mostrar tarefas de um projeto
+routes.get('/projetos/:id/tarefas', (req, res) => { 
     const id = req.params.id
 
-    /*
+    cliente.query('SELECT possuem_projetos_tarefas.fk_tarefas, tarefas.nome, tarefas.descricao, tarefas.data_criacao from  possuem_projetos_tarefas INNER JOIN tarefas on possuem_projetos_tarefas.fk_tarefas = tarefas.id WHERE possuem_projetos_tarefas.fk_projetos = $1', [id])
+        .then(results => {
+            return res.json(results.rows)
+        })
+})
+
+// Inserir Tarefa em um projeto
+routes.post('/projetos/:id/tarefas', (req, res) => { 
+    const body = req.body
+
+    let newId
     cliente.query('INSERT INTO tarefas (nome, descricao, data_criacao) values ($1, $2, $3)', [body.nome, body.descricao, body.data_criacao])
-    cliente.query('INSERT INTO possuem_projetos_tarefas (fk_projetos, fk_tarefas) values ($1, $2)', [id, ])
-    */
-    return res.json("Inserido com sucesso!")
+    cliente.query('SELECT * FROM tarefas WHERE nome = $1, descricao = $2, data_criacao = $3', [body.nome, body.descricao, body.data_criacao])
+        .then(res => newId = res.rows[0])
+        .catch(e => console.error(e.stack))
+
+    cliente.query('INSERT INTO possuem_projetos_tarefas (fk_projetos, fk_tarefas) values ($1, $2)', [id, newId])
+    return res.json("Tarefa $1 Inserida com Sucesso no projeto $2!", [newId, id])
 })
 
 
 // Mostar as pessoas de uma equipe
+routes.get('/equipes/:id/pessoas', (req, res) => { 
+    const id = req.params.id
 
-// Mostrar tarefas de uma equipe
+
+    return res.json("")
+})
 
 // Mostar tarefa de uma pessoa
+routes.get('/pessoas/:id/tarefas', (req, res) => { 
+    const id = req.params.id
+
+
+    return res.json("")
+})
 
 // Mostrar equipes de um projeto
+routes.get('/projetos/:id/equipes', (req, res) => { 
+    const id = req.params.id
+
+
+    return res.json("")
+})
 
 // Mostrar pessoas com uma mesma tarefa
+routes.get('/tarefas/:id/pessoas', (req, res) => { 
+    const id = req.params.id
+
+
+    return res.json("")
+})
+
 
 module.exports = routes

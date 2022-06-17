@@ -65,13 +65,13 @@ INSERT INTO tarefas (nome, descricao, data_criacao) VALUES
 ('Geração de boletos', 'Um boleto bancário é um documento largamente utilizado no Brasil como instrumento de pagamento de um produto ou serviço prestado. Através do boleto, seu emissor pode receber do pagador o valor referente àquele pagamento', '02-21-2022')
 
 INSERT INTO possuem_projetos_tarefas (fk_projetos, fk_tarefas) VALUES
-(1, 5), (1, 6),
+(1, 5), (1, 6), (1, 2),
 (2, 3), (2, 4),
 (3, 7), (3, 8),
-(4, 1), (1, 2)
+(4, 1)
 
 INSERT INTO pessoas (nome, profissao, data_nasc) VALUES
-('Priscila Fernandes Rosado', 'FrontEnd', '10-07-2003'),
+('Priscila Fernandes Rosado'pessoas, 'FrontEnd', '10-07-2003'),
 ('Julieta Rangel Ribas', 'BackEnd', '02-21-1996'),
 ('Ana Almeida', 'Testes', '05-12-2000'),
 ('Maria Vitória Novaes', 'BackEnd', '07-10-1999'),
