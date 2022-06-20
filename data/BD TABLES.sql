@@ -1,3 +1,6 @@
+drop schema public cascade;
+create schema public;
+
 CREATE TABLE projetos (
     id SERIAL PRIMARY KEY NOT NULL,
     nome VARCHAR(50) NOT NULL,
@@ -52,7 +55,7 @@ INSERT INTO projetos (nome, descricao, data_criacao) VALUES
 ('GP Inovação', 'O Grad Prix de Inovação tem por objetivo gerar negócios e resolução de desafios para demandas da indústria, envolvendo: pequenas, médias e grandes empresas, assim como, estimular o empreendedorismo e o fortalecimento do ecossistema empreendedor', '03-20-2022'),
 ('Gerenciamento de Pousadas', 'Desenvolvido para administrar pousadas, hotéis, hostels ou qualquer conjunto de acomodações de forma simples e profissional', '02-12-2022'),
 ('Gerenciamento Financeiro', 'Esse sistema de gestão financeira é uma solução da tecnologia para que haja gestão financeira corporativa. Com isso, a ferramenta, que pode ser um aplicativo ou um software, dispõe de recursos para ajudar no gerenciamento financeiro do negócio', '11-15-2021'),
-('API de Gerenciamento de Projetos', 'API é um acrônimo para Application Programming Interface, ou Interface de Programação de Aplicação, em português. Trata-se de um conjunto de rotinas e padrões que facilitam a comunicação e troca de informações entre sistemas', '06-05-2022')
+('API de Gerenciamento de Projetos', 'API é um acrônimo para Application Programming Interface, ou Interface de Programação de Aplicação, em português. Trata-se de um conjunto de rotinas e padrões que facilitam a comunicação e troca de informações entre sistemas', '06-05-2022');
 
 INSERT INTO tarefas (nome, descricao, data_criacao) VALUES
 ('Criar o Banco de dados da API', 'PostgreSQL é um sistema gerenciador de banco de dados objeto relacional, desenvolvido como projeto de código aberto', '06-14-2022'),
@@ -62,13 +65,7 @@ INSERT INTO tarefas (nome, descricao, data_criacao) VALUES
 ('Gravar o Pitch', 'O pitch é uma apresentação sumária de 3 a 5 minutos com objetivo de despertar o interesse da outra parte (investidora, investidor ou cliente) pelo seu negócio. Assim, deve conter apenas as informações essenciais e diferenciadas', '03-25-2022'),
 ('Fazer pesquisa de anterioridade', 'A busca de anterioridade pode ser definida como uma atividade de pesquisa sobre informações tecnológicas que atestem/comprovem a inexistência de produto, processo ou melhoria idêntica ao objeto de pedido de patente ou registro que se deseja proteger', '04-20-2022'),
 ('Gerar Relatórios', 'Com os indicadores, gráficos, relatórios e demais recursos', '03-05-2022'),
-('Geração de boletos', 'Um boleto bancário é um documento largamente utilizado no Brasil como instrumento de pagamento de um produto ou serviço prestado. Através do boleto, seu emissor pode receber do pagador o valor referente àquele pagamento', '02-21-2022')
-
-INSERT INTO possuem_projetos_tarefas (fk_projetos, fk_tarefas) VALUES
-(1, 5), (1, 6), (1, 2),
-(2, 3), (2, 4),
-(3, 7), (3, 8),
-(4, 1)
+('Geração de boletos', 'Um boleto bancário é um documento largamente utilizado no Brasil como instrumento de pagamento de um produto ou serviço prestado. Através do boleto, seu emissor pode receber do pagador o valor referente àquele pagamento', '02-21-2022');
 
 INSERT INTO pessoas (nome, profissao, data_nasc) VALUES
 ('Priscila Fernandes Rosado', 'FrontEnd', '10-07-2003'),
@@ -90,7 +87,7 @@ INSERT INTO pessoas (nome, profissao, data_nasc) VALUES
 ('Maria Cecília Sales', 'BackEnd', '10-14-2002'),
 ('Marcelo Monteiro', 'Testes', '09-13-1995'),
 ('Mariane Carvalho', 'BackEnd', '10-30-2001'),
-('Juliana Costa', 'FrontEnd', '08-27-1996')
+('Juliana Costa', 'FrontEnd', '08-27-1996');
 
 INSERT INTO equipes (nome, fk_projetos, fk_lider) VALUES
 ('Equipe Alfa', 1, 12),
@@ -99,7 +96,7 @@ INSERT INTO equipes (nome, fk_projetos, fk_lider) VALUES
 ('Equipe Delta', 3, 20),
 ('Equipe Épsilon', 3, 6),
 ('Equipe Zeta', 3, 13),
-('Equipe Eta', 4, 16)
+('Equipe Eta', 4, 16);
 
 INSERT INTO pertencem_pessoas_equipes (fk_pessoas, fk_equipes) VALUES
 (12, 1), (1,1), (19,1),
@@ -108,25 +105,34 @@ INSERT INTO pertencem_pessoas_equipes (fk_pessoas, fk_equipes) VALUES
 (20, 4), (5,4), (11,4),
 (6, 5), (2,5), (14,5), (17,5),
 (13, 6), (8,6), (15,6), (18,6),
-(16, 7), (7,7)
+(16, 7), (7,7);
 
-UPDATE pessoas SET fk_tarefa = 5 WHERE id = 1
-UPDATE pessoas SET fk_tarefa =  WHERE id = 2
-UPDATE pessoas SET fk_tarefa = * WHERE id = 3
-UPDATE pessoas SET fk_tarefa =  WHERE id = 4
-UPDATE pessoas SET fk_tarefa =  WHERE id = 5
-UPDATE pessoas SET fk_tarefa =  WHERE id = 6
-UPDATE pessoas SET fk_tarefa =  WHERE id = 7
-UPDATE pessoas SET fk_tarefa =  WHERE id = 8
-UPDATE pessoas SET fk_tarefa =  WHERE id = 9
-UPDATE pessoas SET fk_tarefa = * WHERE id = 10
-UPDATE pessoas SET fk_tarefa =  WHERE id = 11
-UPDATE pessoas SET fk_tarefa = 6 WHERE id = 12
-UPDATE pessoas SET fk_tarefa =  WHERE id = 13
-UPDATE pessoas SET fk_tarefa =  WHERE id = 14
-UPDATE pessoas SET fk_tarefa =  WHERE id = 15
-UPDATE pessoas SET fk_tarefa =  WHERE id = 16
-UPDATE pessoas SET fk_tarefa =  WHERE id = 17
-UPDATE pessoas SET fk_tarefa =  WHERE id = 18
-UPDATE pessoas SET fk_tarefa = 2 WHERE id = 19
-UPDATE pessoas SET fk_tarefa =  WHERE id = 20
+INSERT INTO possuem_projetos_tarefas (fk_projetos, fk_tarefas) VALUES
+(1, 5), (1, 6), (1, 2),
+(2, 3), (2, 4),
+(3, 7), (3, 8),
+(4, 1);
+
+
+UPDATE pessoas SET fk_tarefa = 2 WHERE id = 1;
+UPDATE pessoas SET fk_tarefa = 1 WHERE id = 2;
+UPDATE pessoas SET fk_tarefa = 3 WHERE id = 3;
+UPDATE pessoas SET fk_tarefa = 5 WHERE id = 4;
+UPDATE pessoas SET fk_tarefa = 4 WHERE id = 5;
+UPDATE pessoas SET fk_tarefa = 6 WHERE id = 6;
+UPDATE pessoas SET fk_tarefa = 7 WHERE id = 7;
+UPDATE pessoas SET fk_tarefa = 4 WHERE id = 8;
+UPDATE pessoas SET fk_tarefa = 8 WHERE id = 9;
+UPDATE pessoas SET fk_tarefa = 1 WHERE id = 10;
+UPDATE pessoas SET fk_tarefa = 1 WHERE id = 11;
+UPDATE pessoas SET fk_tarefa = 4 WHERE id = 12;
+UPDATE pessoas SET fk_tarefa = 3 WHERE id = 13;
+UPDATE pessoas SET fk_tarefa = 1 WHERE id = 14;
+UPDATE pessoas SET fk_tarefa = 6 WHERE id = 15;
+UPDATE pessoas SET fk_tarefa = 7 WHERE id = 16;
+UPDATE pessoas SET fk_tarefa = 8 WHERE id = 17;
+UPDATE pessoas SET fk_tarefa = 4 WHERE id = 18;
+UPDATE pessoas SET fk_tarefa = 1 WHERE id = 19;
+UPDATE pessoas SET fk_tarefa = 2 WHERE id = 20;
+
+/* Lembrete: Fazer mais uma tabela "pessoas_recebem_tarefa" para conectar a tabela pessoas com a tabela possuem projetos tarefas

@@ -214,14 +214,24 @@ routes.get('/equipes/:id/pessoas', (req, res) => {
 
 })
 
+// Inserir tarefas em um projeto
+routes.post('/projetos/:id/tarefas', (req, res) => { 
+    const id = req.params.id
+    const body = req.body
+
+    cliente.query("INSERT INTO tarefas (nome, descricao, data_criacao) VALUES $1, $2, $3", [body.nome, body.descricao, body.data_criacao])
+})
+
+
 // Mostrar tarefa de uma pessoa
 routes.get('/pessoas/:id/tarefas', (req, res) => { 
     const id = req.params.id
+    
+    cliente.query("SELECT pessoas.id, pessoas.nome, pessoas.fk_tarefa,tarefas.id, tarefas.nome, tarefas.descricao, tarefas.data_criacao from pessoas INNER JOIN possuem_projetos_tarefas ON possuem_projetos_tarefas.id = pessoas.fk_tarefa INNER JOIN tarefas ON tarefas.id = possuem_projetos_tarefas.fk_tarefas WHERE pessoas.id = $1", [id])
+    .then(results => {
+        return res.json(results.rows)
+    })
 
-    cliente.query('SELECT * FROM pessoas WHERE id = $1', [id])
-        .then(results => {
-            return res.json(results.rows)
-        })
 })
 
 // Mostrar equipes de um projeto
@@ -236,12 +246,13 @@ routes.get('/projetos/:id/equipes', (req, res) => {
 })
 
 // Mostrar pessoas com uma mesma tarefa
-// routes.get('/tarefas/:id/pessoas', (req, res) => { 
-//     const id = req.params.id
-
-
-//     return res.json("")
-// })
+routes.get('/tarefas/:id/pessoas', (req, res) => { 
+    const id = req.params.id
+    cliente.query('SELECT * FROM pessoas WHERE fk_tarefa = $1', [id])
+    .then(results => {
+        return res.json(results.rows)
+    })
+})
 
 // Inserir Tarefa em um projeto
 routes.post('/projetos/:id/tarefas', (req, res) => { 
