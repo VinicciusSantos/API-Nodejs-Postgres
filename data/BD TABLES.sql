@@ -119,6 +119,7 @@ INSERT INTO possuem_projetos_tarefas (fk_projetos, fk_tarefas) VALUES
 (3, 7), (3, 8),
 (4, 1), (4, 2);
 
+/* Associando tarefas com Pessoas */
 INSERT INTO recebem_tarefas_pessoas (fk_pessoas, fk_pert_pess_tar) VALUES
 (12, 1), (1, 2), (19, 2), (3, 1), (12, 2), 
 (4, 4), (9, 3),
