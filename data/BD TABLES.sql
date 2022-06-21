@@ -27,9 +27,7 @@ CREATE TABLE pessoas (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
     profissao VARCHAR(30),
-    data_nasc DATE,
-    fk_tarefa int,
-    FOREIGN KEY (fk_tarefa) REFERENCES possuem_projetos_tarefas (id)
+    data_nasc DATE
 );
 
 CREATE TABLE equipes (
@@ -47,16 +45,20 @@ CREATE TABLE pertencem_pessoas_equipes (
     FOREIGN KEY (fk_pessoas) REFERENCES pessoas (id),
     FOREIGN KEY (fk_equipes) REFERENCES equipes (id)
 );
- 
 
+CREATE TABLE recebem_tarefas_pessoas (
+    fk_pessoas int NOT NULL,
+    fk_pert_pess_tar int NOT NULL
+);
 
-/* INSERTS */
+/* Cadastrando Projetos */
 INSERT INTO projetos (nome, descricao, data_criacao) VALUES
 ('GP Inovação', 'O Grad Prix de Inovação tem por objetivo gerar negócios e resolução de desafios para demandas da indústria, envolvendo: pequenas, médias e grandes empresas, assim como, estimular o empreendedorismo e o fortalecimento do ecossistema empreendedor', '03-20-2022'),
 ('Gerenciamento de Pousadas', 'Desenvolvido para administrar pousadas, hotéis, hostels ou qualquer conjunto de acomodações de forma simples e profissional', '02-12-2022'),
 ('Gerenciamento Financeiro', 'Esse sistema de gestão financeira é uma solução da tecnologia para que haja gestão financeira corporativa. Com isso, a ferramenta, que pode ser um aplicativo ou um software, dispõe de recursos para ajudar no gerenciamento financeiro do negócio', '11-15-2021'),
 ('API de Gerenciamento de Projetos', 'API é um acrônimo para Application Programming Interface, ou Interface de Programação de Aplicação, em português. Trata-se de um conjunto de rotinas e padrões que facilitam a comunicação e troca de informações entre sistemas', '06-05-2022');
 
+/* Cadastrando Tarefas */
 INSERT INTO tarefas (nome, descricao, data_criacao) VALUES
 ('Criar o Banco de dados da API', 'PostgreSQL é um sistema gerenciador de banco de dados objeto relacional, desenvolvido como projeto de código aberto', '06-14-2022'),
 ('FrontEnd da API', 'Desenvolvimento da interface gráfica do usuário de um site, por meio do uso de HTML, CSS e JavaScript, para que os usuários possam visualizar e interagir com aquele site', '06-30-2022'),
@@ -67,6 +69,7 @@ INSERT INTO tarefas (nome, descricao, data_criacao) VALUES
 ('Gerar Relatórios', 'Com os indicadores, gráficos, relatórios e demais recursos', '03-05-2022'),
 ('Geração de boletos', 'Um boleto bancário é um documento largamente utilizado no Brasil como instrumento de pagamento de um produto ou serviço prestado. Através do boleto, seu emissor pode receber do pagador o valor referente àquele pagamento', '02-21-2022');
 
+/* Cadastrando Pessoas */
 INSERT INTO pessoas (nome, profissao, data_nasc) VALUES
 ('Priscila Fernandes Rosado', 'FrontEnd', '10-07-2003'),
 ('Julieta Rangel Ribas', 'BackEnd', '02-21-1996'),
@@ -89,6 +92,7 @@ INSERT INTO pessoas (nome, profissao, data_nasc) VALUES
 ('Mariane Carvalho', 'BackEnd', '10-30-2001'),
 ('Juliana Costa', 'FrontEnd', '08-27-1996');
 
+/* Cadastrando Equipes */
 INSERT INTO equipes (nome, fk_projetos, fk_lider) VALUES
 ('Equipe Alfa', 1, 12),
 ('Equipe Beta', 1, 3),
@@ -98,6 +102,7 @@ INSERT INTO equipes (nome, fk_projetos, fk_lider) VALUES
 ('Equipe Zeta', 3, 13),
 ('Equipe Eta', 4, 16);
 
+/* Associando pessoas com equipes */
 INSERT INTO pertencem_pessoas_equipes (fk_pessoas, fk_equipes) VALUES
 (12, 1), (1,1), (19,1),
 (3, 2), (10,2),
@@ -107,32 +112,15 @@ INSERT INTO pertencem_pessoas_equipes (fk_pessoas, fk_equipes) VALUES
 (13, 6), (8,6), (15,6), (18,6),
 (16, 7), (7,7);
 
+/* Associando Tarefas com Projetos */
 INSERT INTO possuem_projetos_tarefas (fk_projetos, fk_tarefas) VALUES
-(1, 5), (1, 6), (1, 2),
+(1, 5), (1, 6),
 (2, 3), (2, 4),
 (3, 7), (3, 8),
-(4, 1);
+(4, 1), (4, 2);
 
-
-UPDATE pessoas SET fk_tarefa = 2 WHERE id = 1;
-UPDATE pessoas SET fk_tarefa = 1 WHERE id = 2;
-UPDATE pessoas SET fk_tarefa = 3 WHERE id = 3;
-UPDATE pessoas SET fk_tarefa = 5 WHERE id = 4;
-UPDATE pessoas SET fk_tarefa = 4 WHERE id = 5;
-UPDATE pessoas SET fk_tarefa = 6 WHERE id = 6;
-UPDATE pessoas SET fk_tarefa = 7 WHERE id = 7;
-UPDATE pessoas SET fk_tarefa = 4 WHERE id = 8;
-UPDATE pessoas SET fk_tarefa = 8 WHERE id = 9;
-UPDATE pessoas SET fk_tarefa = 1 WHERE id = 10;
-UPDATE pessoas SET fk_tarefa = 1 WHERE id = 11;
-UPDATE pessoas SET fk_tarefa = 4 WHERE id = 12;
-UPDATE pessoas SET fk_tarefa = 3 WHERE id = 13;
-UPDATE pessoas SET fk_tarefa = 1 WHERE id = 14;
-UPDATE pessoas SET fk_tarefa = 6 WHERE id = 15;
-UPDATE pessoas SET fk_tarefa = 7 WHERE id = 16;
-UPDATE pessoas SET fk_tarefa = 8 WHERE id = 17;
-UPDATE pessoas SET fk_tarefa = 4 WHERE id = 18;
-UPDATE pessoas SET fk_tarefa = 1 WHERE id = 19;
-UPDATE pessoas SET fk_tarefa = 2 WHERE id = 20;
-
-/* Lembrete: Fazer mais uma tabela "pessoas_recebem_tarefa" para conectar a tabela pessoas com a tabela possuem projetos tarefas
+INSERT INTO recebem_tarefas_pessoas (fk_pessoas, fk_pert_pess_tar) VALUES
+(12, 1), (1, 2), (19, 2), (3, 1), (12, 2), 
+(4, 4), (9, 3),
+(20, 5), (5, 5), (11, 6), (6, 5), (2, 5), (14, 5), (17, 6), (13, 5), (8, 6), (15, 6), (18, 5),
+(16, 7), (7, 8);
