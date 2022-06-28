@@ -27,6 +27,15 @@ routes.get('/pessoas', (req, res) => {
     })
 })
 
+// Quantidade de pessoas
+routes.get('/pessoas/count', (req, res) => { 
+    cliente
+        .query("select count(*) from pessoas")
+        .then(results => {
+        return res.json(results.rows)
+    })
+})
+
 // Mostrando pessoas com um ID específico
 routes.get('/pessoas/:id', (req, res) => { 
     const id = req.params.id
@@ -70,6 +79,15 @@ routes.put('/pessoas/:id', (req, res) => {
 routes.get('/projetos', (req, res) => { 
     cliente
         .query("SELECT * FROM projetos ORDER BY id")
+        .then(results => {
+        return res.json(results.rows)
+    })
+})
+
+// Quantidade de projetos
+routes.get('/projetos/count', (req, res) => { 
+    cliente
+        .query("select count(*) from projetos")
         .then(results => {
         return res.json(results.rows)
     })
@@ -122,6 +140,15 @@ routes.get('/equipes', (req, res) => {
     })
 })
 
+// Quantidade de equipes
+routes.get('/equipes/count', (req, res) => { 
+    cliente
+        .query("select count(*) from equipes")
+        .then(results => {
+        return res.json(results.rows)
+    })
+})
+
 // Mostrando equipes específicas pelo ID
 routes.get('/equipes/:id', (req, res) => { 
     const id = req.params.id
@@ -164,6 +191,15 @@ routes.put('/equipes/:id', (req, res) => {
 routes.get('/tarefas', (req, res) => { 
     cliente
         .query("SELECT * FROM tarefas ORDER BY id")
+        .then(results => {
+        return res.json(results.rows)
+    })
+})
+
+// Quantidade de tarefas
+routes.get('/tarefas/count', (req, res) => { 
+    cliente
+        .query("select count(*) from tarefas")
         .then(results => {
         return res.json(results.rows)
     })
