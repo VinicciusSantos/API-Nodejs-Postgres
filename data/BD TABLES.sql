@@ -76,12 +76,12 @@ CREATE TABLE atualizacoes (
 
 CREATE TABLE cargos (
     id SERIAL PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
+    cargo VARCHAR(100) NOT NULL,
     salario REAL NOT NULL
 );
 
 
-INSERT INTO cargos (nome, salario) VALUES
+INSERT INTO cargos (cargo, salario) VALUES
 ('FrontEnd Junior', '2525.00'),
 ('BackEnd Junior', '2525.00'),
 ('BackEnd Pleno', '7506.30'),

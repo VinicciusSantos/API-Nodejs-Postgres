@@ -2,7 +2,7 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const routes = require('./config/routes')
+const routes = require('./routes/routes')
 
 const host = '0.0.0.0';
 const port = process.env.PORT || 3000;
