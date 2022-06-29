@@ -148,6 +148,13 @@ INSERT INTO pessoas_pertencem_equipes (fk_pessoa, fk_equipe) VALUES
 (13, 6), (8,6), (15,6), (18,6),
 (16, 7), (7,7);
 
+/* Associando projetos com equipes */
+INSERT INTO projetos_posssuem_equipes (fk_projeto, fk_equipe) VALUES
+(1, 1), (1,2),
+(2, 3),
+(3, 4), (3,5), (3,6),
+(4, 7);
+
 /* Associando Tarefas com Projetos */
 INSERT INTO projetos_posssuem_tarefas (fk_projeto, fk_tarefa) VALUES
 (1, 5), (1, 6),

@@ -21,6 +21,15 @@ equipes.get('/equipes', (req, res) => {
     })
 })
 
+// Quantidade de equipes
+equipes.get('/equipes/count', (req, res) => { 
+    cliente
+        .query("select count(*) from equipes")
+        .then(results => {
+        return res.json(results.rows)
+    })
+})
+
 // Mostrando equipes específicas pelo ID
 equipes.get('/equipes/:id', (req, res) => { 
     const id = req.params.id
@@ -68,6 +77,17 @@ equipes.get('/equipes/:id/pessoas', (req, res) => {
         .then(results => {
             return res.json(results.rows)
         })
+})
+
+// Associar Pessoa com Equipe
+equipes.post('/equipes/:id_equipe/pessoas/:id_pessoa', (req, res) => { 
+    const id_equipe = req.params.id_equipe
+    const id_pessoa = req.params.id_pessoa
+
+    cliente.query(`INSERT INTO pertencem_pessoas_equipes (fk_pessoas, fk_equipes)
+                   VALUES ($1, $2)`, [id_equipe, id_pessoa])
+
+    return res.json("Pessoa Inserida na Equipe")
 })
 
 module.exports = equipes

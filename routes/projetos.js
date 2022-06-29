@@ -15,7 +15,16 @@ cliente.connect()
 // Mostrando todos os Projetos
 projetos.get('/projetos', (req, res) => { 
     cliente
-        .query("SELECT * FROM projetos ORDER BY id")
+        .query(`SELECT * FROM projetos ORDER BY id`)
+        .then(results => {
+        return res.json(results.rows)
+    })
+})
+
+// Quantidade de projetos
+projetos.get('/projetos/count', (req, res) => { 
+    cliente
+        .query("select count(*) from projetos")
         .then(results => {
         return res.json(results.rows)
     })
@@ -36,7 +45,9 @@ projetos.get('/projetos/:id', (req, res) => {
 projetos.post('/projetos', (req, res) => { 
     const body = req.body
 
-    cliente.query('INSERT INTO projetos (nome, descricao, data_criacao) values ($1, $2, $3)', [body.nome, body.descricao, body.data_criacao])
+    cliente
+        .query(`INSERT INTO projetos (nome, descricao, data_criacao, status)
+                VALUES ($1, $2, $3, $4)`, [body.nome, body.descricao, body.data_criacao, 'Ativo'])
     return res.json("Inserido com sucesso!")
 })
 
@@ -62,39 +73,22 @@ projetos.get('/projetos/:id/pessoas', (req, res) => {
     const id = req.params.id
 
     cliente
-        .query(`SELECT pj.id, pj.nome, pe.id, pe.nome FROM pessoas AS pe
-                   INNER JOIN pertencem_pessoas_equipes AS ppe ON ppe.fk_pessoas = pe.id
-                   INNER JOIN equipes AS eq ON eq.id = ppe.fk_equipes
-                   INNER JOIN projetos AS PJ ON pj.id = eq.fk_projetos
-                   WHERE pj.id = $1`, [id])
+        .query(`SELECT pr.nome, pe.id, pe.nome, eq.nome FROM projetos AS pr
+                INNER JOIN projetos_posssuem_equipes AS ppe ON ppe.fk_projeto = pr.id
+                INNER JOIN equipes AS eq ON eq.id = ppe.fk_equipe
+                INNER JOIN pessoas_pertencem_equipes AS epp ON epp.fk_equipe = eq.id
+                INNER JOIN pessoas AS pe ON pe.id = epp.fk_pessoa
+                WHERE pr.id = $1
+                ORDER BY pr.id, eq.id ,pe.id`, [id])
         .then(results => {
             return res.json(results.rows)
         })
 })
 
 // Mostrar tarefas de um projeto
-projetos.get('/projetos/:id/tarefas', (req, res) => { 
-    const id = req.params.id
-
-    cliente
-        .query(`SELECT ppt.id, pr.nome, tr.nome FROM possuem_projetos_tarefas as ppt
-                INNER JOIN projetos as pr on ppt.fk_projetos = pr.id
-                INNER JOIN tarefas as tr on ppt.fk_tarefas = tr.id
-                WHERE pr.id = $1`, [id])
-        .then(results => {
-            return res.json(results.rows)
-        })
-})
 
 // Mostrar equipes de um projeto
-projetos.get('/projetos/:id/equipes', (req, res) => { 
-    const id = req.params.id
 
-    cliente
-        .query('SELECT * FROM equipes WHERE fk_projetos = $1', [id])
-        .then(results => {
-            return res.json(results.rows)
-        })
-})
+// Associar Tarefa com Projeto
 
 module.exports = projetos

@@ -21,12 +21,13 @@ tarefas.get('/tarefas', (req, res) => {
     })
 })
 
-//Inserindo Tarefas
-tarefas.post('/tarefas', (req, res) => { 
-    const body = req.body
-
-    cliente.query('INSERT INTO tarefas (nome, descricao, data_criacao) values ($1, $2, $3)', [body.nome, body.descricao, body.data_criacao])
-    return res.json("Inserido com sucesso!")
+// Quantidade de tarefas
+tarefas.get('/tarefas/count', (req, res) => { 
+    cliente
+        .query("select count(*) from tarefas")
+        .then(results => {
+        return res.json(results.rows)
+    })
 })
 
 // Mostrando tarefas pelo ID
@@ -38,6 +39,14 @@ tarefas.get('/tarefas/:id', (req, res) => {
         .then(results => {
         return res.json(results.rows)
     })
+})
+
+//Inserindo Tarefas
+tarefas.post('/tarefas', (req, res) => { 
+    const body = req.body
+
+    cliente.query('INSERT INTO tarefas (nome, descricao, data_criacao) values ($1, $2, $3)', [body.nome, body.descricao, body.data_criacao])
+    return res.json("Inserido com sucesso!")
 })
 
 // Deletando tarefas
