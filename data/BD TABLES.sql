@@ -19,7 +19,7 @@ CREATE TABLE tarefas (
     Status VARCHAR(20)
 );
 
-CREATE TABLE projetos_posssuem_tarefas (
+CREATE TABLE projetos_possuem_tarefas (
     fk_projeto INTEGER,
     fk_tarefa INTEGER,
     FOREIGN KEY (fk_projeto) REFERENCES projetos(id),
@@ -156,7 +156,7 @@ INSERT INTO projetos_posssuem_equipes (fk_projeto, fk_equipe) VALUES
 (4, 7);
 
 /* Associando Tarefas com Projetos */
-INSERT INTO projetos_posssuem_tarefas (fk_projeto, fk_tarefa) VALUES
+INSERT INTO projetos_possuem_tarefas (fk_projeto, fk_tarefa) VALUES
 (1, 5), (1, 6),
 (2, 3), (2, 4),
 (3, 7), (3, 8),

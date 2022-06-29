@@ -86,9 +86,46 @@ projetos.get('/projetos/:id/pessoas', (req, res) => {
 })
 
 // Mostrar tarefas de um projeto
+projetos.get('/projetos/:id/tarefas', (req, res) => { 
+    const id = req.params.id
+
+    cliente
+        .query(`SELECT pr.id, pr.nome, tr.id, tr.nome FROM projetos AS pr
+                INNER JOIN projetos_possuem_tarefas AS ppt ON ppt.fk_projeto = pr.id
+                INNER JOIN tarefas AS tr ON tr.id = ppt.fk_tarefa
+                WHERE pr.id = $1`, [id])
+        .then(results => {
+            return res.json(results.rows)
+        })
+})
 
 // Mostrar equipes de um projeto
+projetos.get('/projetos/:id/equipes', (req, res) => { 
+    const id = req.params.id
+
+    cliente
+        .query(`SELECT eq.id, eq.nome FROM projetos AS pr
+                INNER JOIN projetos_posssuem_equipes AS ppe ON ppe.fk_projeto = pr.id
+                INNER JOIN equipes AS eq ON eq.id = ppe.fk_equipe
+                WHERE pr.id = $1
+                ORDER BY pr.id, eq.id`, [id])
+        .then(results => {
+            return res.json(results.rows)
+        })
+})
+
 
 // Associar Tarefa com Projeto
+projetos.get('/projetos/:id_projeto/tarefas/_id_tarefa', (req, res) => { 
+    const id_projeto = req.params.id_projeto
+    const id_tarefa = req.params.id_tarefa
+
+    cliente
+        .query(`INSERT INTO projetos_posssuem_tarefas (fk_projeto, fk_tarefa)
+                VALUES ($1, $2)`, [id_projeto, id_tarefa])
+        .then(results => {
+            return res.json(results.rows)
+        })
+})
 
 module.exports = projetos
