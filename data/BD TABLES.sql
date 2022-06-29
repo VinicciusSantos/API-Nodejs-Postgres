@@ -16,7 +16,7 @@ CREATE TABLE tarefas (
     descricao VARCHAR(400),
     data_criacao DATE,
     data_finalizacao DATE,
-    Status VARCHAR(20)
+    status VARCHAR(20)
 );
 
 CREATE TABLE projetos_possuem_tarefas (
@@ -164,7 +164,10 @@ INSERT INTO projetos_possuem_tarefas (fk_projeto, fk_tarefa) VALUES
 
 /* Associando tarefas com Pessoas */
 INSERT INTO pessoas_associam_tarefas (fk_pessoa, fk_tarefa) VALUES
-(12, 1), (1, 2), (19, 2), (3, 1), (12, 2), 
+(12, 1), (3, 1),
+(1, 2), (19, 2), (12, 2), 
 (4, 4), (9, 3),
-(20, 5), (5, 5), (11, 6), (6, 5), (2, 5), (14, 5), (17, 6), (13, 5), (8, 6), (15, 6), (18, 5),
-(16, 7), (7, 8);
+(20, 5), (5, 5), (11, 6), (6, 5), (2, 5), (14, 5), (18, 5), (13, 5),
+(17, 6) (8, 6), (15, 6),
+(16, 7),
+(7, 8);
