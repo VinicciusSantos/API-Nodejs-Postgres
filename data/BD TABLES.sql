@@ -2,100 +2,100 @@ drop schema public cascade;
 create schema public;
 
 CREATE TABLE projetos (
-    id SERIAL PRIMARY KEY NOT NULL,
-    nome VARCHAR(50) NOT NULL,
-    descricao VARCHAR(400),
-    status VARCHAR(20) NOT NULL,
-    data_criacao DATE NOT NULL,
-    data_finalizacao DATE
+    pr_id SERIAL PRIMARY KEY NOT NULL,
+    pr_nome VARCHAR(50) NOT NULL,
+    pr_descricao VARCHAR(400),
+    pr_status VARCHAR(20) NOT NULL,
+    pr_data_criacao DATE NOT NULL,
+    pr_data_finalizacao DATE
 );
 
 CREATE TABLE tarefas (
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(50) NOT NULL,
-    descricao VARCHAR(400),
-    data_criacao DATE,
-    data_finalizacao DATE,
-    status VARCHAR(20)
+    tr_id SERIAL PRIMARY KEY,
+    tr_nome VARCHAR(50) NOT NULL,
+    tr_descricao VARCHAR(400),
+    tr_data_criacao DATE,
+    tr_data_finalizacao DATE,
+    tr_status VARCHAR(20)
 );
 
 CREATE TABLE projetos_possuem_tarefas (
     fk_projeto INTEGER,
     fk_tarefa INTEGER,
-    FOREIGN KEY (fk_projeto) REFERENCES projetos(id),
-    FOREIGN KEY (fk_tarefa) REFERENCES tarefas(id)
+    FOREIGN KEY (fk_projeto) REFERENCES projetos(pr_id),
+    FOREIGN KEY (fk_tarefa) REFERENCES tarefas(tr_id)
 );
 
 CREATE TABLE pessoas (
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(50) NOT NULL,
-    fk_cargo INTEGER NOT NULL,
-    data_nasc DATE NOT NULL,
-    data_cadastro DATE,
-    status VARCHAR(20) NOT NULL,
-    qtd_tarefas_finalizadas INTEGER NOT NULL
+    pe_id SERIAL PRIMARY KEY,
+    pe_nome VARCHAR(50) NOT NULL,
+    pe_fk_cargo INTEGER NOT NULL,
+    pe_data_nasc DATE NOT NULL,
+    pe_data_cadastro DATE,
+    pe_status VARCHAR(20) NOT NULL,
+    pe_qtd_tarefas_finalizadas INTEGER NOT NULL
 );
 
 CREATE TABLE equipes (
-    id SERIAL PRIMARY KEY NOT NULL, 
-    nome VARCHAR(50) NOT NULL,
+    eq_id SERIAL PRIMARY KEY NOT NULL, 
+    eq_nome VARCHAR(50) NOT NULL,
     fk_lider int NOT NULL,
-    FOREIGN KEY (fk_lider) REFERENCES pessoas (id)
+    FOREIGN KEY (fk_lider) REFERENCES pessoas (pe_id)
 );
 
 CREATE TABLE pessoas_pertencem_equipes (
     fk_equipe INTEGER NOT NULL,
     fk_pessoa INTEGER NOT NULL,
-    FOREIGN KEY (fk_equipe) REFERENCES equipes(id),
-    FOREIGN KEY (fk_pessoa) REFERENCES pessoas(id)
+    FOREIGN KEY (fk_equipe) REFERENCES equipes(eq_id),
+    FOREIGN KEY (fk_pessoa) REFERENCES pessoas(pe_id)
 );
 
 CREATE TABLE projetos_posssuem_equipes (
     fk_projeto INTEGER NOT NULL,
     fk_equipe INTEGER NOT NULL,
-    FOREIGN KEY (fk_equipe) REFERENCES equipes(id),
-    FOREIGN KEY (fk_projeto) REFERENCES projetos(id)
+    FOREIGN KEY (fk_equipe) REFERENCES equipes(eq_id),
+    FOREIGN KEY (fk_projeto) REFERENCES projetos(pr_id)
 );
 
 CREATE TABLE pessoas_associam_tarefas (
     fk_pessoa INTEGER,
     fk_tarefa INTEGER,
-    FOREIGN KEY (fk_pessoa) REFERENCES pessoas(id),
-    FOREIGN KEY (fk_tarefa) REFERENCES tarefas(id)
+    FOREIGN KEY (fk_pessoa) REFERENCES pessoas(pe_id),
+    FOREIGN KEY (fk_tarefa) REFERENCES tarefas(tr_id)
 );
 
 CREATE TABLE atualizacoes (
-    id SERIAL PRIMARY KEY,
-    mensagem VARCHAR(400) NOT NULL,
-    data DATE NOT NULL,
+    att_id SERIAL PRIMARY KEY,
+    att_mensagem VARCHAR(400) NOT NULL,
+    att_data DATE NOT NULL,
     fk_projeto INTEGER NOT NULL,
     fk_autor INTEGER NOT NULL,
-    FOREIGN KEY (fk_projeto) REFERENCES projetos(id),
-    FOREIGN KEY (fk_autor) REFERENCES pessoas(id)
+    FOREIGN KEY (fk_projeto) REFERENCES projetos(pr_id),
+    FOREIGN KEY (fk_autor) REFERENCES pessoas(pe_id)
 );
 
 CREATE TABLE cargos (
-    id SERIAL PRIMARY KEY,
-    cargo VARCHAR(100) NOT NULL,
-    salario REAL NOT NULL
+    ca_id SERIAL PRIMARY KEY,
+    ca_cargo VARCHAR(100) NOT NULL,
+    ca_salario REAL NOT NULL
 );
 
 
-INSERT INTO cargos (cargo, salario) VALUES
+INSERT INTO cargos (ca_cargo, ca_salario) VALUES
 ('FrontEnd Junior', '2525.00'),
 ('BackEnd Junior', '2525.00'),
 ('BackEnd Pleno', '7506.30'),
 ('FrontEnd Pleno', '7506.30');
 
 /* Cadastrando Projetos */
-INSERT INTO projetos (nome, descricao, data_criacao, status) VALUES
+INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, status) VALUES
 ('GP Inovação', 'O Grad Prix de Inovação tem por objetivo gerar negócios e resolução de desafios para demandas da indústria, envolvendo: pequenas, médias e grandes empresas, assim como, estimular o empreendedorismo e o fortalecimento do ecossistema empreendedor', '03-20-2022', 'Em Andamento'),
 ('Gerenciamento de Pousadas', 'Desenvolvido para administrar pousadas, hotéis, hostels ou qualquer conjunto de acomodações de forma simples e profissional', '02-12-2022', 'Em Andamento'),
 ('Gerenciamento Financeiro', 'Esse sistema de gestão financeira é uma solução da tecnologia para que haja gestão financeira corporativa. Com isso, a ferramenta, que pode ser um aplicativo ou um software, dispõe de recursos para ajudar no gerenciamento financeiro do negócio', '11-15-2021', 'Em Andamento'),
 ('API de Gerenciamento de Projetos', 'API é um acrônimo para Application Programming Interface, ou Interface de Programação de Aplicação, em português. Trata-se de um conjunto de rotinas e padrões que facilitam a comunicação e troca de informações entre sistemas', '06-05-2022', 'Em Andamento');
 
 /* Cadastrando Tarefas */
-INSERT INTO tarefas (nome, descricao, data_criacao) VALUES
+INSERT INTO tarefas (tr_nome, tr_descricao, tr_data_criacao) VALUES
 ('Criar o Banco de dados da API', 'PostgreSQL é um sistema gerenciador de banco de dados objeto relacional, desenvolvido como projeto de código aberto', '06-14-2022'),
 ('FrontEnd da API', 'Desenvolvimento da interface gráfica do usuário de um site, por meio do uso de HTML, CSS e JavaScript, para que os usuários possam visualizar e interagir com aquele site', '06-30-2022'),
 ('Cadastrar Pousada', 'Total controle de tudo que acontece no seu estabelecimento, você saberá o exato momento de quem realizou qualquer ação no sistema', '03-02-2022'),
@@ -106,7 +106,7 @@ INSERT INTO tarefas (nome, descricao, data_criacao) VALUES
 ('Geração de boletos', 'Um boleto bancário é um documento largamente utilizado no Brasil como instrumento de pagamento de um produto ou serviço prestado. Através do boleto, seu emissor pode receber do pagador o valor referente àquele pagamento', '02-21-2022');
 
 /* Cadastrando Pessoas */
-INSERT INTO pessoas (nome, data_nasc, fk_cargo, status, qtd_tarefas_finalizadas) VALUES
+INSERT INTO pessoas (pe_nome, pe_data_nasc, pe_fk_cargo, pe_status, pe_qtd_tarefas_finalizadas) VALUES
 ('Priscila Fernandes Rosado', '10-07-2003', 1, 'Ativo', 0),
 ('Julieta Rangel Ribas', '02-21-1996', 3, 'Ativo', 0),
 ('Ana Almeida', '05-12-2000', 3, 'Desativado', 0),
@@ -129,7 +129,7 @@ INSERT INTO pessoas (nome, data_nasc, fk_cargo, status, qtd_tarefas_finalizadas)
 ('Juliana Costa', '08-27-1996', 2, 'Ativo', 0);
 
 /* Cadastrando Equipes */
-INSERT INTO equipes (nome, fk_lider) VALUES
+INSERT INTO equipes (eq_nome, fk_lider) VALUES
 ('Equipe Alfa', 12),
 ('Equipe Beta', 3),
 ('Equipe Gama', 4),

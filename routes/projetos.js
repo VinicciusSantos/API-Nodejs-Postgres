@@ -15,7 +15,7 @@ cliente.connect()
 // Mostrando todos os Projetos
 projetos.get('/projetos', (req, res) => { 
     cliente
-        .query(`SELECT * FROM projetos ORDER BY id`)
+        .query(`SELECT * FROM projetos ORDER BY pr_id`)
         .then(results => {
         return res.json(results.rows)
     })
@@ -35,7 +35,7 @@ projetos.get('/projetos/:id', (req, res) => {
     const id = req.params.id
 
     cliente
-        .query('SELECT * FROM projetos WHERE id = $1', [id])
+        .query('SELECT * FROM projetos WHERE pr_id = $1', [id])
         .then(results => {
         return res.json(results.rows)
     })
@@ -46,7 +46,7 @@ projetos.post('/projetos', (req, res) => {
     const body = req.body
 
     cliente
-        .query(`INSERT INTO projetos (nome, descricao, data_criacao, status)
+        .query(`INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status)
                 VALUES ($1, $2, $3, $4)`, [body.nome, body.descricao, body.data_criacao, 'Ativo'])
     return res.json("Inserido com sucesso!")
 })
@@ -55,7 +55,7 @@ projetos.post('/projetos', (req, res) => {
 projetos.delete('/projetos/:id', (req, res) => { 
     const id = req.params.id
 
-    cliente.query('DELETE FROM projetos WHERE id = $1', [id])
+    cliente.query('DELETE FROM projetos WHERE pr_id = $1', [id])
     return res.json("Deletado com sucesso!")
 })
 
@@ -64,7 +64,7 @@ projetos.put('/projetos/:id', (req, res) => {
     const id = req.params.id
     const body = req.body
 
-    cliente.query('UPDATE projetos SET nome = $1, descricao = $2, data_criacao = $3 WHERE id = $4', [body.nome, body.descricao, body.data_criacao, id])
+    cliente.query('UPDATE projetos SET pr_nome = $1, pr_descricao = $2, pr_data_criacao = $3 WHERE pr_id = $4', [body.nome, body.descricao, body.data_criacao, id])
     return res.json("Alterado com sucesso!")
 })
 
@@ -73,13 +73,13 @@ projetos.get('/projetos/:id/pessoas', (req, res) => {
     const id = req.params.id
 
     cliente
-        .query(`SELECT pr.nome, pe.id, pe.nome, eq.nome FROM projetos AS pr
-                INNER JOIN projetos_posssuem_equipes AS ppe ON ppe.fk_projeto = pr.id
-                INNER JOIN equipes AS eq ON eq.id = ppe.fk_equipe
-                INNER JOIN pessoas_pertencem_equipes AS epp ON epp.fk_equipe = eq.id
-                INNER JOIN pessoas AS pe ON pe.id = epp.fk_pessoa
-                WHERE pr.id = $1
-                ORDER BY pr.id, eq.id ,pe.id`, [id])
+        .query(`SELECT pr.pr_nome, pe.pe_id, pe.pe_nome, eq.eq_nome FROM projetos AS pr
+                INNER JOIN projetos_posssuem_equipes AS ppe ON ppe.fk_projeto = pr.pr_id
+                INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
+                INNER JOIN pessoas_pertencem_equipes AS epp ON epp.fk_equipe = eq.eq_id
+                INNER JOIN pessoas AS pe ON pe.pe_id = epp.fk_pessoa
+                WHERE pr.pr_id = $1
+                ORDER BY pr.pr_id, eq.eq_id ,pe.pe_id`, [id])
         .then(results => {
             return res.json(results.rows)
         })
@@ -90,10 +90,10 @@ projetos.get('/projetos/:id/tarefas', (req, res) => {
     const id = req.params.id
 
     cliente
-        .query(`SELECT pr.id, pr.nome, tr.id, tr.nome FROM projetos AS pr
-                INNER JOIN projetos_possuem_tarefas AS ppt ON ppt.fk_projeto = pr.id
-                INNER JOIN tarefas AS tr ON tr.id = ppt.fk_tarefa
-                WHERE pr.id = $1`, [id])
+        .query(`SELECT pr.pr_id, pr.pr_nome, tr.tr_id, tr.tr_nome FROM projetos AS pr
+                INNER JOIN projetos_possuem_tarefas AS ppt ON ppt.fk_projeto = pr.pr_id
+                INNER JOIN tarefas AS tr ON tr.tr_id = ppt.fk_tarefa
+                WHERE pr.pr_id = $1`, [id])
         .then(results => {
             return res.json(results.rows)
         })
@@ -104,11 +104,11 @@ projetos.get('/projetos/:id/equipes', (req, res) => {
     const id = req.params.id
 
     cliente
-        .query(`SELECT eq.id, eq.nome FROM projetos AS pr
-                INNER JOIN projetos_posssuem_equipes AS ppe ON ppe.fk_projeto = pr.id
-                INNER JOIN equipes AS eq ON eq.id = ppe.fk_equipe
-                WHERE pr.id = $1
-                ORDER BY pr.id, eq.id`, [id])
+        .query(`SELECT eq.eq_id, eq.eq_nome FROM projetos AS pr
+                INNER JOIN projetos_posssuem_equipes AS ppe ON ppe.fk_projeto = pr.pr_id
+                INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
+                WHERE pr.pr_id = $1
+                ORDER BY pr.pr_id, eq.eq_id`, [id])
         .then(results => {
             return res.json(results.rows)
         })

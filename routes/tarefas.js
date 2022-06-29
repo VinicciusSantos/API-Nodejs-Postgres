@@ -15,7 +15,7 @@ cliente.connect()
 // Mostrando todas as tarefas
 tarefas.get('/tarefas', (req, res) => { 
     cliente
-        .query(`SELECT * FROM tarefas ORDER BY id`)
+        .query(`SELECT * FROM tarefas ORDER BY tr_id`)
         .then(results => {
         return res.json(results.rows)
     })
@@ -35,7 +35,7 @@ tarefas.get('/tarefas/:id', (req, res) => {
     const id = req.params.id
 
     cliente
-        .query(`SELECT * FROM tarefas WHERE id = $1`, [id])
+        .query(`SELECT * FROM tarefas WHERE tr_id = $1`, [id])
         .then(results => {
         return res.json(results.rows)
     })
@@ -45,14 +45,14 @@ tarefas.get('/tarefas/:id', (req, res) => {
 tarefas.post('/tarefas', (req, res) => { 
     const body = req.body
 
-    cliente.query('INSERT INTO tarefas (nome, descricao, data_criacao, status) values ($1, $2, $3)', [body.nome, body.descricao, body.data_criacao, 'Ativo'])
+    cliente.query('INSERT INTO tarefas (tr_nome, tr_descricao, tr_data_criacao, tr_status) values ($1, $2, $3, $4)', [body.nome, body.descricao, body.data_criacao, 'Ativo'])
     return res.json("Inserido com sucesso!")
 })
 
 // Deletando tarefas
 tarefas.delete('/tarefas/:id', (req, res) => { 
     const id = req.params.id
-    cliente.query('DELETE FROM tarefas WHERE id = $1', [id])
+    cliente.query('DELETE FROM tarefas WHERE tr_id = $1', [id])
     return res.json("Deletado com sucesso!")
 })
 
@@ -61,7 +61,7 @@ tarefas.put('/tarefas/:id', (req, res) => {
     const id = req.params.id
     const body = req.body
 
-    cliente.query('UPDATE tarefas SET nome = $1, descricao = $2, data_criacao = $3  WHERE id = $4', [body.nome, body.descricao, body.data_criacao, id])
+    cliente.query('UPDATE tarefas SET tr_nome = $1, tr_descricao = $2, tr_data_criacao = $3  WHERE id = $4', [body.nome, body.descricao, body.data_criacao, id])
     return res.json("Alterado com sucesso!")
 })
 
@@ -69,10 +69,10 @@ tarefas.put('/tarefas/:id', (req, res) => {
 tarefas.get('/tarefas/:id/pessoas', (req, res) => { 
     const id = req.params.id
     cliente
-        .query(`SELECT tr.id, tr.nome, pe.id, pe.nome FROM tarefas AS tr
-            INNER JOIN pessoas_associam_tarefas AS pat ON pat.fk_tarefa = tr.id
-            INNER JOIN pessoas AS pe ON pe.id = pat.fk_pessoa
-            WHERE tr.id = $1`, [id])
+        .query(`SELECT tr.tr_id, tr.tr_nome, pe.pe_id, pe.pe_nome FROM tarefas AS tr
+                INNER JOIN pessoas_associam_tarefas AS pat ON pat.fk_tarefa = tr.tr_id
+                INNER JOIN pessoas AS pe ON pe.pe_id = pat.fk_pessoa
+                WHERE tr.tr_id = $1`, [id])
         .then(results => {
         return res.json(results.rows)
     })
