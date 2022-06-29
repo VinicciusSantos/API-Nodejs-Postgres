@@ -45,7 +45,8 @@ equipes.get('/equipes/:id', (req, res) => {
 equipes.post('/equipes', (req, res) => { 
     const body = req.body
 
-    cliente.query('INSERT INTO equipes (nome, fk_projetos, fk_lider) values ($1, $2, $3)', [body.nome, body.fk_projetos, body.fk_lider])
+    cliente
+        .query('INSERT INTO equipes (nome, fk_lider) values ($1, $2)', [body.nome, body.fk_lider])
     return res.json("Inserido com sucesso!")
 })
 
@@ -62,7 +63,7 @@ equipes.put('/equipes/:id', (req, res) => {
     const id = req.params.id
     const body = req.body
 
-    cliente.query('UPDATE equipes SET nome = $1, fk_projetos = $2, fk_lider = $3 WHERE id = $4', [body.nome, body.fk_projetos, body.fk_lider, id])
+    cliente.query('UPDATE equipes SET nome = $1, fk_lider = $2 WHERE id = $3', [body.nome, body.fk_lider, id])
     return res.json("Alterado com sucesso!")
 })
 
@@ -71,9 +72,11 @@ equipes.get('/equipes/:id/pessoas', (req, res) => {
     const id = req.params.id
 
     cliente
-        .query(`SELECT ppe.fk_pessoas, pe.nome, pe.profissao, pe.data_nasc FROM pertencem_pessoas_equipes as ppe
-                INNER JOIN pessoas as pe on ppe.fk_pessoas = pe.id
-                WHERE ppe.fk_equipes = $1`, [id])
+        .query(`SELECT pe.id, pe.nome, ca.cargo, eq.nome FROM pessoas AS pe
+                INNER JOIN pessoas_pertencem_equipes AS ppe ON ppe.fk_pessoa = pe.id
+                INNER JOIN equipes AS eq ON eq.id = ppe.fk_equipe
+                INNER JOIN cargos AS ca ON ca.id = pe.fk_cargo
+                WHERE eq.id = $1`, [id])
         .then(results => {
             return res.json(results.rows)
         })
@@ -84,8 +87,8 @@ equipes.post('/equipes/:id_equipe/pessoas/:id_pessoa', (req, res) => {
     const id_equipe = req.params.id_equipe
     const id_pessoa = req.params.id_pessoa
 
-    cliente.query(`INSERT INTO pertencem_pessoas_equipes (fk_pessoas, fk_equipes)
-                   VALUES ($1, $2)`, [id_equipe, id_pessoa])
+    cliente.query(`INSERT INTO pessoas_pertencem_equipes (fk_pessoas, fk_equipes)
+                   VALUES ($1, $2)`, [id_pessoa, id_equipe])
 
     return res.json("Pessoa Inserida na Equipe")
 })
