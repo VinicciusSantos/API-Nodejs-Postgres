@@ -88,7 +88,7 @@ INSERT INTO cargos (ca_cargo, ca_salario) VALUES
 ('FrontEnd Pleno', '7506.30');
 
 /* Cadastrando Projetos */
-INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, status) VALUES
+INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status) VALUES
 ('GP Inovação', 'O Grad Prix de Inovação tem por objetivo gerar negócios e resolução de desafios para demandas da indústria, envolvendo: pequenas, médias e grandes empresas, assim como, estimular o empreendedorismo e o fortalecimento do ecossistema empreendedor', '03-20-2022', 'Em Andamento'),
 ('Gerenciamento de Pousadas', 'Desenvolvido para administrar pousadas, hotéis, hostels ou qualquer conjunto de acomodações de forma simples e profissional', '02-12-2022', 'Em Andamento'),
 ('Gerenciamento Financeiro', 'Esse sistema de gestão financeira é uma solução da tecnologia para que haja gestão financeira corporativa. Com isso, a ferramenta, que pode ser um aplicativo ou um software, dispõe de recursos para ajudar no gerenciamento financeiro do negócio', '11-15-2021', 'Em Andamento'),
@@ -168,6 +168,6 @@ INSERT INTO pessoas_associam_tarefas (fk_pessoa, fk_tarefa) VALUES
 (1, 2), (19, 2), (12, 2), 
 (4, 4), (9, 3),
 (20, 5), (5, 5), (11, 6), (6, 5), (2, 5), (14, 5), (18, 5), (13, 5),
-(17, 6) (8, 6), (15, 6),
+(17, 6), (8, 6), (15, 6),
 (16, 7),
 (7, 8);
