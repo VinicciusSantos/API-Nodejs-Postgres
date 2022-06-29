@@ -16,11 +16,13 @@ const pessoas = require('./pessoas')
 const projetos = require('./projetos')
 const equipes = require('./equipes')
 const tarefas = require('./tarefas')
+const atualizacoes = require('./atualizacoes')
 
 routes.use(pessoas)
 routes.use(projetos)
 routes.use(equipes)
 routes.use(tarefas)
+routes.use(atualizacoes)
 
 // Tela Principal
 routes.get('/', (req, res) => {

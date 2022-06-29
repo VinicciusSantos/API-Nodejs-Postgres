@@ -6,7 +6,7 @@ CREATE TABLE projetos (
     pr_nome VARCHAR(50) NOT NULL,
     pr_descricao VARCHAR(400),
     pr_status VARCHAR(20) NOT NULL,
-    pr_data_criacao DATE NOT NULL,
+    pr_data_criacao DATE NOT NULL default CURRENT_DATE,
     pr_data_finalizacao DATE
 );
 
@@ -14,7 +14,7 @@ CREATE TABLE tarefas (
     tr_id SERIAL PRIMARY KEY,
     tr_nome VARCHAR(50) NOT NULL,
     tr_descricao VARCHAR(400),
-    tr_data_criacao DATE,
+    tr_data_criacao DATE default CURRENT_DATE,
     tr_data_finalizacao DATE,
     tr_status VARCHAR(20)
 );
@@ -31,7 +31,7 @@ CREATE TABLE pessoas (
     pe_nome VARCHAR(50) NOT NULL,
     pe_fk_cargo INTEGER NOT NULL,
     pe_data_nasc DATE NOT NULL,
-    pe_data_cadastro DATE,
+    pe_data_cadastro DATE default CURRENT_DATE,
     pe_status VARCHAR(20) NOT NULL,
     pe_qtd_tarefas_finalizadas INTEGER NOT NULL
 );
@@ -67,7 +67,7 @@ CREATE TABLE pessoas_associam_tarefas (
 CREATE TABLE atualizacoes (
     att_id SERIAL PRIMARY KEY,
     att_mensagem VARCHAR(400) NOT NULL,
-    att_data DATE NOT NULL,
+    att_data DATE NOT NULL default CURRENT_DATE,
     fk_projeto INTEGER NOT NULL,
     fk_autor INTEGER NOT NULL,
     FOREIGN KEY (fk_projeto) REFERENCES projetos(pr_id),
@@ -79,7 +79,6 @@ CREATE TABLE cargos (
     ca_cargo VARCHAR(100) NOT NULL,
     ca_salario REAL NOT NULL
 );
-
 
 INSERT INTO cargos (ca_cargo, ca_salario) VALUES
 ('FrontEnd Junior', '2525.00'),
