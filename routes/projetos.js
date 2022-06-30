@@ -24,7 +24,7 @@ projetos.get('/projetos', (req, res) => {
 // Quantidade de projetos
 projetos.get('/projetos/count', (req, res) => { 
     cliente
-        .query("select count(*) from projetos")
+        .query("SELECT count(*) FROM projetos")
         .then(results => {
         return res.json(results.rows)
     })
@@ -114,7 +114,6 @@ projetos.get('/projetos/:id/equipes', (req, res) => {
         })
 })
 
-
 // Associar Tarefa com Projeto
 projetos.get('/projetos/:id_projeto/tarefas/_id_tarefa', (req, res) => { 
     const id_projeto = req.params.id_projeto
@@ -126,6 +125,50 @@ projetos.get('/projetos/:id_projeto/tarefas/_id_tarefa', (req, res) => {
         .then(results => {
             return res.json(results.rows)
         })
+})
+
+/* Mostrando todos os Status que estão sendo utilizados
+projetos.get('/projetos/status', (req, res) => {
+    cliente
+        .query(`SELECT pr_status FROM projetos GROUP BY pr_status`)
+        .then(results => {
+            return res.json(results.rows)
+        })
+})
+*/
+
+// Mostrando o Status de Um Projeto
+projetos.get('/projetos/:id/status', (req, res) => {
+    const id = req.params.id
+
+    cliente
+        .query(`SELECT pr_nome, pr_status FROM projetos
+                WHERE pr_id = $1`, [id])
+        .then(results => {
+            return res.json(results.rows)
+        })
+})
+
+// Mostrando projetos com um status específico
+projetos.get('/projetos/status/:status', (req, res) => {
+    const status = req.params.status
+
+    cliente
+        .query(`SELECT * FROM projetos
+                WHERE pr_status = $1`, [status])
+        .then(results => {
+            return res.json(results.rows)
+        })
+})
+
+// Mudar Status de um Projeto
+projetos.put('/projetos/:id/status/:status', (req, res) => {
+    const id = req.params.id
+    const status = req.params.status
+
+    cliente
+        .query(`UPDATE projetos SET pr_status = $1 WHERE pr_id = $2`, [status, id])
+        return res.json('Status Atualizado')
 })
 
 module.exports = projetos

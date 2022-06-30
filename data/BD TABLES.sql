@@ -81,10 +81,7 @@ CREATE TABLE cargos (
 );
 
 INSERT INTO cargos (ca_cargo, ca_salario) VALUES
-('FrontEnd Junior', '2525.00'),
-('BackEnd Junior', '2525.00'),
-('BackEnd Pleno', '7506.30'),
-('FrontEnd Pleno', '7506.30');
+('FrontEnd Junior', '2525.00'),pr_data_criacao
 
 /* Cadastrando Projetos */
 INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status) VALUES
