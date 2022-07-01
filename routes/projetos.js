@@ -127,23 +127,10 @@ projetos.get('/projetos/:id_projeto/tarefas/_id_tarefa', (req, res) => {
         })
 })
 
-/* Mostrando todos os Status que estão sendo utilizados
+// Mostrando todos os Status que estão sendo utilizados
 projetos.get('/projetos/status', (req, res) => {
     cliente
-        .query(`SELECT pr_status FROM projetos GROUP BY pr_status`)
-        .then(results => {
-            return res.json(results.rows)
-        })
-})
-*/
-
-// Mostrando o Status de Um Projeto
-projetos.get('/projetos/:id/status', (req, res) => {
-    const id = req.params.id
-
-    cliente
-        .query(`SELECT pr_nome, pr_status FROM projetos
-                WHERE pr_id = $1`, [id])
+        .query(`SELECT pr_status, count(*) FROM projetos GROUP BY pr_status`)
         .then(results => {
             return res.json(results.rows)
         })
