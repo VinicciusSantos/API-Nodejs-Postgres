@@ -128,7 +128,7 @@ projetos.get('/projetos/:id_projeto/tarefas/_id_tarefa', (req, res) => {
 })
 
 // Mostrando todos os Status que estão sendo utilizados
-projetos.get('/projetos/status', (req, res) => {
+projetos.get('/projetos/statuslist', (req, res) => {
     cliente
         .query(`SELECT pr_status, count(*) FROM projetos GROUP BY pr_status`)
         .then(results => {
