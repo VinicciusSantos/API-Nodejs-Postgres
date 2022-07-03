@@ -17,7 +17,7 @@ pessoas.get('/pessoas', (req, res) => {
     cliente
         .query(`SELECT pe.pe_id, pe.pe_nome, ca.ca_cargo, pe.pe_data_nasc, pe.pe_status, pe.pe_qtd_tarefas_finalizadas
                 FROM pessoas AS pe
-                INNER JOIN cargos AS ca ON ca.ca_id = pe.fk_cargo
+                INNER JOIN cargos AS ca ON ca.ca_id = pe.pe_fk_cargo                
                 ORDER BY id`)
         .then(results => {
             return res.json(results.rows)
@@ -39,7 +39,7 @@ pessoas.get('/pessoas/:id', (req, res) => {
     cliente
         .query(`SELECT pe.pe_id, pe.pe_nome, ca.ca_cargo, pe.pe_data_nasc, pe.pe_status, pe.pe_qtd_tarefas_finalizadas
                 FROM pessoas AS pe
-                INNER JOIN cargos AS ca ON ca.ca_id = pe.fk_cargo
+                INNER JOIN cargos AS ca ON ca.ca_id = pe.pe_fk_cargo                
                 WHERE pe.pe_id = $1`, [id])
         .then(results => {
             return res.json(results.rows)
@@ -51,8 +51,10 @@ pessoas.post('/pessoas', (req, res) => {
     const body = req.body
 
     cliente
-        .query(`INSERT INTO pessoas (pe_nome, fk_cargo, pe_data_nasc, pe_status, pe_qtd_tarefas_finalizadas)
-                VALUES ($1, $2, $3, $4, $5)`, [body.nome, body.fk_cargo, body.data_nasc, 'Ativo', 0])
+        .query(`INSERT INTO pessoas (pe_nome, pe_fk_cargo
+        , pe_data_nasc, pe_status, pe_qtd_tarefas_finalizadas)
+                VALUES ($1, $2, $3, $4, $5)`, [body.nome, body.pe_fk_cargo
+                , body.data_nasc, 'Ativo', 0])
         .then(results => {
             return res.json("Inserido com sucesso!")
         })
@@ -75,8 +77,9 @@ pessoas.put('/pessoas/:id', (req, res) => {
     const body = req.body
 
     cliente
-        .query(`UPDATE pessoas SET nome = $1, fk_cargo = $2, data_nasc = $3
-                WHERE pe_id = $4`, [body.nome, body.fk_cargo, body.data_nasc ,id])
+        .query(`UPDATE pessoas SET nome = $1, pe_fk_cargo         = $2, data_nasc = $3
+                WHERE pe_id = $4`, [body.nome, body.pe_fk_cargo
+                , body.data_nasc ,id])
         .then(results => {
             return res.json("Alterado com sucesso!")
         })
