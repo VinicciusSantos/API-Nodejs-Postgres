@@ -18,7 +18,7 @@ pessoas.get('/pessoas', (req, res) => {
         .query(`SELECT pe.pe_id, pe.pe_nome, ca.ca_cargo, pe.pe_data_nasc, pe.pe_status, pe.pe_qtd_tarefas_finalizadas
                 FROM pessoas AS pe
                 INNER JOIN cargos AS ca ON ca.ca_id = pe.pe_fk_cargo                
-                ORDER BY id`)
+                ORDER BY pe_id`)
         .then(results => {
             return res.json(results.rows)
     })
