@@ -165,9 +165,16 @@ projetos.put('/projetos/:id/status/:status', (req, res) => {
     const id = req.params.id
     const status = req.params.status
 
-    cliente
-        .query(`UPDATE projetos SET pr_status = $1 WHERE pr_id = $2`, [status, id])
-        return res.json('Status Atualizado')
+    // Mundando o status do projeto e garantindo que a sua data de finalização está nula
+    cliente.query(`UPDATE projetos SET pr_status = $1, pr_data_finalizacao = $2 WHERE pr_id = $3`, [status, null ,id])
+
+        
+    // Se o projeto estiver sendo finalizado, temos que gravar a data de finalização:
+    if (status === 'Concluido'){
+        cliente.query(`UPDATE projetos SET pr_data_finalizacao = CURRENT_DATE WHERE pr_id = $1`, [id])
+    }
+    
+    return res.json('Status Atualizado')
 })
 
 module.exports = projetos
