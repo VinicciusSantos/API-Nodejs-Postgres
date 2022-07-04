@@ -30,6 +30,15 @@ projetos.get('/projetos/count', (req, res) => {
     })
 })
 
+// Mostrando todos os Status que estão sendo utilizados
+projetos.get('/projetos/status', (req, res) => {
+    cliente
+        .query(`SELECT pr_status, count(*) FROM projetos GROUP BY pr_status`)
+        .then(results => {
+            return res.json(results.rows)
+        })
+})
+
 // Mostrando projetos pelo ID
 projetos.get('/projetos/:id', (req, res) => { 
     const id = req.params.id
@@ -73,7 +82,7 @@ projetos.get('/projetos/:id/pessoas', (req, res) => {
     const id = req.params.id
 
     cliente
-        .query(`SELECT pr.pr_nome, pe.pe_id, pe.pe_nome, eq.eq_nome FROM projetos AS pr
+        .query(`SELECT pe.pe_id, pe.pe_nome, eq.eq_nome, pr.pr_nome FROM projetos AS pr
                 INNER JOIN projetos_posssuem_equipes AS ppe ON ppe.fk_projeto = pr.pr_id
                 INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
                 INNER JOIN pessoas_pertencem_equipes AS epp ON epp.fk_equipe = eq.eq_id
@@ -90,7 +99,7 @@ projetos.get('/projetos/:id/tarefas', (req, res) => {
     const id = req.params.id
 
     cliente
-        .query(`SELECT pr.pr_id, pr.pr_nome, tr.tr_id, tr.tr_nome FROM projetos AS pr
+        .query(`SELECT tr.tr_id, tr.tr_nome, pr.pr_nome FROM projetos AS pr
                 INNER JOIN projetos_possuem_tarefas AS ppt ON ppt.fk_projeto = pr.pr_id
                 INNER JOIN tarefas AS tr ON tr.tr_id = ppt.fk_tarefa
                 WHERE pr.pr_id = $1`, [id])
@@ -115,7 +124,7 @@ projetos.get('/projetos/:id/equipes', (req, res) => {
 })
 
 // Associar Tarefa com Projeto
-projetos.get('/projetos/:id_projeto/tarefas/_id_tarefa', (req, res) => { 
+projetos.post('/projetos/:id_projeto/tarefas/_id_tarefa', (req, res) => { 
     const id_projeto = req.params.id_projeto
     const id_tarefa = req.params.id_tarefa
 
@@ -127,10 +136,13 @@ projetos.get('/projetos/:id_projeto/tarefas/_id_tarefa', (req, res) => {
         })
 })
 
-// Mostrando todos os Status que estão sendo utilizados
-projetos.get('/projetos/statuslist', (req, res) => {
+// Mostrando o Status de Um Projeto
+projetos.get('/projetos/:id/status', (req, res) => {
+    const id = req.params.id
+
     cliente
-        .query(`SELECT pr_status, count(*) FROM projetos GROUP BY pr_status`)
+        .query(`SELECT pr_nome, pr_status FROM projetos
+                WHERE pr_id = $1`, [id])
         .then(results => {
             return res.json(results.rows)
         })
