@@ -15,7 +15,8 @@ cliente.connect()
 // Mostrando todas as equipes
 equipes.get('/equipes', (req, res) => { 
     cliente
-        .query("SELECT * FROM equipes ORDER BY eq_id")
+        .query(`SELECT eq.eq_id, eq.eq_nome, pe.pe_nome AS eq_lider FROM equipes AS eq
+                INNER JOIN pessoas AS pe ON pe.pe_id = eq.fk_lider`)
         .then(results => {
         return res.json(results.rows)
     })
@@ -75,7 +76,7 @@ equipes.get('/equipes/:id/pessoas', (req, res) => {
         .query(`SELECT pe.pe_id, pe.pe_nome, ca.ca_cargo, eq.eq_nome FROM pessoas AS pe
                 INNER JOIN pessoas_pertencem_equipes AS ppe ON ppe.fk_pessoa = pe.pe_id
                 INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
-                INNER JOIN cargos AS ca ON ca.ca_id = pe.fk_cargo
+                INNER JOIN cargos AS ca ON ca.ca_id = pe.pe_fk_cargo
                 WHERE eq.eq_id = $1`, [id])
         .then(results => {
             return res.json(results.rows)
