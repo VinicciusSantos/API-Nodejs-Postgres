@@ -81,7 +81,7 @@ CREATE TABLE cargos (
 );
 
 INSERT INTO cargos (ca_cargo, ca_salario) VALUES
-('FrontEnd Junior', '2525.00'),pr_data_criacao
+('FrontEnd Junior', '2525.00');
 
 /* Cadastrando Projetos */
 INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status) VALUES
@@ -99,7 +99,7 @@ INSERT INTO tarefas (tr_nome, tr_descricao, tr_data_criacao, tr_status) VALUES
 ('Gravar o Pitch', 'O pitch é uma apresentação sumária de 3 a 5 minutos com objetivo de despertar o interesse da outra parte (investidora, investidor ou cliente) pelo seu negócio. Assim, deve conter apenas as informações essenciais e diferenciadas', '03-25-2022', 'Ativo'),
 ('Fazer pesquisa de anterioridade', 'A busca de anterioridade pode ser definida como uma atividade de pesquisa sobre informações tecnológicas que atestem/comprovem a inexistência de produto, processo ou melhoria idêntica ao objeto de pedido de patente ou registro que se deseja proteger', '04-20-2022', 'Ativo'),
 ('Gerar Relatórios', 'Com os indicadores, gráficos, relatórios e demais recursos', '03-05-2022', 'Concluido'),
-('Geração de boletos', 'Um boleto bancário é um documento largamente utilizado no Brasil como instrumento de pagamento de um produto ou serviço prestado. Através do boleto, seu emissor pode receber do pagador o valor referente àquele pagamento', '02-21-2022', 'Concluído');
+('Geração de boletos', 'Um boleto bancário é um documento largamente utilizado no Brasil como instrumento de pagamento de um produto ou serviço prestado. Através do boleto, seu emissor pode receber do pagador o valor referente àquele pagamento', '02-21-2022', 'Concluido');
 
 /* Cadastrando Pessoas */
 INSERT INTO pessoas (pe_nome, pe_data_nasc, pe_fk_cargo, pe_status, pe_qtd_tarefas_finalizadas) VALUES
