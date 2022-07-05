@@ -136,18 +136,6 @@ projetos.post('/projetos/:id_projeto/tarefas/_id_tarefa', (req, res) => {
         })
 })
 
-// Mostrando o Status de Um Projeto
-projetos.get('/projetos/:id/status', (req, res) => {
-    const id = req.params.id
-
-    cliente
-        .query(`SELECT pr_nome, pr_status FROM projetos
-                WHERE pr_id = $1`, [id])
-        .then(results => {
-            return res.json(results.rows)
-        })
-})
-
 // Mostrando projetos com um status específico
 projetos.get('/projetos/status/:status', (req, res) => {
     const status = req.params.status

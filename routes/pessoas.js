@@ -32,6 +32,15 @@ pessoas.get('/pessoas/count', (req, res) => {
     })
 })
 
+// Mostrando todos os Status que estão sendo utilizados
+pessoas.get('/pessoas/status', (req, res) => {
+    cliente
+        .query(`SELECT pe_status, count(*) FROM pessoas GROUP BY pe_status`)
+        .then(results => {
+            return res.json(results.rows)
+        })
+})
+
 // Mostrando pessoas com um ID específico
 pessoas.get('/pessoas/:id', (req, res) => { 
     const id = req.params.id
@@ -110,6 +119,28 @@ pessoas.post('/pessoas/:id_pessoa/tarefas/:id_tarefa', (req, res) => {
         .then(r => {
             return res.json("Tarefa inserida no projeto")
         })
+})
+
+// Mostrando pessoas com um status específico
+pessoas.get('/pessoas/status/:status', (req, res) => {
+    const status = req.params.status
+
+    cliente
+        .query(`SELECT * FROM pessoas
+                WHERE pe_status = $1`, [status])
+        .then(results => {
+            return res.json(results.rows)
+        })
+})
+
+// Mudar Status de uma pessoa
+pessoas.put('/pessoas/:id/status/:status', (req, res) => {
+    const id = req.params.id
+    const status = req.params.status
+
+    // Mundando o status de uma pessoa
+    cliente.query(`UPDATE pessoas SET pe_status = $1 WHERE pe_id = $2`, [status, id])
+    return res.json('Status Atualizado')
 })
 
 module.exports = pessoas
