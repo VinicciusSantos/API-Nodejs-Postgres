@@ -28,7 +28,7 @@ pessoas.get('/pessoas/count', (req, res) => {
     cliente
         .query("select count(*) from pessoas")
         .then(results => {
-        return res.json(results.rows)
+        return res.json(results.rows[0])
     })
 })
 
@@ -51,7 +51,7 @@ pessoas.get('/pessoas/:id', (req, res) => {
                 INNER JOIN cargos AS ca ON ca.ca_id = pe.pe_fk_cargo                
                 WHERE pe.pe_id = $1`, [id])
         .then(results => {
-            return res.json(results.rows)
+            return res.json(results.rows[0])
     })
 })
 

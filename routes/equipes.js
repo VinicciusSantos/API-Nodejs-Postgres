@@ -27,7 +27,7 @@ equipes.get('/equipes/count', (req, res) => {
     cliente
         .query("select count(*) from equipes")
         .then(results => {
-        return res.json(results.rows)
+        return res.json(results.rows[0])
     })
 })
 
@@ -38,7 +38,7 @@ equipes.get('/equipes/:id', (req, res) => {
     cliente
         .query('SELECT * FROM equipes WHERE eq_id = $1', [id])
         .then(results => {
-        return res.json(results.rows)
+        return res.json(results.rows[0])
     })
 })
 

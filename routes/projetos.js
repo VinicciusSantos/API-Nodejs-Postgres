@@ -26,7 +26,7 @@ projetos.get('/projetos/count', (req, res) => {
     cliente
         .query("SELECT count(*) FROM projetos")
         .then(results => {
-        return res.json(results.rows)
+        return res.json(results.rows[0])
     })
 })
 
@@ -35,7 +35,7 @@ projetos.get('/projetos/status', (req, res) => {
     cliente
         .query(`SELECT pr_status, count(*) FROM projetos GROUP BY pr_status`)
         .then(results => {
-            return res.json(results.rows)
+            return res.json(results.rows[0])
         })
 })
 
@@ -46,7 +46,7 @@ projetos.get('/projetos/:id', (req, res) => {
     cliente
         .query('SELECT * FROM projetos WHERE pr_id = $1', [id])
         .then(results => {
-        return res.json(results.rows)
+        return res.json(results.rows[0])
     })
 })
 

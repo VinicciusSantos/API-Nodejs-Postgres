@@ -26,7 +26,7 @@ tarefas.get('/tarefas/count', (req, res) => {
     cliente
         .query(`select count(*) from tarefas`)
         .then(results => {
-        return res.json(results.rows)
+        return res.json(results.rows[0])
     })
 })
 
@@ -46,7 +46,7 @@ tarefas.get('/tarefas/:id', (req, res) => {
     cliente
         .query(`SELECT * FROM tarefas WHERE tr_id = $1`, [id])
         .then(results => {
-        return res.json(results.rows)
+        return res.json(results.rows[0])
     })
 })
 

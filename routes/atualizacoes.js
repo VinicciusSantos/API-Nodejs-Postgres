@@ -27,7 +27,7 @@ atualizacoes.get('/atualizacoes/:id', (req, res) => {
     cliente
         .query(`SELECT * FROM atualizacoes WHERE att_id = $1`, [id])
         .then(results => {
-        return res.json(results.rows)
+        return res.json(results.rows[0])
     })
 })
 
@@ -40,8 +40,7 @@ atualizacoes.get('/atualizacoes/projeto/:id', (req, res) => {
     })
 })
 
-
-//Inserindo Tarefas
+//Inserindo Atualizações
 atualizacoes.post('/atualizacoes', (req, res) => { 
     const body = req.body
 
