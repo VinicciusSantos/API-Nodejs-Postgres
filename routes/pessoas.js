@@ -96,7 +96,7 @@ pessoas.put('/pessoas/:id', (req, res) => {
 
 // Mostrar tarefas de uma pessoa
 pessoas.get('/pessoas/:id/tarefas', (req, res) => { 
-    const id = req.params.id>
+    const id = req.params.id
     
     cliente
         .query(`SELECT pe.pe_id, pe.pe_nome, tr.tr_id, tr.tr_nome FROM pessoas AS pe
