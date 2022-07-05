@@ -56,7 +56,7 @@ projetos.post('/projetos', (req, res) => {
 
     cliente
         .query(`INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status)
-                VALUES ($1, $2, $3, $4)`, [body.nome, body.descricao, body.data_criacao, 'Ativo'])
+                VALUES ($1, $2, current_date, $3)`, [body.pr_nome, body.pr_descricao, 'Ativo'])
     return res.json("Inserido com sucesso!")
 })
 

@@ -30,6 +30,15 @@ tarefas.get('/tarefas/count', (req, res) => {
     })
 })
 
+// Mostrando todos os Status que estão sendo utilizados
+tarefas.get('/tarefas/status', (req, res) => {
+    cliente
+        .query(`SELECT tr_status, count(*) FROM tarefas GROUP BY tr_status`)
+        .then(results => {
+            return res.json(results.rows)
+        })
+})
+
 // Mostrando tarefas pelo ID
 tarefas.get('/tarefas/:id', (req, res) => { 
     const id = req.params.id
@@ -76,6 +85,28 @@ tarefas.get('/tarefas/:id/pessoas', (req, res) => {
         .then(results => {
         return res.json(results.rows)
     })
+})
+
+// Mostrando tarefas com um status específico
+tarefas.get('/tarefas/status/:status', (req, res) => {
+    const status = req.params.status
+
+    cliente
+        .query(`SELECT * FROM tarefas
+                WHERE pe_status = $1`, [status])
+        .then(results => {
+            return res.json(results.rows)
+        })
+})
+
+// Mudar Status de uma pessoa
+tarefas.put('/tarefas/:id/status/:status', (req, res) => {
+    const id = req.params.id
+    const status = req.params.status
+
+    // Mundando o status de uma pessoa
+    cliente.query(`UPDATE tarefas SET tr_status = $1 WHERE tr_id = $2`, [status, id])
+    return res.json('Status Atualizado')
 })
 
 module.exports = tarefas
