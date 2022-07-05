@@ -93,7 +93,7 @@ tarefas.get('/tarefas/status/:status', (req, res) => {
 
     cliente
         .query(`SELECT * FROM tarefas
-                WHERE pe_status = $1`, [status])
+                WHERE tr_status = $1`, [status])
         .then(results => {
             return res.json(results.rows)
         })
