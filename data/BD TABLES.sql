@@ -90,6 +90,15 @@ INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status) VALUES
 ('Gerenciamento Financeiro', 'Esse sistema de gestão financeira é uma solução da tecnologia para que haja gestão financeira corporativa. Com isso, a ferramenta, que pode ser um aplicativo ou um software, dispõe de recursos para ajudar no gerenciamento financeiro do negócio', '11-15-2021', 'Em Andamento'),
 ('API de Gerenciamento de Projetos', 'API é um acrônimo para Application Programming Interface, ou Interface de Programação de Aplicação, em português. Trata-se de um conjunto de rotinas e padrões que facilitam a comunicação e troca de informações entre sistemas', '06-05-2022', 'Em Andamento');
 
+INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status, pr_data_finalizacao) VALUES
+('teste1', 'blablabla', '01-01-2018', 'Concluido', '12-06-2022'),
+('teste2', 'blablabla ;-;', '05-12-2010', 'Concluido', '23-06-2022'),
+('teste3', 'blablabla dnv', '08-25-2019', 'Concluido', '14-05-2022'),
+('teste4', 'blablabla novamente', '05-12-2010', 'Concluido', '21-04-2022'),
+('teste5', 'blablabla pra testar um negoco', '01-01-2018', 'Concluido', '13-04-2022'),
+('teste6', 'blablabla eai blz?', '05-12-2010', 'Concluido', '28-04-2022');
+
+
 /* Cadastrando Tarefas */
 INSERT INTO tarefas (tr_nome, tr_descricao, tr_data_criacao, tr_status) VALUES
 ('Criar o Banco de dados da API', 'PostgreSQL é um sistema gerenciador de banco de dados objeto relacional, desenvolvido como projeto de código aberto', '06-14-2022', 'Ativo'),
