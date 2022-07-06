@@ -65,7 +65,7 @@ projetos.post('/projetos', async (req, res) => {
         return res.json("Inserido com sucesso!")
     }
     
-    return res.json("Esse projeto já foi inserido!")
+    return res.status(400).json("Esse projeto já foi inserido!")
 })
 
 // Deletando projetos
