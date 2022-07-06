@@ -54,16 +54,18 @@ projetos.get('/projetos/:id', (req, res) => {
 projetos.post('/projetos', async (req, res) => { 
     const body = req.body
 
-    const count = await cliente.query('SELECT count(*) from projetos where pr_nome = $1', [body.nome])
+    const count = await cliente.query('SELECT count(*) from projetos where pr_nome = $1', [body.pr_nome])
 
-    if (count != 0){
-        return res.json("Esse projeto já foi inserido!")
+    console.log(body.pr_nome)
+    console.log(count.rows[0].count)
+    if (count.rows[0].count == 0){
+        cliente
+            .query(`INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status)
+                    VALUES ($1, $2, current_date, $3)`, [body.pr_nome, body.pr_descricao, 'Ativo'])
+        return res.json("Inserido com sucesso!")
     }
-
-    cliente
-        .query(`INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status)
-                VALUES ($1, $2, current_date, $3)`, [body.pr_nome, body.pr_descricao, 'Ativo'])
-    return res.json("Inserido com sucesso!")
+    
+    return res.json("Esse projeto já foi inserido!")
 })
 
 // Deletando projetos
