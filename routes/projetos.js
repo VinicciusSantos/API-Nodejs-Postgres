@@ -51,8 +51,14 @@ projetos.get('/projetos/:id', (req, res) => {
 })
 
 // Inserindo projetos
-projetos.post('/projetos', (req, res) => { 
+projetos.post('/projetos', async (req, res) => { 
     const body = req.body
+
+    const count = await cliente.query('SELECT count(*) from projetos where pr_nome = $1', [body.nome])
+
+    if (count != 0){
+        return res.json("Esse projeto já foi inserido!")
+    }
 
     cliente
         .query(`INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status)
