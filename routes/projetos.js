@@ -2,6 +2,7 @@ const express = require('express')
 const projetos = express.Router()
 
 const { Client } = require('pg');
+const equipes = require('./equipes');
 
 const cliente = new Client({
   connectionString: "postgres://vbqbxvwduupnpi:7126070db19f0b620bc80a0eb041e8067a9eaf9b568937002331f2eb3f51ffc8@ec2-23-23-182-238.compute-1.amazonaws.com:5432/dcte0q2jbf9d90",
@@ -40,14 +41,42 @@ projetos.get('/projetos/status', (req, res) => {
 })
 
 // Mostrando projetos pelo ID
-projetos.get('/projetos/:id', (req, res) => { 
+projetos.get('/projetos/:id', async (req, res) => { 
     const id = req.params.id
 
-    cliente
-        .query('SELECT * FROM projetos WHERE pr_id = $1', [id])
-        .then(results => {
-        return res.json(results.rows[0])
-    })
+    const dados_projeto = await cliente.query('SELECT * FROM projetos WHERE pr_id = $1', [id])
+
+    const lista_tarefas = await cliente.query(`SELECT tr.tr_id, tr.tr_nome, tr_descricao, tr_data_criacao, tr_status, tr_data_finalizacao FROM projetos AS pr
+                                         INNER JOIN projetos_possuem_tarefas AS ppt ON ppt.fk_projeto = pr.pr_id
+                                         INNER JOIN tarefas AS tr ON tr.tr_id = ppt.fk_tarefa
+                                         WHERE pr.pr_id = $1`, [id])
+
+    const lista_equipes = await cliente.query(`SELECT eq.eq_id, eq.eq_nome FROM projetos AS pr
+                                         INNER JOIN projetos_posssuem_equipes AS ppe ON ppe.fk_projeto = pr.pr_id
+                                         INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
+                                         WHERE pr.pr_id = $1
+                                         ORDER BY pr.pr_id, eq.eq_id`, [id])
+
+    let results = {
+        dados: dados_projeto.rows,
+        equipes: lista_equipes.rows,
+        tarefas: lista_tarefas.rows
+    }
+
+    for (let i = 0; i < lista_equipes.rowCount; i++) {
+        let element = lista_equipes.rows[i].eq_id;
+
+        let pessoas_da_equipe = await cliente.query(`SELECT pe.pe_id, pe.pe_nome, ca.ca_cargo, eq.eq_nome FROM pessoas AS pe
+                                                INNER JOIN pessoas_pertencem_equipes AS ppe ON ppe.fk_pessoa = pe.pe_id
+                                                INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
+                                                INNER JOIN cargos AS ca ON ca.ca_id = pe.pe_fk_cargo
+                                                WHERE eq.eq_id = $1`, [element])
+        results.equipes[i].pessoas = pessoas_da_equipe.rows
+    }
+
+    console.log(lista_de_listas_de_pessoas)
+
+    return res.json(results)
 })
 
 // Inserindo projetos
@@ -107,7 +136,7 @@ projetos.get('/projetos/:id/tarefas', (req, res) => {
     const id = req.params.id
 
     cliente
-        .query(`SELECT tr.tr_id, tr.tr_nome, pr.pr_nome FROM projetos AS pr
+        .query(`SELECT tr.tr_id, tr.tr_nome, tr_descricao, tr_data_criacao, tr_status, tr_data_finalizacao, pr_id, pr.pr_nome FROM projetos AS pr
                 INNER JOIN projetos_possuem_tarefas AS ppt ON ppt.fk_projeto = pr.pr_id
                 INNER JOIN tarefas AS tr ON tr.tr_id = ppt.fk_tarefa
                 WHERE pr.pr_id = $1`, [id])
@@ -157,14 +186,27 @@ projetos.get('/projetos/status/:status', (req, res) => {
 })
 
 // Mudar Status de um Projeto
-projetos.put('/projetos/:id/status/:status', (req, res) => {
+projetos.put('/projetos/:id/status/:status', async (req, res) => {
     const id = req.params.id
     const status = req.params.status
 
+    if (status === 'Concluido'){
+        // Somente Autoriza a conclusão do projeto se todas as tarefas dele estiverem concluidas
+        const tarefas = await cliente.query(`SELECT tr_id, tr_nome, tr_status FROM projetos AS pr
+                                         INNER JOIN projetos_possuem_tarefas AS ppt ON ppt.fk_projeto = pr.pr_id
+                                         INNER JOIN tarefas AS tr ON tr.tr_id = ppt.fk_tarefa
+                                         WHERE pr_id = $1 AND tr.tr_status != 'Concluido'`, [id])
+
+        console.log(tarefas.rowCount)
+        
+        if (tarefas.rowCount > 0) {
+            return res.json({mensagem:'Não foi possível Concluir o Projeto, pois ainda existem tarefas não concluidas:', tarefas:tarefas.rows})
+        }
+    }
+
     // Mundando o status do projeto e garantindo que a sua data de finalização está nula
     cliente.query(`UPDATE projetos SET pr_status = $1, pr_data_finalizacao = $2 WHERE pr_id = $3`, [status, null ,id])
-
-        
+   
     // Se o projeto estiver sendo finalizado, temos que gravar a data de finalização:
     if (status === 'Concluido'){
         cliente.query(`UPDATE projetos SET pr_data_finalizacao = CURRENT_DATE WHERE pr_id = $1`, [id])
