@@ -44,25 +44,30 @@ projetos.get('/projetos/status', (req, res) => {
 projetos.get('/projetos/:id', async (req, res) => { 
     const id = req.params.id
 
+    // Recebendo as informações basicas do projeto, como: nome, descrição...
     const dados_projeto = await cliente.query('SELECT * FROM projetos WHERE pr_id = $1', [id])
 
+    // Recebendo as tarefas do projeto
     const lista_tarefas = await cliente.query(`SELECT tr.tr_id, tr.tr_nome, tr_descricao, tr_data_criacao, tr_status, tr_data_finalizacao FROM projetos AS pr
                                          INNER JOIN projetos_possuem_tarefas AS ppt ON ppt.fk_projeto = pr.pr_id
                                          INNER JOIN tarefas AS tr ON tr.tr_id = ppt.fk_tarefa
                                          WHERE pr.pr_id = $1`, [id])
 
+    // Recebendo as equipes do projeto
     const lista_equipes = await cliente.query(`SELECT eq.eq_id, eq.eq_nome FROM projetos AS pr
                                          INNER JOIN projetos_posssuem_equipes AS ppe ON ppe.fk_projeto = pr.pr_id
                                          INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
                                          WHERE pr.pr_id = $1
                                          ORDER BY pr.pr_id, eq.eq_id`, [id])
 
+    // Montando um objeto para ser retornado no json
     let results = {
         dados: dados_projeto.rows,
         equipes: lista_equipes.rows,
         tarefas: lista_tarefas.rows
     }
 
+    // Buscando as pessoas de cada equipe do projeto
     for (let i = 0; i < lista_equipes.rowCount; i++) {
         let element = lista_equipes.rows[i].eq_id;
 
@@ -71,6 +76,8 @@ projetos.get('/projetos/:id', async (req, res) => {
                                                 INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
                                                 INNER JOIN cargos AS ca ON ca.ca_id = pe.pe_fk_cargo
                                                 WHERE eq.eq_id = $1`, [element])
+                                                
+        // Gravando a lista de pessoas dentro do objeto results
         results.equipes[i].pessoas = pessoas_da_equipe.rows
     }
 
