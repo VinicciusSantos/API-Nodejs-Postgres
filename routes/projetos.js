@@ -74,8 +74,6 @@ projetos.get('/projetos/:id', async (req, res) => {
         results.equipes[i].pessoas = pessoas_da_equipe.rows
     }
 
-    console.log(lista_de_listas_de_pessoas)
-
     return res.json(results)
 })
 
