@@ -62,7 +62,7 @@ projetos.get('/projetos/:id', async (req, res) => {
 
     // Montando um objeto para ser retornado no json
     let results = {
-        dados: dados_projeto.rows,
+        dados: dados_projeto.rows[0],
         equipes: lista_equipes.rows,
         tarefas: lista_tarefas.rows
     }
