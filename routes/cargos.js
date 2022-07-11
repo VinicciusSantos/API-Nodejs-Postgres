@@ -31,21 +31,28 @@ cargos.get('/cargos/:id', (req, res) => {
     })
 })
 
-// Mostrando todas as atualizações de um projeto
-cargos.get('/cargos/projeto/:id', (req, res) => { 
-    cliente
-        .query(``)
-        .then(results => {
-        return res.json(results.rows)
-    })
-})
-
-//Inserindo Atualizações
+//Inserindo cargos
 cargos.post('/cargos', (req, res) => { 
     const body = req.body
 
-    cliente.query(`INSERT INTO cargos (att_mensagem, fk_projeto, fk_autor) VALUES ($1, $2, $3)`, [body.att_mensagem, body.fk_projeto, body.fk_autor])
-    return res.json("Atualização Inserida com sucesso!")
+    cliente
+        .query('INSERT INTO cargos (ca_cargo, ca_salario) values ($1, $2)', [body.ca_cargo, body.ca_salario])
+    return res.json("Inserido com sucesso!")
 })
 
-module.exports = cargos
+// Deletando cargos
+cargos.delete('/cargos/:id', (req, res) => { 
+    const id = req.params.id
+
+    cliente.query('DELETE FROM cargos WHERE ca_id = $1', [id])
+    return res.json("Deletado com sucesso!")
+})
+
+// Editando cargos
+cargos.put('/cargos/:id', (req, res) => { 
+    const id = req.params.id
+    const body = req.body
+
+    cliente.query('UPDATE cargos SET ca_cargo = $1, ca_salario = $2 WHERE ca_id = $3', [body.ca_cargo, body.ca_salario, id])
+    return res.json("Alterado com sucesso!")
+})
