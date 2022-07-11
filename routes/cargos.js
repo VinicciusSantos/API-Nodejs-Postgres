@@ -56,3 +56,5 @@ cargos.put('/cargos/:id', (req, res) => {
     cliente.query('UPDATE cargos SET ca_cargo = $1, ca_salario = $2 WHERE ca_id = $3', [body.ca_cargo, body.ca_salario, id])
     return res.json("Alterado com sucesso!")
 })
+
+module.exports = cargos
