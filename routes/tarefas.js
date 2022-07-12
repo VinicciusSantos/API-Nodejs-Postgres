@@ -54,7 +54,7 @@ tarefas.get('/tarefas/:id', (req, res) => {
 tarefas.post('/tarefas', (req, res) => { 
     const body = req.body
 
-    cliente.query('INSERT INTO tarefas (tr_nome, tr_descricao, tr_data_criacao, tr_status) values ($1, $2, $3, $4)', [body.nome, body.descricao, body.data_criacao, 'Ativo'])
+    cliente.query('INSERT INTO tarefas (tr_nome, tr_descricao, tr_data_criacao, tr_status) values ($1, $2, $3, $4)', [body.tr_nome, body.tr_descricao, body.data_criacao, 'Ativo'])
     return res.json("Inserido com sucesso!")
 })
 
