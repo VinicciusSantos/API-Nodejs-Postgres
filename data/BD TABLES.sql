@@ -81,9 +81,9 @@ CREATE TABLE cargos (
 );
 
 INSERT INTO cargos (ca_cargo, ca_salario) VALUES
-('FrontEnd Junior', '2525.00');
-('FrontEnd Pleno', '2525.00');
-('BackEnd Junior', '2525.00');
+('FrontEnd Junior', '2525.00'),
+('FrontEnd Pleno', '2525.00'),
+('BackEnd Junior', '2525.00'),
 ('BackEnd Pleno', '2525.00');
 
 /* Cadastrando Projetos */
@@ -93,13 +93,13 @@ INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status) VALUES
 ('Gerenciamento Financeiro', 'Esse sistema de gestão financeira é uma solução da tecnologia para que haja gestão financeira corporativa. Com isso, a ferramenta, que pode ser um aplicativo ou um software, dispõe de recursos para ajudar no gerenciamento financeiro do negócio', '11-15-2021', 'Em Andamento'),
 ('API de Gerenciamento de Projetos', 'API é um acrônimo para Application Programming Interface, ou Interface de Programação de Aplicação, em português. Trata-se de um conjunto de rotinas e padrões que facilitam a comunicação e troca de informações entre sistemas', '06-05-2022', 'Em Andamento');
 
-INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status, pr_data_finalizacao) VALUES
-('teste1', 'blablabla', '2018-01-01', 'Concluido', '2022-06-30'),
-('teste2', 'blablabla ;-;', '2010-12-15', 'Concluido', '2022-06-18'),
-('teste3', 'blablabla dnv', '2019-08-25', 'Concluido', '2022-05-21'),
-('teste4', 'blablabla novamente', '2010-05-12', 'Concluido', '2022-05-13'),
-('teste5', 'blablabla pra testar um negoco', '2018-01-03', 'Concluido', '2022-04-14'),
-('teste6', 'blablabla eai blz?', '2010-05-12', 'Concluido', '2022-03-24');
+-- INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status, pr_data_finalizacao) VALUES
+-- ('teste1', 'blablabla', '2018-01-01', 'Concluido', '2022-06-30'),
+-- ('teste2', 'blablabla ;-;', '2010-12-15', 'Concluido', '2022-06-18'),
+-- ('teste3', 'blablabla dnv', '2019-08-25', 'Concluido', '2022-05-21'),
+-- ('teste4', 'blablabla novamente', '2010-05-12', 'Concluido', '2022-05-13'),
+-- ('teste5', 'blablabla pra testar um negoco', '2018-01-03', 'Concluido', '2022-04-14'),
+-- ('teste6', 'blablabla eai blz?', '2010-05-12', 'Concluido', '2022-03-24');
 
 /* Cadastrando Tarefas */
 INSERT INTO tarefas (tr_nome, tr_descricao, tr_data_criacao, tr_status) VALUES
