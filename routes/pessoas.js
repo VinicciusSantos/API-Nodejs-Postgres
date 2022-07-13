@@ -58,7 +58,9 @@ pessoas.get('/pessoas/:id', (req, res) => {
 // Inserindo pessoas
 pessoas.post('/pessoas', (req, res) => { 
     const body = req.body
-
+    console.log('-=-=-=-=-=-=-')
+    console.log(body)
+    console.log('-=-=-=-=-=-=-')
     cliente
         .query(`INSERT INTO pessoas (pe_nome, pe_fk_cargo
         , pe_data_nasc, pe_status, pe_qtd_tarefas_finalizadas)
