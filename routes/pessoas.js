@@ -64,7 +64,7 @@ pessoas.post('/pessoas', (req, res) => {
     cliente
         .query(`INSERT INTO pessoas (pe_nome, pe_fk_cargo
         , pe_data_nasc, pe_status, pe_qtd_tarefas_finalizadas)
-                VALUES ($1, $2, $3, $4, $5)`, [body.pe_nome, body.ca_id
+                VALUES ($1, $2, $3, $4, $5)`, [body.pe_nome, body.pe_fk_cargo
                 , body.pe_data_nasc, 'Ativo', 0])
         .then(results => {
             return res.json("Inserido com sucesso!")
