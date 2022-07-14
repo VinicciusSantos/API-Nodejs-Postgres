@@ -108,6 +108,11 @@ projetos.post('/projetos', async (req, res) => {
 // Deletando projetos
 projetos.delete('/projetos/:id', (req, res) => { 
     const id = req.params.id
+    console.log('-=-=-=-=-=-=-=-=-=-')
+    console.log(id)
+    console.log(id == 'styles.css')
+    console.log(id === 'styles.css')
+    console.log('-=-=-=-=-=-=-=-=-=-')
     if(parseInt(id) == NaN || id == 'styles.css'){
         return res.json("Tá passando o parâmetro errado meu fi. Id " + id + " não existe")
     }
