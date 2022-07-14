@@ -43,7 +43,9 @@ projetos.get('/projetos/status', (req, res) => {
 // Mostrando projetos pelo ID
 projetos.get('/projetos/:id', async (req, res) => { 
     const id = req.params.id
+    console.log("-=-=-=-=-=-")
     console.log(id)
+    console.log("-=-=-=-=-=-")
 
     // Recebendo as informações basicas do projeto, como: nome, descrição...
     const dados_projeto = await cliente.query('SELECT * FROM projetos WHERE pr_id = $1', [id])
