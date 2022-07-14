@@ -45,7 +45,7 @@ projetos.get('/projetos/:id', async (req, res) => {
     const id = req.params.id
     console.log("-=-=-=-=-=-")
     console.log(id)
-    console.log(typeof(id))
+    console.log(parseInt(id) == NaN)
     console.log("-=-=-=-=-=-")
 
     // Recebendo as informações basicas do projeto, como: nome, descrição...
