@@ -44,8 +44,9 @@ projetos.get('/projetos/status', (req, res) => {
 projetos.get('/projetos/:id', async (req, res) => { 
     const id = req.params.id
     console.log("-=-=-=-=-=-")
-    console.log(id)
-    console.log(parseInt(id))
+    if(parseInt(id) == NaN){
+        return res.json("Tá passando o parâmetro errado meu fi. Id " + id + " não existe")
+    }
     console.log("-=-=-=-=-=-")
 
     // Recebendo as informações basicas do projeto, como: nome, descrição...
