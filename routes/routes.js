@@ -34,4 +34,10 @@ routes.get('/', (req, res) => {
     return res.json(`Menu Principal, Acesse: https://github.com/VinicciusSantos/API-NodeJs para saber mais`)
 })
 
+// Tela Principal
+routes.get('/styles.css', (req, res) => {
+  console.log('oi')
+  return res.json(`oi`)
+})
+
 module.exports = routes
