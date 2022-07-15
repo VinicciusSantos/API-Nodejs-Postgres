@@ -47,7 +47,7 @@ equipes.post('/equipes', (req, res) => {
     const body = req.body
 
     cliente
-        .query('INSERT INTO equipes (eq_nome, fk_lider) values ($1, $2)', [body.nome, body.fk_lider])
+        .query('INSERT INTO equipes (eq_nome, fk_lider) values ($1, $2)', [body.eq_nome, body.fk_lider])
     return res.json("Inserido com sucesso!")
 })
 
@@ -64,7 +64,7 @@ equipes.put('/equipes/:id', (req, res) => {
     const id = req.params.id
     const body = req.body
 
-    cliente.query('UPDATE equipes SET eq_nome = $1, fk_lider = $2 WHERE eq_id = $3', [body.nome, body.fk_lider, id])
+    cliente.query('UPDATE equipes SET eq_nome = $1, fk_lider = $2 WHERE eq_id = $3', [body.eq_nome, body.fk_lider, id])
     return res.json("Alterado com sucesso!")
 })
 

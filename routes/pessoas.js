@@ -58,14 +58,9 @@ pessoas.get('/pessoas/:id', (req, res) => {
 // Inserindo pessoas
 pessoas.post('/pessoas', (req, res) => { 
     const body = req.body
-    console.log('-=-=-=-=-=-=-')
-    console.log(body)
-    console.log('-=-=-=-=-=-=-')
     cliente
-        .query(`INSERT INTO pessoas (pe_nome, pe_fk_cargo
-        , pe_data_nasc, pe_status, pe_qtd_tarefas_finalizadas)
-                VALUES ($1, $2, $3, $4, $5)`, [body.pe_nome, body.pe_fk_cargo
-                , body.pe_data_nasc, 'Ativo', 0])
+        .query(`INSERT INTO pessoas (pe_nome, pe_fk_cargo, pe_data_nasc, pe_status, pe_qtd_tarefas_finalizadas)
+                VALUES ($1, $2, $3, $4, $5)`, [body.pe_nome, body.pe_fk_cargo, body.pe_data_nasc, 'Ativo', 0])
         .then(results => {
             return res.json("Inserido com sucesso!")
         })
@@ -88,9 +83,9 @@ pessoas.put('/pessoas/:id', (req, res) => {
     const body = req.body
 
     cliente
-        .query(`UPDATE pessoas SET nome = $1, pe_fk_cargo         = $2, data_nasc = $3
-                WHERE pe_id = $4`, [body.nome, body.pe_fk_cargo
-                , body.data_nasc ,id])
+        .query(`UPDATE pessoas SET pe_nome = $1, pe_fk_cargo = $2, pe_data_nasc = $3
+                WHERE pe_id = $4`, [body.pe_nome, body.pe_fk_cargo
+                , body.pe_data_nasc ,id])
         .then(results => {
             return res.json("Alterado com sucesso!")
         })

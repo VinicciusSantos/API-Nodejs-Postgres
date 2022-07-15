@@ -70,7 +70,7 @@ tarefas.put('/tarefas/:id', (req, res) => {
     const id = req.params.id
     const body = req.body
 
-    cliente.query('UPDATE tarefas SET tr_nome = $1, tr_descricao = $2, tr_data_criacao = $3  WHERE id = $4', [body.nome, body.descricao, body.data_criacao, id])
+    cliente.query('UPDATE tarefas SET tr_nome = $1, tr_descricao = $2, tr_data_criacao = $3  WHERE id = $4', [body.tr_nome, body.tr_descricao, body.tr_data_criacao, id])
     return res.json("Alterado com sucesso!")
 })
 
