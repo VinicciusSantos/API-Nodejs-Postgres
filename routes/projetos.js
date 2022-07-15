@@ -43,9 +43,6 @@ projetos.get('/projetos/status', (req, res) => {
 // Mostrando projetos pelo ID
 projetos.get('/projetos/:id', async (req, res) => { 
     const id = req.params.id
-    if(parseInt(id) == NaN){
-        return res.json("Tá passando o parâmetro errado meu fi. Id " + id + " não existe")
-    }
 
     // Recebendo as informações basicas do projeto, como: nome, descrição...
     const dados_projeto = await cliente.query('SELECT * FROM projetos WHERE pr_id = $1', [id])
@@ -107,16 +104,6 @@ projetos.post('/projetos', async (req, res) => {
 
 // Deletando projetos
 projetos.delete('/projetos/:id', (req, res) => { 
-    const id = req.params.id
-    console.log('-=-=-=-=-=-=-=-=-=-')
-    console.log(id)
-    console.log(id == 'styles.css')
-    console.log(id === 'styles.css')
-    console.log('-=-=-=-=-=-=-=-=-=-')
-    if(parseInt(id) == NaN || id == 'styles.css'){
-        return res.json("Tá passando o parâmetro errado meu fi. Id " + id + " não existe")
-    }
-
     cliente.query('DELETE FROM projetos WHERE pr_id = $1', [id])
     return res.json("Deletado com sucesso!")
 })
