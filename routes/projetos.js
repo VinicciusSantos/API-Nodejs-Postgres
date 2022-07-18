@@ -55,16 +55,22 @@ projetos.get('/projetos/:id', async (req, res) => {
 
     // Recebendo as tarefas do projeto
     const lista_tarefas = await cliente.query(`SELECT tr.tr_id, tr.tr_nome, tr_descricao, tr_data_criacao, tr_status, tr_data_finalizacao FROM projetos AS pr
-                                         INNER JOIN projetos_possuem_tarefas AS ppt ON ppt.fk_projeto = pr.pr_id
-                                         INNER JOIN tarefas AS tr ON tr.tr_id = ppt.fk_tarefa
-                                         WHERE pr.pr_id = $1`, [id])
+                                               INNER JOIN projetos_possuem_tarefas AS ppt ON ppt.fk_projeto = pr.pr_id
+                                               INNER JOIN tarefas AS tr ON tr.tr_id = ppt.fk_tarefa
+                                               WHERE pr.pr_id = $1`, [id])
 
     // Recebendo as equipes do projeto
     const lista_equipes = await cliente.query(`SELECT eq.eq_id, eq.eq_nome FROM projetos AS pr
-                                         INNER JOIN projetos_posssuem_equipes AS ppe ON ppe.fk_projeto = pr.pr_id
-                                         INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
-                                         WHERE pr.pr_id = $1
-                                         ORDER BY pr.pr_id, eq.eq_id`, [id])
+                                               INNER JOIN projetos_posssuem_equipes AS ppe ON ppe.fk_projeto = pr.pr_id
+                                               INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
+                                               WHERE pr.pr_id = $1
+                                               ORDER BY pr.pr_id, eq.eq_id`, [id])
+
+    const lista_pessoas = await cliente.query(`SELECT pe.pe_id, pe.pe_nome, ca.ca_cargo, eq.eq_nome ,eq.eq_id FROM pessoas AS pe
+                                               INNER JOIN pessoas_pertencem_equipes AS ppe ON ppe.fk_pessoa = pe.pe_id
+                                               INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
+                                               INNER JOIN cargos AS ca ON ca.ca_id = pe.pe_fk_cargo
+                                               ORDER BY pe.pe_id`)
 
     // Montando um objeto para ser retornado no json
     let results = {
@@ -74,17 +80,8 @@ projetos.get('/projetos/:id', async (req, res) => {
     }
 
     // Buscando as pessoas de cada equipe do projeto
-    for (let i = 0; i < lista_equipes.rowCount; i++) {
-        let element = lista_equipes.rows[i].eq_id;
-
-        let pessoas_da_equipe = await cliente.query(`SELECT pe.pe_id, pe.pe_nome, ca.ca_cargo, eq.eq_nome FROM pessoas AS pe
-                                                    INNER JOIN pessoas_pertencem_equipes AS ppe ON ppe.fk_pessoa = pe.pe_id
-                                                    INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
-                                                    INNER JOIN cargos AS ca ON ca.ca_id = pe.pe_fk_cargo
-                                                    WHERE eq.eq_id = $1`, [element])
-                                                
-        // Gravando a lista de pessoas dentro do objeto results
-        results.equipes[i].pessoas = pessoas_da_equipe.rows
+    for (let j = 0; j < lista_equipes.rowCount; j++) {
+        results.equipes[j].pessoas = lista_pessoas.rows.filter(item => item.eq_id == lista_equipes.rows[j].eq_id) 
     }
 
     return res.status(200).json(results)
