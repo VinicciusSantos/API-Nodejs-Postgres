@@ -54,7 +54,7 @@ tarefas.get('/tarefas/:id', (req, res) => {
 tarefas.post('/tarefas', (req, res) => { 
     const body = req.body
 
-    cliente.query('INSERT INTO tarefas (tr_nome, tr_descricao, tr_data_criacao, tr_status) values ($1, $2, $3, $4)', [body.tr_nome, body.tr_descricao, body.data_criacao, 'Ativo'])
+    cliente.query('INSERT INTO tarefas (tr_nome, tr_descricao, tr_data_criacao, tr_status, tr_prioridade) values ($1, $2, $3, $4)', [body.tr_nome, body.tr_descricao, body.data_criacao, 'Inicio', body.tr_prioridade])
     return res.json("Inserido com sucesso!")
 })
 
@@ -70,7 +70,7 @@ tarefas.put('/tarefas/:id', (req, res) => {
     const id = req.params.id
     const body = req.body
 
-    cliente.query('UPDATE tarefas SET tr_nome = $1, tr_descricao = $2, tr_data_criacao = $3  WHERE id = $4', [body.tr_nome, body.tr_descricao, body.tr_data_criacao, id])
+    cliente.query('UPDATE tarefas SET tr_nome = $1, tr_descricao = $2, tr_data_criacao = $3, tr_prioridade = $4 WHERE id = $5', [body.tr_nome, body.tr_descricao, body.tr_data_criacao, body.tr_prioridade,id])
     return res.json("Alterado com sucesso!")
 })
 
@@ -94,6 +94,18 @@ tarefas.get('/tarefas/status/:status', (req, res) => {
     cliente
         .query(`SELECT * FROM tarefas
                 WHERE tr_status = $1`, [status])
+        .then(results => {
+            return res.json(results.rows)
+        })
+})
+
+// Mostrando tarefas com uma prioridade específica
+tarefas.get('/tarefas/prioridade/:prioridade', (req, res) => {
+    const prioridade = req.params.prioridade
+
+    cliente
+        .query(`SELECT * FROM tarefas
+                WHERE tr_prioridade = $1`, [prioridade])
         .then(results => {
             return res.json(results.rows)
         })
