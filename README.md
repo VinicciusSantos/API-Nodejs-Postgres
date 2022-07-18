@@ -13,3 +13,8 @@
   <li><a href="https://github.com/Lucassec1">Lucas Emanuel</a></li>
   <li><a href="https://github.com/VinicciusSantos">Vinicius Guedes</a></li>
 </ul>
+
+<h2>Modelo Lógico do Banco de Dados</h2>
+<div align="center">
+  <img src="data/Modelo_Lógico.png" width="80%">
+</div>
