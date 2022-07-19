@@ -2,9 +2,9 @@
   "name": "node",
   "version": "1.0.0",
   "description": "Primeira API",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
