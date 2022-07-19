@@ -5,7 +5,7 @@
 
 ![Badge Concluido](http://img.shields.io/static/v1?label=STATUS&message=EM-DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
 
-<p>Disponível em: https://github.com/VinicciusSantos/API-Nodejs-Postgres</p>
+<p>Disponível em: https://api-brisa-nodejs-postgresql.herokuapp.com</p>
 
 # Desenvolvedores
 <ul>
