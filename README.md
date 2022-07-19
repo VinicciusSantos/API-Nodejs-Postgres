@@ -3,7 +3,7 @@
   <h1 align="center">API com Node.js e PostgreSQL</h1>
 </div>
 
-![Badge Concluido](http://img.shields.io/static/v1?label=STATUS&message=CONCLUIDO&color=GREEN&style=for-the-badge)
+![Badge Concluido](http://img.shields.io/static/v1?label=STATUS&message=EM-DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
 
 <p>Disponível em: https://github.com/VinicciusSantos/API-Nodejs-Postgres</p>
 
@@ -41,7 +41,7 @@
     * [Exibir Todas as Pessoas](#exibir-todas-as-pessoas)
     * [Exibir Pessoas Específica](#exibir-pessoa-especifica)
     * [Exibir Tarefa de uma Pessoa](#exibir-tarefa-de-uma-pessoa)
-    * [Exibir Status das Pessoas](#exibir-status-doas-pessoas)
+    * [Exibir Status das Pessoas](#exibir-status-das-pessoas)
     * [Exibir Pessoas com um Status Específico](#exibir-pessoas-com-um-status-especifico)
     * [Cadastrar Pessoa](#cadastrar-pessoa)
     * [Editar Pessoa](#editar-pessoa)
@@ -50,12 +50,12 @@
     * [Exibir Todas as Tarefas](#exibir-todas-as-tarefas)
     * [Exibir Tarefa Específica](#exibir-tarefa-especifica)
     * [Exibir Pessoas com a mesma Tarefa](#exibir-pessoas-com-a-mesma-tarefa)
-    * [Exibir Status das Tarefas](#exibir-status-doas-tarefas)
+    * [Exibir Status das Tarefas](#exibir-status-das-tarefas)
     * [Exibir Tarefas com um Status Específico](#exibir-tarefas-com-um-status-especifico)
     * [Cadastrar Tarefa](#cadastrar-tarefa)
     * [Editar Tarefa](#editar-tarefa)
     * [Deletar Tarefa](#deletar-tarefa)
-* [Como Funcionam as Associações](#como-funcionam-as-associacoes)
+* [Modelagem do Banco](#modelagem-do-banco)
 * [Relacionamento dos Elementos](#relacionamento-dos-elementos)
 * [Avisos](#avisos)
 
@@ -125,7 +125,7 @@ https://api-brisa-nodejs-postgresql.herokuapp.com/projetos/:id/equipes
 https://api-brisa-nodejs-postgresql.herokuapp.com/projetos/status/
 ```
 
-## Exibir Projetos com um Status Específico
+## Exibir Projetos com um Status Especifico
 <p>- Para Buscar algum elemento individualmente, precisamos usar o ID dele.</p>
 <p>- Usando o método GET podemos acessar o seguinte endereço:</p>
 
@@ -254,7 +254,7 @@ https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id/tarefas
 https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/status/
 ```
 
-## Exibir Pessoas com um Status Específico
+## Exibir Pessoas com um Status Especifico
 <p>- Para Buscar algum elemento individualmente, precisamos usar o ID dele.</p>
 <p>- Usando o método GET podemos acessar o seguinte endereço:</p>
 
@@ -323,7 +323,7 @@ https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/:id/pessoas
 https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/status/
 ```
 
-## Exibir Tarefas com um Status Específico
+## Exibir Tarefas com um Status Especifico
 <p>- Para Buscar algum elemento individualmente, precisamos usar o ID dele.</p>
 <p>- Usando o método GET podemos acessar o seguinte endereço:</p>
 
@@ -361,10 +361,10 @@ https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/:id
 
 <br>
 
-# Como Funcionam as Associacoes
+# Modelagem do Banco
 
 <div align="center">
-  <img src="data/Modelo_Lógico.png" width="80%">
+  <img src="server/data/Modelo_Lógico.png" width="80%">
 </div>
 
 # Relacionamento dos Elementos
@@ -378,8 +378,6 @@ https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/:id
 </ul>
 
 # Avisos
-<ul>
-  <li>Caso seja digitado um ID inexistente, será retornado "Id não encontrado";</li>
-  <li>O tratamento de erros ainda está em andamento.</li>
-  <li>O Arquivo "insomnia_data.json" possui um ambiente do [Insomnia](https://insomnia.rest) com todas as rotas</li>
-</ul>
+  - Caso seja digitado um ID inexistente, será retornado "Id não encontrado";
+  - O tratamento de erros ainda está em andamento.
+  - O Arquivo "insomnia_data.json" possui um ambiente do [Insomnia](https://insomnia.rest) com todas as rotas
