@@ -31,13 +31,7 @@ routes.use(cargos)
 
 // Tela Principal
 routes.get('/', (req, res) => {
-    return res.json(`Menu Principal, Acesse: https://github.com/VinicciusSantos/API-NodeJs para saber mais`)
-})
-
-// Tela Principal
-routes.get('/styles.css', (req, res) => {
-  console.log('oi')
-  return res.json(`oi`)
+    return res.json(`Acesse https://github.com/VinicciusSantos/API-Nodejs-Postgres para saber mais`)
 })
 
 module.exports = routes
