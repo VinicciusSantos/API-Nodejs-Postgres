@@ -1,15 +1,7 @@
 const express = require('express')
 const cargos = express.Router()
+
 var cliente = require('../database/connection.js')
-
-/* 
-    Os cargos são tabelas com as profissões das pessoas
-    Cada profissão possui:
-    - ID;
-    - Nome do cargo;
-    - Salário.
-*/
-
 
 // Mostrando todas as atualizações
 cargos.get('/cargos', (req, res) => { 
