@@ -2,7 +2,15 @@ const express = require('express')
 const relatorios = express.Router()
 var cliente = require('../database/connection.js')
 
-// Mostrando todas as atualizações
+
+/*
+  Os relatórios são funções especiais que geram estatísticas dos
+  dados que o sistema possui
+  No frontEnd, será utilizado para construção dos gráficos
+*/
+
+
+// Mostrando os projetos concluidos por mês
 relatorios.get('/relatorios/projetos', (req, res) => { 
     cliente
         .query(`SELECT

@@ -2,6 +2,15 @@ const express = require('express')
 const atualizacoes = express.Router()
 var cliente = require('../database/connection.js')
 
+/*
+    As atualizações serão cards automáticos gerandos pelo sistema mostrando as principais
+    coisas que aconteceram durante um período de tempo, por exemplo:
+    - Cards de Projetos concluidos no dia;
+    - Cards para pessoas que ingressaram em equipes...
+
+    As atualizações ainda não foram implementadas no sistema
+*/
+
 // Mostrando todas as atualizações
 atualizacoes.get('/atualizacoes', (req, res) => { 
     cliente
