@@ -5,7 +5,7 @@ var cliente = require('../database/connection.js')
 // Mostrando todas as pessoas
 pessoas.get('/pessoas', (req, res) => { 
     cliente
-        .query(`SELECT pe.pe_id, pe.pe_nome, pe.pe_cargo, pe.pe_salario, pe.pe_data_nasc, pe.pe_status, pe.pe_qtd_tarefas_finalizadas
+        .query(`SELECT pe.pe_id, pe.pe_nome, pe.pe_cargo, pe.pe_salario, pe.pe_data_nasc, pe.pe_status
                 FROM pessoas AS pe              
                 ORDER BY pe_id`)
         .then(results => {
@@ -35,7 +35,7 @@ pessoas.get('/pessoas/:id', (req, res) => {
     const id = req.params.id
 
     cliente
-        .query(`SELECT pe.pe_id, pe.pe_nome, pe.pe_cargo, pe.pe_salario, pe.pe_data_nasc, pe.pe_status, pe.pe_qtd_tarefas_finalizadas
+        .query(`SELECT pe.pe_id, pe.pe_nome, pe.pe_cargo, pe.pe_salario, pe.pe_data_nasc, pe.pe_status
                 FROM pessoas AS pe              
                 WHERE pe.pe_id = $1`, [id])
         .then(results => {
