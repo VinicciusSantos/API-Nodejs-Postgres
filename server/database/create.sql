@@ -23,8 +23,8 @@ CREATE TABLE tarefas (
 CREATE TABLE projetos_possuem_tarefas (
     fk_projeto INTEGER,
     fk_tarefa INTEGER,
-    FOREIGN KEY (fk_projeto) REFERENCES projetos(pr_id),
-    FOREIGN KEY (fk_tarefa) REFERENCES tarefas(tr_id)
+    FOREIGN KEY (fk_projeto) REFERENCES projetos(pr_id) ON DELETE CASCADE,
+    FOREIGN KEY (fk_tarefa) REFERENCES tarefas(tr_id) ON DELETE CASCADE
 );
 
 CREATE TABLE pessoas (
@@ -41,28 +41,28 @@ CREATE TABLE equipes (
     eq_id SERIAL PRIMARY KEY NOT NULL, 
     eq_nome VARCHAR(50) NOT NULL,
     fk_lider int NOT NULL,
-    FOREIGN KEY (fk_lider) REFERENCES pessoas (pe_id)
+    FOREIGN KEY (fk_lider) REFERENCES pessoas (pe_id) ON DELETE CASCADE
 );
 
 CREATE TABLE pessoas_pertencem_equipes (
     fk_equipe INTEGER NOT NULL,
     fk_pessoa INTEGER NOT NULL,
-    FOREIGN KEY (fk_equipe) REFERENCES equipes(eq_id),
-    FOREIGN KEY (fk_pessoa) REFERENCES pessoas(pe_id)
+    FOREIGN KEY (fk_equipe) REFERENCES equipes(eq_id) ON DELETE CASCADE,
+    FOREIGN KEY (fk_pessoa) REFERENCES pessoas(pe_id) ON DELETE CASCADE
 );
 
 CREATE TABLE projetos_posssuem_equipes (
     fk_projeto INTEGER NOT NULL,
     fk_equipe INTEGER NOT NULL,
-    FOREIGN KEY (fk_equipe) REFERENCES equipes(eq_id),
-    FOREIGN KEY (fk_projeto) REFERENCES projetos(pr_id)
+    FOREIGN KEY (fk_equipe) REFERENCES equipes(eq_id) ON DELETE CASCADE,
+    FOREIGN KEY (fk_projeto) REFERENCES projetos(pr_id) ON DELETE CASCADE
 );
 
 CREATE TABLE pessoas_associam_tarefas (
     fk_pessoa INTEGER,
     fk_tarefa INTEGER,
-    FOREIGN KEY (fk_pessoa) REFERENCES pessoas(pe_id),
-    FOREIGN KEY (fk_tarefa) REFERENCES tarefas(tr_id)
+    FOREIGN KEY (fk_pessoa) REFERENCES pessoas(pe_id) ON DELETE CASCADE,
+    FOREIGN KEY (fk_tarefa) REFERENCES tarefas(tr_id) ON DELETE CASCADE
 );
 
 CREATE TABLE atualizacoes (
@@ -71,8 +71,8 @@ CREATE TABLE atualizacoes (
     att_data DATE NOT NULL default CURRENT_DATE,
     fk_projeto INTEGER NOT NULL,
     fk_autor INTEGER NOT NULL,
-    FOREIGN KEY (fk_projeto) REFERENCES projetos(pr_id),
-    FOREIGN KEY (fk_autor) REFERENCES pessoas(pe_id)
+    FOREIGN KEY (fk_projeto) REFERENCES projetos(pr_id) ON DELETE CASCADE,
+    FOREIGN KEY (fk_autor) REFERENCES pessoas(pe_id) ON DELETE CASCADE
 );
 
 /* Cadastrando Projetos */
