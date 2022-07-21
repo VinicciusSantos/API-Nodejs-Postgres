@@ -6,8 +6,7 @@ var cliente = require('../database/connection.js')
 pessoas.get('/pessoas', (req, res) => { 
     cliente
         .query(`SELECT pe.pe_id, pe.pe_nome, pe.pe_cargo, pe.pe_salario, pe.pe_data_nasc, pe.pe_status, pe.pe_qtd_tarefas_finalizadas
-                FROM pessoas AS pe
-                INNER JOIN cargos AS ca ON ca.ca_id = pe.pe_fk_cargo                
+                FROM pessoas AS pe              
                 ORDER BY pe_id`)
         .then(results => {
             return res.json(results.rows)
@@ -48,7 +47,7 @@ pessoas.get('/pessoas/:id', (req, res) => {
 pessoas.post('/pessoas', (req, res) => { 
     const body = req.body
     cliente
-        .query(`INSERT INTO pessoas (pe_nome, pe.pe_cargo, pe.pe_salario, pe_data_nasc, pe_status)
+        .query(`INSERT INTO pessoas (pe_nome, pe_cargo, pe_salario, pe_data_nasc, pe_status)
                 VALUES ($1, $2, $3, $4, $5)`, [body.pe_nome, body.pe_cargo, body.pe_salario, body.pe_data_nasc, 'Não Iniciado'])
         .then(results => {
             return res.json("Inserido com sucesso!")
