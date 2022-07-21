@@ -30,7 +30,6 @@ CREATE TABLE projetos_possuem_tarefas (
 CREATE TABLE pessoas (
     pe_id SERIAL PRIMARY KEY,
     pe_nome VARCHAR(50) NOT NULL,
-    pe_fk_cargo INTEGER NOT NULL,
     pe_data_nasc DATE NOT NULL,
     pe_data_cadastro DATE default CURRENT_DATE,
     pe_status VARCHAR(20) NOT NULL,
@@ -104,27 +103,27 @@ INSERT INTO tarefas (tr_nome, tr_descricao, tr_data_criacao, tr_status, tr_prior
 ('Geração de boletos', 'Um boleto bancário é um documento largamente utilizado no Brasil como instrumento de pagamento de um produto ou serviço prestado. Através do boleto, seu emissor pode receber do pagador o valor referente àquele pagamento', '02-21-2022', 'Concluido', 'Alta');
 
 /* Cadastrando Pessoas */
-INSERT INTO pessoas (pe_nome, pe_data_nasc, pe_fk_cargo, pe_status, pe_qtd_tarefas_finalizadas, pe_cargo, pe_salario) VALUES
-('Priscila Fernandes Rosado', '10-07-2003', 'Ativo', 0, 'FrontEnd Junior', '2525.00'),
-('Julieta Rangel Ribas', '02-21-1996', 'Ativo', 0, 'FrontEnd Junior', '2525.00'),
-('Ana Almeida', '05-12-2000', 'Desativado', 0, 'FrontEnd Junior', '2525.00'),
-('Maria Vitória Novaes', '07-10-1999', 'Ativo', 0, 'BackEnd Junior', '2525.00'),
-('Otávio Rodrigues', '08-01-2000', 'Ativo', 0, 'BackEnd Junior', '2525.00'),
-('Sr. Ryan Silveira', '10-22-1996', 'Desativado', 0, 'FrontEnd Junior', '2525.00'),
-('Matheus da Mata', '10-18-2002', 'Ativo', 0, 'BackEnd Pleno', '2525.00'),
-('Isis das Neves', '08-10-2002', 'Desativado', 0, 'FrontEnd Junior', '2525.00'),
-('Breno da Rocha', '02-27-2001', 'Ativo', 0, 'BackEnd Junior', '2525.00'),
-('Ana Luiza da Conceição', '10-30-2003', 'Ativo', 0, 'FrontEnd Pleno', '2525.00'),
-('Luigi Vieira', '01-12-2002', 'Ativo', 0, 'BackEnd Junior', '2525.00'),
-('Sr. Yuri Caldeira', '07-01-1945', 'Aposentado', 0, 'FrontEnd Junior', '2525.00'),
-('Rebeca Souza', '09-04-1997', 'Desativado', 0, 'BackEnd Pleno', '2525.00'),
-('Nicole Araújo', '08-08-1998', 'Ativo', 0, 'BackEnd Pleno', '2525.00'),
-('Sra. Alana Santos', '09-07-2003', 'Ativo', 0, 'FrontEnd Junior', '2525.00'),
-('Ana Clara da Mota', '02-25-2000', 'Ativo', 0), 'FrontEnd Pleno', '2525.00',
-('Maria Cecília Sales', '10-14-2002', 'Desativado', 0, 'BackEnd Pleno', '2525.00'),
-('Marcelo Monteiro', '09-13-1995', 'Ativo', 0, 'FrontEnd Junior', '2525.00',
-('Mariane Carvalho', '10-30-2001', 'Ativo', 0, 'BackEnd Pleno', '2525.00'),
-('Juliana Costa', '08-27-1996', 'Ativo', 0, 'FrontEnd Pleno', '2525.00');
+INSERT INTO pessoas (pe_nome, pe_data_nasc, pe_status, pe_cargo, pe_salario) VALUES
+('Priscila Fernandes Rosado', '10-07-2003', 'Ativo', 'FrontEnd Junior', '2525.00'),
+('Julieta Rangel Ribas', '02-21-1996', 'Ativo', 'FrontEnd Junior', '2525.00'),
+('Ana Almeida', '05-12-2000', 'Desativado', 'FrontEnd Junior', '2525.00'),
+('Maria Vitória Novaes', '07-10-1999', 'Ativo', 'BackEnd Junior', '2525.00'),
+('Otávio Rodrigues', '08-01-2000', 'Ativo', 'BackEnd Junior', '2525.00'),
+('Sr. Ryan Silveira', '10-22-1996', 'Desativado', 'FrontEnd Junior', '2525.00'),
+('Matheus da Mata', '10-18-2002', 'Ativo', 'BackEnd Pleno', '2525.00'),
+('Isis das Neves', '08-10-2002', 'Desativado', 'FrontEnd Junior', '2525.00'),
+('Breno da Rocha', '02-27-2001', 'Ativo', 'BackEnd Junior', '2525.00'),
+('Ana Luiza da Conceição', '10-30-2003', 'Ativo', 'FrontEnd Pleno', '2525.00'),
+('Luigi Vieira', '01-12-2002', 'Ativo', 'BackEnd Junior', '2525.00'),
+('Sr. Yuri Caldeira', '07-01-1945', 'Aposentado', 'FrontEnd Junior', '2525.00'),
+('Rebeca Souza', '09-04-1997', 'Desativado', 'BackEnd Pleno', '2525.00'),
+('Nicole Araújo', '08-08-1998', 'Ativo', 'BackEnd Pleno', '2525.00'),
+('Sra. Alana Santos', '09-07-2003', 'Ativo', 'FrontEnd Junior', '2525.00'),
+('Ana Clara da Mota', '02-25-2000', 'Ativo', 'FrontEnd Pleno', '2525.00'),
+('Maria Cecília Sales', '10-14-2002', 'Desativado', 'BackEnd Pleno', '2525.00'),
+('Marcelo Monteiro', '09-13-1995', 'Ativo', 'FrontEnd Junior', '2525.00'),
+('Mariane Carvalho', '10-30-2001', 'Ativo', 'BackEnd Pleno', '2525.00'),
+('Juliana Costa', '08-27-1996', 'Ativo', 'FrontEnd Pleno', '2525.00');
 
 /* Cadastrando Equipes */
 INSERT INTO equipes (eq_nome, fk_lider) VALUES

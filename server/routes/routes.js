@@ -10,7 +10,6 @@ const equipes = require('./equipes')
 const tarefas = require('./tarefas')
 const atualizacoes = require('./atualizacoes')
 const relatorios = require('./relatorios')
-const cargos = require('./cargos')
 
 
 routes.use(pessoas)
@@ -19,7 +18,6 @@ routes.use(equipes)
 routes.use(tarefas)
 routes.use(atualizacoes)
 routes.use(relatorios)
-routes.use(cargos)
 
 // Tela Principal
 routes.get('/', (req, res) => {
