@@ -5,7 +5,7 @@ var cliente = require('../database/connection.js')
 // Mostrando todas as atualizações
 cargos.get('/cargos', (req, res) => { 
     cliente
-        .query(`SELECT pe_cargo, count(*) FROM pessoas GROUP BY pe_cargo ORDER BY pe_cargo`)
+        .query(`SELECT pe_cargo as cargo, count(*) as qtd FROM pessoas GROUP BY pe_cargo ORDER BY pe_cargo`)
         .then(results => {
         return res.json(results.rows)
     })
