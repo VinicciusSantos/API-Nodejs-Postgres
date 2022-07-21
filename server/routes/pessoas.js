@@ -5,7 +5,7 @@ var cliente = require('../database/connection.js')
 // Mostrando todas as pessoas
 pessoas.get('/pessoas', (req, res) => { 
     cliente
-        .query(`SELECT pe.pe_id, pe.pe_nome, ca.ca_cargo, pe.pe_data_nasc, pe.pe_status, pe.pe_qtd_tarefas_finalizadas
+        .query(`SELECT pe.pe_id, pe.pe_nome, pe.pe_cargo, pe.pe_salario, pe.pe_data_nasc, pe.pe_status, pe.pe_qtd_tarefas_finalizadas
                 FROM pessoas AS pe
                 INNER JOIN cargos AS ca ON ca.ca_id = pe.pe_fk_cargo                
                 ORDER BY pe_id`)
@@ -36,9 +36,8 @@ pessoas.get('/pessoas/:id', (req, res) => {
     const id = req.params.id
 
     cliente
-        .query(`SELECT pe.pe_id, pe.pe_nome, ca.ca_cargo, pe.pe_data_nasc, pe.pe_status, pe.pe_qtd_tarefas_finalizadas
-                FROM pessoas AS pe
-                INNER JOIN cargos AS ca ON ca.ca_id = pe.pe_fk_cargo                
+        .query(`SELECT pe.pe_id, pe.pe_nome, pe.pe_cargo, pe.pe_salario, pe.pe_data_nasc, pe.pe_status, pe.pe_qtd_tarefas_finalizadas
+                FROM pessoas AS pe              
                 WHERE pe.pe_id = $1`, [id])
         .then(results => {
             return res.json(results.rows[0])
@@ -49,8 +48,8 @@ pessoas.get('/pessoas/:id', (req, res) => {
 pessoas.post('/pessoas', (req, res) => { 
     const body = req.body
     cliente
-        .query(`INSERT INTO pessoas (pe_nome, pe_fk_cargo, pe_data_nasc, pe_status, pe_qtd_tarefas_finalizadas)
-                VALUES ($1, $2, $3, $4, $5)`, [body.pe_nome, body.pe_fk_cargo, body.pe_data_nasc, 'Ativo', 0])
+        .query(`INSERT INTO pessoas (pe_nome, pe.pe_cargo, pe.pe_salario, pe_data_nasc, pe_status)
+                VALUES ($1, $2, $3, $4, $5)`, [body.pe_nome, body.pe_cargo, body.pe_salario, body.pe_data_nasc, 'Não Iniciado'])
         .then(results => {
             return res.json("Inserido com sucesso!")
         })
@@ -73,9 +72,9 @@ pessoas.put('/pessoas/:id', (req, res) => {
     const body = req.body
 
     cliente
-        .query(`UPDATE pessoas SET pe_nome = $1, pe_fk_cargo = $2, pe_data_nasc = $3
-                WHERE pe_id = $4`, [body.pe_nome, body.pe_fk_cargo
-                , body.pe_data_nasc ,id])
+        .query(`UPDATE pessoas SET pe_nome = $1, pe_data_nasc = $2, pe_cargo = $3, pe_salario = $4
+                WHERE pe_id = $5`, [body.pe_nome, body.pe_data_nasc, body.pe_cargo
+                , body.pe_salario ,id])
         .then(results => {
             return res.json("Alterado com sucesso!")
         })
@@ -86,7 +85,7 @@ pessoas.get('/pessoas/:id/tarefas', (req, res) => {
     const id = req.params.id
     
     cliente
-        .query(`SELECT pe.pe_id, pe.pe_nome, tr.tr_id, tr.tr_nome FROM pessoas AS pe
+        .query(`SELECT pe.pe_id, pe.pe_nome, tr.tr_id, tr.tr_nome, tr.tr_descricao, tr.tr_data_criacao, tr.tr_data_finalizacao, tr.tr_status, tr_prioridade FROM    pessoas AS pe
                 INNER JOIN pessoas_associam_tarefas AS pat ON pat.fk_pessoa = pe.pe_id
                 INNER JOIN tarefas AS tr ON tr.tr_id = pat.fk_tarefa
                 WHERE pe.pe_id = $1`, [id])

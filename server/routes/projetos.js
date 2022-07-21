@@ -28,11 +28,6 @@ projetos.get('/projetos/status', async (req, res) => {
 projetos.get('/projetos/:id', async (req, res) => { 
     const id = req.params.id
 
-    // Verificando se o id que foi passado como parâmetro é realmente um número
-    if (isNaN(parseInt(id)) || id == null){
-        return res.status(400).json(`Id: ${id} é Inválido`)
-    }
-
     // Recebendo as informações do projeto
     const dados_projeto = await cliente.query('SELECT * FROM projetos WHERE pr_id = $1', [id])
                                        .catch(e => console.log(e.stack))

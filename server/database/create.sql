@@ -34,7 +34,8 @@ CREATE TABLE pessoas (
     pe_data_nasc DATE NOT NULL,
     pe_data_cadastro DATE default CURRENT_DATE,
     pe_status VARCHAR(20) NOT NULL,
-    pe_qtd_tarefas_finalizadas INTEGER NOT NULL
+    pe_cargo VARCHAR(100) NOT NULL,
+    pe_salario REAL NOT NULL
 );
 
 CREATE TABLE equipes (
@@ -75,18 +76,6 @@ CREATE TABLE atualizacoes (
     FOREIGN KEY (fk_autor) REFERENCES pessoas(pe_id)
 );
 
-CREATE TABLE cargos (
-    ca_id SERIAL PRIMARY KEY,
-    ca_cargo VARCHAR(100) NOT NULL,
-    ca_salario REAL NOT NULL
-);
-
-INSERT INTO cargos (ca_cargo, ca_salario) VALUES
-('FrontEnd Junior', '2525.00'),
-('FrontEnd Pleno', '2525.00'),
-('BackEnd Junior', '2525.00'),
-('BackEnd Pleno', '2525.00');
-
 /* Cadastrando Projetos */
 INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status) VALUES
 ('GP Inovação', 'O Grad Prix de Inovação tem por objetivo gerar negócios e resolução de desafios para demandas da indústria, envolvendo: pequenas, médias e grandes empresas, assim como, estimular o empreendedorismo e o fortalecimento do ecossistema empreendedor', '03-20-2022', 'Em Andamento'),
@@ -94,47 +83,48 @@ INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status) VALUES
 ('Gerenciamento Financeiro', 'Esse sistema de gestão financeira é uma solução da tecnologia para que haja gestão financeira corporativa. Com isso, a ferramenta, que pode ser um aplicativo ou um software, dispõe de recursos para ajudar no gerenciamento financeiro do negócio', '11-15-2021', 'Em Andamento'),
 ('API de Gerenciamento de Projetos', 'API é um acrônimo para Application Programming Interface, ou Interface de Programação de Aplicação, em português. Trata-se de um conjunto de rotinas e padrões que facilitam a comunicação e troca de informações entre sistemas', '06-05-2022', 'Em Andamento');
 
--- INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status, pr_data_finalizacao) VALUES
--- ('teste1', 'blablabla', '2018-01-01', 'Concluido', '2022-06-30'),
--- ('teste2', 'blablabla ;-;', '2010-12-15', 'Concluido', '2022-06-18'),
--- ('teste3', 'blablabla dnv', '2019-08-25', 'Concluido', '2022-05-21'),
--- ('teste4', 'blablabla novamente', '2010-05-12', 'Concluido', '2022-05-13'),
--- ('teste5', 'blablabla pra testar um negoco', '2018-01-03', 'Concluido', '2022-04-14'),
--- ('teste6', 'blablabla eai blz?', '2010-05-12', 'Concluido', '2022-03-24');
+-- Teste do grafico de projetos
+INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status, pr_data_finalizacao) VALUES
+('teste1', 'blablabla', '2018-01-01', 'Concluido', '2022-06-30'),
+('teste2', 'blablabla ;-;', '2010-12-15', 'Concluido', '2022-06-18'),
+('teste3', 'blablabla dnv', '2019-08-25', 'Concluido', '2022-05-21'),
+('teste4', 'blablabla novamente', '2010-05-12', 'Concluido', '2022-05-13'),
+('teste5', 'blablabla pra testar um negoco', '2018-01-03', 'Concluido', '2022-04-14'),
+('teste6', 'blablabla eai blz?', '2010-05-12', 'Concluido', '2022-03-24');
 
 /* Cadastrando Tarefas */
 INSERT INTO tarefas (tr_nome, tr_descricao, tr_data_criacao, tr_status, tr_prioridade) VALUES
-('Criar o Banco de dados da API', 'PostgreSQL é um sistema gerenciador de banco de dados objeto relacional, desenvolvido como projeto de código aberto', '06-14-2022', 'Ativo', 'Alta'),
-('FrontEnd da API', 'Desenvolvimento da interface gráfica do usuário de um site, por meio do uso de HTML, CSS e JavaScript, para que os usuários possam visualizar e interagir com aquele site', '06-30-2022', 'Em Espera', 'Alta'),
-('Cadastrar Pousada', 'Total controle de tudo que acontece no seu estabelecimento, você saberá o exato momento de quem realizou qualquer ação no sistema', '03-02-2022', 'Ativo', 'Baixa'),
+('Criar o Banco de dados da API', 'PostgreSQL é um sistema gerenciador de banco de dados objeto relacional, desenvolvido como projeto de código aberto', '06-14-2022', 'Em Desenvolvimento', 'Alta'),
+('FrontEnd da API', 'Desenvolvimento da interface gráfica do usuário de um site, por meio do uso de HTML, CSS e JavaScript, para que os usuários possam visualizar e interagir com aquele site', '06-30-2022', 'Não Iniciado', 'Alta'),
+('Cadastrar Pousada', 'Total controle de tudo que acontece no seu estabelecimento, você saberá o exato momento de quem realizou qualquer ação no sistema', '03-02-2022', 'Em Desenvolvimento', 'Baixa'),
 ('Escolha de Melhor Plano', 'Criação de uma função que possa determinar qual é o melhor plano para um cliente do hotel', '05-05-2022', 'Cancelado', 'Media'),
-('Gravar o Pitch', 'O pitch é uma apresentação sumária de 3 a 5 minutos com objetivo de despertar o interesse da outra parte (investidora, investidor ou cliente) pelo seu negócio. Assim, deve conter apenas as informações essenciais e diferenciadas', '03-25-2022', 'Ativo', 'Alta'),
-('Fazer pesquisa de anterioridade', 'A busca de anterioridade pode ser definida como uma atividade de pesquisa sobre informações tecnológicas que atestem/comprovem a inexistência de produto, processo ou melhoria idêntica ao objeto de pedido de patente ou registro que se deseja proteger', '04-20-2022', 'Ativo', 'Alta'),
+('Gravar o Pitch', 'O pitch é uma apresentação sumária de 3 a 5 minutos com objetivo de despertar o interesse da outra parte (investidora, investidor ou cliente) pelo seu negócio. Assim, deve conter apenas as informações essenciais e diferenciadas', '03-25-2022', 'Em Desenvolvimento', 'Alta'),
+('Fazer pesquisa de anterioridade', 'A busca de anterioridade pode ser definida como uma atividade de pesquisa sobre informações tecnológicas que atestem/comprovem a inexistência de produto, processo ou melhoria idêntica ao objeto de pedido de patente ou registro que se deseja proteger', '04-20-2022', 'Em Desenvolvimento', 'Alta'),
 ('Gerar Relatórios', 'Com os indicadores, gráficos, relatórios e demais recursos', '03-05-2022', 'Concluido', 'Baixa'),
 ('Geração de boletos', 'Um boleto bancário é um documento largamente utilizado no Brasil como instrumento de pagamento de um produto ou serviço prestado. Através do boleto, seu emissor pode receber do pagador o valor referente àquele pagamento', '02-21-2022', 'Concluido', 'Alta');
 
 /* Cadastrando Pessoas */
-INSERT INTO pessoas (pe_nome, pe_data_nasc, pe_fk_cargo, pe_status, pe_qtd_tarefas_finalizadas) VALUES
-('Priscila Fernandes Rosado', '10-07-2003', 1, 'Ativo', 0),
-('Julieta Rangel Ribas', '02-21-1996', 3, 'Ativo', 0),
-('Ana Almeida', '05-12-2000', 3, 'Desativado', 0),
-('Maria Vitória Novaes', '07-10-1999', 2, 'Ativo', 0),
-('Otávio Rodrigues', '08-01-2000', 3, 'Ativo', 0),
-('Sr. Ryan Silveira', '10-22-1996', 1, 'Desativado', 0),
-('Matheus da Mata', '10-18-2002', 2, 'Ativo', 0),
-('Isis das Neves', '08-10-2002', 1, 'Desativado', 0),
-('Breno da Rocha', '02-27-2001', 3, 'Ativo', 0),
-('Ana Luiza da Conceição', '10-30-2003', 2, 'Ativo', 0),
-('Luigi Vieira', '01-12-2002', 1, 'Ativo', 0),
-('Sr. Yuri Caldeira', '07-01-1945', 1, 'Aposentado', 0),
-('Rebeca Souza', '09-04-1997', 2, 'Desativado', 0),
-('Nicole Araújo', '08-08-1998', 4, 'Ativo', 0),
-('Sra. Alana Santos', '09-07-2003', 2, 'Ativo', 0),
-('Ana Clara da Mota', '02-25-2000', 4, 'Ativo', 0),
-('Maria Cecília Sales', '10-14-2002', 4, 'Desativado', 0),
-('Marcelo Monteiro', '09-13-1995', 2, 'Ativo', 0),
-('Mariane Carvalho', '10-30-2001', 4, 'Ativo', 0),
-('Juliana Costa', '08-27-1996', 2, 'Ativo', 0);
+INSERT INTO pessoas (pe_nome, pe_data_nasc, pe_fk_cargo, pe_status, pe_qtd_tarefas_finalizadas, pe_cargo, pe_salario) VALUES
+('Priscila Fernandes Rosado', '10-07-2003', 'Ativo', 0, 'FrontEnd Junior', '2525.00'),
+('Julieta Rangel Ribas', '02-21-1996', 'Ativo', 0, 'FrontEnd Junior', '2525.00'),
+('Ana Almeida', '05-12-2000', 'Desativado', 0, 'FrontEnd Junior', '2525.00'),
+('Maria Vitória Novaes', '07-10-1999', 'Ativo', 0, 'BackEnd Junior', '2525.00'),
+('Otávio Rodrigues', '08-01-2000', 'Ativo', 0, 'BackEnd Junior', '2525.00'),
+('Sr. Ryan Silveira', '10-22-1996', 'Desativado', 0, 'FrontEnd Junior', '2525.00'),
+('Matheus da Mata', '10-18-2002', 'Ativo', 0, 'BackEnd Pleno', '2525.00'),
+('Isis das Neves', '08-10-2002', 'Desativado', 0, 'FrontEnd Junior', '2525.00'),
+('Breno da Rocha', '02-27-2001', 'Ativo', 0, 'BackEnd Junior', '2525.00'),
+('Ana Luiza da Conceição', '10-30-2003', 'Ativo', 0, 'FrontEnd Pleno', '2525.00'),
+('Luigi Vieira', '01-12-2002', 'Ativo', 0, 'BackEnd Junior', '2525.00'),
+('Sr. Yuri Caldeira', '07-01-1945', 'Aposentado', 0, 'FrontEnd Junior', '2525.00'),
+('Rebeca Souza', '09-04-1997', 'Desativado', 0, 'BackEnd Pleno', '2525.00'),
+('Nicole Araújo', '08-08-1998', 'Ativo', 0, 'BackEnd Pleno', '2525.00'),
+('Sra. Alana Santos', '09-07-2003', 'Ativo', 0, 'FrontEnd Junior', '2525.00'),
+('Ana Clara da Mota', '02-25-2000', 'Ativo', 0), 'FrontEnd Pleno', '2525.00',
+('Maria Cecília Sales', '10-14-2002', 'Desativado', 0, 'BackEnd Pleno', '2525.00'),
+('Marcelo Monteiro', '09-13-1995', 'Ativo', 0, 'FrontEnd Junior', '2525.00',
+('Mariane Carvalho', '10-30-2001', 'Ativo', 0, 'BackEnd Pleno', '2525.00'),
+('Juliana Costa', '08-27-1996', 'Ativo', 0, 'FrontEnd Pleno', '2525.00');
 
 /* Cadastrando Equipes */
 INSERT INTO equipes (eq_nome, fk_lider) VALUES
