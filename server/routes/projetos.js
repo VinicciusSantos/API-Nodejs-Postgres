@@ -94,6 +94,12 @@ projetos.post('/projetos', async (req, res) => {
 
 // Deletando projetos
 projetos.delete('/projetos/:id', async (req, res) => { 
+    const id = req.params.id
+    
+    // Verificando se o id que foi passado como parâmetro é realmente um número
+    if (isNaN(parseInt(id)) || id == null){
+        return res.status(400).json(`Id: ${id} é Inválido`)
+    }
 
     // Recebendo as informações basicas do projeto, como: nome, descrição...
     const dados_projeto = await cliente.query('SELECT * FROM projetos WHERE pr_id = $1', [id])
@@ -113,6 +119,10 @@ projetos.put('/projetos/:id', async (req, res) => {
     const id = req.params.id
     const body = req.body
 
+    // Verificando se o id que foi passado como parâmetro é realmente um número
+    if (isNaN(parseInt(id)) || id == null){
+        return res.status(400).json(`Id: ${id} é Inválido`)
+    }
 
     // Recebendo as informações do projeto
     const dados_projeto = await cliente.query('SELECT * FROM projetos WHERE pr_id = $1', [id])
@@ -131,6 +141,10 @@ projetos.put('/projetos/:id', async (req, res) => {
 projetos.get('/projetos/:id/pessoas', async (req, res) => { 
     const id = req.params.id
 
+    // Verificando se o id que foi passado como parâmetro é realmente um número
+    if (isNaN(parseInt(id)) || id == null){
+        return res.status(400).json(`Id: ${id} é Inválido`)
+    }
 
     // Recebendo as informações do projeto
     const dados_projeto = await cliente.query('SELECT * FROM projetos WHERE pr_id = $1', [id])
@@ -157,6 +171,10 @@ projetos.get('/projetos/:id/pessoas', async (req, res) => {
 // Mostrar tarefas de um projeto
 projetos.get('/projetos/:id/tarefas', async (req, res) => { 
     const id = req.params.id
+    // Verificando se o id que foi passado como parâmetro é realmente um número
+    if (isNaN(parseInt(id)) || id == null){
+        return res.status(400).json(`Id: ${id} é Inválido`)
+    }
 
     // Recebendo as informações do projeto
     const dados_projeto = await cliente.query('SELECT * FROM projetos WHERE pr_id = $1', [id])
@@ -180,6 +198,10 @@ projetos.get('/projetos/:id/tarefas', async (req, res) => {
 // Mostrar equipes de um projeto
 projetos.get('/projetos/:id/equipes', async (req, res) => { 
     const id = req.params.id
+    // Verificando se o id que foi passado como parâmetro é realmente um número
+    if (isNaN(parseInt(id)) || id == null){
+        return res.status(400).json(`Id: ${id} é Inválido`)
+    }
 
     // Recebendo as informações do projeto
     const dados_projeto = await cliente.query('SELECT * FROM projetos WHERE pr_id = $1', [id])
@@ -230,6 +252,10 @@ projetos.get('/projetos/status/:status', (req, res) => {
 projetos.put('/projetos/:id/status/:status', async (req, res) => {
     const id = req.params.id
     const status = req.params.status
+    // Verificando se o id que foi passado como parâmetro é realmente um número
+    if (isNaN(parseInt(id)) || id == null){
+        return res.status(400).json(`Id: ${id} é Inválido`)
+    }
 
     // Recebendo as informações do projeto
     const dados_projeto = await cliente.query('SELECT * FROM projetos WHERE pr_id = $1', [id])
