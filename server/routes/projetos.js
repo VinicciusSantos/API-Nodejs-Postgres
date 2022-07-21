@@ -50,10 +50,9 @@ projetos.get('/projetos/:id', async (req, res) => {
                                                WHERE pr.pr_id = $1
                                                ORDER BY pr.pr_id, eq.eq_id`, [id])
 
-    const lista_pessoas = await cliente.query(`SELECT pe.pe_id, pe.pe_nome, ca.ca_cargo, eq.eq_nome ,eq.eq_id FROM pessoas AS pe
+    const lista_pessoas = await cliente.query(`SELECT pe.pe_id, pe.pe_nome, pe.pe_cargo, pe.pe_salario, eq.eq_nome ,eq.eq_id FROM pessoas AS pe
                                                INNER JOIN pessoas_pertencem_equipes AS ppe ON ppe.fk_pessoa = pe.pe_id
                                                INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
-                                               INNER JOIN cargos AS ca ON ca.ca_id = pe.pe_fk_cargo
                                                ORDER BY pe.pe_id`)
 
     // Montando um objeto para ser retornado no json
