@@ -13,6 +13,22 @@ pessoas.get("/pessoas", (req, res) => {
         .then((results) => {
             return res.json(results.rows);
         });
+
+        // const projetos = await cliente.query(`select * fom projetos`)
+        // const projetosEquipes = await cliente.query(`select * fom projetos_posssuem_equipes`)
+        // const equipes = await cliente.query(`select * fom equipes`)
+        // const pessoasEquipes = await cliente.query(`select * fom pessoas_pertencem_equipes`)
+        // const pessoas = await cliente.query(`select * fom pessoas`)
+        // const pessoasTarefas = await cliente.query(`select * fom pessoas_associam_tarefas`)
+        // const tarefas = await cliente.query(`select * fom tarefas`)
+    
+        // results = {
+        //     dados: 
+        // }
+    
+        // pessoas.rows.forEach(element => {
+            
+        // });
 });
 
 pessoas.get("/pessoas/count", (req, res) => {
