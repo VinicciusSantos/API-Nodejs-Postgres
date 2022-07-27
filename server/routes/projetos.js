@@ -168,61 +168,6 @@ projetos.get('/projetos/:id/pessoas', async (req, res) => {
         })
 })
 
-// Mostrar tarefas de um projeto
-projetos.get('/projetos/:id/tarefas', async (req, res) => { 
-    const id = req.params.id
-    // Verificando se o id que foi passado como parâmetro é realmente um número
-    if (isNaN(parseInt(id)) || id == null){
-        return res.status(400).json(`Id: ${id} é Inválido`)
-    }
-
-    // Recebendo as informações do projeto
-    const dados_projeto = await cliente.query('SELECT * FROM projetos WHERE pr_id = $1', [id])
-                                       .catch(e => console.log(e.stack))
-
-    // Se o id for válido mas não existir nenhum projeto com esse id, as resposta de dados_projeto terá rowCount == 0, e retornamos um erro
-    if(dados_projeto.rowCount == 0){
-        return res.status(404).json(`Projeto '${id}' não encontrado!`)
-    }
-
-    cliente
-        .query(`SELECT tr.tr_id, tr.tr_nome, tr_descricao, tr_data_criacao, tr_status, tr_data_finalizacao, pr_id, pr.pr_nome FROM projetos AS pr
-                INNER JOIN projetos_possuem_tarefas AS ppt ON ppt.fk_projeto = pr.pr_id
-                INNER JOIN tarefas AS tr ON tr.tr_id = ppt.fk_tarefa
-                WHERE pr.pr_id = $1`, [id])
-        .then(results => {
-            return res.status(200).json(results.rows)
-        })
-})
-
-// Mostrar equipes de um projeto
-projetos.get('/projetos/:id/equipes', async (req, res) => { 
-    const id = req.params.id
-    // Verificando se o id que foi passado como parâmetro é realmente um número
-    if (isNaN(parseInt(id)) || id == null){
-        return res.status(400).json(`Id: ${id} é Inválido`)
-    }
-
-    // Recebendo as informações do projeto
-    const dados_projeto = await cliente.query('SELECT * FROM projetos WHERE pr_id = $1', [id])
-                                       .catch(e => console.log(e.stack))
-
-    // Se o id for válido mas não existir nenhum projeto com esse id, as resposta de dados_projeto terá rowCount == 0, e retornamos um erro
-    if(dados_projeto.rowCount == 0){
-        return res.status(404).json(`Projeto '${id}' não encontrado!`)
-    }
-
-    cliente
-        .query(`SELECT eq.eq_id, eq.eq_nome FROM projetos AS pr
-                INNER JOIN projetos_posssuem_equipes AS ppe ON ppe.fk_projeto = pr.pr_id
-                INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
-                WHERE pr.pr_id = $1
-                ORDER BY pr.pr_id, eq.eq_id`, [id])
-        .then(results => {
-            return res.json(results.rows)
-        })
-})
-
 // Associar Tarefa com Projeto
 projetos.post('/projetos/:id_projeto/tarefas/_id_tarefa', (req, res) => { 
     const id_projeto = req.params.id_projeto

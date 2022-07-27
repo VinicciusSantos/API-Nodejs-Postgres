@@ -17,7 +17,7 @@ CREATE TABLE tarefas (
     tr_data_criacao DATE default CURRENT_DATE,
     tr_data_finalizacao DATE,
     tr_status VARCHAR(20),
-    tr_prioridade varchar(20)
+    tr_prioridade INTEGER,  -- 1 = baixa         2 = Média        3 = Alta
 );
 
 CREATE TABLE projetos_possuem_tarefas (
@@ -93,14 +93,14 @@ INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status, pr_data
 
 /* Cadastrando Tarefas */
 INSERT INTO tarefas (tr_nome, tr_descricao, tr_data_criacao, tr_status, tr_prioridade) VALUES
-('Criar o Banco de dados da API', 'PostgreSQL é um sistema gerenciador de banco de dados objeto relacional, desenvolvido como projeto de código aberto', '06-14-2022', 'Em Desenvolvimento', 'Alta'),
-('FrontEnd da API', 'Desenvolvimento da interface gráfica do usuário de um site, por meio do uso de HTML, CSS e JavaScript, para que os usuários possam visualizar e interagir com aquele site', '06-30-2022', 'Não Iniciado', 'Alta'),
-('Cadastrar Pousada', 'Total controle de tudo que acontece no seu estabelecimento, você saberá o exato momento de quem realizou qualquer ação no sistema', '03-02-2022', 'Em Desenvolvimento', 'Baixa'),
-('Escolha de Melhor Plano', 'Criação de uma função que possa determinar qual é o melhor plano para um cliente do hotel', '05-05-2022', 'Cancelado', 'Media'),
-('Gravar o Pitch', 'O pitch é uma apresentação sumária de 3 a 5 minutos com objetivo de despertar o interesse da outra parte (investidora, investidor ou cliente) pelo seu negócio. Assim, deve conter apenas as informações essenciais e diferenciadas', '03-25-2022', 'Em Desenvolvimento', 'Alta'),
-('Fazer pesquisa de anterioridade', 'A busca de anterioridade pode ser definida como uma atividade de pesquisa sobre informações tecnológicas que atestem/comprovem a inexistência de produto, processo ou melhoria idêntica ao objeto de pedido de patente ou registro que se deseja proteger', '04-20-2022', 'Em Desenvolvimento', 'Alta'),
-('Gerar Relatórios', 'Com os indicadores, gráficos, relatórios e demais recursos', '03-05-2022', 'Concluido', 'Baixa'),
-('Geração de boletos', 'Um boleto bancário é um documento largamente utilizado no Brasil como instrumento de pagamento de um produto ou serviço prestado. Através do boleto, seu emissor pode receber do pagador o valor referente àquele pagamento', '02-21-2022', 'Concluido', 'Alta');
+('Criar o Banco de dados da API', 'PostgreSQL é um sistema gerenciador de banco de dados objeto relacional, desenvolvido como projeto de código aberto', '06-14-2022', 'Em Desenvolvimento', 3),
+('FrontEnd da API', 'Desenvolvimento da interface gráfica do usuário de um site, por meio do uso de HTML, CSS e JavaScript, para que os usuários possam visualizar e interagir com aquele site', '06-30-2022', 'Não Iniciado', 3),
+('Cadastrar Pousada', 'Total controle de tudo que acontece no seu estabelecimento, você saberá o exato momento de quem realizou qualquer ação no sistema', '03-02-2022', 'Em Desenvolvimento', 2),
+('Escolha de Melhor Plano', 'Criação de uma função que possa determinar qual é o melhor plano para um cliente do hotel', '05-05-2022', 'Cancelado', 2),
+('Gravar o Pitch', 'O pitch é uma apresentação sumária de 3 a 5 minutos com objetivo de despertar o interesse da outra parte (investidora, investidor ou cliente) pelo seu negócio. Assim, deve conter apenas as informações essenciais e diferenciadas', '03-25-2022', 'Em Desenvolvimento', 3),
+('Fazer pesquisa de anterioridade', 'A busca de anterioridade pode ser definida como uma atividade de pesquisa sobre informações tecnológicas que atestem/comprovem a inexistência de produto, processo ou melhoria idêntica ao objeto de pedido de patente ou registro que se deseja proteger', '04-20-2022', 'Em Desenvolvimento', 3),
+('Gerar Relatórios', 'Com os indicadores, gráficos, relatórios e demais recursos', '03-05-2022', 'Concluido', 1),
+('Geração de boletos', 'Um boleto bancário é um documento largamente utilizado no Brasil como instrumento de pagamento de um produto ou serviço prestado. Através do boleto, seu emissor pode receber do pagador o valor referente àquele pagamento', '02-21-2022', 'Concluido', 1);
 
 /* Cadastrando Pessoas */
 INSERT INTO pessoas (pe_nome, pe_data_nasc, pe_status, pe_cargo, pe_salario) VALUES
