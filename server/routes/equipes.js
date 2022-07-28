@@ -32,11 +32,21 @@ equipes.get('/equipes/:id', (req, res) => {
 })
 
 //Inserindo equipes
-equipes.post('/equipes', (req, res) => { 
+equipes.post('/equipes', async (req, res) => { 
     const body = req.body
 
-    cliente
-        .query('INSERT INTO equipes (eq_nome) values ($1)', [body.eq_nome])
+    // cadastrando a equipe
+    cliente.query('INSERT INTO equipes (eq_nome) values ($1)', [body.eq_nome])
+
+    // Pegando o id da equipe que acabou de ser cadastrada
+    const id = await cliente.query('select max(eq_id) from equipes')
+
+    // Colocando as pessoas na equipe
+    body.pessoas.forEach(p => {
+        cliente.query(`INSERT INTO pessoas_pertencem_equipes (fk_pessoa, fk_equipe)
+                   VALUES ($1, $2)`, [p, id.rows[0].max])
+    });
+
     return res.json("Inserido com sucesso!")
 })
 
