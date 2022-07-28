@@ -40,8 +40,6 @@ CREATE TABLE pessoas (
 CREATE TABLE equipes (
     eq_id SERIAL PRIMARY KEY NOT NULL, 
     eq_nome VARCHAR(50) NOT NULL,
-    fk_lider int NOT NULL,
-    FOREIGN KEY (fk_lider) REFERENCES pessoas (pe_id) ON DELETE CASCADE
 );
 
 CREATE TABLE pessoas_pertencem_equipes (
@@ -126,14 +124,14 @@ INSERT INTO pessoas (pe_nome, pe_data_nasc, pe_status, pe_cargo, pe_salario) VAL
 ('Juliana Costa', '08-27-1996', 'Ativo', 'FrontEnd Pleno', '2525.00');
 
 /* Cadastrando Equipes */
-INSERT INTO equipes (eq_nome, fk_lider) VALUES
-('Equipe Alfa', 12),
-('Equipe Beta', 3),
-('Equipe Gama', 4),
-('Equipe Delta', 20),
-('Equipe Épsilon', 6),
-('Equipe Zeta', 13),
-('Equipe Eta', 16);
+INSERT INTO equipes (eq_nome) VALUES
+('Equipe Alfa'),
+('Equipe Beta'),
+('Equipe Gama'),
+('Equipe Delta'),
+('Equipe Épsilon'),
+('Equipe Zeta'),
+('Equipe Eta');
 
 /* Associando pessoas com equipes */
 INSERT INTO pessoas_pertencem_equipes (fk_pessoa, fk_equipe) VALUES

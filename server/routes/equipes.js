@@ -5,8 +5,7 @@ var cliente = require('../database/connection.js')
 // Mostrando todas as equipes
 equipes.get('/equipes', (req, res) => { 
     cliente
-        .query(`SELECT eq.eq_id, eq.eq_nome, pe.pe_nome AS eq_lider FROM equipes AS eq
-                INNER JOIN pessoas AS pe ON pe.pe_id = eq.fk_lider`)
+        .query(`SELECT * from equipes`)
         .then(results => {
         return res.json(results.rows)
     })
@@ -37,7 +36,7 @@ equipes.post('/equipes', (req, res) => {
     const body = req.body
 
     cliente
-        .query('INSERT INTO equipes (eq_nome, fk_lider) values ($1, $2)', [body.eq_nome, body.fk_lider])
+        .query('INSERT INTO equipes (eq_nome) values ($1)', [body.eq_nome])
     return res.json("Inserido com sucesso!")
 })
 
@@ -54,7 +53,7 @@ equipes.put('/equipes/:id', (req, res) => {
     const id = req.params.id
     const body = req.body
 
-    cliente.query('UPDATE equipes SET eq_nome = $1, fk_lider = $2 WHERE eq_id = $3', [body.eq_nome, body.fk_lider, id])
+    cliente.query('UPDATE equipes SET eq_nome = $1 WHERE eq_id = $2', [body.eq_nome, id])
     return res.json("Alterado com sucesso!")
 })
 
