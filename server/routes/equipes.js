@@ -62,10 +62,9 @@ equipes.get('/equipes/:id/pessoas', (req, res) => {
     const id = req.params.id
 
     cliente
-        .query(`SELECT pe.pe_id, pe.pe_nome, ca.ca_cargo, eq.eq_nome FROM pessoas AS pe
+        .query(`SELECT pe.pe_id, pe.pe_nome, pe.pe_cargo, eq.eq_nome FROM pessoas AS pe
                 INNER JOIN pessoas_pertencem_equipes AS ppe ON ppe.fk_pessoa = pe.pe_id
                 INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
-                INNER JOIN cargos AS ca ON ca.ca_id = pe.pe_fk_cargo
                 WHERE eq.eq_id = $1`, [id])
         .then(results => {
             return res.json(results.rows)
