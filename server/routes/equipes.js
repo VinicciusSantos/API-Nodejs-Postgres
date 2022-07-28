@@ -46,7 +46,7 @@ equipes.post('/equipes', async (req, res) => {
 
     // Colocando as pessoas na equipe
     body.pessoas.forEach(async p => {
-        const idPessoa = await cliente.query(`select pe_id from pessoas where pr_nome = $1`, [p])
+        const idPessoa = await cliente.query(`select pe_id from pessoas where pe_nome = $1`, [p])
         cliente.query(`INSERT INTO pessoas_pertencem_equipes (fk_pessoa, fk_equipe)
                 VALUES ($1, $2)`, [idPessoa.rows[0].pe_id, id.rows[0].max])
     });
