@@ -1,0 +1,14 @@
+const express = require('express')
+const equipes = express.Router()
+var cliente = require('../../cmd/database/connection.js')
+
+// Editando equipes
+equipes.put('/equipes/:id', (req, res) => { 
+    const id = req.params.id
+    const body = req.body
+
+    cliente.query('UPDATE equipes SET eq_nome = $1 WHERE eq_id = $2', [body.eq_nome, id])
+    return res.json("Alterado com sucesso!")
+})
+
+module.exports = equipes
