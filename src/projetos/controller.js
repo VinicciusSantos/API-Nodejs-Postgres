@@ -1,6 +1,7 @@
-const express = require('express')
-const projetos = express.Router()
+const express = require("express");
+const projetos = express.Router();
 
+const get_all = require('./get_all')
 const get_status = require('./get_status')
 const get_projeto = require('./get_projeto')
 const add_projeto = require('./add_projeto')
@@ -11,6 +12,7 @@ const join_projetos_tarefas = require('./join_projetos_tarefas')
 const get_filter_by_status = require('./get_filter_by_status')
 const update_status = require('./update_status')
 
+projetos.use(get_all)
 projetos.use(get_status)
 projetos.use(get_projeto)
 projetos.use(add_projeto)
@@ -21,4 +23,4 @@ projetos.use(join_projetos_tarefas)
 projetos.use(get_filter_by_status)
 projetos.use(update_status)
 
-module.exports = projetos
+module.exports = projetos;
