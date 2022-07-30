@@ -38,8 +38,12 @@ projetos.get('/projetos/:id', async (req, res) => {
     let results = {
         dados: dados_projeto.rows[0],
         equipes: lista_equipes.rows,
-        tarefas: lista_tarefas.rows
+        tarefas: {}
     }
+
+    results.tarefas.EmDesenvolvimento = lista_tarefas.rows.filter((tarefa) => tarefa.tr_status == "Em Desenvolvimento")
+    results.tarefas.NaoIniciadas = lista_tarefas.rows.filter((tarefa) => tarefa.tr_status == "Não Iniciado")
+    results.tarefas.Concluidas = lista_tarefas.rows.filter((tarefa) => tarefa.tr_status == "Concluido")
 
     // Buscando as pessoas de cada equipe do projeto
     for (let j = 0; j < lista_equipes.rowCount; j++) {
