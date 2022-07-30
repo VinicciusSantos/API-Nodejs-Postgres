@@ -17,7 +17,7 @@ projetos.get('/projetos/:id', async (req, res) => {
     }
 
     // Recebendo as tarefas do projeto
-    const lista_tarefas = await cliente.query(`SELECT tr.tr_id, tr.tr_nome, tr_descricao, tr_data_criacao, tr_status, tr_data_finalizacao FROM projetos AS pr
+    const lista_tarefas = await cliente.query(`SELECT tr.tr_id, tr.tr_nome, tr_descricao, tr_data_criacao, tr_status, tr_data_finalizacao, tr_prioridade FROM projetos AS pr
                                                INNER JOIN projetos_possuem_tarefas AS ppt ON ppt.fk_projeto = pr.pr_id
                                                INNER JOIN tarefas AS tr ON tr.tr_id = ppt.fk_tarefa
                                                WHERE pr.pr_id = $1`, [id])
