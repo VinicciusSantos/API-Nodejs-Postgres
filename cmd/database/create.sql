@@ -17,7 +17,7 @@ CREATE TABLE tarefas (
     tr_data_criacao DATE default CURRENT_DATE,
     tr_data_finalizacao DATE,
     tr_status VARCHAR(20),
-    tr_prioridade INTEGER,  -- 1 = baixa         2 = Média        3 = Alta
+    tr_prioridade INTEGER  -- 1 = baixa         2 = Média        3 = Alta
 );
 
 CREATE TABLE projetos_possuem_tarefas (
@@ -39,7 +39,7 @@ CREATE TABLE pessoas (
 
 CREATE TABLE equipes (
     eq_id SERIAL PRIMARY KEY NOT NULL, 
-    eq_nome VARCHAR(50) NOT NULL,
+    eq_nome VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE pessoas_pertencem_equipes (
