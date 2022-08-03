@@ -37,7 +37,7 @@ pessoas.get("/pessoas/:id", async (req, res) => {
         WHERE pe.pe_id = $1`, [id]);
 
     results.tarefas.EmDesenvolvimento = tarefas.rows.filter((t) => t.tr_status == "Em Desenvolvimento")
-    results.tarefas.Concluidas = tarefas.rows.filter((t) => t.tr_status == "Concluidas")
+    results.tarefas.Concluidas = tarefas.rows.filter((t) => t.tr_status == "Concluido")
     results.tarefas.NaoIniciadas = tarefas.rows.filter((t) => t.tr_status == "Não Iniciado")
     results.projetos = projetos.rows
 
