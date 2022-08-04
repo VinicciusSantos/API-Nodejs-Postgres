@@ -1,0 +1,15 @@
+const express = require("express");
+const lembretes = express.Router();
+var cliente = require("../../cmd/database/connection.js");
+
+// Inserindo lembretes
+lembretes.post("/lembretes", (req, res) => {
+    const body = req.body;
+    cliente
+        .query(`INSERT INTO lembretes (le_descricao, le_data_lembrete) VALUES ($1, $2)`, [ body.le_descricao, body.le_lembrete])
+        .then((results) => {
+            return res.json("Inserido com sucesso!");
+        });
+});
+
+module.exports = lembretes;

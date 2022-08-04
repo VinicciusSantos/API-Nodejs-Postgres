@@ -63,15 +63,12 @@ CREATE TABLE pessoas_associam_tarefas (
     FOREIGN KEY (fk_tarefa) REFERENCES tarefas(tr_id) ON DELETE CASCADE
 );
 
-CREATE TABLE atualizacoes (
-    att_id SERIAL PRIMARY KEY,
-    att_mensagem VARCHAR(400) NOT NULL,
-    att_data DATE NOT NULL default CURRENT_DATE,
-    fk_projeto INTEGER NOT NULL,
-    fk_autor INTEGER NOT NULL,
-    FOREIGN KEY (fk_projeto) REFERENCES projetos(pr_id) ON DELETE CASCADE,
-    FOREIGN KEY (fk_autor) REFERENCES pessoas(pe_id) ON DELETE CASCADE
-);
+CREATE TABLE lembretes (
+    le_id SERIAL PRIMARY KEY,
+    le_descricao VARCHAR(400),
+    le_data_criacao DATE NOT NULL DEFAULT CURRENT_DATE,
+    le_data_lembrete DATE NOT NULL
+)
 
 /* Cadastrando Projetos */
 INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status) VALUES
