@@ -41,8 +41,9 @@ projetos.get('/projetos/:id', async (req, res) => {
         tarefas: {}
     }
 
-    results.tarefas.EmDesenvolvimento = lista_tarefas.rows.filter((tarefa) => tarefa.tr_status == "Em Desenvolvimento")
     results.tarefas.NaoIniciadas = lista_tarefas.rows.filter((tarefa) => tarefa.tr_status == "Não Iniciado")
+    results.tarefas.EmDesenvolvimento = lista_tarefas.rows.filter((tarefa) => tarefa.tr_status == "Em Desenvolvimento")
+    results.tarefas.Testes = lista_tarefas.rows.filter((t) => t.tr_status == "Em Testes")
     results.tarefas.Concluidas = lista_tarefas.rows.filter((tarefa) => tarefa.tr_status == "Concluido")
 
     // Buscando as pessoas de cada equipe do projeto
