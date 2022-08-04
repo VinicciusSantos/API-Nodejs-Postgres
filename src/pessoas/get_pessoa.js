@@ -14,9 +14,10 @@ pessoas.get("/pessoas/:id", async (req, res) => {
     let results = {
         dados: data_pessoas.rows[0],
         tarefas: {
+            NaoIniciadas: [],
             EmDesenvolvimento: [],
-            Concluidas: [],
-            NaoIniciadas: []
+            Testes: [],
+            Concluidas: []
         },
         projetos: [],
     };
@@ -36,9 +37,10 @@ pessoas.get("/pessoas/:id", async (req, res) => {
         INNER JOIN pessoas AS pe ON pe.pe_id = ppeq.fk_pessoa
         WHERE pe.pe_id = $1`, [id]);
 
-    results.tarefas.EmDesenvolvimento = tarefas.rows.filter((t) => t.tr_status == "Em Desenvolvimento")
-    results.tarefas.Concluidas = tarefas.rows.filter((t) => t.tr_status == "Concluido")
     results.tarefas.NaoIniciadas = tarefas.rows.filter((t) => t.tr_status == "Não Iniciado")
+    results.tarefas.EmDesenvolvimento = tarefas.rows.filter((t) => t.tr_status == "Em Desenvolvimento")
+    results.tarefas.Testes = tarefas.rows.filter((t) => t.tr_status == "Em Testes")
+    results.tarefas.Concluidas = tarefas.rows.filter((t) => t.tr_status == "Concluido")
     results.projetos = projetos.rows
 
     return res.json(results)
