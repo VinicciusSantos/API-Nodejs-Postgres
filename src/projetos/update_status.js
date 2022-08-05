@@ -6,6 +6,7 @@ var cliente = require('../../cmd/database/connection.js')
 projetos.put('/projetos/:id/status/:status', async (req, res) => {
     const id = req.params.id
     const status = req.params.status
+    
     // Verificando se o id que foi passado como parâmetro é realmente um número
     if (isNaN(parseInt(id)) || id == null){
         return res.status(400).json(`Id: ${id} é Inválido`)
