@@ -5,6 +5,7 @@ var cliente = require('../../cmd/database/connection.js')
 // Inserindo projetos
 projetos.post('/projetos', async (req, res) => { 
     const body = req.body
+    console.log(body)
 
     // Verificando se os valores estão sendo recebidos no body
     if (body.pr_nome == null) {
