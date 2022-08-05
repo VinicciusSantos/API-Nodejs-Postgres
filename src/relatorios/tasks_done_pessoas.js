@@ -12,7 +12,7 @@ relatorios.get('/relatorios/pessoas/:id', async (req, res) => {
                                     INNER JOIN pessoas AS pe ON pe.pe_id = pat.fk_pessoa
                                     WHERE pe.pe_id = $1 AND tr.tr_data_finalizacao IS NOT NULL`, [id])
 
-    if (qtd.rows[0].count === 0) {
+    if (qtd.rows[0].count == 0) {
         const vazio = await cliente.query(`SELECT
                                            EXTRACT(MONTH FROM CURRENT_DATE) AS mes,
                                            EXTRACT(YEAR FROM CURRENT_DATE) AS ano,
