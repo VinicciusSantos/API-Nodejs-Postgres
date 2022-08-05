@@ -5,7 +5,6 @@ var cliente = require('../../cmd/database/connection.js')
 // Inserindo projetos
 projetos.post('/projetos', async (req, res) => { 
     const body = req.body
-    console.log(body)
 
     // Verificando se os valores estão sendo recebidos no body
     if (body.pr_nome == null) {
@@ -13,7 +12,7 @@ projetos.post('/projetos', async (req, res) => {
     }
 
     // recebendo a quantidadde de projetos que tem o mesmo nome do que foi passado no body pra fazer as validações
-    const count = await cliente.query('SELECT pr_nome from projetos where pr_nome = $1', [body.pr_nome])
+    const count = await cliente.query('SELECT pr_nome from projetos where pr_nome ilike $1', [body.pr_nome])
     
     // Verificando se já existe algum projeto com o mesmo nome do que vai ser inserido
     if (count.rowCount == 0){
