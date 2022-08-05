@@ -22,13 +22,14 @@ projetos.post('/projetos', async (req, res) => {
         // Pegando o id do projeto que acabou de ser cadastrado
         const id = await cliente.query('select max(pr_id) from projetos')
         
-        
         // Colocando as equipes no projeto
-        body.equipes.forEach(async e => {
-            const idEquipe = await cliente.query(`select eq_id from equipes where eq_nome = $1`, [e])
-            cliente.query(`INSERT INTO projetos_posssuem_equipes (fk_equipe, fk_projeto)
-            VALUES ($1, $2)`, [idEquipe.rows[0].eq_id, id.rows[0].max])
-        });
+        if (body.equipes) {
+            body.equipes.forEach(async e => {
+                const idEquipe = await cliente.query(`select eq_id from equipes where eq_nome = $1`, [e])
+                cliente.query(`INSERT INTO projetos_posssuem_equipes (fk_equipe, fk_projeto)
+                VALUES ($1, $2)`, [idEquipe.rows[0].eq_id, id.rows[0].max])
+            })
+        }
         
         return res.status(201).json("Inserido com sucesso!")
     }
