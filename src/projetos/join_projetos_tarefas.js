@@ -13,6 +13,10 @@ projetos.post('/projetos/:id_projeto/tarefas/_id_tarefa', (req, res) => {
         .then(results => {
             return res.status(201).json(results.rows)
         })
+        .catch(e => {
+            console.log(e)
+            return res.status(400).json(e)
+        })
 })
 
 module.exports = projetos

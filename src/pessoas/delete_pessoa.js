@@ -10,7 +10,11 @@ pessoas.delete("/pessoas/:id", (req, res) => {
         .query("DELETE FROM pessoas WHERE pe_id = $1", [id])
         .then((results) => {
             return res.json("Deletado com sucesso!");
-        });
+        })
+        .catch(e => {
+            console.log(e)
+            return res.status(400).json(e)
+        })
 });
 
 

@@ -9,6 +9,10 @@ tarefas.get('/tarefas/status', (req, res) => {
         .then(results => {
             return res.json(results.rows)
         })
+        .catch(e => {
+            console.log(e)
+            return res.status(400).json(e)
+        })
 })
 
 module.exports = tarefas

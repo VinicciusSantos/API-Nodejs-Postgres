@@ -4,15 +4,25 @@ var cliente = require('../../cmd/database/connection.js')
 
 // Mostrando todas as tarefas
 tarefas.get('/tarefas', async (req, res) => { 
-    const lista_tarefas = await cliente.query(`SELECT tr.*, pr.pr_nome from tarefas AS tr
+    const lista_tarefas = await cliente
+                                        .query(`SELECT tr.*, pr.pr_nome from tarefas AS tr
                                                 LEFT JOIN projetos_possuem_tarefas AS ppt ON ppt.fk_tarefa = tr.tr_id
                                                 LEFT JOIN projetos AS pr ON pr.pr_id = ppt.fk_projeto
                                                 ORDER BY tr.tr_nome`)
+                                        .catch(e => {
+                                            console.log(e)
+                                            return res.status(400).json(e)
+                                        })
 
-    const lista_pessoas = await cliente.query(`SELECT pe.*, tr.tr_id FROM pessoas AS pe
-                                         INNER JOIN pessoas_associam_tarefas AS pat ON pat.fk_pessoa = pe.pe_id
-                                         INNER JOIN tarefas AS tr ON tr.tr_id = pat.fk_tarefa
-                                         ORDER BY tr.tr_id`)
+    const lista_pessoas = await cliente
+                                        .query(`SELECT pe.*, tr.tr_id FROM pessoas AS pe
+                                                INNER JOIN pessoas_associam_tarefas AS pat ON pat.fk_pessoa = pe.pe_id
+                                                INNER JOIN tarefas AS tr ON tr.tr_id = pat.fk_tarefa
+                                                ORDER BY tr.tr_id`)
+                                        .catch(e => {
+                                            console.log(e)
+                                            return res.status(400).json(e)
+                                        })
 
     let results = {
         dados: lista_tarefas.rows

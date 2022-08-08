@@ -8,8 +8,12 @@ cargos.get('/cargos/:cargo', (req, res) => {
     cliente
         .query(`SELECT * FROM pessoas WHERE pe_cargo = $1 ORDER BY pe_id`, [id])
         .then(results => {
-        return res.json(results.rows[0])
-    })
+            return res.json(results.rows[0])
+        })
+        .catch(e => {
+            console.log(e)
+            return res.status(400).json(e)
+        })
 })
 
 module.exports = cargos

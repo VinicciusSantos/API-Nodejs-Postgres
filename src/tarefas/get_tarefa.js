@@ -10,7 +10,11 @@ tarefas.get('/tarefas/:id', (req, res) => {
         .query(`SELECT * FROM tarefas WHERE tr_id = $1`, [id])
         .then(results => {
         return res.json(results.rows[0])
-    })
+        })
+        .catch(e => {
+            console.log(e)
+            return res.status(400).json(e)
+        })
 })
 
 module.exports = tarefas

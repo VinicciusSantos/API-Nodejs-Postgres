@@ -6,7 +6,12 @@ var cliente = require('../../cmd/database/connection.js')
 equipes.delete('/equipes/:id', (req, res) => { 
     const id = req.params.id
 
-    cliente.query('DELETE FROM equipes WHERE eq_id = $1', [id])
+    cliente
+        .query('DELETE FROM equipes WHERE eq_id = $1', [id])
+        .catch(e => {
+            console.log(e)
+            return res.status(400).json(e)
+        })
     return res.json("Deletado com sucesso!")
 })
 

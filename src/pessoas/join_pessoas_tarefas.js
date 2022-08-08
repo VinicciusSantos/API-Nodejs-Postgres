@@ -15,7 +15,11 @@ pessoas.post("/pessoas/:id_pessoa/tarefas/:id_tarefa", (req, res) => {
         )
         .then((r) => {
             return res.json("Tarefa inserida no projeto");
-        });
+        })
+        .catch(e => {
+            console.log(e)
+            return res.status(400).json(e)
+        })
 });
 
 

@@ -4,7 +4,12 @@ var cliente = require('../../cmd/database/connection.js')
 
 // Mostrando todos os Projetos
 projetos.get('/projetos', async (req, res) => { 
-    const results = await cliente.query(`SELECT * FROM projetos ORDER BY pr_id`)
+    const results = await cliente
+                                .query(`SELECT * FROM projetos ORDER BY pr_id`)
+                                .catch(e => {
+                                    console.log(e)
+                                    return res.status(400).json(e)
+                                })
     
     if (results.rowCount == 0) {
         return res.status(404).json("Não Existem Projetos Cadastrados!")

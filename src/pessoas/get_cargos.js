@@ -8,6 +8,10 @@ cargos.get('/cargos', (req, res) => {
         .query(`SELECT pe_cargo as cargo, count(*) as qtd FROM pessoas GROUP BY pe_cargo ORDER BY pe_cargo`)
         .then(results => {
         return res.json(results.rows)
+        .catch(e => {
+            console.log(e)
+            return res.status(400).json(e)
+        })
     })
 })
 

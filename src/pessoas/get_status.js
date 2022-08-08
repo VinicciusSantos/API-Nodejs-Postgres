@@ -8,7 +8,11 @@ pessoas.get("/pessoas/status", (req, res) => {
         .query(`SELECT pe_status, count(*) FROM pessoas GROUP BY pe_status`)
         .then((results) => {
             return res.json(results.rows);
-        });
+        })
+        .catch(e => {
+            console.log(e)
+            return res.status(400).json(e)
+        })
 });
 
 module.exports = pessoas;

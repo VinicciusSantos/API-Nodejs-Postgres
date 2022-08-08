@@ -8,8 +8,12 @@ projetos.get('/projetos/:id', async (req, res) => {
     const id = req.params.id
 
     // Recebendo as informações do projeto
-    const dados_projeto = await cliente.query('SELECT * FROM projetos WHERE pr_id = $1', [id])
-                                       .catch(e => console.log(e.stack))
+    const dados_projeto = await cliente
+                                        .query('SELECT * FROM projetos WHERE pr_id = $1', [id])
+                                        .catch(e => {
+                                            console.log(e)
+                                            return res.status(400).json(e)
+                                        })
 
     // Se o id for válido mas não existir nenhum projeto com esse id, as resposta de dados_projeto terá rowCount == 0, e retornamos um erro
     if(dados_projeto.rowCount == 0){
@@ -17,22 +21,37 @@ projetos.get('/projetos/:id', async (req, res) => {
     }
 
     // Recebendo as tarefas do projeto
-    const lista_tarefas = await cliente.query(`SELECT tr.tr_id, tr.tr_nome, tr_descricao, tr_data_criacao, tr_status, tr_data_finalizacao, tr_prioridade FROM projetos AS pr
+    const lista_tarefas = await cliente
+                                    .query(`SELECT tr.tr_id, tr.tr_nome, tr_descricao, tr_data_criacao, tr_status, tr_data_finalizacao, tr_prioridade FROM projetos AS pr
                                                INNER JOIN projetos_possuem_tarefas AS ppt ON ppt.fk_projeto = pr.pr_id
                                                INNER JOIN tarefas AS tr ON tr.tr_id = ppt.fk_tarefa
                                                WHERE pr.pr_id = $1`, [id])
+                                    .catch(e => {
+                                        console.log(e)
+                                        return res.status(400).json(e)
+                                    })
 
     // Recebendo as equipes do projeto
-    const lista_equipes = await cliente.query(`SELECT eq.eq_id, eq.eq_nome FROM projetos AS pr
-                                               INNER JOIN projetos_posssuem_equipes AS ppe ON ppe.fk_projeto = pr.pr_id
-                                               INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
-                                               WHERE pr.pr_id = $1
-                                               ORDER BY pr.pr_id, eq.eq_id`, [id])
+    const lista_equipes = await cliente
+                                    .query(`SELECT eq.eq_id, eq.eq_nome FROM projetos AS pr
+                                            INNER JOIN projetos_posssuem_equipes AS ppe ON ppe.fk_projeto = pr.pr_id
+                                            INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
+                                            WHERE pr.pr_id = $1
+                                            ORDER BY pr.pr_id, eq.eq_id`, [id])
+                                    .catch(e => {
+                                        console.log(e)
+                                        return res.status(400).json(e)
+                                    })
 
-    const lista_pessoas = await cliente.query(`SELECT pe.pe_id, pe.pe_nome, pe.pe_cargo, pe.pe_salario, eq.eq_nome ,eq.eq_id FROM pessoas AS pe
-                                               INNER JOIN pessoas_pertencem_equipes AS ppe ON ppe.fk_pessoa = pe.pe_id
-                                               INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
-                                               ORDER BY pe.pe_id`)
+    const lista_pessoas = await cliente
+                                    .query(`SELECT pe.pe_id, pe.pe_nome, pe.pe_cargo, pe.pe_salario, eq.eq_nome ,eq.eq_id FROM pessoas AS pe
+                                            INNER JOIN pessoas_pertencem_equipes AS ppe ON ppe.fk_pessoa = pe.pe_id
+                                            INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
+                                            ORDER BY pe.pe_id`)
+                                    .catch(e => {
+                                        console.log(e)
+                                        return res.status(400).json(e)
+                                    })
 
     // Montando um objeto para ser retornado no json
     let results = {

@@ -12,8 +12,12 @@ projetos.get('/projetos/:id/pessoas', async (req, res) => {
     }
 
     // Recebendo as informações do projeto
-    const dados_projeto = await cliente.query('SELECT * FROM projetos WHERE pr_id = $1', [id])
-                                       .catch(e => console.log(e.stack))
+    const dados_projeto = await cliente
+                                        .query('SELECT * FROM projetos WHERE pr_id = $1', [id])
+                                        .catch(e => {
+                                            console.log(e)
+                                            return res.status(400).json(e)
+                                        })
 
     // Se o id for válido mas não existir nenhum projeto com esse id, as resposta de dados_projeto terá rowCount == 0, e retornamos um erro
     if(dados_projeto.rowCount == 0){

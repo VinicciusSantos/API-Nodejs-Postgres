@@ -12,6 +12,10 @@ projetos.get('/projetos/status/:status', (req, res) => {
         .then(results => {
             return res.status(200).json(results.rows)
         })
+        .catch(e => {
+            console.log(e)
+            return res.status(400).json(e)
+        })
 })
 
 
