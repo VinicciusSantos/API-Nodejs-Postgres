@@ -8,15 +8,11 @@ pessoas.get("/pessoas/status", (req, res) => {
         .query(`SELECT pe_status, count(*) FROM pessoas GROUP BY pe_status`)
         .then((results) => {
             return res.json(results.rows);
-<<<<<<< HEAD
         })
         .catch(e => {
             
             return res.status(400).json(e)
         })
-=======
-        });
->>>>>>> parent of ee26479 (Tratamento de erros com Catch)
 });
 
 module.exports = pessoas;

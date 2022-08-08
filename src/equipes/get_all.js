@@ -6,7 +6,6 @@ var cliente = require('../../cmd/database/connection.js')
 equipes.get('/equipes', async (req, res) => { 
     const equipes = await cliente.query(`SELECT * FROM equipes`)
 
-<<<<<<< HEAD
     const equipes_pessoas = await cliente
                                         .query(`SELECT pe.*, eq.eq_id FROM equipes as eq
                                                 INNER JOIN pessoas_pertencem_equipes as ppe on ppe.fk_equipe = eq.eq_id
@@ -24,15 +23,6 @@ equipes.get('/equipes', async (req, res) => {
                                             
                                             return res.status(400).json(e)
                                         })
-=======
-    const equipes_pessoas = await cliente.query(`SELECT pe.*, eq.eq_id FROM equipes as eq
-                                                 INNER JOIN pessoas_pertencem_equipes as ppe on ppe.fk_equipe = eq.eq_id
-                                                 INNER JOIN pessoas as pe on pe.pe_id = ppe.fk_pessoa`)
-
-    const equipes_projetos = await cliente.query(`SELECT pr.*, eq.eq_id FROM equipes AS eq
-                                                  INNER JOIN projetos_posssuem_equipes AS ppe ON ppe.fk_equipe = eq.eq_id
-                                                  INNER JOIN projetos AS pr ON pr.pr_id = ppe.fk_projeto`)
->>>>>>> parent of ee26479 (Tratamento de erros com Catch)
     const results = []
 
     // pegar as pessoas da equipe

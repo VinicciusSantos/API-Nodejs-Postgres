@@ -8,19 +8,12 @@ pessoas.put("/pessoas/:id/status/:status", (req, res) => {
     const status = req.params.status;
 
     // Mundando o status de uma pessoaz
-<<<<<<< HEAD
     cliente
         .query(`UPDATE pessoas SET pe_status = $1 WHERE pe_id = $2`, [status, id,])
         .catch(e => {
             
             return res.status(400).json(e)
         })
-=======
-    cliente.query(`UPDATE pessoas SET pe_status = $1 WHERE pe_id = $2`, [
-        status,
-        id,
-    ]);
->>>>>>> parent of ee26479 (Tratamento de erros com Catch)
     return res.json("Status Atualizado");
 });
 

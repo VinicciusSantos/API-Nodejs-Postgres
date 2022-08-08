@@ -13,33 +13,24 @@ projetos.put('/projetos/:id', async (req, res) => {
     }
 
     // Recebendo as informações do projeto
-<<<<<<< HEAD
     const dados_projeto = await cliente
                                     .query('SELECT * FROM projetos WHERE pr_id = $1', [id])
                                     .catch(e => {
                                         
                                         return res.status(400).json(e)
                                     })
-=======
-    const dados_projeto = await cliente.query('SELECT * FROM projetos WHERE pr_id = $1', [id])
-                                       .catch(e => console.log(e.stack))
->>>>>>> parent of ee26479 (Tratamento de erros com Catch)
 
     // Se o id for válido mas não existir nenhum projeto com esse id, as resposta de dados_projeto terá rowCount == 0, e retornamos um erro
     if(dados_projeto.rowCount == 0){
         return res.status(404).json(`Projeto '${id}' não encontrado!`)
     }
 
-<<<<<<< HEAD
     cliente
         .query('UPDATE projetos SET pr_nome = $1, pr_descricao = $2 WHERE pr_id = $3', [body.pr_nome, body.pr_descricao, id])
         .catch(e => {
             
             return res.status(400).json(e)
         })
-=======
-    cliente.query('UPDATE projetos SET pr_nome = $1, pr_descricao = $2 WHERE pr_id = $3', [body.pr_nome, body.pr_descricao, id])
->>>>>>> parent of ee26479 (Tratamento de erros com Catch)
     return res.status(204).json("Alterado com sucesso!")
 })
 

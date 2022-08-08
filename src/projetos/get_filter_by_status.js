@@ -12,13 +12,10 @@ projetos.get('/projetos/status/:status', (req, res) => {
         .then(results => {
             return res.status(200).json(results.rows)
         })
-<<<<<<< HEAD
         .catch(e => {
             
             return res.status(400).json(e)
         })
-=======
->>>>>>> parent of ee26479 (Tratamento de erros com Catch)
 })
 
 
