@@ -10,7 +10,7 @@ tarefas.put('/tarefas/:id', (req, res) => {
     cliente
         .query('UPDATE tarefas SET tr_nome = $1, tr_descricao = $2, tr_data_criacao = $3, tr_prioridade = $4 WHERE id = $5', [body.tr_nome, body.tr_descricao,  body.tr_data_criacao, body.tr_prioridade,id])
         .catch(e => {
-            console.log(e)
+            
             return res.status(400).json(e)
         })
     return res.json("Alterado com sucesso!")

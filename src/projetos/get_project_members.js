@@ -15,7 +15,7 @@ projetos.get('/projetos/:id/pessoas', async (req, res) => {
     const dados_projeto = await cliente
                                         .query('SELECT * FROM projetos WHERE pr_id = $1', [id])
                                         .catch(e => {
-                                            console.log(e)
+                                            
                                             return res.status(400).json(e)
                                         })
 

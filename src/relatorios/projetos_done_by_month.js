@@ -15,7 +15,7 @@ relatorios.get('/relatorios/projetos', async (req, res) => {
                                             EXTRACT(YEAR FROM CURRENT_DATE) AS ano,
                                             0 AS quantidade`)
                                     .catch(e => {
-                                        console.log(e)
+                                        
                                         return res.status(400).json(e)
                                     })
         return res.json(vazio.rows)
@@ -31,7 +31,7 @@ relatorios.get('/relatorios/projetos', async (req, res) => {
                                         GROUP BY EXTRACT(MONTH from pr_data_finalizacao), EXTRACT(YEAR FROM pr_data_finalizacao)
                                         ORDER BY EXTRACT(MONTH from pr_data_finalizacao), EXTRACT(YEAR FROM pr_data_finalizacao)`)
                                 .catch(e => {
-                                    console.log(e)
+                                    
                                     return res.status(400).json(e)
                                 })
     

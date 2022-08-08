@@ -10,7 +10,7 @@ equipes.put('/equipes/:id', (req, res) => {
     cliente
         .query('UPDATE equipes SET eq_nome = $1 WHERE eq_id = $2', [body.eq_nome, id])
         .catch(e => {
-            console.log(e)
+            
             return res.status(400).json(e)
         })
     return res.json("Alterado com sucesso!")

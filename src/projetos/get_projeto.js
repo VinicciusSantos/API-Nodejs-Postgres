@@ -11,7 +11,7 @@ projetos.get('/projetos/:id', async (req, res) => {
     const dados_projeto = await cliente
                                         .query('SELECT * FROM projetos WHERE pr_id = $1', [id])
                                         .catch(e => {
-                                            console.log(e)
+                                            
                                             return res.status(400).json(e)
                                         })
 
@@ -27,7 +27,7 @@ projetos.get('/projetos/:id', async (req, res) => {
                                                INNER JOIN tarefas AS tr ON tr.tr_id = ppt.fk_tarefa
                                                WHERE pr.pr_id = $1`, [id])
                                     .catch(e => {
-                                        console.log(e)
+                                        
                                         return res.status(400).json(e)
                                     })
 
@@ -39,7 +39,7 @@ projetos.get('/projetos/:id', async (req, res) => {
                                             WHERE pr.pr_id = $1
                                             ORDER BY pr.pr_id, eq.eq_id`, [id])
                                     .catch(e => {
-                                        console.log(e)
+                                        
                                         return res.status(400).json(e)
                                     })
 
@@ -49,7 +49,7 @@ projetos.get('/projetos/:id', async (req, res) => {
                                             INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
                                             ORDER BY pe.pe_id`)
                                     .catch(e => {
-                                        console.log(e)
+                                        
                                         return res.status(400).json(e)
                                     })
 

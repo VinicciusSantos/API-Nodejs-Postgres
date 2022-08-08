@@ -16,7 +16,7 @@ tarefas.put('/tarefas/:id/status/:status', async (req, res) => {
     const dados_tarefa = await cliente
                                     .query('SELECT * FROM tarefas WHERE tr_id = $1', [id])
                                     .catch(e => {
-                                        console.log(e)
+                                        
                                         return res.status(400).json(e)
                                     })
 
@@ -29,7 +29,7 @@ tarefas.put('/tarefas/:id/status/:status', async (req, res) => {
     cliente
         .query(`UPDATE tarefas SET tr_status = $1, tr_data_finalizacao = $2 WHERE tr_id = $3`, [status, null ,id])
         .catch(e => {
-            console.log(e)
+            
             return res.status(400).json(e)
         })
    
@@ -38,7 +38,7 @@ tarefas.put('/tarefas/:id/status/:status', async (req, res) => {
         cliente
             .query(`UPDATE tarefas SET tr_data_finalizacao = CURRENT_DATE WHERE tr_id = $1`, [id])
             .catch(e => {
-                console.log(e)
+                
                 return res.status(400).json(e)
             })
     }

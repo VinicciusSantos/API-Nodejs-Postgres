@@ -12,7 +12,7 @@ equipes.post('/equipes', async (req, res) => {
     const pessoas = await cliente
                                 .query(`select pe_nome, pe_id from pessoas`)
                                 .catch(e => {
-                                    console.log(e)
+                                    
                                     return res.status(400).json(e)
                                 })
 
@@ -20,7 +20,7 @@ equipes.post('/equipes', async (req, res) => {
     const id = await cliente
                         .query('select max(eq_id) from equipes')
                         .catch(e => {
-                            console.log(e)
+                            
                             return res.status(400).json(e)
                         })
 
@@ -32,7 +32,7 @@ equipes.post('/equipes', async (req, res) => {
             .query(`INSERT INTO pessoas_pertencem_equipes (fk_pessoa, fk_equipe)
                     VALUES ($1, $2)`, [idPessoa.rows[0].pe_id, id.rows[0].max])
             .catch(e => {
-                console.log(e)
+                
                 return res.status(400).json(e)
             })
     });

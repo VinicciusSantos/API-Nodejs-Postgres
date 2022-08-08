@@ -10,7 +10,7 @@ projetos.post('/projetos', async (req, res) => {
     const count = await cliente
                                 .query('SELECT pr_nome from projetos where pr_nome ilike $1', [body.pr_nome])
                                 .catch(e => {
-                                    console.log(e)
+                                    
                                     return res.status(400).json(e)
                                 })
     
@@ -20,7 +20,7 @@ projetos.post('/projetos', async (req, res) => {
             .query(`INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status)
                     VALUES ($1, $2, current_date, $3)`, [body.pr_nome, body.pr_descricao, 'Ativo'])
             .catch(e => {
-                console.log(e)
+                
                 return res.status(400).json(e)
             })
                        
@@ -35,7 +35,7 @@ projetos.post('/projetos', async (req, res) => {
                     .query(`INSERT INTO projetos_posssuem_equipes (fk_equipe, fk_projeto)
                             VALUES ($1, $2)`, [idEquipe.rows[0].eq_id, id.rows[0].max])
                     .catch(e => {
-                        console.log(e)
+                        
                         return res.status(400).json(e)
                     })
             })

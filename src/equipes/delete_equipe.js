@@ -9,7 +9,7 @@ equipes.delete('/equipes/:id', (req, res) => {
     cliente
         .query('DELETE FROM equipes WHERE eq_id = $1', [id])
         .catch(e => {
-            console.log(e)
+            
             return res.status(400).json(e)
         })
     return res.json("Deletado com sucesso!")

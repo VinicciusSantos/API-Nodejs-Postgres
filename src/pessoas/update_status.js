@@ -11,7 +11,7 @@ pessoas.put("/pessoas/:id/status/:status", (req, res) => {
     cliente
         .query(`UPDATE pessoas SET pe_status = $1 WHERE pe_id = $2`, [status, id,])
         .catch(e => {
-            console.log(e)
+            
             return res.status(400).json(e)
         })
     return res.json("Status Atualizado");

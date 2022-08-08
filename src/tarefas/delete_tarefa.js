@@ -10,7 +10,7 @@ tarefas.delete('/tarefas/:id', (req, res) => {
         return res.status(400).json(e)
         })
         .catch(e => {
-            console.log(e)
+            
             return res.status(400).json(e)
         })
     

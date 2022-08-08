@@ -7,7 +7,6 @@ projetos.get('/projetos', async (req, res) => {
     const results = await cliente
                                 .query(`SELECT * FROM projetos ORDER BY pr_id`)
                                 .catch(e => {
-                                    console.log(e)
                                     return res.status(400).json(e)
                                 })
     

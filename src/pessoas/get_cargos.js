@@ -9,7 +9,7 @@ cargos.get('/cargos', (req, res) => {
         .then(results => {
         return res.json(results.rows)
         .catch(e => {
-            console.log(e)
+            
             return res.status(400).json(e)
         })
     })

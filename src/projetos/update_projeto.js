@@ -16,7 +16,7 @@ projetos.put('/projetos/:id', async (req, res) => {
     const dados_projeto = await cliente
                                     .query('SELECT * FROM projetos WHERE pr_id = $1', [id])
                                     .catch(e => {
-                                        console.log(e)
+                                        
                                         return res.status(400).json(e)
                                     })
 
@@ -28,7 +28,7 @@ projetos.put('/projetos/:id', async (req, res) => {
     cliente
         .query('UPDATE projetos SET pr_nome = $1, pr_descricao = $2 WHERE pr_id = $3', [body.pr_nome, body.pr_descricao, id])
         .catch(e => {
-            console.log(e)
+            
             return res.status(400).json(e)
         })
     return res.status(204).json("Alterado com sucesso!")

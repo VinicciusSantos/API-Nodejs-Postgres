@@ -10,7 +10,7 @@ tarefas.get('/tarefas/status', (req, res) => {
             return res.json(results.rows)
         })
         .catch(e => {
-            console.log(e)
+            
             return res.status(400).json(e)
         })
 })

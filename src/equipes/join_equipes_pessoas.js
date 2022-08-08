@@ -11,7 +11,7 @@ equipes.post('/equipes/:id_equipe/pessoas/:id_pessoa', (req, res) => {
         .query(`INSERT INTO pessoas_pertencem_equipes (fk_pessoas, fk_equipes)
                 VALUES ($1, $2)`, [id_pessoa, id_equipe])
         .catch(e => {
-            console.log(e)
+            
             return res.status(400).json(e)
         })
 
