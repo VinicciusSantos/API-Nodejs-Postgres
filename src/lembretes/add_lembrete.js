@@ -9,11 +9,15 @@ lembretes.post("/lembretes", (req, res) => {
         .query(`INSERT INTO lembretes (le_descricao, le_data_lembrete) VALUES ($1, $2)`, [ body.le_descricao, body.le_data_lembrete])
         .then((results) => {
             return res.json("Inserido com sucesso!");
+<<<<<<< HEAD
         })
         .catch(e => {
             
             return res.status(400).json(e)
         })
+=======
+        });
+>>>>>>> parent of ee26479 (Tratamento de erros com Catch)
 });
 
 module.exports = lembretes;

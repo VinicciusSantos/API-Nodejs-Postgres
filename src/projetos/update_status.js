@@ -13,12 +13,17 @@ projetos.put('/projetos/:id/status/:status', async (req, res) => {
     }
 
     // Recebendo as informações do projeto
+<<<<<<< HEAD
     const dados_projeto = await cliente
                                         .query('SELECT * FROM projetos WHERE pr_id = $1', [id])
                                         .catch(e => {
                                             
                                             return res.status(400).json(e)
                                         })
+=======
+    const dados_projeto = await cliente.query('SELECT * FROM projetos WHERE pr_id = $1', [id])
+                                       .catch(e => console.log(e.stack))
+>>>>>>> parent of ee26479 (Tratamento de erros com Catch)
 
     // Se o id for válido mas não existir nenhum projeto com esse id, as resposta de dados_projeto terá rowCount == 0, e retornamos um erro
     if(dados_projeto.rowCount == 0){
@@ -27,15 +32,17 @@ projetos.put('/projetos/:id/status/:status', async (req, res) => {
 
     if (status === 'Concluido'){
         // Somente Autoriza a conclusão do projeto se todas as tarefas dele estiverem concluidas
-        const tarefas = await cliente
-                                    .query(`SELECT tr_id, tr_nome, tr_status FROM projetos AS pr
+        const tarefas = await cliente.query(`SELECT tr_id, tr_nome, tr_status FROM projetos AS pr
                                             INNER JOIN projetos_possuem_tarefas AS ppt ON ppt.fk_projeto = pr.pr_id
                                             INNER JOIN tarefas AS tr ON tr.tr_id = ppt.fk_tarefa
                                             WHERE pr_id = $1 AND tr.tr_status != 'Concluido'`, [id])
+<<<<<<< HEAD
                                     .catch(e => {
                                         
                                         return res.status(400).json(e)
                                     })
+=======
+>>>>>>> parent of ee26479 (Tratamento de erros com Catch)
 
         console.log(tarefas.rowCount)
         
@@ -45,6 +52,7 @@ projetos.put('/projetos/:id/status/:status', async (req, res) => {
     }
 
     // Mundando o status do projeto e garantindo que a sua data de finalização está nula
+<<<<<<< HEAD
     cliente
             .query(`UPDATE projetos SET pr_status = $1, pr_data_finalizacao = $2 WHERE pr_id = $3`, [status, null ,id])
             .catch(e => {
@@ -60,6 +68,13 @@ projetos.put('/projetos/:id/status/:status', async (req, res) => {
                     
                     return res.status(400).json(e)
                 })
+=======
+    cliente.query(`UPDATE projetos SET pr_status = $1, pr_data_finalizacao = $2 WHERE pr_id = $3`, [status, null ,id])
+   
+    // Se o projeto estiver sendo finalizado, temos que gravar a data de finalização:
+    if (status === 'Concluido'){
+        cliente.query(`UPDATE projetos SET pr_data_finalizacao = CURRENT_DATE WHERE pr_id = $1`, [id])
+>>>>>>> parent of ee26479 (Tratamento de erros com Catch)
     }
     
     return res.status(200).json('Status Atualizado')

@@ -15,11 +15,15 @@ pessoas.put("/pessoas/:id", (req, res) => {
         )
         .then((results) => {
             return res.json("Alterado com sucesso!");
+<<<<<<< HEAD
         })
         .catch(e => {
             
             return res.status(400).json(e)
         })
+=======
+        });
+>>>>>>> parent of ee26479 (Tratamento de erros com Catch)
 });
 
 

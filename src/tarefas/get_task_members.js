@@ -12,10 +12,13 @@ tarefas.get('/tarefas/:id/pessoas', (req, res) => {
                 WHERE tr.tr_id = $1`, [id])
         .then(results => {
         return res.json(results.rows)
+<<<<<<< HEAD
         .catch(e => {
             
             return res.status(400).json(e)
         })
+=======
+>>>>>>> parent of ee26479 (Tratamento de erros com Catch)
     })
 })
 
