@@ -11,8 +11,7 @@ pessoas.delete("/pessoas/:id", (req, res) => {
         .then((results) => {
             return res.json("Deletado com sucesso!");
         })
-        .catch(e => {
-            
+        .catch(e => {           
             return res.status(400).json(e)
         })
 });

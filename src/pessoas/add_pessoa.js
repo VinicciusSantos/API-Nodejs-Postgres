@@ -14,8 +14,7 @@ pessoas.post("/pessoas", (req, res) => {
         .then((results) => {
             return res.json("Inserido com sucesso!");
         })
-        .catch(e => {
-            
+        .catch(e => {           
             return res.status(400).json(e)
         })
 });

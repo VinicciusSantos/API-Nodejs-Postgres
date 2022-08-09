@@ -15,8 +15,7 @@ tarefas.put('/tarefas/:id/status/:status', async (req, res) => {
     // Recebendo as informações da tarefa
     const dados_tarefa = await cliente
                                     .query('SELECT * FROM tarefas WHERE tr_id = $1', [id])
-                                    .catch(e => {
-                                        
+                                    .catch(e => {                                        
                                         return res.status(400).json(e)
                                     })
 
@@ -28,8 +27,7 @@ tarefas.put('/tarefas/:id/status/:status', async (req, res) => {
     // Mundando o status da tarefa e garantindo que a sua data de finalização está nula
     cliente
         .query(`UPDATE tarefas SET tr_status = $1, tr_data_finalizacao = $2 WHERE tr_id = $3`, [status, null ,id])
-        .catch(e => {
-            
+        .catch(e => {            
             return res.status(400).json(e)
         })
    
@@ -37,8 +35,7 @@ tarefas.put('/tarefas/:id/status/:status', async (req, res) => {
     if (status === 'Concluido'){
         cliente
             .query(`UPDATE tarefas SET tr_data_finalizacao = CURRENT_DATE WHERE tr_id = $1`, [id])
-            .catch(e => {
-                
+            .catch(e => {                
                 return res.status(400).json(e)
             })
     }

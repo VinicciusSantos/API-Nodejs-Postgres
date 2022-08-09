@@ -14,8 +14,7 @@ projetos.delete('/projetos/:id', async (req, res) => {
     // Recebendo as informações basicas do projeto, como: nome, descrição...
     const dados_projeto = await cliente
                                         .query('SELECT * FROM projetos WHERE pr_id = $1', [id])
-                                        .catch(e => {
-                                            
+                                        .catch(e => {                                           
                                             return res.status(400).json(e)
                                         })
 

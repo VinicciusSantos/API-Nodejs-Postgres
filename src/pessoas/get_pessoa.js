@@ -11,7 +11,6 @@ pessoas.get("/pessoas/:id", async (req, res) => {
                                             FROM pessoas AS pe              
                                             WHERE pe.pe_id = $1`,[id])
                                     .catch(e => {
-                                        
                                         return res.status(400).json(e)
                                     })
         
@@ -32,8 +31,7 @@ pessoas.get("/pessoas/:id", async (req, res) => {
                                         INNER JOIN tarefas AS tr ON tr.tr_id = pat.fk_tarefa
                                         WHERE pe.pe_id = $1
                                         ORDER BY tr.tr_prioridade, tr.tr_nome`, [id])
-                                .catch(e => {
-                                    
+                                .catch(e => {                                 
                                     return res.status(400).json(e)
                                 })
 
@@ -45,8 +43,7 @@ pessoas.get("/pessoas/:id", async (req, res) => {
                                         INNER JOIN pessoas_pertencem_equipes AS ppeq ON ppeq.fk_equipe = eq.eq_id
                                         INNER JOIN pessoas AS pe ON pe.pe_id = ppeq.fk_pessoa
                                         WHERE pe.pe_id = $1`, [id])
-                                .catch(e => {
-                                    
+                                .catch(e => {                                    
                                     return res.status(400).json(e)
                                 })
 

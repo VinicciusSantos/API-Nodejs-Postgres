@@ -9,8 +9,7 @@ tarefas.delete('/tarefas/:id', (req, res) => {
         .query('DELETE FROM tarefas WHERE tr_id = $1', [id]).catch(e => {
         return res.status(400).json(e)
         })
-        .catch(e => {
-            
+        .catch(e => {            
             return res.status(400).json(e)
         })
     

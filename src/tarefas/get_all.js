@@ -9,8 +9,7 @@ tarefas.get('/tarefas', async (req, res) => {
                                                 LEFT JOIN projetos_possuem_tarefas AS ppt ON ppt.fk_tarefa = tr.tr_id
                                                 LEFT JOIN projetos AS pr ON pr.pr_id = ppt.fk_projeto
                                                 ORDER BY tr.tr_nome`)
-                                        .catch(e => {
-                                            
+                                        .catch(e => {                                           
                                             return res.status(400).json(e)
                                         })
 
@@ -19,8 +18,7 @@ tarefas.get('/tarefas', async (req, res) => {
                                                 INNER JOIN pessoas_associam_tarefas AS pat ON pat.fk_pessoa = pe.pe_id
                                                 INNER JOIN tarefas AS tr ON tr.tr_id = pat.fk_tarefa
                                                 ORDER BY tr.tr_id`)
-                                        .catch(e => {
-                                            
+                                        .catch(e => {                                            
                                             return res.status(400).json(e)
                                         })
 

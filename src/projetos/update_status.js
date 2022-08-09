@@ -15,8 +15,7 @@ projetos.put('/projetos/:id/status/:status', async (req, res) => {
     // Recebendo as informações do projeto
     const dados_projeto = await cliente
                                         .query('SELECT * FROM projetos WHERE pr_id = $1', [id])
-                                        .catch(e => {
-                                            
+                                        .catch(e => {                                            
                                             return res.status(400).json(e)
                                         })
 
@@ -32,8 +31,7 @@ projetos.put('/projetos/:id/status/:status', async (req, res) => {
                                             INNER JOIN projetos_possuem_tarefas AS ppt ON ppt.fk_projeto = pr.pr_id
                                             INNER JOIN tarefas AS tr ON tr.tr_id = ppt.fk_tarefa
                                             WHERE pr_id = $1 AND tr.tr_status != 'Concluido'`, [id])
-                                    .catch(e => {
-                                        
+                                    .catch(e => {                                       
                                         return res.status(400).json(e)
                                     })
 
@@ -47,8 +45,7 @@ projetos.put('/projetos/:id/status/:status', async (req, res) => {
     // Mundando o status do projeto e garantindo que a sua data de finalização está nula
     cliente
             .query(`UPDATE projetos SET pr_status = $1, pr_data_finalizacao = $2 WHERE pr_id = $3`, [status, null ,id])
-            .catch(e => {
-                
+            .catch(e => {                
                 return res.status(400).json(e)
             })
    
@@ -56,8 +53,7 @@ projetos.put('/projetos/:id/status/:status', async (req, res) => {
     if (status === 'Concluido'){
         cliente
                 .query(`UPDATE projetos SET pr_data_finalizacao = CURRENT_DATE WHERE pr_id = $1`, [id])
-                .catch(e => {
-                    
+                .catch(e => {                    
                     return res.status(400).json(e)
                 })
     }

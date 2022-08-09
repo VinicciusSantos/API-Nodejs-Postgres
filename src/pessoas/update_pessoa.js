@@ -16,8 +16,7 @@ pessoas.put("/pessoas/:id", (req, res) => {
         .then((results) => {
             return res.json("Alterado com sucesso!");
         })
-        .catch(e => {
-            
+        .catch(e => {          
             return res.status(400).json(e)
         })
 });

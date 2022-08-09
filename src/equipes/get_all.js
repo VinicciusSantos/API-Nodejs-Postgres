@@ -10,8 +10,7 @@ equipes.get('/equipes', async (req, res) => {
                                         .query(`SELECT pe.*, eq.eq_id FROM equipes as eq
                                                 INNER JOIN pessoas_pertencem_equipes as ppe on ppe.fk_equipe = eq.eq_id
                                                 INNER JOIN pessoas as pe on pe.pe_id = ppe.fk_pessoa`)
-                                        .catch(e => {
-                                            
+                                        .catch(e => {                                           
                                             return res.status(400).json(e)
                                         })
 
@@ -19,8 +18,7 @@ equipes.get('/equipes', async (req, res) => {
                                         .query(`SELECT pr.*, eq.eq_id FROM equipes AS eq
                                                 INNER JOIN projetos_posssuem_equipes AS ppe ON ppe.fk_equipe = eq.eq_id
                                                 INNER JOIN projetos AS pr ON pr.pr_id = ppe.fk_projeto`)
-                                        .catch(e => {
-                                            
+                                        .catch(e => {                                          
                                             return res.status(400).json(e)
                                         })
     const results = []

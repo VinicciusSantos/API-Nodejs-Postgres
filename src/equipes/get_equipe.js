@@ -11,8 +11,7 @@ equipes.get('/equipes/:id', (req, res) => {
         .then(results => {
             return res.json(results.rows[0])
         })
-        .catch(e => {
-            
+        .catch(e => {         
             return res.status(400).json(e)
         })
 })

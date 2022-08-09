@@ -12,8 +12,7 @@ relatorios.get('/relatorios/pessoas/:id', async (req, res) => {
                                     INNER JOIN pessoas_associam_tarefas AS pat ON pat.fk_tarefa = tr.tr_id
                                     INNER JOIN pessoas AS pe ON pe.pe_id = pat.fk_pessoa
                                     WHERE pe.pe_id = $1 AND tr.tr_data_finalizacao IS NOT NULL`, [id])
-                            .catch(e => {
-                                
+                            .catch(e => {                                
                                 return res.status(400).json(e)
                             })
 
@@ -23,8 +22,7 @@ relatorios.get('/relatorios/pessoas/:id', async (req, res) => {
                                            EXTRACT(MONTH FROM CURRENT_DATE) AS mes,
                                            EXTRACT(YEAR FROM CURRENT_DATE) AS ano,
                                            0 AS quantidade`)
-                                    .catch(e => {
-                                        
+                                    .catch(e => {                                       
                                         return res.status(400).json(e)
                                     })
         return res.json(vazio.rows)
@@ -39,8 +37,7 @@ relatorios.get('/relatorios/pessoas/:id', async (req, res) => {
         .then(results => {
             return res.json(results.rows)
         })
-        .catch(e => {
-            
+        .catch(e => {           
             return res.status(400).json(e)
         })
 })

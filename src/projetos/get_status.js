@@ -6,8 +6,7 @@ var cliente = require('../../cmd/database/connection.js')
 projetos.get('/projetos/status', async (req, res) => {
     const results = await cliente
                                 .query(`SELECT pr_status, count(*) FROM projetos GROUP BY pr_status`)
-                                .catch(e => {
-                                    
+                                .catch(e => {                                    
                                     return res.status(400).json(e)
                                 })
     

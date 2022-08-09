@@ -10,8 +10,7 @@ projetos.get('/projetos/:id', async (req, res) => {
     // Recebendo as informações do projeto
     const dados_projeto = await cliente
                                         .query('SELECT * FROM projetos WHERE pr_id = $1', [id])
-                                        .catch(e => {
-                                            
+                                        .catch(e => {                                           
                                             return res.status(400).json(e)
                                         })
 
@@ -26,8 +25,7 @@ projetos.get('/projetos/:id', async (req, res) => {
                                                INNER JOIN projetos_possuem_tarefas AS ppt ON ppt.fk_projeto = pr.pr_id
                                                INNER JOIN tarefas AS tr ON tr.tr_id = ppt.fk_tarefa
                                                WHERE pr.pr_id = $1`, [id])
-                                    .catch(e => {
-                                        
+                                    .catch(e => {                                    
                                         return res.status(400).json(e)
                                     })
 
@@ -38,8 +36,7 @@ projetos.get('/projetos/:id', async (req, res) => {
                                             INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
                                             WHERE pr.pr_id = $1
                                             ORDER BY pr.pr_id, eq.eq_id`, [id])
-                                    .catch(e => {
-                                        
+                                    .catch(e => {                                       
                                         return res.status(400).json(e)
                                     })
 
@@ -48,8 +45,7 @@ projetos.get('/projetos/:id', async (req, res) => {
                                             INNER JOIN pessoas_pertencem_equipes AS ppe ON ppe.fk_pessoa = pe.pe_id
                                             INNER JOIN equipes AS eq ON eq.eq_id = ppe.fk_equipe
                                             ORDER BY pe.pe_id`)
-                                    .catch(e => {
-                                        
+                                    .catch(e => {                                    
                                         return res.status(400).json(e)
                                     })
 

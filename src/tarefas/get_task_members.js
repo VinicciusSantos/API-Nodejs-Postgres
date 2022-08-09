@@ -12,8 +12,7 @@ tarefas.get('/tarefas/:id/pessoas', (req, res) => {
                 WHERE tr.tr_id = $1`, [id])
         .then(results => {
         return res.json(results.rows)
-        .catch(e => {
-            
+        .catch(e => {            
             return res.status(400).json(e)
         })
     })
