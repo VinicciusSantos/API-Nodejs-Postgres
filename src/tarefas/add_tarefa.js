@@ -15,7 +15,7 @@ tarefas.post('/tarefas', async (req, res) => {
 
     // Inserindo a tarefa
     const results = await cliente.query(`INSERT INTO tarefas (tr_nome, tr_descricao, tr_data_criacao, tr_status, tr_prioridade)
-                                    VALUES ($1, $2, current_date, 'Em Andamento', $3)`, [body.tr_nome, body.tr_descricao, body.tr_prioridade])
+                                    VALUES ($1, $2, current_date, 'Não Iniciado', $3)`, [body.tr_nome, body.tr_descricao, body.tr_prioridade])
     
     // Pegando o id da tarefa que acabou de ser cadastrada
     const id = await cliente.query('select max(tr_id) from tarefas')
