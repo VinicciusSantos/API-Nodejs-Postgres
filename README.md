@@ -22,10 +22,16 @@
     * [Deletar um Projeto](#deletar-um-projeto)
     * [Buscar todos os Projetos](#buscar-todos-os-projetos)
 	* [Buscar um Projeto Especifico](#buscar-um-projeto-especifico)
-	* [Ver os Status que estão sendo utilizados](#ver-os-status-que-estão-sendo-utilizados)
-	* [Buscar todos os projetos com um determinado status](#buscar-todos-os-projetos-com-um-determinado-status)
-	* [Vincular projeto com tarefa](#vincular-projeto-com-tarefa)
-
+	* [Ver os Status que Estão Sendo Utilizados](#ver-os-status-que-estão-sendo-utilizados)
+	* [Buscar Todos os Projetos com um Determinado Status](#buscar-todos-os-projetos-com-um-determinado-status)
+	* [Vincular Projeto com Tarefa](#vincular-projeto-com-tarefa)
+* [Equipes](#equipes)
+	* [Cadastrar uma Equipe](#cadastrar-uma-equipe)
+	* [Deletar uma Equipe](#deletar-uma-equipe)
+	* [Buscar Todas as Equipes](#buscar-todas-as-equipes)
+	* [Buscar uma Equipe Específica](#buscar-uma-equipe-especifica)
+	* [Vincular Equipes com Pessoas](#vincular-equipes-com-pessoas)
+	* [Atualizar informações de Equipes](#atualizar-informações-de-equipes)
 
 # Sobre o Sistema
 - Um sistema para manter projetos, o sistema deve cadastrar projetos e equipes, um projeto possui uma equipe e deve ter tarefas dentro do projeto onde os membros da equipe podem se atribuir;
@@ -287,3 +293,171 @@ https://api-brisa-nodejs-postgresql.herokuapp.com/projetos/:id/status/:status
 Observações:
 - ":id" se refere ao código identificador do projeto
 - ":status" se refere ao novo status que será atribuido ao projeto
+
+# Equipes
+## Cadastrar uma Equipe
+Usando o método POST podemos acessar o seguinte endereço:
+
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/equipes
+```
+
+São esperadas as seguintes entradas:
+```
+{
+	"eq_nome": "",
+	"pessoas": ["João", "Marcos"]
+}
+```
+Observações:
+- Não é possível cadastrar equipes com nomes já existentes
+- No campo de "pessoas", é passado um array com os nomes das pessoas cadastradas
+
+## Deletar uma Equipe
+Para apagar uma equipe, é necessário acessar o seguinte endereço usando o método DELETE, sendo ":id" um identificador de uma equipe:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/equipes/:id
+```
+Observações:
+- Caso não seja passado um id válido ou um id de não existente, será retornado um código de erro
+
+## Buscar todas as Equipes
+Retorna todas as equipes que foram cadastradas em uma lista de objetos
+
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/equipes
+```
+```
+[
+	{
+		"eq_id": 1,
+		"eq_nome": "Equipe Alfa",
+		"pessoas": [
+			{
+				"pe_id": 12,
+				"pe_nome": "Sr. Yuri Caldeira",
+				"pe_data_nasc": "1945-07-01T00:00:00.000Z",
+				"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+				"pe_status": "Aposentado",
+				"pe_cargo": "FrontEnd Junior",
+				"pe_salario": 2525,
+				"eq_id": 1
+			},
+			{
+				"pe_id": 19,
+				"pe_nome": "Mariane Carvalho",
+				"pe_data_nasc": "2001-10-30T00:00:00.000Z",
+				"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+				"pe_status": "Ativo",
+				"pe_cargo": "BackEnd Pleno",
+				"pe_salario": 2525,
+				"eq_id": 1
+			}
+		],
+		"projetos": [
+			{
+				"pr_id": 1,
+				"pr_nome": "Gp2111",
+				"pr_descricao": "O Gp é...",
+				"pr_status": "Em Andamento",
+				"pr_data_criacao": "2022-03-20T00:00:00.000Z",
+				"pr_data_finalizacao": null,
+				"eq_id": 1
+			},
+			{
+				"pr_id": 66,
+				"pr_nome": "drctfvbyguhnjimok,ojhygt",
+				"pr_descricao": "ftygbuhnji",
+				"pr_status": "Ativo",
+				"pr_data_criacao": "2022-08-09T00:00:00.000Z",
+				"pr_data_finalizacao": null,
+				"eq_id": 1
+			}
+		]
+	},
+	{
+		"eq_id": 2,
+		"eq_nome": "Equipe Beta",
+		"pessoas": [
+			{
+				"pe_id": 3,
+				"pe_nome": "Ana Almeida",
+				"pe_data_nasc": "2000-05-12T00:00:00.000Z",
+				"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+				"pe_status": "Desativado",
+				"pe_cargo": "FrontEnd Junior",
+				"pe_salario": 2525,
+				"eq_id": 2
+			},
+			{
+				"pe_id": 10,
+				"pe_nome": "Ana Luiza da Conceição",
+				"pe_data_nasc": "2003-10-30T00:00:00.000Z",
+				"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+				"pe_status": "Ativo",
+				"pe_cargo": "FrontEnd Pleno",
+				"pe_salario": 2525,
+				"eq_id": 2
+			}
+		],
+		"projetos": [
+			{
+				"pr_id": 1,
+				"pr_nome": "Gp2111",
+				"pr_descricao": "O Gp é...",
+				"pr_status": "Em Andamento",
+				"pr_data_criacao": "2022-03-20T00:00:00.000Z",
+				"pr_data_finalizacao": null,
+				"eq_id": 2
+			},
+			{
+				"pr_id": 66,
+				"pr_nome": "drctfvbyguhnjimok,ojhygt",
+				"pr_descricao": "ftygbuhnji",
+				"pr_status": "Ativo",
+				"pr_data_criacao": "2022-08-09T00:00:00.000Z",
+				"pr_data_finalizacao": null,
+				"eq_id": 2
+			}
+		]
+	}
+]
+```
+
+## Buscar uma Equipe Especifica
+Acessar a seguinte rota usando o método GET:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/equipes/:id
+```
+
+Retorno Esperado:
+```
+{
+	"eq_id": 1,
+	"eq_nome": "Equipe Alfa"
+}
+```
+
+## Vincular Equipes com Pessoas
+Usando o método POST, podemos acessar o seguinte endereço:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/equipes/:eq/pessoas/:pe
+```
+Observações:
+- ":eq" se refere ao código identificador da equipe
+- ":pe" se refere ao código identificador da pessoa
+
+## Atualizar Informações de Equipes
+Usando o método PUT, podemos acessar o seguinte endereço:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/projetos/:id
+```
+Observações:
+- ":id" se refere ao código identificador do projeto
+
+É necessario passar os seguintes campos:
+```
+{
+	"eq_nome": ""
+}
+```
