@@ -3,14 +3,13 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const routes = require('../src/routes')
 
-require('dotenv').config()
-
 const host = '0.0.0.0';
 const port = process.env.PORT || 8000;
 
 const app = express()
 
-app.use(bodyParser.urlencoded({extended: false}))
+
+app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.json())
 app.use(cors())
 app.use(routes)
