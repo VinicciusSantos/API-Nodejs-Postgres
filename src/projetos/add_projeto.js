@@ -6,6 +6,11 @@ var cliente = require('../../cmd/database/connection.js')
 projetos.post('/projetos', async (req, res) => { 
     const body = req.body
 
+    if (body.pr_nome === "" || !body.pr_nome) {
+        return res.status(400).json('Nome Inválido')
+    }
+    
+
     // recebendo a quantidadde de projetos que tem o mesmo nome do que foi passado no body pra fazer as validações
     const count = await cliente
                                 .query('SELECT pr_nome from projetos where pr_nome ilike $1', [body.pr_nome])

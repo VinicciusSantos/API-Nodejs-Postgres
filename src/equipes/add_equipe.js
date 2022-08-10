@@ -6,6 +6,10 @@ var cliente = require('../../cmd/database/connection.js')
 equipes.post('/equipes', async (req, res) => { 
     const body = req.body
 
+    if (body.eq_nome === "" || !body.eq_nome) {
+        return res.status(400).json('Nome Inválido')
+    }
+
     // cadastrando a equipe
     cliente.query('INSERT INTO equipes (eq_nome) values ($1)', [body.eq_nome])
 
