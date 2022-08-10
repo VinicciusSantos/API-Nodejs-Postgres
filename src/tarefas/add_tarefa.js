@@ -6,6 +6,10 @@ var cliente = require('../../cmd/database/connection.js')
 tarefas.post('/tarefas', async (req, res) => { 
     const body = req.body
 
+    if (body.tr_nome === "" || !body.tr_nome) {
+        return res.status(400).json('Nome Inválido')
+    }
+
     // recebendo a quantidadde de tarefas que tem o mesmo nome do que foi passado no body pra fazer as validações
     const count = await cliente.query('SELECT count(*) from tarefas where tr_nome ilike $1', [body.tr_nome])
     
