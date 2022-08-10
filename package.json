@@ -4,7 +4,7 @@
   "description": "Primeira API",
   "main": "cmd/server.js",
   "scripts": {
-    "start": "nodemon cmd/server.js"
+    "start": "node cmd/server.js"
   },
   "author": "",
   "license": "ISC",
