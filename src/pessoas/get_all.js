@@ -6,9 +6,9 @@ var cliente = require("../../cmd/database/connection.js");
 pessoas.get("/pessoas", (req, res) => {
     cliente
         .query(
-            `SELECT pe.pe_id, pe.pe_nome, pe.pe_cargo, pe.pe_salario, pe.pe_data_nasc, pe.pe_status
-                FROM pessoas AS pe              
-                ORDER BY pe_id`
+            `SELECT pe.*
+            FROM pessoas AS pe              
+            ORDER BY pe_id`
         )
         .then((results) => {
             return res.json(results.rows);
