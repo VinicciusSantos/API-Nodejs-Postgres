@@ -38,12 +38,12 @@
 	* [Buscar Todas as Pessoas](#buscar-todas-as-pessoas)
 	* [Buscar uma Pessoa Específica](#buscar-uma-pessoa-especifica)
 	* [Atualizar informações de Pessoa](#atualizar-informações-de-pessoa)
-	* [Buscar todas as Profissões](#buscar-todas-as-profissoes)
-	* [Buscar Pessoas pela Profissão](#buscar-pessoas-pela-profissao)
+	* [Buscar todas as Profissões](#buscar-todas-as-profissões)
+	* [Buscar Pessoas pela Profissão](#buscar-pessoas-pela-profissão)
 	* [Buscar todos os Status](#buscar-todos-os-status)
 	* [Buscar Pessoas pelo Status](#buscar-pessoas-pelo-status)
-	* [Mudar o status de uma pessoa](#mudar-status-de-uma-pessoa)
-	* [Vincular Pessoas com Tarefas](#vincular-pessoa-com-tarefa)
+	* [Mudar o status de uma pessoa](#mudar-o-status-de-uma-pessoa)
+	* [Vincular Pessoa com Tarefa](#vincular-pessoa-com-tarefa)
 
 # Sobre o Sistema
 - Um sistema para manter projetos, o sistema deve cadastrar projetos e equipes, um projeto possui uma equipe e deve ter tarefas dentro do projeto onde os membros da equipe podem se atribuir;
@@ -534,7 +534,7 @@ Retorno esperado: Uma lista de objetos
 ]
 ```
 
-## Buscar uma Pessoa Específica
+## Buscar uma Pessoa Especifica
 Usando o método GET podemos acessar o seguinte endereço:
 ```
 https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id
@@ -596,31 +596,124 @@ https://api-brisa-nodejs-postgresql.herokuapp.com/cargos/:cargo
 Observações:
 - ":cargo" se refere a um nome de uma profissão
 
-Retorno Esperado:
+Retorno Esperado: Lista de Pessoas
 ```
-
+[
+	{
+		"pe_id": 4,
+		"pe_nome": "Maria Vitória Novaes",
+		"pe_data_nasc": "1999-07-10T00:00:00.000Z",
+		"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+		"pe_status": "Ativo",
+		"pe_cargo": "BackEnd Junior",
+		"pe_salario": 2525,
+		"pe_foto": null
+	},
+	{
+		"pe_id": 5,
+		"pe_nome": "Otávio Rodrigues",
+		"pe_data_nasc": "2000-08-01T00:00:00.000Z",
+		"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+		"pe_status": "Ativo",
+		"pe_cargo": "BackEnd Junior",
+		"pe_salario": 2525,
+		"pe_foto": null
+	},
+	{
+		"pe_id": 21,
+		"pe_nome": "Pedro Miguel",
+		"pe_data_nasc": "2003-02-12T00:00:00.000Z",
+		"pe_data_cadastro": "2022-08-04T00:00:00.000Z",
+		"pe_status": "Não Iniciado",
+		"pe_cargo": "BackEnd Junior",
+		"pe_salario": 2500,
+		"pe_foto": null
+	}
+]
 ```
 
 ## Buscar todos os Status
 Usando o método GET podemos acessar o seguinte endereço:
 ```
-https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id
+https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/status
+```
+Retorno Esperado: Lista de Objetos com os status e com a quantidade de pessoas com esse status
+```
+[
+	{
+		"pe_status": "Não Iniciado",
+		"count": "33"
+	},
+	{
+		"pe_status": "Ativo",
+		"count": "14"
+	},
+	{
+		"pe_status": "Aposentado",
+		"count": "1"
+	},
+	{
+		"pe_status": "Desativado",
+		"count": "5"
+	}
+]
 ```
 
 ## Buscar Pessoas pelo Status
 Usando o método GET podemos acessar o seguinte endereço:
 ```
-https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id
+https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/status/:status
+```
+Retorno Esperado:
+```
+[
+	{
+		"pe_id": 3,
+		"pe_nome": "Ana Almeida",
+		"pe_data_nasc": "2000-05-12T00:00:00.000Z",
+		"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+		"pe_status": "Desativado",
+		"pe_cargo": "FrontEnd Junior",
+		"pe_salario": 2525,
+		"pe_foto": null
+	},
+	{
+		"pe_id": 6,
+		"pe_nome": "Sr. Ryan Silveira",
+		"pe_data_nasc": "1996-10-22T00:00:00.000Z",
+		"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+		"pe_status": "Desativado",
+		"pe_cargo": "FrontEnd Junior",
+		"pe_salario": 2525,
+		"pe_foto": null
+	},
+	{
+		"pe_id": 8,
+		"pe_nome": "Isis das Neves",
+		"pe_data_nasc": "2002-08-10T00:00:00.000Z",
+		"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+		"pe_status": "Desativado",
+		"pe_cargo": "FrontEnd Junior",
+		"pe_salario": 2525,
+		"pe_foto": null
+	}
+]
 ```
 
 ## Mudar o status de uma pessoa
-Usando o método GET podemos acessar o seguinte endereço:
+Usando o método PUT podemos acessar o seguinte endereço:
 ```
-https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id
+https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id/status/:status
 ```
+Observações:
+- ":id" se refere ao código identificador da pessoa
+- ":status" se refere ao novo status que a pessoa vai receber
 
-## Vincular Pessoas com Tarefas
-Usando o método GET podemos acessar o seguinte endereço:
+## Vincular Pessoa com Tarefa
+Usando o método POST podemos acessar o seguinte endereço:
 ```
-https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id
+https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id_pessoa/tarefas/:id_tarefa
 ```
+Observações:
+- ":id_pessoa" se refere ao código identificador da pessoa
+- ":id_tarefa" se refere ao código identificador da tarefa
