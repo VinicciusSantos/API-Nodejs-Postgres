@@ -18,46 +18,20 @@
 * [Sobre o Sistema](#sobre-o-sistema)
 * [Funcionalidades](#funcionalidades)
 * [Projetos](#projetos)
-    * [Exibir Todos os Projetos](#exibir-todos-os-projetos)
-    * [Exibir Projeto Específico](#exibir-projeto-especifico)
-    * [Exibir Projeto Específico](#exibir-projeto-especifico)
-    * [Exibir Pessoas de um Projeto](#exibir-pessoas-de-um-projeto)
-    * [Exibir Tarefas de um Projeto](#exibir-tarefas-de-um-projeto)
-    * [Exibir Equipes de um Projeto](#exibir-equipes-de-um-projeto)
-    * [Exibir Status dos Projetos](#exibir-status-dos-projetos)
-    * [Exibir Projetos com um Status Específico](#exibir-projetos-com-um-status-especifico)
-    * [Cadastrar Projeto](#cadastrar-projeto)
-    * [Editar Projeto](#editar-projeto)
-    * [Deletar Projeto](#deletar-projeto)
+    * [Cadastrar um Projeto](#cadastrar-um-projeto)
+    * [Deletar um Projeto](#deletar-um-projeto)
+    * [Buscar todos os Projetos](#buscar-todos-os-projetos)
+	* [Buscar um Projeto Especifico](#buscar-um-projeto-especifico)
+	* [Ver os Status que Estão Sendo Utilizados](#ver-os-status-que-estão-sendo-utilizados)
+	* [Buscar Todos os Projetos com um Determinado Status](#buscar-todos-os-projetos-com-um-determinado-status)
+	* [Vincular Projeto com Tarefa](#vincular-projeto-com-tarefa)
 * [Equipes](#equipes)
-    * [Exibir Todas as Equipes](#exibir-todas-as-equipes)
-    * [Exibir Equipe Específica](#exibir-equipe-especifica)
-    * [Exibir Pessoas de uma Equipe](#exibir-pessoas-de-uma-equipe)
-    * [Exibir Tarefas de uma Equipe](#exibir-tarefas-de-uma-equipe)
-    * [Cadastrar Equipe](#cadastrar-equipe)
-    * [Editar Equipe](#editar-equipe)
-    * [Deletar Equipe](#deletar-equipe)
-* [Pessoas](#pessoas)
-    * [Exibir Todas as Pessoas](#exibir-todas-as-pessoas)
-    * [Exibir Pessoas Específica](#exibir-pessoa-especifica)
-    * [Exibir Tarefa de uma Pessoa](#exibir-tarefa-de-uma-pessoa)
-    * [Exibir Status das Pessoas](#exibir-status-das-pessoas)
-    * [Exibir Pessoas com um Status Específico](#exibir-pessoas-com-um-status-especifico)
-    * [Cadastrar Pessoa](#cadastrar-pessoa)
-    * [Editar Pessoa](#editar-pessoa)
-    * [Deletar Pessoa](#deletar-pessoa)
-* [Tarefas](#tarefas)
-    * [Exibir Todas as Tarefas](#exibir-todas-as-tarefas)
-    * [Exibir Tarefa Específica](#exibir-tarefa-especifica)
-    * [Exibir Pessoas com a mesma Tarefa](#exibir-pessoas-com-a-mesma-tarefa)
-    * [Exibir Status das Tarefas](#exibir-status-das-tarefas)
-    * [Exibir Tarefas com um Status Específico](#exibir-tarefas-com-um-status-especifico)
-    * [Cadastrar Tarefa](#cadastrar-tarefa)
-    * [Editar Tarefa](#editar-tarefa)
-    * [Deletar Tarefa](#deletar-tarefa)
-* [Modelagem do Banco](#modelagem-do-banco)
-* [Relacionamento dos Elementos](#relacionamento-dos-elementos)
-* [Avisos](#avisos)
+	* [Cadastrar uma Equipe](#cadastrar-uma-equipe)
+	* [Deletar uma Equipe](#deletar-uma-equipe)
+	* [Buscar Todas as Equipes](#buscar-todas-as-equipes)
+	* [Buscar uma Equipe Específica](#buscar-uma-equipe-especifica)
+	* [Vincular Equipes com Pessoas](#vincular-equipes-com-pessoas)
+	* [Atualizar informações de Equipes](#atualizar-informações-de-equipes)
 
 # Sobre o Sistema
 - Um sistema para manter projetos, o sistema deve cadastrar projetos e equipes, um projeto possui uma equipe e deve ter tarefas dentro do projeto onde os membros da equipe podem se atribuir;
@@ -75,309 +49,415 @@
 
 
 #  Projetos
-<p>- Cada Projeto possui um ID e um Nome.<p>
-<p>- Em um projeto, podemos ter várias equipes trabalhando</p>
-
-## Exibir Todos os Projetos
-<p>- Usando o método GET podemos acessar o seguinte endereço:</p>
+## Cadastrar um Projeto
+Usando o método POST podemos acessar o seguinte endereço:
 
 ```
 https://api-brisa-nodejs-postgresql.herokuapp.com/projetos
 ```
 
-## Exibir Projeto Especifico
-<p>- Para Buscar algum elemento individualmente, precisamos usar o ID dele.</p>
-<p>- Usando o método GET podemos acessar o seguinte endereço:</p>
+São esperadas as seguintes entradas:
+```
+{
+		"pr_nome": "",
+		"pr_descricao": "",
+		"equipes": ["Equipe 1", "Equipe2"]
+}
+```
+Observações:
+- Não é possível cadastrar projetos com nomes já existentes
+- No campo de "equipes", é passado um array com os nomes das equipes cadastradas
 
+## Deletar um Projeto
+Para apagar um projeto, é necessário acessar o seguinte endereço usando o método DELETE, sendo ":id" um identificador de um projeto:
 ```
 https://api-brisa-nodejs-postgresql.herokuapp.com/projetos/:id
 ```
+Observações:
+- Caso não seja passado um id válido ou um id de não existente, será retornado um código de erro
 
-## Exibir Pessoas de um Projeto
-<p>- Para Buscar algum elemento individualmente, precisamos usar o ID dele.</p>
-<p>- Usando o método GET podemos acessar o seguinte endereço:</p>
-
-```
-https://api-brisa-nodejs-postgresql.herokuapp.com/projetos/:id/pessoas
-```
-
-## Exibir Tarefas de um Projeto
-<p>- Para Buscar algum elemento individualmente, precisamos usar o ID dele.</p>
-<p>- Usando o método GET podemos acessar o seguinte endereço:</p>
+## Buscar todos os Projetos
+Retorna todos os projetos que foram cadastrados em uma lista de objetos
 
 ```
-https://api-brisa-nodejs-postgresql.herokuapp.com/projetos/:id/tarefas
+https://api-brisa-nodejs-postgresql.herokuapp.com/projetos
+```
+```
+[
+	{
+		"pr_id": 1,
+		"pr_nome": "Projeto1",
+		"pr_descricao": "O Projeto 1 tem como finalidade...",
+		"pr_status": "Em Andamento",
+		"pr_data_criacao": "2022-03-20T00:00:00.000Z",
+		"pr_data_finalizacao": null
+	},
+	{
+		"pr_id": 2,
+		"pr_nome": "Projeto2",
+		"pr_descricao": Um Projeto para...",
+		"pr_status": "Em Andamento",
+		"pr_data_criacao": "2022-02-12T00:00:00.000Z",
+		"pr_data_finalizacao": null
+	}
+]
 ```
 
-## Exibir Equipes de um Projeto
-<p>- Para Buscar algum elemento individualmente, precisamos usar o ID dele.</p>
-<p>- Usando o método GET podemos acessar o seguinte endereço:</p>
-
+## Buscar um Projeto Especifico:
+Acessar a seguinte rota usando o método GET:
 ```
-https://api-brisa-nodejs-postgresql.herokuapp.com/projetos/:id/equipes
+https://api-brisa-nodejs-postgresql.herokuapp.com/projetos/:id
+```
+O retorno esperado é um objeto com as seguintes informações:
+- Dados (infomações básicas);
+- Equipes (Lista de equipes com as pessoas delas)
+- Tarefas (Lista de tarefas divididas em: Não Iniciadas, Em Desenvolvimento, em Testes, Concluidas)
+```
+{
+	"dados": {
+		"pr_id": 1,
+		"pr_nome": "Projeto 1",
+		"pr_descricao": "O Gp é...",
+		"pr_status": "Em Andamento",
+		"pr_data_criacao": "2022-03-20T00:00:00.000Z",
+		"pr_data_finalizacao": null
+	},
+	"equipes": [
+		{
+			"eq_id": 1,
+			"eq_nome": "Equipe Alfa",
+			"pessoas": [
+				{
+					"pe_id": 1,
+					"pe_nome": "Priscila Fernandes Rosado",
+					"pe_cargo": "FrontEnd Junior",
+					"pe_salario": 2525,
+					"eq_nome": "Equipe Alfa",
+					"eq_id": 1
+				},
+				{
+					"pe_id": 12,
+					"pe_nome": "Sr. Yuri Caldeira",
+					"pe_cargo": "FrontEnd Junior",
+					"pe_salario": 2525,
+					"eq_nome": "Equipe Alfa",
+					"eq_id": 1
+				}
+			]
+		},
+		{
+			"eq_id": 2,
+			"eq_nome": "Equipe Beta",
+			"pessoas": [
+				{
+					"pe_id": 3,
+					"pe_nome": "Ana Almeida",
+					"pe_cargo": "FrontEnd Junior",
+					"pe_salario": 2525,
+					"eq_nome": "Equipe Beta",
+					"eq_id": 2
+				}
+			]
+		}
+	],
+	"tarefas": {
+		"NaoIniciadas": [
+			{
+				"tr_id": 44,
+				"tr_nome": "Vender Limão",
+				"tr_descricao": "comercio de limões",
+				"tr_data_criacao": "2022-08-09T00:00:00.000Z",
+				"tr_status": "Não Iniciado",
+				"tr_data_finalizacao": null,
+				"tr_prioridade": 1
+			},
+			{
+				"tr_id": 56,
+				"tr_nome": "Vende Kiwi",
+				"tr_descricao": "vender frutas",
+				"tr_data_criacao": "2022-08-09T00:00:00.000Z",
+				"tr_status": "Não Iniciado",
+				"tr_data_finalizacao": null,
+				"tr_prioridade": 1
+			}
+		],
+		"EmDesenvolvimento": [
+			{
+				"tr_id": 33,
+				"tr_nome": "Comprar Biscoito",
+				"tr_descricao": "asdfasdfsadfa",
+				"tr_data_criacao": "2022-08-09T00:00:00.000Z",
+				"tr_status": "Em Desenvolvimento",
+				"tr_data_finalizacao": null,
+				"tr_prioridade": 1
+			},
+			{
+				"tr_id": 49,
+				"tr_nome": "AB",
+				"tr_descricao": "dsaddada",
+				"tr_data_criacao": "2022-08-09T00:00:00.000Z",
+				"tr_status": "Em Desenvolvimento",
+				"tr_data_finalizacao": null,
+				"tr_prioridade": 2
+			}
+		],
+		"Testes": [
+			{
+				"tr_id": 6,
+				"tr_nome": "Fazer pesquisa de anterioridade",
+				"tr_descricao": "A busca de anterioridade pode ser definida...",
+				"tr_data_criacao": "2022-04-20T00:00:00.000Z",
+				"tr_status": "Em Testes",
+				"tr_data_finalizacao": null,
+				"tr_prioridade": 3
+			}
+		],
+		"Concluidas": [
+			{
+				"tr_id": 5,
+				"tr_nome": "Gravar o Pitch",
+				"tr_descricao": "O pitch é uma apresentação sumária...",
+				"tr_data_criacao": "2022-03-25T00:00:00.000Z",
+				"tr_status": "Concluido",
+				"tr_data_finalizacao": "2022-08-09T00:00:00.000Z",
+				"tr_prioridade": 3
+			}
+		]
+	}
+}
+```
+## Ver os Status que estão sendo utilizados
+Usando o método GET, podemos acessar o seguinte endereço:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/projetos/status
+```
+retorno esperado: Lista de status e quantidade de projetos com seu respectiva categoria
+```
+[
+	{
+		"pr_status": "Ativo",
+		"count": "19"
+	},
+	{
+		"pr_status": "Concluido",
+		"count": "1"
+	},
+	{
+		"pr_status": "Em Andamento",
+		"count": "4"
+	}
+]
 ```
 
-## Exibir Status dos Projetos
-<p>- Para Buscar algum elemento individualmente, precisamos usar o ID dele.</p>
-<p>- Usando o método GET podemos acessar o seguinte endereço:</p>
-
-```
-https://api-brisa-nodejs-postgresql.herokuapp.com/projetos/status/
-```
-
-## Exibir Projetos com um Status Especifico
-<p>- Para Buscar algum elemento individualmente, precisamos usar o ID dele.</p>
-<p>- Usando o método GET podemos acessar o seguinte endereço:</p>
-
+## Buscar todos os projetos com um determinado status
+Usando o método GET, podemos acessar o seguinte endereço:
 ```
 https://api-brisa-nodejs-postgresql.herokuapp.com/projetos/status/:status
 ```
+Observações:
+- ":status" deve ser substituido pelo status que deve ser pesquisado
+- O retorno esperado é uma lista de objetos
+- Caso não tenha nenhum projeto com o status pesquisado, será retornado apenas um array vazio
 
-## Cadastrar Projeto
-<p>Um projeto tem os seguintes campos:
-<ul>
-  <li>pr_nome</li>
-  <li>pr_descricao</li>
-</ul>
-<p>- Usando o método POST podemos acessar o seguinte endereço e cadastrar um elemento:</p>
 
+## Vincular projeto com tarefa
+Usando o método POST, podemos acessar o seguinte endereço:
 ```
-https://api-brisa-nodejs-postgresql.herokuapp.com/projetos
+https://api-brisa-nodejs-postgresql.herokuapp.com/projetos/:pr/tarefas/:tr
 ```
+Observações:
+- ":pr" se refere ao código identificador do projeto
+- ":tr" se refere ao código identificador da tarefa
 
-## Editar Projeto
-<p>- Para editar um projeto, precisamos usar o ID dele</p>
-<p>- Usando o método PUT podemos acessar o seguinte endereço:</p>
-
-```
-https://api-brisa-nodejs-postgresql.herokuapp.com/projetos/:id
-```
-
-## Deletar Projeto
-<p>- Para deletar um projeto, precisamos usar o ID dele</p>
-<p>- Usando o método DELETE podemos acessar o seguinte endereço:</p>
-
+## Atualizar Informações de um Projeto
+Usando o método PUT, podemos acessar o seguinte endereço:
 ```
 https://api-brisa-nodejs-postgresql.herokuapp.com/projetos/:id
 ```
+Observações:
+- ":id" se refere ao código identificador do projeto
 
+É necessario passar os seguintes campos:
+```
+{
+	"pr_nome": "",
+	"pr_descricao": ""
+}
+```
+
+## Atualizar status de um Projeto
+Usando o método PUT, podemos acessar o seguinte endereço:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/projetos/:id/status/:status
+```
+Observações:
+- ":id" se refere ao código identificador do projeto
+- ":status" se refere ao novo status que será atribuido ao projeto
 
 # Equipes
-## Exibir todas as Equipes
-<p>- Usando o método GET podemos acessar o seguinte endereço:</p>
+## Cadastrar uma Equipe
+Usando o método POST podemos acessar o seguinte endereço:
 
 ```
 https://api-brisa-nodejs-postgresql.herokuapp.com/equipes
 ```
 
-## Exibir Equipe Especifica
-<p>- Para Buscar algum elemento individualmente, precisamos usar o ID dele.</p>
-<p>- Usando o método GET podemos acessar o seguinte endereço:</p>
+São esperadas as seguintes entradas:
+```
+{
+	"eq_nome": "",
+	"pessoas": ["João", "Marcos"]
+}
+```
+Observações:
+- Não é possível cadastrar equipes com nomes já existentes
+- No campo de "pessoas", é passado um array com os nomes das pessoas cadastradas
 
+## Deletar uma Equipe
+Para apagar uma equipe, é necessário acessar o seguinte endereço usando o método DELETE, sendo ":id" um identificador de uma equipe:
 ```
 https://api-brisa-nodejs-postgresql.herokuapp.com/equipes/:id
 ```
+Observações:
+- Caso não seja passado um id válido ou um id de não existente, será retornado um código de erro
 
-## Exibir Pessoas de uma Equipe
-<p>- Para Buscar algum elemento individualmente, precisamos usar o ID dele.</p>
-<p>- Usando o método GET podemos acessar o seguinte endereço:</p>
-
-```
-https://api-brisa-nodejs-postgresql.herokuapp.com/equipes/:id/pessoas
-```
-
-## Exibir Tarefas de uma Equipe
-<p>- Para Buscar algum elemento individualmente, precisamos usar o ID dele.</p>
-<p>- Usando o método GET podemos acessar o seguinte endereço:</p>
-
-```
-https://api-brisa-nodejs-postgresql.herokuapp.com/equipes/:id/tarefas
-```
-
-## Cadastrar Equipe
-<p>Uma equipe tem os seguintes campos:
-<ul>
-  <li>eq_nome</li>
-  <li>fk_lider</li>
-</ul>
-<p>- Usando o método POST podemos acessar o seguinte endereço e cadastrar um elemento:</p>
+## Buscar todas as Equipes
+Retorna todas as equipes que foram cadastradas em uma lista de objetos
 
 ```
 https://api-brisa-nodejs-postgresql.herokuapp.com/equipes
 ```
+```
+[
+	{
+		"eq_id": 1,
+		"eq_nome": "Equipe Alfa",
+		"pessoas": [
+			{
+				"pe_id": 12,
+				"pe_nome": "Sr. Yuri Caldeira",
+				"pe_data_nasc": "1945-07-01T00:00:00.000Z",
+				"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+				"pe_status": "Aposentado",
+				"pe_cargo": "FrontEnd Junior",
+				"pe_salario": 2525,
+				"eq_id": 1
+			},
+			{
+				"pe_id": 19,
+				"pe_nome": "Mariane Carvalho",
+				"pe_data_nasc": "2001-10-30T00:00:00.000Z",
+				"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+				"pe_status": "Ativo",
+				"pe_cargo": "BackEnd Pleno",
+				"pe_salario": 2525,
+				"eq_id": 1
+			}
+		],
+		"projetos": [
+			{
+				"pr_id": 1,
+				"pr_nome": "Gp2111",
+				"pr_descricao": "O Gp é...",
+				"pr_status": "Em Andamento",
+				"pr_data_criacao": "2022-03-20T00:00:00.000Z",
+				"pr_data_finalizacao": null,
+				"eq_id": 1
+			},
+			{
+				"pr_id": 66,
+				"pr_nome": "drctfvbyguhnjimok,ojhygt",
+				"pr_descricao": "ftygbuhnji",
+				"pr_status": "Ativo",
+				"pr_data_criacao": "2022-08-09T00:00:00.000Z",
+				"pr_data_finalizacao": null,
+				"eq_id": 1
+			}
+		]
+	},
+	{
+		"eq_id": 2,
+		"eq_nome": "Equipe Beta",
+		"pessoas": [
+			{
+				"pe_id": 3,
+				"pe_nome": "Ana Almeida",
+				"pe_data_nasc": "2000-05-12T00:00:00.000Z",
+				"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+				"pe_status": "Desativado",
+				"pe_cargo": "FrontEnd Junior",
+				"pe_salario": 2525,
+				"eq_id": 2
+			},
+			{
+				"pe_id": 10,
+				"pe_nome": "Ana Luiza da Conceição",
+				"pe_data_nasc": "2003-10-30T00:00:00.000Z",
+				"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+				"pe_status": "Ativo",
+				"pe_cargo": "FrontEnd Pleno",
+				"pe_salario": 2525,
+				"eq_id": 2
+			}
+		],
+		"projetos": [
+			{
+				"pr_id": 1,
+				"pr_nome": "Gp2111",
+				"pr_descricao": "O Gp é...",
+				"pr_status": "Em Andamento",
+				"pr_data_criacao": "2022-03-20T00:00:00.000Z",
+				"pr_data_finalizacao": null,
+				"eq_id": 2
+			},
+			{
+				"pr_id": 66,
+				"pr_nome": "drctfvbyguhnjimok,ojhygt",
+				"pr_descricao": "ftygbuhnji",
+				"pr_status": "Ativo",
+				"pr_data_criacao": "2022-08-09T00:00:00.000Z",
+				"pr_data_finalizacao": null,
+				"eq_id": 2
+			}
+		]
+	}
+]
+```
 
-## Editar Equipe
-<p>- Para editar uma equipe, precisamos usar o ID dela</p>
-<p>- Usando o método PUT podemos acessar o seguinte endereço:</p>
-
+## Buscar uma Equipe Especifica
+Acessar a seguinte rota usando o método GET:
 ```
 https://api-brisa-nodejs-postgresql.herokuapp.com/equipes/:id
 ```
 
-## Deletar Equipe
-<p>- Para deletar uma Equipe, precisamos usar o ID dela</p>
-<p>- Usando o método DELETE podemos acessar o seguinte endereço:</p>
-
+Retorno Esperado:
 ```
-https://api-brisa-nodejs-postgresql.herokuapp.com/equipes/:id
-```
-
-# Pessoas
-## Exibir todas as Pessoas
-<p>- Usando o método GET podemos acessar o seguinte endereço:</p>
-
-```
-https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas
+{
+	"eq_id": 1,
+	"eq_nome": "Equipe Alfa"
+}
 ```
 
-## Exibir Pessoa Especifica
-<p>- Para Buscar algum elemento individualmente, precisamos usar o ID dele.</p>
-<p>- Usando o método GET podemos acessar o seguinte endereço:</p>
-
+## Vincular Equipes com Pessoas
+Usando o método POST, podemos acessar o seguinte endereço:
 ```
-https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id
+https://api-brisa-nodejs-postgresql.herokuapp.com/equipes/:eq/pessoas/:pe
 ```
+Observações:
+- ":eq" se refere ao código identificador da equipe
+- ":pe" se refere ao código identificador da pessoa
 
-## Exibir Tarefa de uma Pessoa
-<p>- Para Buscar algum elemento individualmente, precisamos usar o ID dele.</p>
-<p>- Usando o método GET podemos acessar o seguinte endereço:</p>
-
+## Atualizar Informações de Equipes
+Usando o método PUT, podemos acessar o seguinte endereço:
 ```
-https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id/tarefas
+https://api-brisa-nodejs-postgresql.herokuapp.com/projetos/:id
 ```
+Observações:
+- ":id" se refere ao código identificador do projeto
 
-## Exibir Status das Pessoas
-<p>- Para Buscar algum elemento individualmente, precisamos usar o ID dele.</p>
-<p>- Usando o método GET podemos acessar o seguinte endereço:</p>
-
+É necessario passar os seguintes campos:
 ```
-https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/status/
+{
+	"eq_nome": ""
+}
 ```
-
-## Exibir Pessoas com um Status Especifico
-<p>- Para Buscar algum elemento individualmente, precisamos usar o ID dele.</p>
-<p>- Usando o método GET podemos acessar o seguinte endereço:</p>
-
-```
-https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/status/:status
-```
-
-## Cadastrar Pessoa
-<p>Uma Pessoa tem os seguintes campos:
-<ul>
-  <li>pe_nome</li>
-  <li>pe_fk_cargo</li>
-  <li>pe_data_nasc</li>
-</ul>
-<p>- Usando o método POST podemos acessar o seguinte endereço e cadastrar um elemento:</p>
-
-```
-https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas
-```
-
-## Editar Pessoa
-<p>- Para editar uma pessoa, precisamos usar o ID dela</p>
-<p>- Usando o método PUT podemos acessar o seguinte endereço:</p>
-
-```
-https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id
-```
-
-<h2>Deletar Pessoa</h2>
-<p>- Para deletar uma pessoa, precisamos usar o ID dela</p>
-<p>- Usando o método DELETE podemos acessar o seguinte endereço:</p>
-
-```
-https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id
-```
-
-# Tarefas
-## Exibir todas as Tarefas
-<p>- Usando o método GET podemos acessar o seguinte endereço:</p>
-
-```
-https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas
-```
-
-## Exibir Tarefa Especifica
-<p>- Para Buscar algum elemento individualmente, precisamos usar o ID dele.</p>
-<p>- Usando o método GET podemos acessar o seguinte endereço:</p>
-
-```
-https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/:id
-```
-
-## Exibir Pessoas com a mesma Tarefa
-<p>- Para Buscar algum elemento individualmente, precisamos usar o ID dele.</p>
-<p>- Usando o método GET podemos acessar o seguinte endereço:</p>
-
-```
-https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/:id/pessoas
-```
-
-## Exibir Status das Tarefas
-<p>- Para Buscar algum elemento individualmente, precisamos usar o ID dele.</p>
-<p>- Usando o método GET podemos acessar o seguinte endereço:</p>
-
-```
-https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/status/
-```
-
-## Exibir Tarefas com um Status Especifico
-<p>- Para Buscar algum elemento individualmente, precisamos usar o ID dele.</p>
-<p>- Usando o método GET podemos acessar o seguinte endereço:</p>
-
-```
-https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/tarefas/:status
-```
-
-## Cadastrar Tarefa
-<p>Uma Tarefa tem os seguintes campos:
-<ul>
-  <li>tr_nome</li>
-  <li>tr_descricao</li>
-</ul>
-<p>- Usando o método POST podemos acessar o seguinte endereço e cadastrar um elemento:</p>
-
-```
-https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas
-```
-
-## Editar Tarefa
-<p>- Para editar uma Tarefa, precisamos usar o ID dela</p>
-<p>- Usando o método PUT podemos acessar o seguinte endereço:</p>
-
-```
-https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/:id
-```
-
-## Deletar Tarefa
-<p>- Para deletar uma tarefa, precisamos usar o ID dela</p>
-<p>- Usando o método DELETE podemos acessar o seguinte endereço:</p>
-
-```
-https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/:id
-```
-
-<br>
-
-# Modelagem do Banco
-
-<div align="center">
-  <img src="server/data/Modelo_Lógico.png" width="80%">
-</div>
-
-# Relacionamento dos Elementos
-
-<p>Sabendo da estrutura dos elementos, podemos chegar às seguintes conclusões:</p>
-<ul>
-  <li>Várias pessoas podem ter a mesma tarefa, e uma pessoa pode ter várias tarefas</li>
-  <li>Uma equipe pode ter várias pessoas, e uma pessoa pode estar em várias equipes</li>
-  <li>Um Projeto pode ter várias equipes, e uma equipe estar em vários projeto</li>
-  <li>Dentro de uma equipe, as pessoas podem ter tarefas diferentes</li>
-</ul>
-
-# Avisos
-  - Caso seja digitado um ID inexistente, será retornado "Id não encontrado";
-  - O tratamento de erros ainda está em andamento.
-  - O Arquivo "insomnia_data.json" possui um ambiente do [Insomnia](https://insomnia.rest) com todas as rotas
