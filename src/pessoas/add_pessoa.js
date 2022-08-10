@@ -4,7 +4,7 @@ var cliente = require("../../cmd/database/connection.js");
 const multer = require('multer');
 
 var pe_foto = ""
-// Configuração de armazenamento
+// Configuração de armazenamento das fotos de perfil
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/')
@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
         // Extração da extensão do arquivo original:
         const extensaoArquivo = file.originalname.split('.')[1];
 
-        // Cria um código randômico que será o nome do arquivo
+        // Cria um nome aleatório para o arquivo
         const novoNomeArquivo = require('crypto')
             .randomBytes(64)
             .toString('hex');

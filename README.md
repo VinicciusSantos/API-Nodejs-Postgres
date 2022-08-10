@@ -44,6 +44,23 @@
 	* [Buscar Pessoas pelo Status](#buscar-pessoas-pelo-status)
 	* [Mudar o status de uma pessoa](#mudar-o-status-de-uma-pessoa)
 	* [Vincular Pessoa com Tarefa](#vincular-pessoa-com-tarefa)
+* [Tarefas](#tarefas)
+	* [Cadastrar uma Tarefa](#cadastrar-uma-tarefa)
+	* [Deletar uma tarefa](#deletar-uma-tarefa)
+	* [Buscar Todas as tarefas](#buscar-todas-as-tarefas)
+	* [Buscar uma tarefa Específica](#buscar-uma-tarefa-especifica)
+	* [Buscar uma tarefa com uma Prioriade Específica](#buscar-uma-tarefa-com-uma-prioridade-especifica)
+	* [Atualizar informações de tarefa](#atualizar-informações-de-tarefa)
+	* [Buscar todos os Status](#buscar-todos-os-status)
+	* [Buscar tarefas pelo Status](#buscar-tarefas-pelo-status)
+	* [Mudar o status de uma tarefa](#mudar-o-status-de-uma-tarefa)
+* [Lembretes](#lembretes)
+	* [Cadastrar um Lembrete](#cadastrar-um-lembrete)
+	* [Deletar um Lembrete](#deletar-um-lembrete)
+	* [Buscar Todas os Lembretes](#buscar-todas-os-lembretes)
+* Relatorios
+	* [Projetos Feitos](#projetos-feitos)
+	* [Tarefas feitas por uma pessoa](#tarefas-feitas-por-uma-pessoa)
 
 # Sobre o Sistema
 - Um sistema para manter projetos, o sistema deve cadastrar projetos e equipes, um projeto possui uma equipe e deve ter tarefas dentro do projeto onde os membros da equipe podem se atribuir;
@@ -717,3 +734,23 @@ https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id_pessoa/tarefas/:id
 Observações:
 - ":id_pessoa" se refere ao código identificador da pessoa
 - ":id_tarefa" se refere ao código identificador da tarefa
+
+# Tarefas
+## Cadastrar uma tarefa
+## Deletar uma tarefa
+## Buscar Todas as tarefas
+## Buscar uma tarefa Específica
+## Buscar uma tarefa com uma Prioriade Específica
+## Atualizar informações de tarefa
+## Buscar todos os Status
+## Buscar tarefas pelo Status
+## Mudar o status de uma tarefa
+
+# Lembretes
+## Cadastrar um Lembrete
+## Deletar um Lembrete
+## Buscar Todas os Lembretes
+
+# Relatorios
+## Projetos Feitos
+## Tarefas feitas por uma pessoa
