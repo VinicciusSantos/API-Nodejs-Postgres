@@ -9,6 +9,9 @@ const port = process.env.PORT || 8000;
 const app = express()
 
 
+app.use(express.static(__dirname + '/uploads'))
+app.use('/uploads', express.static('uploads'));
+
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.json())
 app.use(cors())

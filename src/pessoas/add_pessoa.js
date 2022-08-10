@@ -3,6 +3,7 @@ const pessoas = express.Router();
 var cliente = require("../../cmd/database/connection.js");
 const multer = require('multer');
 
+var pe_foto = ""
 // Configuração de armazenamento
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -17,8 +18,10 @@ const storage = multer.diskStorage({
             .randomBytes(64)
             .toString('hex');
 
+        pe_foto = `${novoNomeArquivo}.${extensaoArquivo}`
+
         // Indica o novo nome do arquivo:
-        cb(null, `${novoNomeArquivo}.${extensaoArquivo}`)
+        cb(null, pe_foto)
     }
 });
 
@@ -28,10 +31,11 @@ const upload = multer({ storage });
 pessoas.post("/pessoas", upload.single('foto'), (req, res) => {
     const body = req.body;
     cliente
-        .query(`INSERT INTO pessoas (pe_nome, pe_cargo, pe_salario, pe_data_nasc, pe_status)
-                VALUES ($1, $2, $3, $4, $5)`, [ body.pe_nome, body.pe_cargo, body.pe_salario, body.pe_data_nasc, "Não Iniciado",])
-        .then((results) => {
-            return res.json("Inserido com sucesso!");
+    .query(`INSERT INTO pessoas (pe_nome, pe_cargo, pe_salario, pe_data_nasc, pe_status, pe_foto)
+    VALUES ($1, $2, $3, $4, $5, $6)`, [ body.pe_nome, body.pe_cargo, body.pe_salario, body.pe_data_nasc, "Não Iniciado", `https://api-brisa-nodejs-postgresql.herokuapp.com/updloads${pe_foto}`])
+    .then((results) => {
+        console.log(pe_foto)
+        return res.json("Inserido com sucesso!");
         })
         .catch(e => {           
             return res.status(400).json(e)
