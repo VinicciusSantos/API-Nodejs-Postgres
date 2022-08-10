@@ -7,7 +7,7 @@ pessoas.get("/pessoas/:id", async (req, res) => {
     const id = req.params.id;
 
     const data_pessoas = await cliente
-                                    .query(`SELECT pe.pe_id, pe.pe_nome, pe.pe_cargo, pe.pe_salario, pe.pe_data_nasc, pe.pe_status
+                                    .query(`SELECT pe.*
                                             FROM pessoas AS pe              
                                             WHERE pe.pe_id = $1`,[id])
                                     .catch(e => {
