@@ -32,7 +32,7 @@ pessoas.post("/pessoas", upload.single('foto'), (req, res) => {
     const body = req.body;
     cliente
     .query(`INSERT INTO pessoas (pe_nome, pe_cargo, pe_salario, pe_data_nasc, pe_status, pe_foto)
-    VALUES ($1, $2, $3, $4, $5, $6)`, [ body.pe_nome, body.pe_cargo, body.pe_salario, body.pe_data_nasc, "Não Iniciado", `https://api-brisa-nodejs-postgresql.herokuapp.com/updloads${pe_foto}`])
+    VALUES ($1, $2, $3, $4, $5, $6)`, [ body.pe_nome, body.pe_cargo, body.pe_salario, body.pe_data_nasc, "Não Iniciado", `https://api-brisa-nodejs-postgresql.herokuapp.com/uploads/${pe_foto}`])
     .then((results) => {
         console.log(pe_foto)
         return res.json("Inserido com sucesso!");
