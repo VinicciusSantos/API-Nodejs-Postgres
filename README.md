@@ -32,6 +32,18 @@
 	* [Buscar uma Equipe Específica](#buscar-uma-equipe-especifica)
 	* [Vincular Equipes com Pessoas](#vincular-equipes-com-pessoas)
 	* [Atualizar informações de Equipes](#atualizar-informações-de-equipes)
+* [Pessoas](#pessoas)
+	* [Cadastrar uma Pessoa](#cadastrar-uma-pessoa)
+	* [Deletar uma Pessoa](#deletar-uma-pessoa)
+	* [Buscar Todas as Pessoas](#buscar-todas-as-pessoas)
+	* [Buscar uma Pessoa Específica](#buscar-uma-pessoa-especifica)
+	* [Atualizar informações de Pessoa](#atualizar-informações-de-pessoa)
+	* [Buscar todas as Profissões](#buscar-todas-as-profissoes)
+	* [Buscar Pessoas pela Profissão](#buscar-pessoas-pela-profissao)
+	* [Buscar todos os Status](#buscar-todos-os-status)
+	* [Buscar Pessoas pelo Status](#buscar-pessoas-pelo-status)
+	* [Mudar o status de uma pessoa](#mudar-status-de-uma-pessoa)
+	* [Vincular Pessoas com Tarefas](#vincular-pessoa-com-tarefa)
 
 # Sobre o Sistema
 - Um sistema para manter projetos, o sistema deve cadastrar projetos e equipes, um projeto possui uma equipe e deve ter tarefas dentro do projeto onde os membros da equipe podem se atribuir;
@@ -460,4 +472,155 @@ Observações:
 {
 	"eq_nome": ""
 }
+```
+
+# Pessoas
+
+## Cadastrar uma Pessoa
+Usando o método POST podemos acessar o seguinte endereço:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id
+```
+Observações:
+- ":id" se refere ao código identificador da pessoa
+
+Entradas esperadas:
+```
+{
+	"pe_nome": "",
+	"pe_data_nasc": "",
+	"pe_cargo": "",
+	"pe_salario": 123,
+	"pe_foto": ""
+}
+```
+
+## Deletar uma Pessoa
+Para apagar uma pessoa, é necessário acessar o seguinte endereço usando o método DELETE, sendo ":id" um identificador de uma pessoa:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id
+```
+Observações:
+- Caso não seja passado um id válido ou um id de não existente, será retornado um código de erro
+
+## Buscar Todas as Pessoas
+Usando o método GET podemos acessar o seguinte endereço:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas
+```
+Retorno esperado: Uma lista de objetos
+```
+[
+	{
+		"pe_id": 1,
+		"pe_nome": "Priscila Fernandes Rosado",
+		"pe_data_nasc": "2003-10-07T00:00:00.000Z",
+		"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+		"pe_status": "Ativo",
+		"pe_cargo": "FrontEnd Junior",
+		"pe_salario": 2525,
+		"pe_foto": "3e866f56aebff7be37.jpg"
+	},
+	{
+		"pe_id": 2,
+		"pe_nome": "Julieta Rangel Ribas",
+		"pe_data_nasc": "1996-02-21T00:00:00.000Z",
+		"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+		"pe_status": "Ativo",
+		"pe_cargo": "FrontEnd Junior",
+		"pe_salario": 2525,
+		"pe_foto": "75ad5d6b4754fe736120477bb710.jpg"
+	}
+]
+```
+
+## Buscar uma Pessoa Específica
+Usando o método GET podemos acessar o seguinte endereço:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id
+```
+Observações:
+- Caso não seja passado um id válido ou um id de não existente, será retornado um código de erro
+- ":id" é um código identificador de pessoas
+
+## Atualizar informações de Pessoa
+Usando o método PUT podemos acessar o seguinte endereço:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id
+```
+São esperadas as seguintes entradas:
+```
+{
+		"pe_nome": "",
+		"pe_data_nasc": "",
+		"pe_cargo": "",
+		"pe_salario": 123
+}
+```
+Observações:
+- Caso não seja passado um id válido ou um id de não existente, será retornado um código de erro
+- ":id" é um código identificador de pessoas
+
+## Buscar todas as Profissões
+Usando o método GET podemos acessar o seguinte endereço:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/cargos
+```
+Retorno Esperado: Lista de objetos contendo os cargos e a quantidade de pessoas que ocupam esses cargos
+```
+[
+	{
+		"cargo": "BackEnd Junior",
+		"qtd": "9"
+	},
+	{
+		"cargo": "BackEnd Pleno",
+		"qtd": "6"
+	},
+	{
+		"cargo": "FrontEnd Junior",
+		"qtd": "34"
+	},
+	{
+		"cargo": "FrontEnd Pleno",
+		"qtd": "3"
+	}
+]
+```
+
+## Buscar Pessoas pela Profissão
+Usando o método GET podemos acessar o seguinte endereço:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/cargos/:cargo
+```
+Observações:
+- ":cargo" se refere a um nome de uma profissão
+
+Retorno Esperado:
+```
+
+```
+
+## Buscar todos os Status
+Usando o método GET podemos acessar o seguinte endereço:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id
+```
+
+## Buscar Pessoas pelo Status
+Usando o método GET podemos acessar o seguinte endereço:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id
+```
+
+## Mudar o status de uma pessoa
+Usando o método GET podemos acessar o seguinte endereço:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id
+```
+
+## Vincular Pessoas com Tarefas
+Usando o método GET podemos acessar o seguinte endereço:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id
 ```
