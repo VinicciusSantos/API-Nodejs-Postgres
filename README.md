@@ -22,7 +22,7 @@
     * [Deletar um Projeto](#deletar-um-projeto)
     * [Buscar todos os Projetos](#buscar-todos-os-projetos)
 	* [Buscar um Projeto Especifico](#buscar-um-projeto-especifico)
-	* [Ver os Status que Estão Sendo Utilizados](#ver-os-status-que-estão-sendo-utilizados)
+	* [Ver os Status de projetos que Estão Sendo Utilizados](#ver-os-status-de-projetos-que-estão-sendo-utilizados)
 	* [Buscar Todos os Projetos com um Determinado Status](#buscar-todos-os-projetos-com-um-determinado-status)
 	* [Vincular Projeto com Tarefa](#vincular-projeto-com-tarefa)
 * [Equipes](#equipes)
@@ -40,7 +40,7 @@
 	* [Atualizar informações de Pessoa](#atualizar-informações-de-pessoa)
 	* [Buscar todas as Profissões](#buscar-todas-as-profissões)
 	* [Buscar Pessoas pela Profissão](#buscar-pessoas-pela-profissão)
-	* [Buscar todos os Status](#buscar-todos-os-status)
+	* [Buscar todos os Status de Pessoas](#buscar-todos-os-status-de-pessoas)
 	* [Buscar Pessoas pelo Status](#buscar-pessoas-pelo-status)
 	* [Mudar o status de uma pessoa](#mudar-o-status-de-uma-pessoa)
 	* [Vincular Pessoa com Tarefa](#vincular-pessoa-com-tarefa)
@@ -58,7 +58,7 @@
 	* [Cadastrar um Lembrete](#cadastrar-um-lembrete)
 	* [Deletar um Lembrete](#deletar-um-lembrete)
 	* [Buscar Todas os Lembretes](#buscar-todas-os-lembretes)
-* Relatorios
+* [Relatórios](#relatórios)
 	* [Projetos Feitos](#projetos-feitos)
 	* [Tarefas feitas por uma pessoa](#tarefas-feitas-por-uma-pessoa)
 
@@ -255,7 +255,7 @@ O retorno esperado é um objeto com as seguintes informações:
 	}
 }
 ```
-## Ver os Status que estão sendo utilizados
+## Ver os Status de projetos que estão sendo utilizados
 Usando o método GET, podemos acessar o seguinte endereço:
 ```
 https://api-brisa-nodejs-postgresql.herokuapp.com/projetos/status
@@ -744,7 +744,7 @@ Retorno Esperado: Lista de Pessoas
 ]
 ```
 
-## Buscar todos os Status
+## Buscar todos os Status de Pessoas
 Usando o método GET podemos acessar o seguinte endereço:
 ```
 https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/status
@@ -832,10 +832,163 @@ Observações:
 
 # Tarefas
 ## Cadastrar uma tarefa
+Usando o método POST podemos acessar o seguinte endereço:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas
+```
+
+São esperadas as seguintes entradas:
+```
+{
+		"tr_nome": "",
+		"tr_descricao": "",
+		"tr_prioridade": 1
+}
+```
+Observações:
+- O campo "tr_prioridade" aceita 3 por padrão valores:
+	- 1 - Prioridade Baixa
+	- 2 - Prioridade Média
+	- 3 - Prioridade Alta
+- Não é possível cadastrar tarefas com nomes já existentes
+
 ## Deletar uma tarefa
+Para apagar uma tarefa, é necessário acessar o seguinte endereço usando o método DELETE, sendo ":id" um identificador de uma tarefa:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/:id
+```
+Observações:
+- Caso não seja passado um id válido ou um id de não existente, será retornado um código de erro
+
 ## Buscar Todas as tarefas
-## Buscar uma tarefa Específica
-## Buscar uma tarefa com uma Prioriade Específica
+Retorna todos as tarefas que foram cadastrados em uma lista de objetos
+
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas
+```
+
+Retorno Esperado: Lista de tarefas com as pessoas que estão desenvolvendo cada uma
+```
+{
+	"dados": [
+		{
+			"tr_id": 1,
+			"tr_nome": "Comprar Banana",
+			"tr_descricao": "Ir na feira e comprar uma bananinha",
+			"tr_data_criacao": "2022-08-10T00:00:00.000Z",
+			"tr_data_finalizacao": null,
+			"tr_status": "Não Iniciado",
+			"tr_prioridade": 1,
+			"pr_nome": "vender frutas",
+			"pessoas": [
+				{
+					"pe_id": 2,
+					"pe_nome": "Julieta Rangel Ribas",
+					"pe_data_nasc": "1996-02-21T00:00:00.000Z",
+					"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+					"pe_status": "Ativo",
+					"pe_cargo": "FrontEnd Junior",
+					"pe_salario": 2525,
+					"pe_foto": null,
+					"tr_id": 63
+				},
+				{
+					"pe_id": 4,
+					"pe_nome": "Maria Vitória Novaes",
+					"pe_data_nasc": "1999-07-10T00:00:00.000Z",
+					"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+					"pe_status": "Ativo",
+					"pe_cargo": "BackEnd Junior",
+					"pe_salario": 2525,
+					"pe_foto": null,
+					"tr_id": 63
+				}
+			]
+		},
+		{
+			"tr_id": 2,
+			"tr_nome": "Pesquisa de Anterioridade",
+			"tr_descricao": "Buscar se a ideia é inovadora",
+			"tr_data_criacao": "2022-08-09T00:00:00.000Z",
+			"tr_data_finalizacao": null,
+			"tr_status": "Em Desenvolvimento",
+			"tr_prioridade": 2,
+			"pr_nome": "Gp22",
+			"pessoas": [
+				{
+					"pe_id": 1,
+					"pe_nome": "Priscila Fernandes Rosado",
+					"pe_data_nasc": "2003-10-07T00:00:00.000Z",
+					"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+					"pe_status": "Ativo",
+					"pe_cargo": "FrontEnd Junior",
+					"pe_salario": 2525,
+					"pe_foto": null,
+					"tr_id": 49
+				},
+				{
+					"pe_id": 3,
+					"pe_nome": "Ana Almeida",
+					"pe_data_nasc": "2000-05-12T00:00:00.000Z",
+					"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+					"pe_status": "Desativado",
+					"pe_cargo": "FrontEnd Junior",
+					"pe_salario": 2525,
+					"pe_foto": null,
+					"tr_id": 49
+				},
+				{
+					"pe_id": 5,
+					"pe_nome": "Otávio Rodrigues",
+					"pe_data_nasc": "2000-08-01T00:00:00.000Z",
+					"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+					"pe_status": "Ativo",
+					"pe_cargo": "BackEnd Junior",
+					"pe_salario": 2525,
+					"pe_foto": null,
+					"tr_id": 49
+				}
+			]
+		}
+	]
+}
+```
+
+## Buscar uma tarefa Especifica
+Acessar a seguinte rota usando o método GET:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/:id
+```
+
+O retorno esperado:
+```
+{
+	"tr_id": 1,
+	"tr_nome": "Criar o Banco de dados da API",
+	"tr_descricao": "PostgreSQL é um sistema gerenciador...",
+	"tr_data_criacao": "2022-06-14T00:00:00.000Z",
+	"tr_data_finalizacao": null,
+	"tr_status": "Em Desenvolvimento",
+	"tr_prioridade": 3
+}
+```
+
+## Buscar uma tarefa com uma Prioriade Especifica
+Acessar a seguinte rota usando o método GET:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/prioridade/:prioridade
+```
+
+Observações:
+- ":prioridade" se refere ao filtro que vai ser passado
+- As prioridades padrão são:
+	- 1 - Prioridade Baixa
+	- 2 - Prioridade Média
+	- 3 - Prioridade Alta
+
+Retorno Esperado:
+
+
 ## Atualizar informações de tarefa
 ## Buscar todos os Status
 ## Buscar tarefas pelo Status
@@ -846,6 +999,6 @@ Observações:
 ## Deletar um Lembrete
 ## Buscar Todas os Lembretes
 
-# Relatorios
+# Relatórios
 ## Projetos Feitos
 ## Tarefas feitas por uma pessoa
