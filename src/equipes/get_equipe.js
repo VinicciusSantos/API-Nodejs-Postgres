@@ -40,6 +40,7 @@ equipes.get('/equipes/:id', async (req, res) => {
         results.pessoas[index].tarefas = tarefas.filter(t => t.pe_id = p.pe_id)
     })
     
+    return res.status(200).json(results)
 })
 
 module.exports = equipes
