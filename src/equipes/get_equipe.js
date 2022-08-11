@@ -37,7 +37,7 @@ equipes.get('/equipes/:id', async (req, res) => {
                         })
     
     pessoas.rows.forEach((p, index) => {
-        results.pessoas[index].tarefas = tarefas.filter(t => t.pe_id = p.pe_id)
+        results.pessoas[index].tarefas = tarefas.filter(t => t.pe_id === p.pe_id)
     })
     
     return res.status(200).json(results)
