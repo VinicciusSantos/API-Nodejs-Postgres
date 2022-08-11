@@ -460,10 +460,105 @@ https://api-brisa-nodejs-postgresql.herokuapp.com/equipes/:id
 ```
 
 Retorno Esperado:
+- Informações Básicas (id e nome)
+- Membros das equipes com suas respectivas tarefas
 ```
 {
 	"eq_id": 1,
-	"eq_nome": "Equipe Alfa"
+	"eq_nome": "Equipe Alfa",
+	"pessoas": [
+		{
+			"pe_id": 1,
+			"pe_nome": "Priscila Fernandes Rosado",
+			"pe_data_nasc": "2003-10-07T00:00:00.000Z",
+			"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+			"pe_status": "Ativo",
+			"pe_cargo": "FrontEnd Junior",
+			"pe_salario": 2525,
+			"pe_foto": null,
+			"tarefas": [
+				{
+					"tr_id": 2,
+					"tr_nome": "FrontEnd da API",
+					"tr_descricao": "Desenvolvimento da interface gráfica...",
+					"tr_data_criacao": "2022-06-30T00:00:00.000Z",
+					"tr_data_finalizacao": null,
+					"tr_status": "Não Iniciado",
+					"tr_prioridade": 3,
+					"eq_id": 1,
+					"pe_id": 1
+				},
+				{
+					"tr_id": 30,
+					"tr_nome": "tesasdvzggsd",
+					"tr_descricao": "asdfasdfsadfa",
+					"tr_data_criacao": "2022-08-09T00:00:00.000Z",
+					"tr_data_finalizacao": null,
+					"tr_status": "Em Andamento",
+					"tr_prioridade": 1,
+					"eq_id": 1,
+					"pe_id": 1
+				}
+			]
+		},
+		{
+			"pe_id": 12,
+			"pe_nome": "Sr. Yuri Caldeira",
+			"pe_data_nasc": "1945-07-01T00:00:00.000Z",
+			"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+			"pe_status": "Aposentado",
+			"pe_cargo": "FrontEnd Junior",
+			"pe_salario": 2525,
+			"pe_foto": null,
+			"tarefas": [
+				{
+					"tr_id": 1,
+					"tr_nome": "Criar o Banco de dados da API",
+					"tr_descricao": "PostgreSQL é um sistema gerenciador de...",
+					"tr_data_criacao": "2022-06-14T00:00:00.000Z",
+					"tr_data_finalizacao": null,
+					"tr_status": "Em Desenvolvimento",
+					"tr_prioridade": 3,
+					"eq_id": 1,
+					"pe_id": 12
+				},
+				{
+					"tr_id": 2,
+					"tr_nome": "FrontEnd da API",
+					"tr_descricao": "Desenvolvimento da interface gráfica...",
+					"tr_data_criacao": "2022-06-30T00:00:00.000Z",
+					"tr_data_finalizacao": null,
+					"tr_status": "Não Iniciado",
+					"tr_prioridade": 3,
+					"eq_id": 1,
+					"pe_id": 12
+				}
+			]
+		},
+		{
+			"pe_id": 19,
+			"pe_nome": "Mariane Carvalho",
+			"pe_data_nasc": "2001-10-30T00:00:00.000Z",
+			"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+			"pe_status": "Ativo",
+			"pe_cargo": "BackEnd Pleno",
+			"pe_salario": 2525,
+			"pe_foto": null,
+			"tarefas": [
+				{
+					"tr_id": 2,
+					"tr_nome": "FrontEnd da API",
+					"tr_descricao": "Desenvolvimento da interface gráfica...",
+					"tr_data_criacao": "2022-06-30T00:00:00.000Z",
+					"tr_data_finalizacao": null,
+					"tr_status": "Não Iniciado",
+					"tr_prioridade": 3,
+					"eq_id": 1,
+					"pe_id": 19
+				}
+			]
+		}
+	]
 }
 ```
 
