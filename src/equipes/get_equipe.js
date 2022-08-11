@@ -7,13 +7,13 @@ equipes.get('/equipes/:id', async (req, res) => {
     const id = req.params.id
 
     // Recebendo todas as informações da equipe
-    const dados = cliente
+    const dados = await cliente
                     .query('SELECT * FROM equipes WHERE eq_id = $1', [id])
                     .catch(e => {         
                         return res.status(400).json(e)
                     })
     
-    const pessoas = cliente
+    const pessoas = await cliente
                         .query(`SELECT pe.* FROM equipes AS eq
                                 INNER JOIN pessoas_pertencem_equipes AS ppe ON ppe.fk_equipe = eq.eq_id
                                 INNER JOIN pessoas AS pe ON pe.pe_id = ppe.fk_pessoa
@@ -22,10 +22,10 @@ equipes.get('/equipes/:id', async (req, res) => {
                             return res.status(400).json(e)
                         })
 
-    const results = dados.rows
+    const results = dados.rows[0]
     results.pessoas = pessoas.rows
 
-    const tarefas = cliente
+    const tarefas = await cliente
                         .query(`SELECT tr.*, eq.eq_id, pe.pe_id FROM equipes AS eq
                                 INNER JOIN pessoas_pertencem_equipes AS ppe ON ppe.fk_equipe = eq.eq_id
                                 INNER JOIN pessoas AS pe ON pe.pe_id = ppe.fk_pessoa
