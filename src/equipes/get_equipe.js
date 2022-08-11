@@ -22,7 +22,7 @@ equipes.get('/equipes/:id', async (req, res) => {
                             return res.status(400).json(e)
                         })
 
-    const results = dados.rows[0]
+    const results = dados.rows
     results.pessoas = pessoas.rows
 
     const tarefas = cliente
