@@ -26,6 +26,7 @@ equipes.get('/equipes/:id', async (req, res) => {
 
     const results = dados.rows[0]
     results.pessoas = pessoas.rows
+    results.qtd_tarefas = tarefas.rowCount
 
     const tarefas = await cliente
                         .query(`SELECT tr.*, eq.eq_id, pe.pe_id FROM equipes AS eq
