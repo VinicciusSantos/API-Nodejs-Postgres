@@ -37,9 +37,14 @@ equipes.get('/equipes/:id', async (req, res) => {
                         .catch(e => {                             
                             return res.status(400).json(e)
                         })
+    
 
     pessoas.rows.forEach((p, index) => {
-        results.pessoas[index].tarefas = tarefas.rows.filter(t => t.pe_id === p.pe_id)
+        results.pessoas[index].tarefas = {}
+        results.pessoas[index].tarefas.NaoIniciadas = tarefas.rows.filter(t => t.pe_id === p.pe_id && t.tr_status == "Não Iniciado")
+        results.pessoas[index].tarefas.EmAndamento = tarefas.rows.filter(t => t.pe_id === p.pe_id && t.tr_status == "Em Desenvolvimento")
+        results.pessoas[index].tarefas.EmTestes = tarefas.rows.filter(t => t.pe_id === p.pe_id && t.tr_status == "Em Testes")
+        results.pessoas[index].tarefas.Concluidas = tarefas.rows.filter(t => t.pe_id === p.pe_id && t.tr_status == "Concluido")
     })
     
     return res.status(200).json(results)
