@@ -26,8 +26,7 @@ equipes.get('/equipes/:id', async (req, res) => {
 
     const results = dados.rows[0]
     results.pessoas = pessoas.rows
-    results.qtd_tarefas = tarefas.rowCount
-
+    
     const tarefas = await cliente
                         .query(`SELECT tr.*, eq.eq_id, pe.pe_id FROM equipes AS eq
                                 INNER JOIN pessoas_pertencem_equipes AS ppe ON ppe.fk_equipe = eq.eq_id
@@ -39,7 +38,9 @@ equipes.get('/equipes/:id', async (req, res) => {
                             return res.status(400).json(e)
                         })
     
-
+                        
+    results.qtd_tarefas = tarefas.rowCount
+    
     pessoas.rows.forEach((p, index) => {
         results.pessoas[index].tarefas = {}
         results.pessoas[index].tarefas.qtd = tarefas.rows.filter(t => t.pe_id == p.pe_id).length
