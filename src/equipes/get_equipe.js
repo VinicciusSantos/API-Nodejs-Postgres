@@ -41,7 +41,7 @@ equipes.get('/equipes/:id', async (req, res) => {
 
     pessoas.rows.forEach((p, index) => {
         results.pessoas[index].tarefas = {}
-        results.pessoas[index].tarefas.qtd = tarefas.rowCount
+        results.pessoas[index].tarefas.qtd = tarefas.rows.filter(t => t.pe_id == p.pe_id).length
         results.pessoas[index].tarefas.NaoIniciadas = tarefas.rows.filter(t => t.pe_id === p.pe_id && t.tr_status == "Não Iniciado")
         results.pessoas[index].tarefas.EmAndamento = tarefas.rows.filter(t => t.pe_id === p.pe_id && t.tr_status == "Em Desenvolvimento")
         results.pessoas[index].tarefas.EmTestes = tarefas.rows.filter(t => t.pe_id === p.pe_id && t.tr_status == "Em Testes")
