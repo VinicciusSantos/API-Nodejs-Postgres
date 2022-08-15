@@ -10,7 +10,7 @@ equipes.get('/equipes/:id', async (req, res) => {
     try {
         var dados = await cliente.query('SELECT * FROM equipes WHERE eq_id = $1', [id])
     } catch (err) {
-        return res.status(400).send(err.stack)
+        return res.status(400).send(err)
     }
     
     if (dados.rowCount == 0) return res.status(404).json(`Nenhuma Equipe Encontrada com o ID: ${id}`)
