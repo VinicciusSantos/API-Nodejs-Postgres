@@ -94,7 +94,7 @@ São esperadas as seguintes entradas:
 {
 		"pr_nome": "",
 		"pr_descricao": "",
-		"equipes": ["Equipe 1", "Equipe2"]
+		"equipes": [{}, {}]
 }
 ```
 Observações:
@@ -1121,7 +1121,83 @@ Obsesvações:
 - ":id" se refere ao identificador do lembrete
 
 ## Buscar Todas os Lembretes
+Acessar a seguinte rota usando o método GET:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/lembretes
+```
+
+Retorno Esperado:
+```
+[
+	{
+		"le_id": 81,
+		"le_descricao": "Lembrete tal,
+		"le_data_criacao": "2022-08-11T00:00:00.000Z",
+		"le_data_lembrete": "2022-08-24T19:06:51.000Z"
+	},
+	{
+		"le_id": 83,
+		"le_descricao": "Lembrete muito bacana",
+		"le_data_criacao": "2022-08-11T00:00:00.000Z",
+		"le_data_lembrete": "2022-08-12T21:30:18.000Z"
+	}
+]
+```
 
 # Relatórios
 ## Projetos Feitos
+Acessar a seguinte rota usando o método GET:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/relatorios/projetos
+```
+
+Retorno Esperado: Lista de Objetos com os projetos concluidos em cada mês
+```
+[
+	{
+		"mes": "8",
+		"ano": "2022",
+		"quantidade": 2
+	},
+	{
+		"mes": "9",
+		"ano": "2022",
+		"quantidade": 1
+	},
+	{
+		"mes": "10",
+		"ano": "2022",
+		"quantidade": 5
+	},
+]
+```
+
 ## Tarefas feitas por uma pessoa
+Acessar a seguinte rota usando o método GET:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/relatorios/pessoas/:id
+```
+
+Observações:
+- ":id" se refere a um identificador de uma pessoa
+
+Retorno Esperado: Lista de Objetos com as tarefas feitas por uma pessoa em cada mês
+```
+[
+	{
+		"mes": "8",
+		"ano": "2022",
+		"quantidade": 2
+	},
+	{
+		"mes": "9",
+		"ano": "2022",
+		"quantidade": 1
+	},
+	{
+		"mes": "10",
+		"ano": "2022",
+		"quantidade": 5
+	},
+]
+```
