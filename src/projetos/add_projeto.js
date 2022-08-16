@@ -30,6 +30,7 @@ projetos.post('/projetos', async (req, res) => {
         // Pegando o id do projeto que acabou de ser cadastrado
         const id = await cliente.query('select max(pr_id) from projetos')
         
+        console.log(body.equipes)
         // Colocando as equipes no projeto
         if (body.equipes) {
             body.equipes.forEach(async e => {
