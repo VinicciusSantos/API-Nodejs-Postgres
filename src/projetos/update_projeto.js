@@ -6,6 +6,7 @@ var cliente = require('../../cmd/database/connection.js')
 projetos.put('/projetos/:id', async (req, res) => { 
     const id = req.params.id
     const body = req.body
+    console.log(body)
 
     // Verificando se o id que foi passado como parâmetro é realmente um número
     if (isNaN(parseInt(id)) || id == null){
@@ -33,8 +34,8 @@ projetos.put('/projetos/:id', async (req, res) => {
 
     // editando as equipes do projeto
     cliente.query(`DELETE FROM projetos_posssuem_equipes WHERE fk_projeto = $1`, [id])
-     // Colocando as equipes no projeto
-
+    
+    // Colocando as equipes no projeto
     body.equipes.forEach(async e => {
         cliente
             .query(`INSERT INTO projetos_posssuem_equipes (fk_equipe, fk_projeto)
