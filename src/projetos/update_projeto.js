@@ -6,7 +6,6 @@ var cliente = require('../../cmd/database/connection.js')
 projetos.put('/projetos/:id', async (req, res) => { 
     const id = req.params.id
     const body = req.body
-    console.log(body)
 
     // Verificando se o id que foi passado como parâmetro é realmente um número
     if (isNaN(parseInt(id)) || id == null){
