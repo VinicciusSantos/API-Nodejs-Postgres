@@ -38,8 +38,6 @@ equipes.get('/equipes/:id', async (req, res) => {
                             return res.status(400).json(e)
                         })
     
-                        
-    results.qtd_tarefas = tarefas.rowCount
     
     pessoas.rows.forEach((p, index) => {
         results.pessoas[index].tarefas = {}
@@ -49,6 +47,13 @@ equipes.get('/equipes/:id', async (req, res) => {
         results.pessoas[index].tarefas.EmTestes = tarefas.rows.filter(t => t.pe_id === p.pe_id && t.tr_status == "Em Testes")
         results.pessoas[index].tarefas.Concluidas = tarefas.rows.filter(t => t.pe_id === p.pe_id && t.tr_status == "Concluido")
     })
+
+    results.tarefas = {}
+    results.tarefas.total = tarefas.rowCount
+    results.tarefas.NaoIniciadas = tarefas.rows.filter(t => t.tr_status == "Não Iniciado").length
+    results.tarefas.EmAndamento = tarefas.rows.filter(t => t.tr_status == "Em Desenvolvimento").length
+    results.tarefas.EmTestes = tarefas.rows.filter(t => t.tr_status == "Em Testes").length
+    results.tarefas.Concluidas = tarefas.rows.filter(t => t.tr_status == "Concluido").length
     
     return res.status(200).json(results)
 })
