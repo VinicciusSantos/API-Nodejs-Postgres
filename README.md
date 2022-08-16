@@ -55,7 +55,7 @@
 	- [Buscar uma tarefa Especifica](#buscar-uma-tarefa-especifica)
 	- [Buscar uma tarefa com uma Prioriade Especifica](#buscar-uma-tarefa-com-uma-prioriade-especifica)
 	- [Atualizar informações de tarefa](#atualizar-informações-de-tarefa)
-	- [Buscar todos os Status](#buscar-todos-os-status)
+	- [Buscar todos os Status das tarefas](#buscar-todos-os-status-das-tarefas)
 	- [Buscar tarefas pelo Status](#buscar-tarefas-pelo-status)
 	- [Mudar o status de uma tarefa](#mudar-o-status-de-uma-tarefa)
 - [Lembretes](#lembretes)
@@ -576,10 +576,10 @@ Observações:
 ## Atualizar Informações de Equipes
 Usando o método PUT, podemos acessar o seguinte endereço:
 ```
-https://api-brisa-nodejs-postgresql.herokuapp.com/projetos/:id
+https://api-brisa-nodejs-postgresql.herokuapp.com/equipes/:id
 ```
 Observações:
-- ":id" se refere ao código identificador do projeto
+- ":id" se refere ao código identificador do a equipe
 
 É necessario passar os seguintes campos:
 ```
@@ -988,13 +988,115 @@ Observações:
 	- 2 - Prioridade Média
 	- 3 - Prioridade Alta
 
-Retorno Esperado:
-
+Retorno Esperado: Lista de Objetos
+```
+[
+	{
+		"tr_id": 32,
+		"tr_nome": "Tarefa 32",
+		"tr_descricao": "asdfasdfsadfa",
+		"tr_data_criacao": "2022-08-09T00:00:00.000Z",
+		"tr_data_finalizacao": null,
+		"tr_status": "Não Iniciado",
+		"tr_prioridade": 1
+	},
+	{
+		"tr_id": 36,
+		"tr_nome": "Tarefa com um nome legal",
+		"tr_descricao": "aaaaaa",
+		"tr_data_criacao": "2022-08-09T00:00:00.000Z",
+		"tr_data_finalizacao": null,
+		"tr_status": "Em Desenvolvimento",
+		"tr_prioridade": 1
+	}
+]
+```
 
 ## Atualizar informações de tarefa
-## Buscar todos os Status
+Acessar a seguinte rota usando o método PUT:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/:id
+```
+Observações:
+- ":id" se refere ao código identificador da tarefa
+
+É necessario passar os seguintes campos:
+```
+{
+	"tr_nome": "",
+	"tr_descricao": "" 
+}
+```
+
+## Buscar todos os Status das tarefas
+Acessar a seguinte rota usando o método GET:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/status
+```
+
+Retorno Esperado:
+```
+[
+	{
+		"tr_status": "Em Desenvolvimento",
+		"count": "43"
+	},
+	{
+		"tr_status": "Não Iniciado",
+		"count": "4"
+	},
+	{
+		"tr_status": "Em Testes",
+		"count": "3"
+	},
+	{
+		"tr_status": "Concluido",
+		"count": "4"
+	}
+]
+```
+
 ## Buscar tarefas pelo Status
+Acessar a seguinte rota usando o método GET:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/status/:status
+```
+
+Obsesvações:
+- ":status" se refere a um status de tarefa 
+
+Retorno Esperado:
+```
+[
+	{
+		"tr_status": "Em Desenvolvimento",
+		"count": "43"
+	},
+	{
+		"tr_status": "Não Iniciado",
+		"count": "4"
+	},
+	{
+		"tr_status": "Em Testes",
+		"count": "3"
+	},
+	{
+		"tr_status": "Concluido",
+		"count": "4"
+	}
+]
+```
+
 ## Mudar o status de uma tarefa
+Acessar a seguinte rota usando o método GET:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/:id/status/:status
+```
+
+Obsesvações:
+- ":id" se refere ao identificador da tarefa
+- ":status" se refere ao novo status que a tarefa vai receber
+
 
 # Lembretes
 ## Cadastrar um Lembrete
