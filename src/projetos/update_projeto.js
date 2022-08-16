@@ -36,10 +36,9 @@ projetos.put('/projetos/:id', async (req, res) => {
      // Colocando as equipes no projeto
 
     body.equipes.forEach(async e => {
-        const idEquipe = await cliente.query(`select eq_id from equipes where eq_nome = $1`, [e])
         cliente
             .query(`INSERT INTO projetos_posssuem_equipes (fk_equipe, fk_projeto)
-                    VALUES ($1, $2)`, [idEquipe.rows[0].eq_id, id])
+                    VALUES ($1, $2)`, [e.eq_id, id])
             .catch(e => {                       
                 return res.status(400).json(e)
             })
