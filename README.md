@@ -1100,7 +1100,26 @@ Obsesvações:
 
 # Lembretes
 ## Cadastrar um Lembrete
+Acessar a seguinte rota usando o método POST:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/lembretes
+```
+
+Entradas esperadas:
+```
+	le_descricao: "Lorem Ipsum"
+	le_data_lembrete: "2022-08-24T19:06:51.000Z"
+```
+
 ## Deletar um Lembrete
+Acessar a seguinte rota usando o método DELETE:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/lembretes/:id
+```
+
+Obsesvações:
+- ":id" se refere ao identificador do lembrete
+
 ## Buscar Todas os Lembretes
 
 # Relatórios
