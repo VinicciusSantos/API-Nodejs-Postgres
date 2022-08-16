@@ -24,11 +24,26 @@ projetos.put('/projetos/:id', async (req, res) => {
         return res.status(404).json(`Projeto '${id}' não encontrado!`)
     }
 
+    // Editando as informações básicas do projeto
     cliente
         .query('UPDATE projetos SET pr_nome = $1, pr_descricao = $2 WHERE pr_id = $3', [body.pr_nome, body.pr_descricao, id])
         .catch(e => {     
             return res.status(400).json(e)
         })
+
+    // editando as equipes do projeto
+    cliente.query(`DELETE FROM projetos_posssuem_equipes WHERE fk_projeto = $1`, [id])
+     // Colocando as equipes no projeto
+
+    body.equipes.forEach(async e => {
+        const idEquipe = await cliente.query(`select eq_id from equipes where eq_nome = $1`, [e])
+        cliente
+            .query(`INSERT INTO projetos_posssuem_equipes (fk_equipe, fk_projeto)
+                    VALUES ($1, $2)`, [idEquipe.rows[0].eq_id, id])
+            .catch(e => {                       
+                return res.status(400).json(e)
+            })
+    })
     return res.status(204).json("Alterado com sucesso!")
 })
 
