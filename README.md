@@ -15,52 +15,56 @@
 </ul>
 
 # Menu
-* [Sobre o Sistema](#sobre-o-sistema)
-* [Funcionalidades](#funcionalidades)
-* [Projetos](#projetos)
-    * [Cadastrar um Projeto](#cadastrar-um-projeto)
-    * [Deletar um Projeto](#deletar-um-projeto)
-    * [Buscar todos os Projetos](#buscar-todos-os-projetos)
-	* [Buscar um Projeto Especifico](#buscar-um-projeto-especifico)
-	* [Ver os Status de projetos que Estão Sendo Utilizados](#ver-os-status-de-projetos-que-estão-sendo-utilizados)
-	* [Buscar Todos os Projetos com um Determinado Status](#buscar-todos-os-projetos-com-um-determinado-status)
-	* [Vincular Projeto com Tarefa](#vincular-projeto-com-tarefa)
-* [Equipes](#equipes)
-	* [Cadastrar uma Equipe](#cadastrar-uma-equipe)
-	* [Deletar uma Equipe](#deletar-uma-equipe)
-	* [Buscar Todas as Equipes](#buscar-todas-as-equipes)
-	* [Buscar uma Equipe Específica](#buscar-uma-equipe-especifica)
-	* [Vincular Equipes com Pessoas](#vincular-equipes-com-pessoas)
-	* [Atualizar informações de Equipes](#atualizar-informações-de-equipes)
-* [Pessoas](#pessoas)
-	* [Cadastrar uma Pessoa](#cadastrar-uma-pessoa)
-	* [Deletar uma Pessoa](#deletar-uma-pessoa)
-	* [Buscar Todas as Pessoas](#buscar-todas-as-pessoas)
-	* [Buscar uma Pessoa Específica](#buscar-uma-pessoa-especifica)
-	* [Atualizar informações de Pessoa](#atualizar-informações-de-pessoa)
-	* [Buscar todas as Profissões](#buscar-todas-as-profissões)
-	* [Buscar Pessoas pela Profissão](#buscar-pessoas-pela-profissão)
-	* [Buscar todos os Status de Pessoas](#buscar-todos-os-status-de-pessoas)
-	* [Buscar Pessoas pelo Status](#buscar-pessoas-pelo-status)
-	* [Mudar o status de uma pessoa](#mudar-o-status-de-uma-pessoa)
-	* [Vincular Pessoa com Tarefa](#vincular-pessoa-com-tarefa)
-* [Tarefas](#tarefas)
-	* [Cadastrar uma Tarefa](#cadastrar-uma-tarefa)
-	* [Deletar uma tarefa](#deletar-uma-tarefa)
-	* [Buscar Todas as tarefas](#buscar-todas-as-tarefas)
-	* [Buscar uma tarefa Específica](#buscar-uma-tarefa-especifica)
-	* [Buscar uma tarefa com uma Prioriade Específica](#buscar-uma-tarefa-com-uma-prioridade-especifica)
-	* [Atualizar informações de tarefa](#atualizar-informações-de-tarefa)
-	* [Buscar todos os Status](#buscar-todos-os-status)
-	* [Buscar tarefas pelo Status](#buscar-tarefas-pelo-status)
-	* [Mudar o status de uma tarefa](#mudar-o-status-de-uma-tarefa)
-* [Lembretes](#lembretes)
-	* [Cadastrar um Lembrete](#cadastrar-um-lembrete)
-	* [Deletar um Lembrete](#deletar-um-lembrete)
-	* [Buscar Todas os Lembretes](#buscar-todas-os-lembretes)
-* [Relatórios](#relatórios)
-	* [Projetos Feitos](#projetos-feitos)
-	* [Tarefas feitas por uma pessoa](#tarefas-feitas-por-uma-pessoa)
+- [Desenvolvedores](#desenvolvedores)
+- [Menu](#menu)
+- [Sobre o Sistema](#sobre-o-sistema)
+- [Funcionalidades](#funcionalidades)
+- [Projetos](#projetos)
+	- [Cadastrar um Projeto](#cadastrar-um-projeto)
+	- [Deletar um Projeto](#deletar-um-projeto)
+	- [Buscar todos os Projetos](#buscar-todos-os-projetos)
+	- [Buscar um Projeto Especifico:](#buscar-um-projeto-especifico)
+	- [Ver os Status de projetos que estão sendo utilizados](#ver-os-status-de-projetos-que-estão-sendo-utilizados)
+	- [Buscar todos os projetos com um determinado status](#buscar-todos-os-projetos-com-um-determinado-status)
+	- [Vincular projeto com tarefa](#vincular-projeto-com-tarefa)
+	- [Atualizar Informações de um Projeto](#atualizar-informações-de-um-projeto)
+	- [Atualizar status de um Projeto](#atualizar-status-de-um-projeto)
+- [Equipes](#equipes)
+	- [Cadastrar uma Equipe](#cadastrar-uma-equipe)
+	- [Deletar uma Equipe](#deletar-uma-equipe)
+	- [Buscar todas as Equipes](#buscar-todas-as-equipes)
+	- [Buscar uma Equipe Especifica](#buscar-uma-equipe-especifica)
+	- [Vincular Equipes com Pessoas](#vincular-equipes-com-pessoas)
+	- [Atualizar Informações de Equipes](#atualizar-informações-de-equipes)
+- [Pessoas](#pessoas)
+	- [Cadastrar uma Pessoa](#cadastrar-uma-pessoa)
+	- [Deletar uma Pessoa](#deletar-uma-pessoa)
+	- [Buscar Todas as Pessoas](#buscar-todas-as-pessoas)
+	- [Buscar uma Pessoa Especifica](#buscar-uma-pessoa-especifica)
+	- [Atualizar informações de Pessoa](#atualizar-informações-de-pessoa)
+	- [Buscar todas as Profissões](#buscar-todas-as-profissões)
+	- [Buscar Pessoas pela Profissão](#buscar-pessoas-pela-profissão)
+	- [Buscar todos os Status de Pessoas](#buscar-todos-os-status-de-pessoas)
+	- [Buscar Pessoas pelo Status](#buscar-pessoas-pelo-status)
+	- [Mudar o status de uma pessoa](#mudar-o-status-de-uma-pessoa)
+	- [Vincular Pessoa com Tarefa](#vincular-pessoa-com-tarefa)
+- [Tarefas](#tarefas)
+	- [Cadastrar uma tarefa](#cadastrar-uma-tarefa)
+	- [Deletar uma tarefa](#deletar-uma-tarefa)
+	- [Buscar Todas as tarefas](#buscar-todas-as-tarefas)
+	- [Buscar uma tarefa Especifica](#buscar-uma-tarefa-especifica)
+	- [Buscar uma tarefa com uma Prioriade Especifica](#buscar-uma-tarefa-com-uma-prioriade-especifica)
+	- [Atualizar informações de tarefa](#atualizar-informações-de-tarefa)
+	- [Buscar todos os Status](#buscar-todos-os-status)
+	- [Buscar tarefas pelo Status](#buscar-tarefas-pelo-status)
+	- [Mudar o status de uma tarefa](#mudar-o-status-de-uma-tarefa)
+- [Lembretes](#lembretes)
+	- [Cadastrar um Lembrete](#cadastrar-um-lembrete)
+	- [Deletar um Lembrete](#deletar-um-lembrete)
+	- [Buscar Todas os Lembretes](#buscar-todas-os-lembretes)
+- [Relatórios](#relatórios)
+	- [Projetos Feitos](#projetos-feitos)
+	- [Tarefas feitas por uma pessoa](#tarefas-feitas-por-uma-pessoa)
 
 # Sobre o Sistema
 - Um sistema para manter projetos, o sistema deve cadastrar projetos e equipes, um projeto possui uma equipe e deve ter tarefas dentro do projeto onde os membros da equipe podem se atribuir;
@@ -462,103 +466,101 @@ https://api-brisa-nodejs-postgresql.herokuapp.com/equipes/:id
 Retorno Esperado:
 - Informações Básicas (id e nome)
 - Membros das equipes com suas respectivas tarefas
+- Visão Geral das tarefas (Total, Não Iniciadas, Em Andamento, Em Teste, Concluidas)
 ```
 {
-	"eq_id": 1,
-	"eq_nome": "Equipe Alfa",
+	"eq_id": 2,
+	"eq_nome": "Equipe Beta",
 	"pessoas": [
 		{
-			"pe_id": 1,
-			"pe_nome": "Priscila Fernandes Rosado",
-			"pe_data_nasc": "2003-10-07T00:00:00.000Z",
-			"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
-			"pe_status": "Ativo",
+			"pe_id": 3,
+			"pe_nome": "Ana Almeida",
+			"pe_data_nasc": "2000-05-12T03:00:00.000Z",
+			"pe_data_cadastro": "2022-08-03T03:00:00.000Z",
+			"pe_status": "Desativado",
 			"pe_cargo": "FrontEnd Junior",
 			"pe_salario": 2525,
 			"pe_foto": null,
-			"tarefas": [
-				{
-					"tr_id": 2,
-					"tr_nome": "FrontEnd da API",
-					"tr_descricao": "Desenvolvimento da interface gráfica...",
-					"tr_data_criacao": "2022-06-30T00:00:00.000Z",
-					"tr_data_finalizacao": null,
-					"tr_status": "Não Iniciado",
-					"tr_prioridade": 3,
-					"eq_id": 1,
-					"pe_id": 1
-				},
-				{
-					"tr_id": 30,
-					"tr_nome": "tesasdvzggsd",
-					"tr_descricao": "asdfasdfsadfa",
-					"tr_data_criacao": "2022-08-09T00:00:00.000Z",
-					"tr_data_finalizacao": null,
-					"tr_status": "Em Andamento",
-					"tr_prioridade": 1,
-					"eq_id": 1,
-					"pe_id": 1
-				}
-			]
+			"tarefas": {
+				"qtd": 11,
+				"NaoIniciadas": [
+					{
+						"tr_id": 55,
+						"tr_nome": "Vende Abacaxi",
+						"tr_descricao": "dsadasdas",
+						"tr_data_criacao": "2022-08-09T03:00:00.000Z",
+						"tr_data_finalizacao": null,
+						"tr_status": "Não Iniciado",
+						"tr_prioridade": 1,
+						"eq_id": 2,
+						"pe_id": 3
+					}
+				],
+				"EmAndamento": [
+					{
+						"tr_id": 1,
+						"tr_nome": "Criar o Banco de dados da API",
+						"tr_descricao": "PostgreSQL é um sistema gerenciador de banco de dados objeto relacional, desenvolvido como projeto de código aberto",
+						"tr_data_criacao": "2022-06-14T03:00:00.000Z",
+						"tr_data_finalizacao": null,
+						"tr_status": "Em Desenvolvimento",
+						"tr_prioridade": 3,
+						"eq_id": 2,
+						"pe_id": 3
+					},
+					{
+						"tr_id": 52,
+						"tr_nome": "vender limao",
+						"tr_descricao": "dasdas",
+						"tr_data_criacao": "2022-08-09T03:00:00.000Z",
+						"tr_data_finalizacao": null,
+						"tr_status": "Em Desenvolvimento",
+						"tr_prioridade": 2,
+						"eq_id": 2,
+						"pe_id": 3
+					}
+				],
+				"EmTestes": [
+					{
+						"tr_id": 58,
+						"tr_nome": "lucas mandou",
+						"tr_descricao": "aaaaa",
+						"tr_data_criacao": "2022-08-10T03:00:00.000Z",
+						"tr_data_finalizacao": null,
+						"tr_status": "Em Testes",
+						"tr_prioridade": 1,
+						"eq_id": 2,
+						"pe_id": 3
+					}
+				],
+				"Concluidas": []
+			}
 		},
 		{
-			"pe_id": 12,
-			"pe_nome": "Sr. Yuri Caldeira",
-			"pe_data_nasc": "1945-07-01T00:00:00.000Z",
-			"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
-			"pe_status": "Aposentado",
-			"pe_cargo": "FrontEnd Junior",
-			"pe_salario": 2525,
-			"pe_foto": null,
-			"tarefas": [
-				{
-					"tr_id": 1,
-					"tr_nome": "Criar o Banco de dados da API",
-					"tr_descricao": "PostgreSQL é um sistema gerenciador de...",
-					"tr_data_criacao": "2022-06-14T00:00:00.000Z",
-					"tr_data_finalizacao": null,
-					"tr_status": "Em Desenvolvimento",
-					"tr_prioridade": 3,
-					"eq_id": 1,
-					"pe_id": 12
-				},
-				{
-					"tr_id": 2,
-					"tr_nome": "FrontEnd da API",
-					"tr_descricao": "Desenvolvimento da interface gráfica...",
-					"tr_data_criacao": "2022-06-30T00:00:00.000Z",
-					"tr_data_finalizacao": null,
-					"tr_status": "Não Iniciado",
-					"tr_prioridade": 3,
-					"eq_id": 1,
-					"pe_id": 12
-				}
-			]
-		},
-		{
-			"pe_id": 19,
-			"pe_nome": "Mariane Carvalho",
-			"pe_data_nasc": "2001-10-30T00:00:00.000Z",
-			"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
+			"pe_id": 10,
+			"pe_nome": "Ana Luiza da Conceição",
+			"pe_data_nasc": "2003-10-30T03:00:00.000Z",
+			"pe_data_cadastro": "2022-08-03T03:00:00.000Z",
 			"pe_status": "Ativo",
-			"pe_cargo": "BackEnd Pleno",
+			"pe_cargo": "FrontEnd Pleno",
 			"pe_salario": 2525,
 			"pe_foto": null,
-			"tarefas": [
-				{
-					"tr_id": 2,
-					"tr_nome": "FrontEnd da API",
-					"tr_descricao": "Desenvolvimento da interface gráfica...",
-					"tr_data_criacao": "2022-06-30T00:00:00.000Z",
-					"tr_data_finalizacao": null,
-					"tr_status": "Não Iniciado",
-					"tr_prioridade": 3,
-					"eq_id": 1,
-					"pe_id": 19
-				}
-			]
+			"tarefas": {
+				"qtd": 0,
+				"NaoIniciadas": [],
+				"EmAndamento": [],
+				"EmTestes": [],
+				"Concluidas": []
+			}
 		}
-	]
+	],
+	"tarefas": {
+		"total": 11,
+		"NaoIniciadas": 1,
+		"EmAndamento": 7,
+		"EmTestes": 1,
+		"Concluidas": 2
+	}
 }
 ```
 
