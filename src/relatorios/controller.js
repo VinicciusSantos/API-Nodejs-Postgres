@@ -3,9 +3,11 @@ const relatorios = express.Router()
 
 const projetos_done_by_month = require('./projetos_done_by_month')
 const tasks_done_pessoas = require('./tasks_done_pessoas')
+const desempenho_pessoas_equipe = require('./desempenho_pessoas_equipe')
 
 relatorios.use(projetos_done_by_month)
 relatorios.use(tasks_done_pessoas)
+relatorios.use(desempenho_pessoas_equipe)
 
 module.exports = relatorios
 
