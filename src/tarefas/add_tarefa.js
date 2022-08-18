@@ -34,10 +34,8 @@ tarefas.post('/tarefas', async (req, res) => {
     if (body.pessoas) {   
         // Associando as pessoas com as tarefas
         body.pessoas.forEach(async p => {
-            const idPessoa = await cliente.query(`select pe_id from pessoas where pe_nome = $1`, [p])
-            
             cliente.query(`INSERT INTO pessoas_associam_tarefas (fk_pessoa, fk_tarefa)
-            VALUES ($1, $2)`, [idPessoa.rows[0].pe_id, id.rows[0].max])
+            VALUES ($1, $2)`, [p.pe_id, id.rows[0].max])
         })
     }
 
