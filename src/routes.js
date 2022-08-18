@@ -10,6 +10,7 @@ const pessoas = require('./pessoas/controller')
 const tarefas = require('./tarefas/controller')
 const relatorios = require('./relatorios/controller')
 const lembretes = require('./lembretes/controller')
+const users = require('./users/controller')
 
 routes.use(projetos)
 routes.use(equipes)
@@ -17,6 +18,7 @@ routes.use(pessoas)
 routes.use(tarefas)
 routes.use(relatorios)
 routes.use(lembretes)
+routes.use(users)
 
 // Tela Principal
 routes.get('/', (req, res) => {
