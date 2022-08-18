@@ -339,7 +339,28 @@ São esperadas as seguintes entradas:
 ```
 {
 	"eq_nome": "",
-	"pessoas": ["João", "Marcos"]
+	"pessoas": [
+			{
+				pe_id: 2,
+				pe_nome: 'Julieta Rangel Ribas',
+				pe_data_nasc: '1996-02-21T03:00:00.000Z',
+				pe_data_cadastro: '2022-08-03T03:00:00.000Z',
+				pe_status: 'Ativo',
+				pe_cargo: 'FrontEnd Junior',
+				pe_salario: 2525,
+				pe_foto: null
+			},
+			{
+				pe_id: 9,
+				pe_nome: 'Breno da Rocha',
+				pe_data_nasc: '2001-02-27T03:00:00.000Z',
+				pe_data_cadastro: '2022-08-03T03:00:00.000Z',
+				pe_status: 'Ativo',
+				pe_cargo: 'BackEnd Junior',
+				pe_salario: 2525,
+				pe_foto: null
+			}
+		]
 }
 ```
 Observações:
