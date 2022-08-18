@@ -8,8 +8,10 @@ const { s3Uploadv2 } = require("../../cmd/s3Service.js");
 // Inserindo pessoas
 pessoas.post("/pessoas", multer(multerConfig).single('foto'), async (req, res) => {
     const body = req.body;
-    const result = await s3Uploadv2(req.file)
-    console.log(result)
+    if (req.file) {
+        const result = await s3Uploadv2(req.file)
+        console.log(result)
+    }
 
     if (body.pe_nome === "" || !body.pe_nome) {
         return res.status(400).json('Nome Inválido')
