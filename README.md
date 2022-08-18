@@ -605,7 +605,31 @@ Observações:
 É necessario passar os seguintes campos:
 ```
 {
-	"eq_nome": ""
+  eq_nome: 'Equipe Delta2',
+  pessoas: [
+    {
+      pe_id: 4,
+      pe_nome: 'Maria Vitória Novaes',
+      pe_data_nasc: '1999-07-10T03:00:00.000Z',
+      pe_data_cadastro: '2022-08-03T03:00:00.000Z',
+      pe_status: 'Ativo',
+      pe_cargo: 'BackEnd Junior',
+      pe_salario: 2525,
+      pe_foto: null,
+      tarefas: [Object]
+    },
+    {
+      pe_id: 5,
+      pe_nome: 'Otávio Rodrigues',
+      pe_data_nasc: '2000-08-01T03:00:00.000Z',
+      pe_data_cadastro: '2022-08-03T03:00:00.000Z',
+      pe_status: 'Ativo',
+      pe_cargo: 'BackEnd Junior',
+      pe_salario: 2525,
+      pe_foto: null,
+      tarefas: [Object]
+    }
+  ]
 }
 ```
 
