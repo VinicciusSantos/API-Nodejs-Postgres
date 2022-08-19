@@ -29,11 +29,13 @@ user.post('/registro', async (req, res) => {
     }
 
     const cadastro = await cliente
-                                .query(`INSERT INTO users (nome, email, senha) VALUES ($1, $2, $3) RETURNING id, senha`, [nome, email, senha])
+                                .query(`INSERT INTO users (nome, email, senha) VALUES ($1, $2, $3) RETURNING id, senha`, [nome, email, hashedPassword])
                                 .catch(e => {                                  
                                     return res.status(400).json(e)
                                 })
-    return res.status(200).json(`Ok`)
+
+    console.log(cadastro.rows)
+    return res.status(200).json(`Usuário Cadastrado, Por Favor, faça Login`)
 })
 
 module.exports = user

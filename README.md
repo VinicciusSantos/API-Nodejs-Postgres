@@ -1029,16 +1029,28 @@ Acessar a seguinte rota usando o método GET:
 https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/:id
 ```
 
-O retorno esperado:
+O retorno esperado: Dados de tarefas e suas subtarefas
 ```
 {
 	"tr_id": 1,
 	"tr_nome": "Criar o Banco de dados da API",
-	"tr_descricao": "PostgreSQL é um sistema gerenciador...",
-	"tr_data_criacao": "2022-06-14T00:00:00.000Z",
+	"tr_descricao": "PostgreSQL é um sistema gerenciador de banco de dados objeto relacional, desenvolvido como projeto de código aberto",
+	"tr_data_criacao": "2022-06-14T03:00:00.000Z",
 	"tr_data_finalizacao": null,
-	"tr_status": "Em Desenvolvimento",
-	"tr_prioridade": 3
+	"tr_status": "Em Testes",
+	"tr_prioridade": 3,
+	"subTarefas": [
+		{
+			"id": 1,
+			"nome": "Criar as Tabelas no Postgre",
+			"descricao": "Varias coisas",
+			"prioridade": 1,
+			"fk_tarefa": 1,
+			"data_criacao": "2022-08-19T03:00:00.000Z",
+			"data_conclusao": null,
+			"status": "Concluido"
+		}
+	]
 }
 ```
 

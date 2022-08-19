@@ -30,7 +30,6 @@ tarefas.post('/tarefas', async (req, res) => {
                                                     VALUES ($1, $2)`, [body.pr_id, id.rows[0].max])
     }
     
-    
     if (body.pessoas) {   
         // Associando as pessoas com as tarefas
         body.pessoas.forEach(async p => {

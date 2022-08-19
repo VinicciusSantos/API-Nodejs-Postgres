@@ -70,6 +70,18 @@ CREATE TABLE lembretes (
     le_data_lembrete DATE NOT NULL
 )
 
+create table subTarefas (
+	id serial not null primary key,
+	nome varchar(100) not null,
+	descricao varchar(400),
+	prioridade integer not null,
+	fk_tarefa integer not null,
+	data_criacao timestamp default current_date not null,
+	data_conclusao timestamp,
+	status varchar(20) not null,
+	foreign key (fk_tarefa) references tarefas(tr_id) on delete cascade
+)
+
 /* Cadastrando Projetos */
 INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status) VALUES
 ('GP Inovação', 'O Grad Prix de Inovação tem por objetivo gerar negócios e resolução de desafios para demandas da indústria, envolvendo: pequenas, médias e grandes empresas, assim como, estimular o empreendedorismo e o fortalecimento do ecossistema empreendedor', '03-20-2022', 'Em Andamento'),
@@ -163,3 +175,5 @@ INSERT INTO pessoas_associam_tarefas (fk_pessoa, fk_tarefa) VALUES
 (17, 6), (8, 6), (15, 6),
 (16, 7),
 (7, 8);
+
+insert into subTarefas (nome, descricao, prioridade, fk_tarefa, status) values ('Criar as Tabelas no Postgre', 'Varias coisas', 1, 1, 'Concluido')
