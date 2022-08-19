@@ -33,11 +33,28 @@ tarefas.put('/tarefas/:id/status/:status', async (req, res) => {
    
     // Se a tarefa estiver sendo finalizado, temos que gravar a data de finalização:
     if (status === 'Concluido'){
-        cliente
-            .query(`UPDATE tarefas SET tr_data_finalizacao = CURRENT_DATE WHERE tr_id = $1`, [id])
-            .catch(e => {                
-                return res.status(400).json(e)
-            })
+        await cliente
+                .query(`UPDATE tarefas SET tr_data_finalizacao = CURRENT_DATE WHERE tr_id = $1`, [id])
+                .catch(e => {                
+                    return res.status(400).json(e)
+                })  
+    }
+
+    // Verificando se o projeto tem todas as tarefas concluidas
+    const projeto = await cliente
+                        .query(`SELECT * FROM projetos_possuem_tarefas AS ppt
+                                INNER JOIN tarefas AS tr ON tr.tr_id = ppt.fk_tarefa
+                                WHERE fk_tarefa = $1`, [id])
+                        .catch(e => {                
+                            return res.status(400).json(e)
+                        })
+
+    if (projeto.rows.filter(t => t.tr_status == 'Concluido').length == 0) {
+        // Mudando o status do projeto para concluido se todas as tarefas estiverem concluidas
+        await cliente.query(`UPDATE projetos SET pr_status = 'Em Andamento' WHERE pr_id = $1`, [projeto.rows[0].fk_projeto])
+    } else {
+        // Mudando o status do projeto para Em Andamento
+        await cliente.query(`UPDATE projetos SET pr_status = 'Concluido' WHERE pr_id = $1`, [projeto.rows[0].fk_projeto])
     }
 
     return res.json('Status Atualizado')
