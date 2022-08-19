@@ -8,7 +8,7 @@ tarefas.get('/tarefas', async (req, res) => {
                                         .query(`SELECT tr.*, pr.pr_nome from tarefas AS tr
                                                 LEFT JOIN projetos_possuem_tarefas AS ppt ON ppt.fk_tarefa = tr.tr_id
                                                 LEFT JOIN projetos AS pr ON pr.pr_id = ppt.fk_projeto
-                                                ORDER BY tr.tr_nome`)
+                                                ORDER BY tr.tr_prioridade desc, tr_nome`)
                                         .catch(e => {                                           
                                             return res.status(400).json(e)
                                         })
@@ -22,12 +22,18 @@ tarefas.get('/tarefas', async (req, res) => {
                                             return res.status(400).json(e)
                                         })
 
-    let results = {
-        dados: lista_tarefas.rows
-    }
+    const lista_subtarefas = await cliente
+                                        .query(`SELECT * FROM subTarefas`)
+                                        .catch(e => {                                            
+                                            return res.status(400).json(e)
+                                        })
+
+    let results = lista_tarefas.rows
+
 
     lista_tarefas.rows.forEach((tarefa, index) => {
-        results.dados[index].pessoas = lista_pessoas.rows.filter((pessoa) => pessoa.tr_id === tarefa.tr_id)
+        results[index].pessoas = lista_pessoas.rows.filter((pessoa) => pessoa.tr_id === tarefa.tr_id)
+        results[index].subTarefas = lista_subtarefas.rows.filter(subtarefa => subtarefa.fk_tarefa === tarefa.tr_id)
     });
 
     return res.json(results)
