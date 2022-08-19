@@ -58,6 +58,10 @@
 	- [Buscar todos os Status das tarefas](#buscar-todos-os-status-das-tarefas)
 	- [Buscar tarefas pelo Status](#buscar-tarefas-pelo-status)
 	- [Mudar o status de uma tarefa](#mudar-o-status-de-uma-tarefa)
+	- [Criar Subtarefa](#criar-subtarefa)
+	- [Atualizar Informações de uma Subtarefa](#atualizar-informações-de-uma-subtarefa)
+	- [Atualizar Status de uma Subtarefa](#atualizar-status-de-uma-subtarefa)
+	- [Apagar Subtarefa](#apagar-subtarefa)
 - [Lembretes](#lembretes)
 	- [Cadastrar um Lembrete](#cadastrar-um-lembrete)
 	- [Deletar um Lembrete](#deletar-um-lembrete)
@@ -1171,9 +1175,66 @@ Acessar a seguinte rota usando o método GET:
 https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/:id/status/:status
 ```
 
-Obsesvações:
+Observações:
 - ":id" se refere ao identificador da tarefa
 - ":status" se refere ao novo status que a tarefa vai receber
+
+## Criar Subtarefa
+Acessar a seguinte rota usando o método POST:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/subtarefas/:tarefa
+```
+
+São Esperadas as seguintes entradas:
+```
+{
+	"nome": "",
+	"descricao": "",
+	"prioridade": 1
+}
+```
+
+Observações:
+- ":tarefa" se refere ao identificador de uma tarefa que a subtarefa será associada
+- O campo "tr_prioridade" aceita 3 por padrão valores:
+	- 1 - Prioridade Baixa
+	- 2 - Prioridade Média
+	- 3 - Prioridade Alta
+
+## Atualizar Informações de uma Subtarefa
+Acessar a seguinte rota usando o método PUT:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/subtarefas/:id
+```
+
+São Esperadas as seguintes entradas:
+```
+{
+	"nome": "",
+	"descricao": "",
+	"prioridade": 1
+}
+```
+
+Observações:
+- ":id" se refere ao identificador de uma subtarefa
+
+## Atualizar Status de uma Subtarefa
+Acessar a seguinte rota usando o método PUT:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/subtarefas/:id/status/:status
+```
+Observações:
+- ":id" se refere ao identificador de uma subtarefa
+- ":status" se refere ao novo status que a subtarefa vai receber
+
+## Apagar Subtarefa
+Para apagar uma subtarefa, é necessário acessar o seguinte endereço usando o método DELETE, sendo ":id" um identificador de uma subtarefa:
+```
+https://api-brisa-nodejs-postgresql.herokuapp.com/subtarefas/:id
+```
+Observações:
+- Caso não seja passado um id válido ou um id de não existente, será retornado um código de erro
 
 
 # Lembretes
