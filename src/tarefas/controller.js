@@ -10,6 +10,9 @@ const update_tarefa = require('./update_tarefa')
 const get_filter_by_status = require('./get_filter_by_status')
 const get_filter_by_prioridade = require('./get_filter_by_prioridade')
 const update_status = require('./update_status')
+const update_subtarefa_status = require('./update_subtarefa_status')
+const update_subtarefa = require('./update_subtarefa')
+const delete_subtarefa = require('./delete_subtarefa')
 const add_subtarefas = require('./add_subtarefas')
 
 tarefas.use(get_all)
@@ -22,5 +25,8 @@ tarefas.use(get_filter_by_status)
 tarefas.use(get_filter_by_prioridade)
 tarefas.use(update_status)
 tarefas.use(add_subtarefas)
+tarefas.use(update_subtarefa_status)
+tarefas.use(update_subtarefa)
+tarefas.use(delete_subtarefa)
 
 module.exports = tarefas
