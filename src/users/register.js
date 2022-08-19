@@ -39,20 +39,3 @@ user.post('/registro', async (req, res) => {
 })
 
 module.exports = user
-
-/*
-CREATE TABLE users (
-	id BIGSERIAL PRIMARY KEY NOT NULL,
-	nome varchar(200) not null,
-	email varchar(200) not null,
-	senha varchar(200) not null,
-	unique(email)
-);
-
-select * from users
-
-alter table users
-add column senha varchar(200) not null
-
-INSERT INTO users (nome, email, senha) VALUES ('admin', 'admin@gmail.com', '123456')
-delete from users*/

@@ -1,5 +1,5 @@
 const LocalStrategy = require("passport-local").Strategy
-const cliente = require('../../cmd/database/connection.js')
+const cliente = require('./database/connection.js')
 const bcrypt = require('bcrypt')
 
 function initialize(passport) {
@@ -16,16 +16,33 @@ function initialize(passport) {
 
             bcrypt.compare(senha, user.senha, (err, isMatch) => {
                 if (err) throw err
+                if (isMatch) return done(null, user)
+                else done(null, false, {message: "Senha Incorreta"})
             })
+        } else {
+            return done(null, false, {message: "Email Não Encontrado"})
         }
     }
 
 
-    passport.use(new LocalStrategy)(
+    passport.use(new LocalStrategy(
         {
             usernameField: "email",
             passwordField: "senha"
         }, 
         authenticateUser
-    )
+    ))
+
+    passport.serializeUser((user) => done(null, user.id))
+    passport.deserializeUser( async (id, done) => {
+        const results = await cliente
+                                    .query(`SELECT * FROM users WHERE id = $1`, [id])
+                                    .catch(e => {                                  
+                                        return res.status(400).json(e)
+                                    })
+
+        return done(null, results.rows[0])
+    })
 }
+
+module.exports = initialize

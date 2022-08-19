@@ -82,6 +82,14 @@ create table subTarefas (
 	foreign key (fk_tarefa) references tarefas(tr_id) on delete cascade
 )
 
+CREATE TABLE users (
+	id BIGSERIAL PRIMARY KEY NOT NULL,
+	nome varchar(200) not null,
+	email varchar(200) not null,
+	senha varchar(200) not null,
+	unique(email)
+);
+
 /* Cadastrando Projetos */
 INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status) VALUES
 ('GP Inovação', 'O Grad Prix de Inovação tem por objetivo gerar negócios e resolução de desafios para demandas da indústria, envolvendo: pequenas, médias e grandes empresas, assim como, estimular o empreendedorismo e o fortalecimento do ecossistema empreendedor', '03-20-2022', 'Em Andamento'),
@@ -177,3 +185,5 @@ INSERT INTO pessoas_associam_tarefas (fk_pessoa, fk_tarefa) VALUES
 (7, 8);
 
 insert into subTarefas (nome, descricao, prioridade, fk_tarefa, status) values ('Criar as Tabelas no Postgre', 'Varias coisas', 1, 1, 'Concluido')
+
+INSERT INTO users (nome, email, senha) VALUES ('admin', 'admin@gmail.com', '123456')
