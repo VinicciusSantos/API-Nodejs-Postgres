@@ -58,10 +58,11 @@
 	- [Buscar todos os Status das tarefas](#buscar-todos-os-status-das-tarefas)
 	- [Buscar tarefas pelo Status](#buscar-tarefas-pelo-status)
 	- [Mudar o status de uma tarefa](#mudar-o-status-de-uma-tarefa)
-	- [Criar Subtarefa](#criar-subtarefa)
-	- [Atualizar Informações de uma Subtarefa](#atualizar-informações-de-uma-subtarefa)
-	- [Atualizar Status de uma Subtarefa](#atualizar-status-de-uma-subtarefa)
-	- [Apagar Subtarefa](#apagar-subtarefa)
+	- [Sub Tarefas](#sub-tarefas)
+		- [Criar SubTarefa](#criar-subtarefa)
+		- [Atualizar Informações de uma SubTarefa](#atualizar-informações-de-uma-subtarefa)
+		- [Atualizar Status de uma SubTarefa](#atualizar-status-de-uma-subtarefa)
+		- [Apagar SubTarefa](#apagar-subtarefa)
 - [Lembretes](#lembretes)
 	- [Cadastrar um Lembrete](#cadastrar-um-lembrete)
 	- [Deletar um Lembrete](#deletar-um-lembrete)
@@ -1179,7 +1180,8 @@ Observações:
 - ":id" se refere ao identificador da tarefa
 - ":status" se refere ao novo status que a tarefa vai receber
 
-## Criar Subtarefa
+## Sub Tarefas
+### Criar Subtarefa
 Acessar a seguinte rota usando o método POST:
 ```
 https://api-brisa-nodejs-postgresql.herokuapp.com/subtarefas/:tarefa
@@ -1201,7 +1203,7 @@ Observações:
 	- 2 - Prioridade Média
 	- 3 - Prioridade Alta
 
-## Atualizar Informações de uma Subtarefa
+### Atualizar Informações de uma Subtarefa
 Acessar a seguinte rota usando o método PUT:
 ```
 https://api-brisa-nodejs-postgresql.herokuapp.com/subtarefas/:id
@@ -1219,7 +1221,7 @@ São Esperadas as seguintes entradas:
 Observações:
 - ":id" se refere ao identificador de uma subtarefa
 
-## Atualizar Status de uma Subtarefa
+### Atualizar Status de uma Subtarefa
 Acessar a seguinte rota usando o método PUT:
 ```
 https://api-brisa-nodejs-postgresql.herokuapp.com/subtarefas/:id/status/:status
@@ -1228,7 +1230,7 @@ Observações:
 - ":id" se refere ao identificador de uma subtarefa
 - ":status" se refere ao novo status que a subtarefa vai receber
 
-## Apagar Subtarefa
+### Apagar Subtarefa
 Para apagar uma subtarefa, é necessário acessar o seguinte endereço usando o método DELETE, sendo ":id" um identificador de uma subtarefa:
 ```
 https://api-brisa-nodejs-postgresql.herokuapp.com/subtarefas/:id
