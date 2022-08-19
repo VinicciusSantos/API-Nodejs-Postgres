@@ -25,11 +25,6 @@ tarefas.post('/tarefas', async (req, res) => {
     const id = await cliente.query('select max(tr_id) from tarefas')
     
     if (body.pr_id) {
-        const projeto = await cliente.query(`SELECT * FROM projetos_possuem_tarefas WHERE fk_projeto = $1`, [body.pr_id])
-        if (projeto.rowCount == 0) {
-            await cliente.query(`UPDATE PROJETOS SET pr_status = 'Em Andamento' WHERE pr_id = $1`, [body.pr_id])
-        }
-
         // Associando a tarefa com o projeto
         const projetoTarefa = await cliente.query(`INSERT INTO projetos_possuem_tarefas (fk_projeto, fk_tarefa)
                                                     VALUES ($1, $2)`, [body.pr_id, id.rows[0].max])
