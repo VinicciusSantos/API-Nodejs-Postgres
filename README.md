@@ -1140,7 +1140,7 @@ Acessar a seguinte rota usando o método GET:
 https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/status/:status
 ```
 
-Obsesvações:
+Observações:
 - ":status" se refere a um status de tarefa 
 
 Retorno Esperado:
@@ -1171,7 +1171,7 @@ Acessar a seguinte rota usando o método GET:
 https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/:id/status/:status
 ```
 
-Obsesvações:
+Observações:
 - ":id" se refere ao identificador da tarefa
 - ":status" se refere ao novo status que a tarefa vai receber
 
@@ -1195,7 +1195,7 @@ Acessar a seguinte rota usando o método DELETE:
 https://api-brisa-nodejs-postgresql.herokuapp.com/lembretes/:id
 ```
 
-Obsesvações:
+Observações:
 - ":id" se refere ao identificador do lembrete
 
 ## Buscar Todas os Lembretes
