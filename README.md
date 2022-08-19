@@ -936,91 +936,90 @@ Retorna todos as tarefas que foram cadastrados em uma lista de objetos
 https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas
 ```
 
-Retorno Esperado: Lista de tarefas com as pessoas que estão desenvolvendo cada uma
+Retorno Esperado: Lista de tarefas com as pessoas que estão desenvolvendo cada uma e suas respectivas subtarefas
 ```
-{
-	"dados": [
-		{
-			"tr_id": 1,
-			"tr_nome": "Comprar Banana",
-			"tr_descricao": "Ir na feira e comprar uma bananinha",
-			"tr_data_criacao": "2022-08-10T00:00:00.000Z",
-			"tr_data_finalizacao": null,
-			"tr_status": "Não Iniciado",
-			"tr_prioridade": 1,
-			"pr_nome": "vender frutas",
-			"pessoas": [
-				{
-					"pe_id": 2,
-					"pe_nome": "Julieta Rangel Ribas",
-					"pe_data_nasc": "1996-02-21T00:00:00.000Z",
-					"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
-					"pe_status": "Ativo",
-					"pe_cargo": "FrontEnd Junior",
-					"pe_salario": 2525,
-					"pe_foto": null,
-					"tr_id": 63
-				},
-				{
-					"pe_id": 4,
-					"pe_nome": "Maria Vitória Novaes",
-					"pe_data_nasc": "1999-07-10T00:00:00.000Z",
-					"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
-					"pe_status": "Ativo",
-					"pe_cargo": "BackEnd Junior",
-					"pe_salario": 2525,
-					"pe_foto": null,
-					"tr_id": 63
-				}
-			]
-		},
-		{
-			"tr_id": 2,
-			"tr_nome": "Pesquisa de Anterioridade",
-			"tr_descricao": "Buscar se a ideia é inovadora",
-			"tr_data_criacao": "2022-08-09T00:00:00.000Z",
-			"tr_data_finalizacao": null,
-			"tr_status": "Em Desenvolvimento",
-			"tr_prioridade": 2,
-			"pr_nome": "Gp22",
-			"pessoas": [
-				{
-					"pe_id": 1,
-					"pe_nome": "Priscila Fernandes Rosado",
-					"pe_data_nasc": "2003-10-07T00:00:00.000Z",
-					"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
-					"pe_status": "Ativo",
-					"pe_cargo": "FrontEnd Junior",
-					"pe_salario": 2525,
-					"pe_foto": null,
-					"tr_id": 49
-				},
-				{
-					"pe_id": 3,
-					"pe_nome": "Ana Almeida",
-					"pe_data_nasc": "2000-05-12T00:00:00.000Z",
-					"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
-					"pe_status": "Desativado",
-					"pe_cargo": "FrontEnd Junior",
-					"pe_salario": 2525,
-					"pe_foto": null,
-					"tr_id": 49
-				},
-				{
-					"pe_id": 5,
-					"pe_nome": "Otávio Rodrigues",
-					"pe_data_nasc": "2000-08-01T00:00:00.000Z",
-					"pe_data_cadastro": "2022-08-03T00:00:00.000Z",
-					"pe_status": "Ativo",
-					"pe_cargo": "BackEnd Junior",
-					"pe_salario": 2525,
-					"pe_foto": null,
-					"tr_id": 49
-				}
-			]
-		}
-	]
-}
+[
+	{
+		"tr_id": 35,
+		"tr_nome": "aaaaa",
+		"tr_descricao": "aaaa",
+		"tr_data_criacao": "2022-08-09T03:00:00.000Z",
+		"tr_data_finalizacao": null,
+		"tr_status": "Em Desenvolvimento",
+		"tr_prioridade": null,
+		"pr_nome": null,
+		"pessoas": [],
+		"subTarefas": []
+	},
+	{
+		"tr_id": 38,
+		"tr_nome": "dddd",
+		"tr_descricao": "dddd",
+		"tr_data_criacao": "2022-08-09T03:00:00.000Z",
+		"tr_data_finalizacao": null,
+		"tr_status": "Em Desenvolvimento",
+		"tr_prioridade": null,
+		"pr_nome": null,
+		"pessoas": [],
+		"subTarefas": []
+	},
+	{
+		"tr_id": 1,
+		"tr_nome": "Criar o Banco de dados da API",
+		"tr_descricao": "PostgreSQL é um sistema gerenciador de banco de dados objeto relacional, desenvolvido como projeto de código aberto",
+		"tr_data_criacao": "2022-06-14T03:00:00.000Z",
+		"tr_data_finalizacao": null,
+		"tr_status": "Em Testes",
+		"tr_prioridade": 3,
+		"pr_nome": "API de Gerenciamento de Projetos",
+		"pessoas": [
+			{
+				"pe_id": 3,
+				"pe_nome": "Ana Almeida",
+				"pe_data_nasc": "2000-05-12T03:00:00.000Z",
+				"pe_data_cadastro": "2022-08-03T03:00:00.000Z",
+				"pe_status": "Desativado",
+				"pe_cargo": "FrontEnd Junior",
+				"pe_salario": 2525,
+				"pe_foto": null,
+				"tr_id": 1
+			},
+			{
+				"pe_id": 12,
+				"pe_nome": "Sr. Yuri Caldeira",
+				"pe_data_nasc": "1945-07-01T03:00:00.000Z",
+				"pe_data_cadastro": "2022-08-03T03:00:00.000Z",
+				"pe_status": "Aposentado",
+				"pe_cargo": "FrontEnd Junior",
+				"pe_salario": 2525,
+				"pe_foto": null,
+				"tr_id": 1
+			}
+		],
+		"subTarefas": [
+			{
+				"id": 1,
+				"nome": "Criar as Tabelas no Postgre",
+				"descricao": "Varias coisas",
+				"prioridade": 1,
+				"fk_tarefa": 1,
+				"data_criacao": "2022-08-19T03:00:00.000Z",
+				"data_conclusao": null,
+				"status": "Concluido"
+			},
+			{
+				"id": 2,
+				"nome": "Fazer Inserts para teste",
+				"descricao": "blablabla",
+				"prioridade": 1,
+				"fk_tarefa": 1,
+				"data_criacao": "2022-08-19T03:00:00.000Z",
+				"data_conclusao": null,
+				"status": "Não Iniciada"
+			}
+		]
+	}
+]
 ```
 
 ## Buscar uma tarefa Especifica
