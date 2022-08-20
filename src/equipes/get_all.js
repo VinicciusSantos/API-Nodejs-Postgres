@@ -30,7 +30,7 @@ equipes.get('/equipes', async (req, res) => {
         results[index].projetos = equipes_projetos.rows.filter(p => p.eq_id == e.eq_id)
     })
 
-    return res.json(results)
+    return res.status(200).json(results)
 })
 
 module.exports = equipes
