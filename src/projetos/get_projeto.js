@@ -1,10 +1,10 @@
 const express = require('express')
 const projetos = express.Router()
 var cliente = require('../../cmd/database/connection.js')
-
+const authenticateToken = require('../../cmd/jwt')
 
 // Mostrando projetos pelo ID
-projetos.get('/projetos/:id', async (req, res) => { 
+projetos.get('/projetos/:id', authenticateToken, async (req, res) => { 
     const id = req.params.id
 
     // Recebendo as informações do projeto

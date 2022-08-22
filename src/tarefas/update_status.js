@@ -1,9 +1,10 @@
 const express = require('express')
 const tarefas = express.Router()
 var cliente = require('../../cmd/database/connection.js')
+const authenticateToken = require('../../cmd/jwt')
 
 // Mudar Status de uma tarefa
-tarefas.put('/tarefas/:id/status/:status', async (req, res) => {
+tarefas.put('/tarefas/:id/status/:status', authenticateToken, async (req, res) => {
     const id = req.params.id
     const status = req.params.status
 

@@ -1,9 +1,10 @@
 const express = require("express");
 const pessoas = express.Router();
 var cliente = require("../../cmd/database/connection.js");
+const authenticateToken = require('../../cmd/jwt')
 
 // Mostrando pessoas com um status específico
-pessoas.get("/pessoas/status/:status", (req, res) => {
+pessoas.get("/pessoas/status/:status", authenticateToken, (req, res) => {
     const status = req.params.status;
 
     cliente

@@ -1,9 +1,10 @@
 const express = require('express')
 const relatorios = express.Router()
 var cliente = require('../../cmd/database/connection.js')
+const authenticateToken = require('../../cmd/jwt')
 
 // Retorna as tarefas concluidas por uma pessoa em cada mês
-relatorios.get('/relatorios/pessoas/:id', async (req, res) => { 
+relatorios.get('/relatorios/pessoas/:id', authenticateToken, async (req, res) => { 
     const id = req.params.id
 
     // Verificando se tem tarefas finalizadas pela pessoa para realizar o calculo

@@ -1,9 +1,10 @@
 const express = require("express");
 const pessoas = express.Router();
 var cliente = require("../../cmd/database/connection.js");
+const authenticateToken = require('../../cmd/jwt')
 
 // Mostrando todas as pessoas
-pessoas.get("/pessoas", (req, res) => {
+pessoas.get("/pessoas", authenticateToken, (req, res) => {
     cliente
         .query(
             `SELECT pe.*

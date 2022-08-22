@@ -1,9 +1,10 @@
 const express = require('express')
 const relatorios = express.Router()
 var cliente = require('../../cmd/database/connection.js')
+const authenticateToken = require('../../cmd/jwt')
 
 // Retorna os projetos concluidos em cada mês
-relatorios.get('/relatorios/equipes/:id', async (req, res) => {
+relatorios.get('/relatorios/equipes/:id', authenticateToken, async (req, res) => {
     const id = req.params.id
     
     // Buscando a quantidade de tarefas feitas por cada pessoa de uma equipe

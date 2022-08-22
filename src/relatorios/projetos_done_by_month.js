@@ -1,9 +1,10 @@
 const express = require('express')
 const relatorios = express.Router()
 var cliente = require('../../cmd/database/connection.js')
+const authenticateToken = require('../../cmd/jwt')
 
 // Retorna os projetos concluidos em cada mês
-relatorios.get('/relatorios/projetos', async (req, res) => { 
+relatorios.get('/relatorios/projetos', authenticateToken, async (req, res) => { 
 
     // Verificando se tem projetos finalizados para fazer o calculo
     const qtd = await cliente.query(`SELECT COUNT(*) FROM projetos WHERE pr_data_finalizacao IS NOT NULL`)

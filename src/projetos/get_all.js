@@ -1,11 +1,10 @@
 const express = require('express')
 const projetos = express.Router()
 var cliente = require('../../cmd/database/connection.js')
-// const authenticateToken = require('../../cmd/jwt')
+const authenticateToken = require('../../cmd/jwt')
 
 // Mostrando todos os Projetos
-// projetos.get('/projetos', authenticateToken, async (req, res) => { 
-projetos.get('/projetos', async (req, res) => { 
+projetos.get('/projetos', authenticateToken, async (req, res) => { 
     const results = await cliente
                                 .query(`SELECT * FROM projetos ORDER BY pr_id`)
                                 .catch(e => {

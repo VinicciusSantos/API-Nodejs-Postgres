@@ -1,9 +1,10 @@
 const express = require("express");
 const pessoas = express.Router();
 var cliente = require("../../cmd/database/connection.js");
+const authenticateToken = require('../../cmd/jwt')
 
 // Mudar Status de uma pessoa
-pessoas.put("/pessoas/:id/status/:status", (req, res) => {
+pessoas.put("/pessoas/:id/status/:status", authenticateToken, (req, res) => {
     const id = req.params.id;
     const status = req.params.status;
 

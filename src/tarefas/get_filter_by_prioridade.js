@@ -1,9 +1,10 @@
 const express = require('express')
 const tarefas = express.Router()
 var cliente = require('../../cmd/database/connection.js')
+const authenticateToken = require('../../cmd/jwt')
 
 // Mostrando tarefas com uma prioridade específica
-tarefas.get('/tarefas/prioridade/:prioridade', (req, res) => {
+tarefas.get('/tarefas/prioridade/:prioridade', authenticateToken, (req, res) => {
     const prioridade = req.params.prioridade
 
     cliente

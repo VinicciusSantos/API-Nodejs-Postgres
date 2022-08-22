@@ -1,9 +1,10 @@
 const express = require('express')
 const equipes = express.Router()
 var cliente = require('../../cmd/database/connection.js')
+const authenticateToken = require('../../cmd/jwt')
 
 // Associar Pessoa com Equipe
-equipes.post('/equipes/:id_equipe/pessoas/:id_pessoa', async (req, res) => { 
+equipes.post('/equipes/:id_equipe/pessoas/:id_pessoa', authenticateToken, async (req, res) => { 
     const id_equipe = req.params.id_equipe
     const id_pessoa = req.params.id_pessoa
 

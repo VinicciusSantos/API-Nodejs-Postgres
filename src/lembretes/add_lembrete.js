@@ -1,9 +1,10 @@
 const express = require("express");
 const lembretes = express.Router();
 var cliente = require("../../cmd/database/connection.js");
+const authenticateToken = require('../../cmd/jwt')
 
 // Inserindo lembretes
-lembretes.post("/lembretes", (req, res) => {
+lembretes.post("/lembretes", authenticateToken, (req, res) => {
     const body = req.body;
     
     cliente

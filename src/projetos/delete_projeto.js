@@ -1,9 +1,10 @@
 const express = require('express')
 const projetos = express.Router()
 var cliente = require('../../cmd/database/connection.js')
+const authenticateToken = require('../../cmd/jwt')
 
 // Deletando projetos
-projetos.delete('/projetos/:id', async (req, res) => { 
+projetos.delete('/projetos/:id', authenticateToken, async (req, res) => { 
     const id = req.params.id
     
     // Verificando se o id que foi passado como parâmetro é realmente um número

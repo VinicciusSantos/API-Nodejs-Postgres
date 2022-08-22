@@ -1,9 +1,10 @@
 const express = require('express')
 const projetos = express.Router()
 var cliente = require('../../cmd/database/connection.js')
+const authenticateToken = require('../../cmd/jwt')
 
 // Editando projetos
-projetos.put('/projetos/:id', async (req, res) => { 
+projetos.put('/projetos/:id', authenticateToken, async (req, res) => { 
     const id = req.params.id
     const body = req.body
 

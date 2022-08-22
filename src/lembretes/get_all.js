@@ -1,9 +1,10 @@
 const express = require("express");
 const lembretes = express.Router();
 var cliente = require("../../cmd/database/connection.js");
+const authenticateToken = require('../../cmd/jwt')
 
 // Mostrando todas as lembretes
-lembretes.get("/lembretes", (req, res) => {
+lembretes.get("/lembretes", authenticateToken, (req, res) => {
     cliente
         .query(`SELECT * FROM lembretes`)
         .then((results) => {

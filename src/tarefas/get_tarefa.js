@@ -1,9 +1,10 @@
 const express = require('express')
 const tarefas = express.Router()
 var cliente = require('../../cmd/database/connection.js')
+const authenticateToken = require('../../cmd/jwt')
 
 // Mostrando tarefas pelo ID
-tarefas.get('/tarefas/:id', async (req, res) => { 
+tarefas.get('/tarefas/:id', authenticateToken, async (req, res) => { 
     const id = req.params.id
 
     const tarefa = await cliente

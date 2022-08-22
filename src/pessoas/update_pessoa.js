@@ -1,9 +1,10 @@
 const express = require("express");
 const pessoas = express.Router();
 var cliente = require("../../cmd/database/connection.js");
+const authenticateToken = require('../../cmd/jwt')
 
 // Editando pessoas
-pessoas.put("/pessoas/:id", (req, res) => {
+pessoas.put("/pessoas/:id", authenticateToken, (req, res) => {
     const id = req.params.id;
     const body = req.body;
 

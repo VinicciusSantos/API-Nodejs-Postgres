@@ -1,9 +1,10 @@
 const express = require('express')
 const tarefas = express.Router()
 var cliente = require('../../cmd/database/connection.js')
+const authenticateToken = require('../../cmd/jwt')
 
 // Mostrando todas as tarefas
-tarefas.get('/tarefas', async (req, res) => { 
+tarefas.get('/tarefas', authenticateToken, async (req, res) => { 
     const lista_tarefas = await cliente
                                         .query(`SELECT tr.*, pr.pr_nome from tarefas AS tr
                                                 LEFT JOIN projetos_possuem_tarefas AS ppt ON ppt.fk_tarefa = tr.tr_id

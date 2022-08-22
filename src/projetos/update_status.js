@@ -1,9 +1,10 @@
 const express = require('express')
 const projetos = express.Router()
 var cliente = require('../../cmd/database/connection.js')
+const authenticateToken = require('../../cmd/jwt')
 
 // Mudar Status de um Projeto
-projetos.put('/projetos/:id/status/:status', async (req, res) => {
+projetos.put('/projetos/:id/status/:status', authenticateToken, async (req, res) => {
     const id = req.params.id
     const status = req.params.status
     

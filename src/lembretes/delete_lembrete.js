@@ -1,9 +1,10 @@
 const express = require('express')
 const lembretes = express.Router()
 var cliente = require('../../cmd/database/connection.js')
+const authenticateToken = require('../../cmd/jwt')
 
 // Deletando lembretes
-lembretes.delete('/lembretes/:id', (req, res) => { 
+lembretes.delete('/lembretes/:id', authenticateToken, (req, res) => { 
     const id = req.params.id
     cliente
         .query('DELETE FROM lembretes WHERE le_id = $1', [id])

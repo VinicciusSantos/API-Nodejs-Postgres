@@ -1,9 +1,10 @@
 const express = require("express");
 const pessoas = express.Router();
 var cliente = require("../../cmd/database/connection.js");
+const authenticateToken = require('../../cmd/jwt')
 
 // Deletando pessoas
-pessoas.delete("/pessoas/:id", (req, res) => {
+pessoas.delete("/pessoas/:id", authenticateToken, (req, res) => {
     const id = req.params.id;
 
     cliente

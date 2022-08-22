@@ -6,7 +6,6 @@ function authenticateToken(req, res, next) {
         return res.status(401).json({message: `Token Inválido!`});
     }
     const token = header.split(' ')[1]
-    console.log(req.headers)
   
     jwt.verify(token, process.env.SECRET, (err, decored) => {
         if (err) return res.status(401).json({message: "Não Autorizado"}).end()

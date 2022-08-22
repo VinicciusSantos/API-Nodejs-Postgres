@@ -1,9 +1,10 @@
 const express = require("express");
 const pessoas = express.Router();
 var cliente = require("../../cmd/database/connection.js");
+const authenticateToken = require('../../cmd/jwt')
 
 // Mostrando pessoas com um ID específico
-pessoas.get("/pessoas/:id", async (req, res) => {
+pessoas.get("/pessoas/:id", authenticateToken, async (req, res) => {
     const id = req.params.id;
 
     const data_pessoas = await cliente

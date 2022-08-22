@@ -1,9 +1,10 @@
 const express = require('express')
 const equipes = express.Router()
 var cliente = require('../../cmd/database/connection.js')
+const authenticateToken = require('../../cmd/jwt')
 
 // Mostrando todas as equipes
-equipes.get('/equipes', async (req, res) => { 
+equipes.get('/equipes', authenticateToken, async (req, res) => { 
     const equipes = await cliente.query(`SELECT * FROM equipes`)
 
     const equipes_pessoas = await cliente

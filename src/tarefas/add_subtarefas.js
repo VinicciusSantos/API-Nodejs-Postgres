@@ -1,9 +1,10 @@
 const express = require('express')
 const tarefas = express.Router()
 var cliente = require('../../cmd/database/connection.js')
+const authenticateToken = require('../../cmd/jwt')
 
 //Inserindo Sub Tarefas
-tarefas.post('/subtarefas/:tarefa', async (req, res) => { 
+tarefas.post('/subtarefas/:tarefa', authenticateToken, async (req, res) => { 
     const body = req.body
     const tarefa = req.params.tarefa
 

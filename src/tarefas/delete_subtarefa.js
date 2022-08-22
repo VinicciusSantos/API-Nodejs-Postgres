@@ -1,9 +1,10 @@
 const express = require('express')
 const tarefas = express.Router()
 var cliente = require('../../cmd/database/connection.js')
+const authenticateToken = require('../../cmd/jwt')
 
 // Deletando subtarefas
-tarefas.delete('/subtarefas/:id', (req, res) => { 
+tarefas.delete('/subtarefas/:id', authenticateToken, (req, res) => { 
     const id = req.params.id
     
     cliente

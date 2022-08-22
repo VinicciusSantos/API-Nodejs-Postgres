@@ -1,9 +1,10 @@
 const express = require('express')
 const projetos = express.Router()
 var cliente = require('../../cmd/database/connection.js')
+const authenticateToken = require('../../cmd/jwt')
 
 // Mostrando projetos com um status específico
-projetos.get('/projetos/status/:status', (req, res) => {
+projetos.get('/projetos/status/:status', authenticateToken, (req, res) => {
     const status = req.params.status
 
     cliente

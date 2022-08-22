@@ -1,9 +1,10 @@
 const express = require('express')
 const tarefas = express.Router()
 var cliente = require('../../cmd/database/connection.js')
+const authenticateToken = require('../../cmd/jwt')
 
 //Inserindo Tarefas
-tarefas.post('/tarefas', async (req, res) => { 
+tarefas.post('/tarefas', authenticateToken, async (req, res) => { 
     const body = req.body
 
     if (body.tr_nome === "" || !body.tr_nome) {

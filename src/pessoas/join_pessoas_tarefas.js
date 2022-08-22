@@ -1,9 +1,10 @@
 const express = require("express");
 const pessoas = express.Router();
 var cliente = require("../../cmd/database/connection.js");
+const authenticateToken = require('../../cmd/jwt')
 
 // Associar Tarefas com Pessoas
-pessoas.post("/pessoas/:id_pessoa/tarefas/:id_tarefa", (req, res) => {
+pessoas.post("/pessoas/:id_pessoa/tarefas/:id_tarefa", authenticateToken, (req, res) => {
     const id_pessoa = req.params.id_pessoa;
     const id_tarefa = req.params.id_tarefa;
 

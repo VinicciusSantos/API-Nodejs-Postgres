@@ -4,9 +4,10 @@ var cliente = require("../../cmd/database/connection.js");
 const multer = require('multer');
 const multerConfig = require('../../cmd/multer');
 const { s3Uploadv2 } = require("../../cmd/s3Service.js");
+const authenticateToken = require('../../cmd/jwt')
 
 // Inserindo pessoas
-pessoas.post("/pessoas", multer(multerConfig).single('foto'), async (req, res) => {
+pessoas.post("/pessoas", authenticateToken, multer(multerConfig).single('foto'), async (req, res) => {
     const body = req.body;
     if (req.file) {
         const result = await s3Uploadv2(req.file)
