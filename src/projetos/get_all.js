@@ -5,7 +5,7 @@ var cliente = require('../../cmd/database/connection.js')
 
 // Mostrando todos os Projetos
 // projetos.get('/projetos', authenticateToken, async (req, res) => { 
-projetos.get('/projetos', authenticateToken, async (req, res) => { 
+projetos.get('/projetos', async (req, res) => { 
     const results = await cliente
                                 .query(`SELECT * FROM projetos ORDER BY pr_id`)
                                 .catch(e => {
