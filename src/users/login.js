@@ -26,7 +26,7 @@ user.post('/login', async (req, res) => {
     if (validPassword) {
         const id = user.rows[0].id
         const token = jwt.sign({ id }, process.env.SECRET, {
-            expiresIn: 900 // expires in 15min
+            expiresIn: 18000 // expires in 15min
         });
         return res.status(200).json({ auth: true, token: token });
     } else {
