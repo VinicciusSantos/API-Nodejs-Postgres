@@ -38,6 +38,11 @@ CREATE TABLE pessoas (
     pe_foto VARCHAR(300)
 );
 
+CREATE TABLE fotos_padrao (
+	id SERIAL PRIMARY KEY,
+	link VARCHAR(300) NOT NULL
+)
+
 CREATE TABLE equipes (
     eq_id SERIAL PRIMARY KEY NOT NULL, 
     eq_nome VARCHAR(50) NOT NULL,
@@ -82,6 +87,7 @@ create table subTarefas (
 	status INTEGER NOT NULL,
 	FOREIGN KEY (fk_tarefa) REFERENCES tarefas(tr_id) ON DELETE CASCADE
 )
+
 
 /* Cadastrando Projetos */
 INSERT INTO projetos (pr_nome, pr_descricao, pr_data_criacao, pr_status) VALUES
