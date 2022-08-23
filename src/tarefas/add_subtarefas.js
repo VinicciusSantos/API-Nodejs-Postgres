@@ -10,7 +10,7 @@ tarefas.post('/subtarefas/:tarefa', authenticateToken, async (req, res) => {
 
     const results = await cliente
                                 .query(`INSERT INTO subTarefas (nome, descricao, prioridade, fk_tarefa, status)
-                                        VALUES ($1, $2, $3, $4, 'Não Iniciada')`, [body.nome, body.descricao, body.prioridade, tarefa])
+                                        VALUES ($1, $2, $3, $4, 0)`, [body.nome, body.descricao, body.prioridade, tarefa])
                                 .catch(e => {                                  
                                     return res.status(400).json(e)
                                 })
