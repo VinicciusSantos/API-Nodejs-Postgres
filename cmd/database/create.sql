@@ -34,12 +34,14 @@ CREATE TABLE pessoas (
     pe_data_cadastro DATE default CURRENT_DATE,
     pe_status VARCHAR(20) NOT NULL,
     pe_cargo VARCHAR(100) NOT NULL,
-    pe_salario REAL NOT NULL
+    pe_salario REAL NOT NULL,
+    pe_foto VARCHAR(300)
 );
 
 CREATE TABLE equipes (
     eq_id SERIAL PRIMARY KEY NOT NULL, 
-    eq_nome VARCHAR(50) NOT NULL
+    eq_nome VARCHAR(50) NOT NULL,
+    eq_foto VARCHAR(300)
 );
 
 CREATE TABLE pessoas_pertencem_equipes (
@@ -71,15 +73,14 @@ CREATE TABLE lembretes (
 )
 
 create table subTarefas (
-	id serial not null primary key,
-	nome varchar(100) not null,
-	descricao varchar(400),
-	prioridade integer not null,
-	fk_tarefa integer not null,
-	data_criacao timestamp default current_date not null,
-	data_conclusao timestamp,
-	status varchar(20) not null,
-	foreign key (fk_tarefa) references tarefas(tr_id) on delete cascade
+	id SERIAL NOT NULL primary key,
+	nome VARCHAR(100) NOT NULL,
+	prioridade INTEGER NOT NULL,
+	fk_tarefa INTEGER NOT NULL,
+	data_criacao TIMESTAMP DEFAULT current_date NOT NULL,
+	data_conclusao TIMESTAMP,
+	status INTEGER NOT NULL,
+	FOREIGN KEY (fk_tarefa) REFERENCES tarefas(tr_id) ON DELETE CASCADE
 )
 
 /* Cadastrando Projetos */
@@ -176,4 +177,4 @@ INSERT INTO pessoas_associam_tarefas (fk_pessoa, fk_tarefa) VALUES
 (16, 7),
 (7, 8);
 
-insert into subTarefas (nome, descricao, prioridade, fk_tarefa, status) values ('Criar as Tabelas no Postgre', 'Varias coisas', 1, 1, 'Concluido')
+insert into subTarefas (nome, prioridade, fk_tarefa, status) values ('Criar as Tabelas no Postgre', 1, 1, 0)
