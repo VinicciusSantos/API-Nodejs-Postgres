@@ -14,7 +14,7 @@ tarefas.get('/tarefas/:id', authenticateToken, async (req, res) => {
                             })
     
     const subTarefas = await cliente
-                                .query(`SELECT * FROM subTarefas WHERE fk_tarefa = $1`, [id])
+                                .query(`SELECT * FROM subTarefas WHERE fk_tarefa = $1 order by id`, [id])
                                 .catch(e => {            
                                     return res.status(400).json(e)
                                 })
