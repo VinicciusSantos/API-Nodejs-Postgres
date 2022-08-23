@@ -10,7 +10,7 @@ const authenticateToken = require('../../cmd/jwt')
 pessoas.post("/pessoas", authenticateToken, multer(multerConfig).single('foto'), async (req, res) => {
     const body = req.body;
     if (req.file) {
-        const result = await s3Uploadv2(req.file)
+        var result = await s3Uploadv2(req.file)
         console.log(result)
     }
 
