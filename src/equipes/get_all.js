@@ -5,7 +5,7 @@ const authenticateToken = require('../../cmd/jwt')
 
 // Mostrando todas as equipes
 equipes.get('/equipes', authenticateToken, async (req, res) => { 
-    const equipes = await cliente.query(`SELECT * FROM equipes`)
+    const equipes = await cliente.query(`SELECT * FROM equipes order by eq_id`)
 
     const equipes_pessoas = await cliente
                                         .query(`SELECT pe.*, eq.eq_id FROM equipes as eq
@@ -22,11 +22,18 @@ equipes.get('/equipes', authenticateToken, async (req, res) => {
                                         .catch(e => {                                          
                                             return res.status(400).json(e)
                                         })
+
+    const fotos = await cliente
+                            .query(`SELECT * FROM fotos_padrao`)
+                            .catch(e => {                                          
+                                return res.status(400).json(e)
+                            })
     const results = []
 
     // pegar as pessoas da equipe
     equipes.rows.forEach((e, index) => {
         results[index] = e
+        results[index].eq_foto = fotos.rows.filter(f => f.id == e.eq_foto)[0].link
         results[index].pessoas = equipes_pessoas.rows.filter(d => d.eq_id == e.eq_id)
         results[index].projetos = equipes_projetos.rows.filter(p => p.eq_id == e.eq_id)
     })

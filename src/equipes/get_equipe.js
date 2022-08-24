@@ -16,6 +16,12 @@ equipes.get('/equipes/:id', authenticateToken, async (req, res) => {
     
     if (dados.rowCount == 0) return res.status(404).json(`Nenhuma Equipe Encontrada com o ID: ${id}`)
 
+    const foto = await cliente 
+                        .query(`SELECT * FROM fotos_padrao WHERE id = $1`, [dados.rows[0].eq_foto])
+                        .catch(e => {                             
+                            return res.status(400).json(e)
+                        })
+
     const pessoas = await cliente
                         .query(`SELECT pe.* FROM equipes AS eq
                                 INNER JOIN pessoas_pertencem_equipes AS ppe ON ppe.fk_equipe = eq.eq_id
@@ -26,6 +32,7 @@ equipes.get('/equipes/:id', authenticateToken, async (req, res) => {
                         })
 
     const results = dados.rows[0]
+    dados.rows[0].eq_foto = foto.rows[0].link
     results.pessoas = pessoas.rows
     
     const tarefas = await cliente
