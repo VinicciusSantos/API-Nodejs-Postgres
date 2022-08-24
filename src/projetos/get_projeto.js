@@ -24,7 +24,8 @@ projetos.get('/projetos/:id', authenticateToken, async (req, res) => {
                                     .query(`SELECT tr.tr_id, tr.tr_nome, tr_descricao, tr_data_criacao, tr_status, tr_data_finalizacao, tr_prioridade FROM projetos AS pr
                                                INNER JOIN projetos_possuem_tarefas AS ppt ON ppt.fk_projeto = pr.pr_id
                                                INNER JOIN tarefas AS tr ON tr.tr_id = ppt.fk_tarefa
-                                               WHERE pr.pr_id = $1`, [id])
+                                               WHERE pr.pr_id = $1
+                                               ORDER BY tr_prioridade desc, tr_nome`, [id])
                                     .catch(e => {                                    
                                         return res.status(400).json(e)
                                     })
