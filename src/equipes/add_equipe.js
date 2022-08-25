@@ -12,7 +12,7 @@ equipes.post('/equipes', authenticateToken, async (req, res) => {
     }
 
     // cadastrando a equipe
-    const id = cliente
+    const id = await cliente
                     .query(`INSERT INTO equipes (eq_nome, eq_foto) 
                             values ($1, $2)
                             RETURNING eq_id`, [body.eq_nome, body.eq_foto])
@@ -21,8 +21,7 @@ equipes.post('/equipes', authenticateToken, async (req, res) => {
                     })
 
     console.log(`Body: ${body}`)
-    console.log(`Id: ${id.rows[0].eq_id}}`)
-    
+
     // Colocando as pessoas na equipe
     if (body.pessoas) {
         body.pessoas.forEach(async p => {
@@ -36,7 +35,7 @@ equipes.post('/equipes', authenticateToken, async (req, res) => {
         });
     }
 
-    return res.json(result)
+    return res.status(201).json({message: "Criado"})
 })
 
 module.exports = equipes
