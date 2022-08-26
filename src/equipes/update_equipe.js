@@ -24,7 +24,7 @@ equipes.put('/equipes/:id', authenticateToken, async (req, res) => {
                                             WHERE eq.eq_id = $1`, [id])
 
     cliente
-        .query('UPDATE equipes SET eq_nome = $1 WHERE eq_id = $2', [body.eq_nome, id])
+        .query('UPDATE equipes SET eq_nome = $1, eq_foto = $2 WHERE eq_id = $3', [body.eq_nome, body.eq_foto, id])
         .catch(e => {         
             return res.status(400).json(e)
         })
