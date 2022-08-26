@@ -7,9 +7,10 @@ const authenticateToken = require('../../cmd/jwt')
 tarefas.put('/subtarefas/:id', authenticateToken, (req, res) => { 
     const id = req.params.id
     const body = req.body
+    console.log(body)
 
     cliente
-        .query('UPDATE subtarefas SET nome = $1, descricao = $2, prioridade = $3 WHERE id = $4', [body.nome, body.descricao, body.prioridade])
+        .query('UPDATE subtarefas SET nome = $1, prioridade = $2 WHERE id = $3', [body.nome, body.prioridade, id])
         .catch(e => {            
             return res.status(400).json(e)
         })
