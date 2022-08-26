@@ -32,7 +32,11 @@ equipes.get('/equipes/:id', authenticateToken, async (req, res) => {
                         })
 
     const results = dados.rows[0]
-    dados.rows[0].eq_foto = foto.rows[0].link
+    try {
+        dados.rows[0].eq_foto = foto.rows[0].link
+    } catch (error) {
+        dados.rows[0].eq_foto = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFv8yKLUE-rGAPYj41Bigfne3zUWW-TD0Z7A&usqp=CAU"
+    }
     results.pessoas = pessoas.rows
     
     const tarefas = await cliente
