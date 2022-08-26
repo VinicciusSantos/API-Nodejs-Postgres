@@ -50,12 +50,14 @@ tarefas.put('/tarefas/:id/status/:status', authenticateToken, async (req, res) =
                             return res.status(400).json(e)
                         })
 
-    if (projeto.rows.filter(t => t.tr_status == 'Concluido').length == 0) {
-        // Mudando o status do projeto para concluido se todas as tarefas estiverem concluidas
-        await cliente.query(`UPDATE projetos SET pr_status = 'Em Andamento' WHERE pr_id = $1`, [projeto.rows[0].fk_projeto])
-    } else {
-        // Mudando o status do projeto para Em Andamento
-        await cliente.query(`UPDATE projetos SET pr_status = 'Concluido' WHERE pr_id = $1`, [projeto.rows[0].fk_projeto])
+    if (projeto.rowCount > 0) {
+        if (projeto.rows.filter(t => t.tr_status == 'Concluido').length == 0) {
+            // Mudando o status do projeto para concluido se todas as tarefas estiverem concluidas
+            await cliente.query(`UPDATE projetos SET pr_status = 'Em Andamento' WHERE pr_id = $1`, [projeto.rows[0].fk_projeto])
+        } else {
+            // Mudando o status do projeto para Em Andamento
+            await cliente.query(`UPDATE projetos SET pr_status = 'Concluido' WHERE pr_id = $1`, [projeto.rows[0].fk_projeto])
+        }
     }
 
     return res.json('Status Atualizado')
