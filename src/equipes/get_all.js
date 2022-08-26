@@ -33,7 +33,11 @@ equipes.get('/equipes', authenticateToken, async (req, res) => {
     // pegar as pessoas da equipe
     equipes.rows.forEach((e, index) => {
         results[index] = e
-        results[index].eq_foto = fotos.rows.filter(f => f.id == e.eq_foto)[0].link
+        try {
+            results[index].eq_foto = fotos.rows.filter(f => f.id == e.eq_foto)[0].link
+        } catch (error) {
+            results[index].eq_foto = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFv8yKLUE-rGAPYj41Bigfne3zUWW-TD0Z7A&usqp=CAU"
+        }
         results[index].pessoas = equipes_pessoas.rows.filter(d => d.eq_id == e.eq_id)
         results[index].projetos = equipes_projetos.rows.filter(p => p.eq_id == e.eq_id)
     })
