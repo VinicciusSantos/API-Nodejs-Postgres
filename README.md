@@ -95,7 +95,7 @@ https://api-brisa-nodejs-postgresql.herokuapp.com/projetos
 ```
 
 São esperadas as seguintes entradas:
-```
+```json
 {
 		"pr_nome": "",
 		"pr_descricao": "",
@@ -120,7 +120,7 @@ Retorna todos os projetos que foram cadastrados em uma lista de objetos
 ```
 https://api-brisa-nodejs-postgresql.herokuapp.com/projetos
 ```
-```
+```json
 [
 	{
 		"pr_id": 1,
@@ -133,7 +133,7 @@ https://api-brisa-nodejs-postgresql.herokuapp.com/projetos
 	{
 		"pr_id": 2,
 		"pr_nome": "Projeto2",
-		"pr_descricao": Um Projeto para...",
+		"pr_descricao": "Um Projeto para...",
 		"pr_status": "Em Andamento",
 		"pr_data_criacao": "2022-02-12T00:00:00.000Z",
 		"pr_data_finalizacao": null
@@ -150,7 +150,8 @@ O retorno esperado é um objeto com as seguintes informações:
 - Dados (infomações básicas);
 - Equipes (Lista de equipes com as pessoas delas)
 - Tarefas (Lista de tarefas divididas em: Não Iniciadas, Em Desenvolvimento, em Testes, Concluidas)
-```
+
+```json
 {
 	"dados": {
 		"pr_id": 1,
@@ -263,6 +264,7 @@ O retorno esperado é um objeto com as seguintes informações:
 		]
 	}
 }
+
 ```
 ## Ver os Status de projetos que estão sendo utilizados
 Usando o método GET, podemos acessar o seguinte endereço:
@@ -270,7 +272,8 @@ Usando o método GET, podemos acessar o seguinte endereço:
 https://api-brisa-nodejs-postgresql.herokuapp.com/projetos/status
 ```
 retorno esperado: Lista de status e quantidade de projetos com seu respectiva categoria
-```
+
+```json
 [
 	{
 		"pr_status": "Ativo",
@@ -316,7 +319,7 @@ Observações:
 - ":id" se refere ao código identificador do projeto
 
 É necessario passar os seguintes campos:
-```
+```json
 {
 	"pr_nome": "",
 	"pr_descricao": ""
@@ -341,29 +344,29 @@ https://api-brisa-nodejs-postgresql.herokuapp.com/equipes
 ```
 
 São esperadas as seguintes entradas:
-```
+```json
 {
 	"eq_nome": "",
 	"pessoas": [
 			{
-				pe_id: 2,
-				pe_nome: 'Julieta Rangel Ribas',
-				pe_data_nasc: '1996-02-21T03:00:00.000Z',
-				pe_data_cadastro: '2022-08-03T03:00:00.000Z',
-				pe_status: 'Ativo',
-				pe_cargo: 'FrontEnd Junior',
-				pe_salario: 2525,
-				pe_foto: null
+				"pe_id": 2,
+				"pe_nome": "Julieta Rangel Ribas",
+				"pe_data_nasc": "1996-02-21T03:00:00.000Z",
+				"pe_data_cadastro": "2022-08-03T03:00:00.000Z",
+				"pe_status": "Ativo",
+				"pe_cargo": "FrontEnd Junior",
+				"pe_salario": 2525,
+				"pe_foto": null
 			},
 			{
-				pe_id: 9,
-				pe_nome: 'Breno da Rocha',
-				pe_data_nasc: '2001-02-27T03:00:00.000Z',
-				pe_data_cadastro: '2022-08-03T03:00:00.000Z',
-				pe_status: 'Ativo',
-				pe_cargo: 'BackEnd Junior',
-				pe_salario: 2525,
-				pe_foto: null
+				"pe_id": 9,
+				"pe_nome": "Breno da Rocha",
+				"pe_data_nasc": "2001-02-27T03:00:00.000Z",
+				"pe_data_cadastro": "2022-08-03T03:00:00.000Z",
+				"pe_status": "Ativo",
+				"pe_cargo": "BackEnd Junior",
+				"pe_salario": 2525,
+				"pe_foto": null
 			}
 		]
 }
@@ -386,7 +389,7 @@ Retorna todas as equipes que foram cadastradas em uma lista de objetos
 ```
 https://api-brisa-nodejs-postgresql.herokuapp.com/equipes
 ```
-```
+```json
 [
 	{
 		"eq_id": 1,
@@ -493,7 +496,7 @@ Retorno Esperado:
 - Informações Básicas (id e nome)
 - Membros das equipes com suas respectivas tarefas
 - Visão Geral das tarefas (Total, Não Iniciadas, Em Andamento, Em Teste, Concluidas)
-```
+```json
 {
 	"eq_id": 2,
 	"eq_nome": "Equipe Beta",
@@ -608,31 +611,31 @@ Observações:
 - ":id" se refere ao código identificador do a equipe
 
 É necessario passar os seguintes campos:
-```
+```json
 {
-  eq_nome: 'Equipe Delta2',
-  pessoas: [
+  "eq_nome": "Equipe Delta2",
+  "pessoas": [
     {
-      pe_id: 4,
-      pe_nome: 'Maria Vitória Novaes',
-      pe_data_nasc: '1999-07-10T03:00:00.000Z',
-      pe_data_cadastro: '2022-08-03T03:00:00.000Z',
-      pe_status: 'Ativo',
-      pe_cargo: 'BackEnd Junior',
-      pe_salario: 2525,
-      pe_foto: null,
-      tarefas: [Object]
+      "pe_id": 4,
+      "pe_nome": "Maria Vitória Novaes",
+      "pe_data_nasc": "1999-07-10T03:00:00.000Z",
+      "pe_data_cadastro": "2022-08-03T03:00:00.000Z",
+      "pe_status": "Ativo",
+      "pe_cargo": "BackEnd Junior",
+      "pe_salario": 2525,
+      "pe_foto": null,
+      "tarefas": [Object]
     },
     {
-      pe_id: 5,
-      pe_nome: 'Otávio Rodrigues',
-      pe_data_nasc: '2000-08-01T03:00:00.000Z',
-      pe_data_cadastro: '2022-08-03T03:00:00.000Z',
-      pe_status: 'Ativo',
-      pe_cargo: 'BackEnd Junior',
-      pe_salario: 2525,
-      pe_foto: null,
-      tarefas: [Object]
+      "pe_id": 5,
+      "pe_nome": "Otávio Rodrigues",
+      "pe_data_nasc": "2000-08-01T03:00:00.000Z",
+      "pe_data_cadastro": "2022-08-03T03:00:00.000Z",
+      "pe_status": "Ativo",
+      "pe_cargo": "BackEnd Junior",
+      "pe_salario": 2525,
+      "pe_foto": null,
+      "tarefas": [Object]
     }
   ]
 }
@@ -649,7 +652,7 @@ Observações:
 - ":id" se refere ao código identificador da pessoa
 
 Entradas esperadas:
-```
+```json
 {
 	"pe_nome": "",
 	"pe_data_nasc": "",
@@ -673,7 +676,7 @@ Usando o método GET podemos acessar o seguinte endereço:
 https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas
 ```
 Retorno esperado: Uma lista de objetos
-```
+```json
 [
 	{
 		"pe_id": 1,
@@ -713,7 +716,7 @@ Usando o método PUT podemos acessar o seguinte endereço:
 https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/:id
 ```
 São esperadas as seguintes entradas:
-```
+```json
 {
 		"pe_nome": "",
 		"pe_data_nasc": "",
@@ -731,7 +734,7 @@ Usando o método GET podemos acessar o seguinte endereço:
 https://api-brisa-nodejs-postgresql.herokuapp.com/cargos
 ```
 Retorno Esperado: Lista de objetos contendo os cargos e a quantidade de pessoas que ocupam esses cargos
-```
+```json
 [
 	{
 		"cargo": "BackEnd Junior",
@@ -761,7 +764,7 @@ Observações:
 - ":cargo" se refere a um nome de uma profissão
 
 Retorno Esperado: Lista de Pessoas
-```
+```json
 [
 	{
 		"pe_id": 4,
@@ -802,7 +805,7 @@ Usando o método GET podemos acessar o seguinte endereço:
 https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/status
 ```
 Retorno Esperado: Lista de Objetos com os status e com a quantidade de pessoas com esse status
-```
+```json
 [
 	{
 		"pe_status": "Não Iniciado",
@@ -829,7 +832,7 @@ Usando o método GET podemos acessar o seguinte endereço:
 https://api-brisa-nodejs-postgresql.herokuapp.com/pessoas/status/:status
 ```
 Retorno Esperado:
-```
+```json
 [
 	{
 		"pe_id": 3,
@@ -890,31 +893,31 @@ https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas
 ```
 
 São esperadas as seguintes entradas:
-```
+```json
 {
 		"tr_nome": "",
 		"tr_descricao": "",
 		"tr_prioridade": 1,
 		"pessoas": [
 			{
-				pe_id: 2,
-				pe_nome: 'Julieta Rangel Ribas',
-				pe_data_nasc: '1996-02-21T03:00:00.000Z',
-				pe_data_cadastro: '2022-08-03T03:00:00.000Z',
-				pe_status: 'Ativo',
-				pe_cargo: 'FrontEnd Junior',
-				pe_salario: 2525,
-				pe_foto: null
+				"pe_id": 2,
+				"pe_nome": "Julieta Rangel Ribas",
+				"pe_data_nasc": "1996-02-21T03:00:00.000Z",
+				"pe_data_cadastro": "2022-08-03T03:00:00.000Z",
+				"pe_status": "Ativo",
+				"pe_cargo": "FrontEnd Junior",
+				"pe_salario": 2525,
+				"pe_foto": null
 			},
 			{
-				pe_id: 9,
-				pe_nome: 'Breno da Rocha',
-				pe_data_nasc: '2001-02-27T03:00:00.000Z',
-				pe_data_cadastro: '2022-08-03T03:00:00.000Z',
-				pe_status: 'Ativo',
-				pe_cargo: 'BackEnd Junior',
-				pe_salario: 2525,
-				pe_foto: null
+				"pe_id": 9,
+				"pe_nome": "Breno da Rocha",
+				"pe_data_nasc": "2001-02-27T03:00:00.000Z",
+				"pe_data_cadastro": "2022-08-03T03:00:00.000Z",
+				"pe_status": "Ativo",
+				"pe_cargo": "BackEnd Junior",
+				"pe_salario": 2525,
+				"pe_foto": null
 			}
 		]
 }
@@ -942,7 +945,7 @@ https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas
 ```
 
 Retorno Esperado: Lista de tarefas com as pessoas que estão desenvolvendo cada uma e suas respectivas subtarefas
-```
+```json
 [
 	{
 		"tr_id": 35,
@@ -1034,7 +1037,7 @@ https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/:id
 ```
 
 O retorno esperado: Dados de tarefas e suas subtarefas
-```
+```json
 {
 	"tr_id": 1,
 	"tr_nome": "Criar o Banco de dados da API",
@@ -1072,7 +1075,7 @@ Observações:
 	- 3 - Prioridade Alta
 
 Retorno Esperado: Lista de Objetos
-```
+```json
 [
 	{
 		"tr_id": 32,
@@ -1104,7 +1107,7 @@ Observações:
 - ":id" se refere ao código identificador da tarefa
 
 É necessario passar os seguintes campos:
-```
+```json
 {
 	"tr_nome": "",
 	"tr_descricao": "" 
@@ -1118,7 +1121,7 @@ https://api-brisa-nodejs-postgresql.herokuapp.com/tarefas/status
 ```
 
 Retorno Esperado:
-```
+```json
 [
 	{
 		"tr_status": "Em Desenvolvimento",
@@ -1149,7 +1152,7 @@ Observações:
 - ":status" se refere a um status de tarefa 
 
 Retorno Esperado:
-```
+```json
 [
 	{
 		"tr_status": "Em Desenvolvimento",
@@ -1188,7 +1191,7 @@ https://api-brisa-nodejs-postgresql.herokuapp.com/subtarefas/:tarefa
 ```
 
 São Esperadas as seguintes entradas:
-```
+```json
 {
 	"nome": "",
 	"descricao": "",
@@ -1210,7 +1213,7 @@ https://api-brisa-nodejs-postgresql.herokuapp.com/subtarefas/:id
 ```
 
 São Esperadas as seguintes entradas:
-```
+```json
 {
 	"nome": "",
 	"descricao": "",
@@ -1268,11 +1271,11 @@ https://api-brisa-nodejs-postgresql.herokuapp.com/lembretes
 ```
 
 Retorno Esperado:
-```
+```json
 [
 	{
 		"le_id": 81,
-		"le_descricao": "Lembrete tal,
+		"le_descricao": "Lembrete tal",
 		"le_data_criacao": "2022-08-11T00:00:00.000Z",
 		"le_data_lembrete": "2022-08-24T19:06:51.000Z"
 	},
@@ -1293,7 +1296,7 @@ https://api-brisa-nodejs-postgresql.herokuapp.com/relatorios/projetos
 ```
 
 Retorno Esperado: Lista de Objetos com os projetos concluidos em cada mês
-```
+```json
 [
 	{
 		"mes": "8",
@@ -1323,7 +1326,7 @@ Observações:
 - ":id" se refere a um identificador de uma pessoa
 
 Retorno Esperado: Lista de Objetos com as tarefas feitas por uma pessoa em cada mês
-```
+```json
 [
 	{
 		"mes": "8",
