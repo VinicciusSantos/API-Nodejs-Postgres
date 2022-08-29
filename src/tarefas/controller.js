@@ -14,6 +14,7 @@ const update_subtarefa_status = require('./update_subtarefa_status')
 const update_subtarefa = require('./update_subtarefa')
 const delete_subtarefa = require('./delete_subtarefa')
 const add_subtarefas = require('./add_subtarefas')
+const check_subtarefas = require('./check_subtarefas')
 
 tarefas.use(get_all)
 tarefas.use(get_status)
@@ -28,5 +29,6 @@ tarefas.use(add_subtarefas)
 tarefas.use(update_subtarefa_status)
 tarefas.use(update_subtarefa)
 tarefas.use(delete_subtarefa)
+tarefas.use(check_subtarefas)
 
 module.exports = tarefas
