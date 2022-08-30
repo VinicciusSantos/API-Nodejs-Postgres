@@ -5,10 +5,14 @@ const morgan = require('morgan')
 
 const app = express()
 
+const equipes = require('./equipe/routes')
+
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(express.json())
 app.use(cors())
+
+app.use(equipes)
 
 const host = '0.0.0.0';
 const port = process.env.PORT || 8000;
