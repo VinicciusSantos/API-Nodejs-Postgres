@@ -12,7 +12,8 @@ const Equipe = database.define('equipe',{
 
   nome: {
     type: Sequelize.STRING(100),
-    allowNull: false
+    allowNull: false,
+    unique: true
   }
 })
 

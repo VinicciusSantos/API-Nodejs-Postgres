@@ -1,13 +1,21 @@
 const Equipe = require('../model/model')
 
-exports.NovaEquipe = async (EquipeNova) => {
-
-    return await Equipe
-                    .create(EquipeNova)
-                    .catch(err => { console.error(err) })
-
+exports.NovaEquipe = (EquipeNova) => {
+    return Equipe.create(EquipeNova)
 }
 
-exports.BuscarEquipes = async () => {
-    return await Equipe.findAll()
+exports.BuscarEquipes = () => {
+    return Equipe.findAll()
+}
+
+exports.BuscarPorId = (id) => {
+    return Equipe.findByPk(id)
+}
+
+exports.Edit = (id, equipe) => {
+    return Equipe.update(equipe, { where: { id: id }})
+}
+
+exports.Delete = (id) => {
+    return Equipe.destroy({ where: { id: id }})
 }
