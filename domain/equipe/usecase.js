@@ -5,3 +5,7 @@ exports.NovaEquipe = async (req, res, NovaEquipe) => {
 
     return await Equipe.NovaEquipe(NovaEquipe)
 }
+
+exports.BuscarEquipes = async (req, res) => {
+    return await Equipe.BuscarEquipes()
+}
