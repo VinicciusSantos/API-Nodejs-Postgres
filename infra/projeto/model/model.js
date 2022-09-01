@@ -19,7 +19,8 @@ const Projeto = database.define('projeto',{
 
   status: {
     type: Sequelize.STRING(20),
-    allowNull: false
+    allowNull: false,
+    defaultValue: 'Não Iniciado'
   }
 })
 
