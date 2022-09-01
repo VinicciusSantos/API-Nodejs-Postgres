@@ -1,7 +1,6 @@
 const Equipe = require('../../infra/equipe/sequelize/data')
 
 exports.NovaEquipe = async (NovaEquipe) => {
-    NovaEquipe.nome = `Equipe: ${NovaEquipe.nome}`
     return await Equipe.NovaEquipe(NovaEquipe)
 }
 

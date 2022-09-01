@@ -11,17 +11,36 @@ const Pessoa = database.define('pessoa',{
 
   nome: {
     type: Sequelize.STRING(100),
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isAlpha: true,
+      min: 3, 
+    }
   },
 
   nascimento: {
     type: Sequelize.DATE,
     allowNull: false,
+    validate: {
+      isBefore: new Date().toISOString()
+    }
   },
 
-  salario: Sequelize.DECIMAL,
+  salario: {
+    type: Sequelize.DECIMAL,
+    validate: {
+      isFloat: true,
+      notEmpty: true
+    }
+  },
 
-  foto: Sequelize.STRING(300)
+  foto: {
+    type: Sequelize.STRING(300),
+    validate: {
+      isUrl: true,
+      notEmpty: false,
+    }
+  }
 })
 
 module.exports = Pessoa;

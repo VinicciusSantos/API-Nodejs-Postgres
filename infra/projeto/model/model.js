@@ -12,7 +12,11 @@ const Projeto = database.define('projeto',{
   nome: {
     type: Sequelize.STRING(100),
     allowNull: false,
-    unique: true
+    unique: true,
+    validate: {
+      min: 4,
+      notEmpty: true
+    }
   },
 
   descricao: Sequelize.STRING(400),
@@ -20,7 +24,12 @@ const Projeto = database.define('projeto',{
   status: {
     type: Sequelize.STRING(20),
     allowNull: false,
-    defaultValue: 'Não Iniciado'
+    defaultValue: 'Não Iniciado',
+    validate: {
+      isAlpha: true,
+      notEmpty: true,
+      isIn: [["Ativo", "Concluido", "Em Andamento"]]
+    }
   }
 })
 

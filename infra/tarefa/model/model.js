@@ -11,7 +11,11 @@ const Tarefa = database.define('tarefa',{
 
   nome: {
     type: Sequelize.STRING(100),
-    allowNull: false
+    allowNull: false,
+    validate: {
+      min: 4,
+      notEmpty: true
+    }
   },
 
   descricao: Sequelize.STRING(400),
@@ -19,10 +23,22 @@ const Tarefa = database.define('tarefa',{
   status: {
     type: Sequelize.STRING(20),
     allowNull: false,
-    defaultValue: "Não Iniciada"
+    defaultValue: "Não Iniciada",
+    validate: {
+      isAlpha: true,
+      notEmpty: true,
+      isIn: [["Em Desenvolvimento", "Não Iniciado", "Em Testes", "Concluido"]]
+    }
   },
 
-  prioridade: Sequelize.INTEGER
+  prioridade: {
+    type: Sequelize.INTEGER,
+    validate: {
+      isInt: true,
+      notEmpty: true,
+      isIn: [[1, 2, 3]],
+    }
+  }
 })
 
 module.exports = Tarefa;

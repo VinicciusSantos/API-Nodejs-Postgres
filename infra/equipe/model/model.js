@@ -13,7 +13,12 @@ const Equipe = database.define('equipe',{
   nome: {
     type: Sequelize.STRING(100),
     allowNull: false,
-    unique: true
+    unique: true,
+    validate: {
+      isAlphanumeric: true,
+      notEmpty: true,
+      min: 4
+    }
   }
 })
 

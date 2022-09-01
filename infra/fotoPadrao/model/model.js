@@ -11,7 +11,11 @@ const FotoPadrao = database.define('fotoPadrao',{
 
   link: {
     type: Sequelize.STRING(300),
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true, 
+      isUrl: true
+    }
   },
 })
 

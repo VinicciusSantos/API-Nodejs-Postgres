@@ -11,12 +11,19 @@ const Lembrete = database.define('lembrete',{
 
   descricao: {
     type: Sequelize.STRING(400),
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
 
   data: {
     type: Sequelize.DATE,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isDate: true
+      // isAfter: new Date()
+    }
   },
 })
 
