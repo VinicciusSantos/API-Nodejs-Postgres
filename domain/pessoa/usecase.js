@@ -6,7 +6,7 @@ exports.NovaPessoa = async (pessoaNova) => {
 
 exports.BuscarPessoas = async () => {
     const pes = await Pessoa.BuscarPessoas()
-    if (!pes) throw new Error(`Nenhuma Pessoa Encontrada`)
+    if (pes.length === 0) throw new Error(`Nenhuma Pessoa Encontrada`)
     return pes
 }
 

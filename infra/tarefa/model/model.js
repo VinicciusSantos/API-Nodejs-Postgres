@@ -18,7 +18,8 @@ const Tarefa = database.define('tarefa',{
 
   status: {
     type: Sequelize.STRING(20),
-    allowNull: false
+    allowNull: false,
+    defaultValue: "Não Iniciada"
   },
 
   prioridade: Sequelize.INTEGER
