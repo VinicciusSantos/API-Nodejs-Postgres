@@ -1,4 +1,4 @@
-const Pessoa = require('../../domain/Pessoa/usecase')
+const Pessoa = require('../../domain/pessoa/usecase')
 const ModelApresentacao = require('../../domain/pessoa/model/model')
 
 exports.NovaPessoa = async (req, res) => {

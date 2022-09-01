@@ -32,6 +32,8 @@ exports.Edit = async (id, equipe) => {
 
 exports.Delete = async (id) => {
     try {
+        const eq = await this.BuscarPorId(id)
+        if (!eq) throw new Error(`Equipe ${id} não encontrada`)
         await Equipe.Delete(id)
     } catch (error) {
         throw new Error(error)
