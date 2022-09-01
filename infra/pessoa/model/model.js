@@ -19,17 +19,6 @@ const Pessoa = database.define('pessoa',{
     allowNull: false,
   },
 
-  cadastro: {
-    type: Sequelize.DATE,
-    defaultValue: new Date(),
-    allowNull: false
-  },
-
-  status: {
-    type: Sequelize.STRING(20),
-    allowNull: false
-  },
-
   salario: Sequelize.DECIMAL,
 
   foto: Sequelize.STRING(300)

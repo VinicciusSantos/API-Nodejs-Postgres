@@ -10,8 +10,10 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(express.json())
 app.use(cors())
 
-const equipe = require('./equipe/routes')
-app.use(equipe)
+const equipes = require('./equipe/routes')
+const pessoas = require('./pessoa/routes')
+app.use(equipes)
+app.use(pessoas)
 
 const host = '0.0.0.0';
 const port = process.env.PORT || 8000;
