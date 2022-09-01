@@ -1,7 +1,7 @@
 const Projeto = require('../../infra/projeto/sequelize/data')
 
 exports.NovoProjeto = async (NovoProjeto) => {
-    return await Projeto.NovoProjeto(NovoProjeto)
+    return Projeto.NovoProjeto(NovoProjeto)
 }
 
 exports.BuscarProjetos = async () => {

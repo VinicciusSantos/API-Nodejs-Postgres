@@ -1,15 +1,17 @@
 const Projeto = require('../../domain/projeto/usecase')
+const ProjetoEquipe = require('../../domain/projetoEquipe/usecase')
 const ModelApresentacao = require('../../domain/projeto/model/model')
 
 exports.NovoProjeto = async (req, res) => {
-    const { nome, descricao } = req.body
+    const { nome, descricao, equipes } = req.body
     let ProjetoNovo = new ModelApresentacao(nome, descricao)
 
     try {
         const novosDados = await Projeto.NovoProjeto(ProjetoNovo)
-        return res.status(201).json({message: "Criado com Sucesso", data: novosDados})
+        const eqs = await ProjetoEquipe.Associar(novosDados, equipes)
+        return res.status(201).json({message: "Criado com Sucesso", data: novosDados, equipes: eqs})
     } catch (error) {
-        return res.status(400).json({message: "Não Foi possível cadastrar a Projeto", error: error.message})
+        return res.status(400).json({message: "Não Foi possível cadastrar o Projeto", error: error.message})
     }
 }
 
@@ -27,7 +29,8 @@ exports.BuscarPorId = async (req, res) => {
 
     try {
         const pe = await Projeto.BuscarPorId(id)
-        return res.status(200).json({message: "Retornando o Projeto com sucesso", data: pe})
+        const equipes = await ProjetoEquipe.GetEquipes(id)
+        return res.status(200).json({message: "Retornando o Projeto com sucesso", data: pe, equipes})
     } catch (error) {
         return res.status(400).json({message: "Erro ao buscar Projeto", error: error.message})
     }

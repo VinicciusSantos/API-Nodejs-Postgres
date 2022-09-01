@@ -24,7 +24,7 @@ const Projeto = database.define('projeto',{
   status: {
     type: Sequelize.STRING(20),
     allowNull: false,
-    defaultValue: 'Não Iniciado',
+    defaultValue: 'Ativo',
     validate: {
       isAlpha: true,
       notEmpty: true,
