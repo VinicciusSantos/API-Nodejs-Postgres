@@ -1,3 +1,4 @@
+const sequelize = require('sequelize')
 const Projeto = require('../model/model')
 
 exports.NovoProjeto = (ProjetoNovo) => {
@@ -18,4 +19,11 @@ exports.Edit = (id, projeto) => {
 
 exports.Delete = (id) => {
     return Projeto.destroy({ where: { id: id }})
+}
+
+exports.VerStatus = () => {
+    return Projeto.findAll({
+        attributes: ['status', [sequelize.fn('COUNT', '*'), 'count']],
+        group: ['status']
+    })
 }

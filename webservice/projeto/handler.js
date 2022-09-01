@@ -59,3 +59,12 @@ exports.Delete = async (req, res) => {
         return res.status(400).json({message: "Erro ao Deletar Projeto", error: error.message})
     }
 }
+
+exports.VerStatus = async (req, res) => {
+    try {
+        const status = await Projeto.VerStatus()
+        return res.status(200).json({message: "Status de projetos obtidos com sucesso", data: status})
+    } catch (error) {
+        return res.status(400).json({message: "Erro ao Buscar status"})
+    }
+}

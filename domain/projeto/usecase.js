@@ -38,3 +38,14 @@ exports.Delete = async (id) => {
         throw new Error(error)
     }
 }
+
+exports.VerStatus = async() => {
+    try {
+        const status = await Projeto.VerStatus()
+        console.log("status")
+        if (status.length === 0) throw new Error("Nenhum Status Cadastrado")
+        return status
+    } catch (error) {
+        throw new error("Falha ao buscar status")
+    }
+}
