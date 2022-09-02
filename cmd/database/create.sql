@@ -39,8 +39,8 @@ CREATE TABLE pessoas (
 );
 
 CREATE TABLE fotos_padrao (
-	id SERIAL PRIMARY KEY,
-	link VARCHAR(300) NOT NULL
+    id SERIAL PRIMARY KEY,
+    link VARCHAR(300) NOT NULL
 )
 
 CREATE TABLE equipes (
@@ -78,14 +78,14 @@ CREATE TABLE lembretes (
 )
 
 create table subTarefas (
-	id SERIAL NOT NULL primary key,
-	nome VARCHAR(100) NOT NULL,
-	prioridade INTEGER NOT NULL,
-	fk_tarefa INTEGER NOT NULL,
-	data_criacao TIMESTAMP DEFAULT current_date NOT NULL,
-	data_conclusao TIMESTAMP,
-	status INTEGER NOT NULL,
-	FOREIGN KEY (fk_tarefa) REFERENCES tarefas(tr_id) ON DELETE CASCADE
+    id SERIAL NOT NULL primary key,
+    nome VARCHAR(100) NOT NULL,
+    prioridade INTEGER NOT NULL,
+    fk_tarefa INTEGER NOT NULL,
+    data_criacao TIMESTAMP DEFAULT current_date NOT NULL,
+    data_conclusao TIMESTAMP,
+    status INTEGER NOT NULL,
+    FOREIGN KEY (fk_tarefa) REFERENCES tarefas(tr_id) ON DELETE CASCADE
 )
 
 
