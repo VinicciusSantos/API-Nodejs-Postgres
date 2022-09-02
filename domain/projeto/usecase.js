@@ -30,6 +30,9 @@ exports.BuscarPorId = async (id) => {
 
 exports.Edit = async (id, projeto) => {
     try {
+        const proj = await this.BuscarPorId(id)
+        if (!proj) throw new Error(`Projeto ${id} não encontrado`)
+
         await Projeto.Edit(id, projeto)
         return this.BuscarPorId(id)
     } catch (error) {
@@ -47,13 +50,23 @@ exports.Delete = async (id) => {
     }
 }
 
-exports.VerStatus = async() => {
+exports.VerStatus = async () => {
     try {
         const status = await Projeto.VerStatus()
         if (status.length === 0) throw new Error("Nenhum Status Cadastrado")
         return status
     } catch (error) {
         throw new Error("Falha ao buscar status")
+    }
+}
+
+exports.MudarStatus = async (id, status) => {
+    try {
+        const proj = this.BuscarPorId(id)
+        proj.status = status
+        return this.Edit(id, proj)
+    } catch (error) {
+        throw new Error(error)
     }
 }
 

@@ -13,7 +13,6 @@ const Pessoa = database.define('pessoa',{
     type: Sequelize.STRING(100),
     allowNull: false,
     validate: {
-      isAlpha: true,
       min: 3, 
     }
   },

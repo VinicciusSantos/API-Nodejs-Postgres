@@ -15,7 +15,6 @@ const Equipe = database.define('equipe',{
     allowNull: false,
     unique: true,
     validate: {
-      isAlphanumeric: true,
       notEmpty: true,
       min: 4
     }

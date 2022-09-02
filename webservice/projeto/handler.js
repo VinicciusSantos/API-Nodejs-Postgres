@@ -73,6 +73,17 @@ exports.VerStatus = async (req, res) => {
     }
 }
 
+exports.MudarStatus = async (req,res) => {
+    const { id, status } = req.params
+
+    try {
+        const updated = await Projeto.MudarStatus(id, status)
+        return res.status(200).json({message: "Status de projetos alterado com sucesso", data: updated})
+    } catch (error) {
+        return res.status(400).json({message: "Erro ao Atualizar status", error: error.message})
+    }
+}
+
 exports.BuscarPorStatus = async(req, res) => {
     const { status } = req.params
     try {

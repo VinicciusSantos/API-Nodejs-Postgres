@@ -26,7 +26,6 @@ const Projeto = database.define('projeto',{
     allowNull: false,
     defaultValue: 'Ativo',
     validate: {
-      isAlpha: true,
       notEmpty: true,
       isIn: [["Ativo", "Concluido", "Em Andamento"]]
     }

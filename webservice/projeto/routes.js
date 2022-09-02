@@ -4,6 +4,7 @@ var handlerProjeto = require('./handler')
 app.group('/projetos', function(){
     app.get("/status", handlerProjeto.VerStatus)
     app.get("/status/:status", handlerProjeto.BuscarPorStatus)
+    app.put("/:id/status/:status", handlerProjeto.MudarStatus)
 
     app.get("/:id", handlerProjeto.BuscarPorId)
     app.get("/", handlerProjeto.BuscarProjetos)
