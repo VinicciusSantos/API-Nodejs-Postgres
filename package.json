@@ -2,10 +2,10 @@
   "name": "node",
   "version": "1.0.0",
   "description": "Primeira API",
-  "main": "cmd/server.js",
+  "main": "src/webservice/main.js",
   "scripts": {
-    "dev": "nodemon webservice/main.js",
-    "start": "node webservice/main.js"
+    "dev": "nodemon src/webservice/main.js",
+    "start": "node src/webservice/main.js"
   },
   "author": "",
   "license": "ISC",

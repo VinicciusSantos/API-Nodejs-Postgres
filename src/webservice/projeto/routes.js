@@ -6,9 +6,9 @@ app.group('/projetos', function(){
     app.get("/status/:status", handlerProjeto.BuscarPorStatus)
     app.put("/:id/status/:status", handlerProjeto.MudarStatus)
 
-    app.get("/:id", handlerProjeto.BuscarPorId)
-    app.get("/", handlerProjeto.BuscarProjetos)
     app.post("/", handlerProjeto.NovoProjeto)
+    app.get("/", handlerProjeto.BuscarProjetos)
+    app.get("/:id", handlerProjeto.BuscarPorId)
     app.put("/:id", handlerProjeto.Edit)
     app.delete("/:id", handlerProjeto.Delete)
     
