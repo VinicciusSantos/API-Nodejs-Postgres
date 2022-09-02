@@ -24,7 +24,6 @@ exports.getTarefas = async(pr) => {
         prTarefas.forEach(eq => { ids_tarefas.push(eq.dataValues.tarefaId) })
 
         const results = todasTarefas.filter(tr => ids_tarefas.includes(tr.dataValues.id))
-        console.log(results)
         return results
     } catch (error) {
         throw new Error(error)
