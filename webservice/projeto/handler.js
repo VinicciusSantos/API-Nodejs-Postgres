@@ -12,7 +12,7 @@ exports.NovoProjeto = async (req, res) => {
         const eqs = await ProjetoEquipe.Associar(novosDados.dataValues.id, equipes)
         return res.status(201).json({message: "Criado com Sucesso", data: novosDados, equipes: eqs})
     } catch (error) {
-        return res.status(400).json({message: "Não Foi possível cadastrar o Projeto", error: error})
+        return res.status(400).json({message: "Não Foi possível cadastrar o Projeto", error: error.message})
     }
 }
 

@@ -11,7 +11,7 @@ exports.NovaPessoa = async (req, res) => {
         const novosDados = await Pessoa.NovaPessoa(pessoaNova)
         return res.status(201).json({message: "Criado com Sucesso", data: novosDados})
     } catch (error) {
-        return res.status(400).json({message: "Não Foi possível cadastrar a Pessoa", error: error})
+        return res.status(400).json({message: "Não Foi possível cadastrar a Pessoa", error: error.message})
     }
 }
 

@@ -9,7 +9,7 @@ exports.NovaEquipe = async (req, res) => {
         const novosDados = await Equipe.NovaEquipe(equipeNova)
         return res.status(201).json({message: "Criado com Sucesso", data: novosDados})
     } catch (error) {
-        return res.status(400).json({message: "Não Foi possível criar a equipe", error: error})
+        return res.status(400).json({message: "Não Foi possível criar a equipe", error: error.message})
     }
 }
 

@@ -9,7 +9,7 @@ exports.NovaTarefa = async (req, res) => {
         const novosDados = await Tarefa.NovaTarefa(TarefaNova)
         return res.status(201).json({message: "Criada com Sucesso", data: novosDados})
     } catch (error) {
-        return res.status(400).json({message: "Não Foi possível criar a Tarefa", error: error})
+        return res.status(400).json({message: "Não Foi possível criar a Tarefa", error: error.message})
     }
 }
 
