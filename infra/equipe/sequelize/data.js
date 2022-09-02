@@ -8,6 +8,10 @@ exports.BuscarEquipes = () => {
     return Equipe.findAll()
 }
 
+exports.BuscarCampos = (campos) => {
+    return Equipe.findAll({attributes: campos})
+}
+
 exports.BuscarPorId = (id) => {
     return Equipe.findByPk(id)
 }

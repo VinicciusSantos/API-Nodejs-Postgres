@@ -17,6 +17,7 @@ const tarefas = require('./tarefa/routes')
 app.use(equipes)
 app.use(pessoas)
 app.use(projetos)
+app.use(tarefas)
 
 const host = '0.0.0.0';
 const port = process.env.PORT || 8000;

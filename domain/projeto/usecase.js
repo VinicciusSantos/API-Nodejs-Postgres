@@ -1,13 +1,21 @@
 const Projeto = require('../../infra/projeto/sequelize/data')
 
 exports.NovoProjeto = async (NovoProjeto) => {
-    return Projeto.NovoProjeto(NovoProjeto)
+    try {
+        return Projeto.NovoProjeto(NovoProjeto)
+    } catch (error) {
+        throw new Error(error)
+    }
 }
 
 exports.BuscarProjetos = async () => {
-    const prs = await Projeto.BuscarProjetos()
-    if (prs.length === 0) throw new Error(`Nenhum Projeto Encontrado`)
-    return prs
+    try {
+        const prs = await Projeto.BuscarProjetos()
+        if (prs.length === 0) throw new Error(`Nenhum Projeto Encontrado`)
+        return prs
+    } catch (error) {
+        throw new Error(error)
+    }
 }
 
 exports.BuscarPorId = async (id) => {
@@ -15,8 +23,8 @@ exports.BuscarPorId = async (id) => {
         const pr = await Projeto.BuscarPorId(id)
         if (!pr) throw new Error(`Projeto ${id} não foi encontrado`)
         return pr
-    } catch (err) {
-        throw new Error(err)
+    } catch (error) {
+        throw new Error(error)
     }
 }
 
@@ -42,10 +50,19 @@ exports.Delete = async (id) => {
 exports.VerStatus = async() => {
     try {
         const status = await Projeto.VerStatus()
-        console.log("status")
         if (status.length === 0) throw new Error("Nenhum Status Cadastrado")
         return status
     } catch (error) {
-        throw new error("Falha ao buscar status")
+        throw new Error("Falha ao buscar status")
+    }
+}
+
+exports.BuscarPorStatus = async (status) => {
+    try {
+        const projetosFiltrados = await Projeto.BuscarPorStatus(status)
+        if (projetosFiltrados.length === 0) throw new Error(`Nenhum projeto encontrado com o status ${status}`)
+        return projetosFiltrados
+    } catch (error) {
+        throw new Error(`Falha ao buscar projetos com o status: ${status}`)
     }
 }

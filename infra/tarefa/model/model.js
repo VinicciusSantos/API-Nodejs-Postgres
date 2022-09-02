@@ -25,9 +25,8 @@ const Tarefa = database.define('tarefa',{
     allowNull: false,
     defaultValue: "Não Iniciada",
     validate: {
-      isAlpha: true,
       notEmpty: true,
-      isIn: [["Em Desenvolvimento", "Não Iniciado", "Em Testes", "Concluido"]]
+      isIn: [["Em Desenvolvimento", "Não Iniciada", "Em Testes", "Concluido"]]
     }
   },
 

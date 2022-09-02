@@ -27,3 +27,7 @@ exports.VerStatus = () => {
         group: ['status']
     })
 }
+
+exports.BuscarPorStatus = (status) => {
+    return Projeto.findAll({ where: { status: status }})
+}

@@ -1,5 +1,6 @@
 const Projeto = require('../../domain/projeto/usecase')
 const ProjetoEquipe = require('../../domain/projetoEquipe/usecase')
+const ProjetoTarefa = require('../../domain/projetoTarefa/usecase')
 const ModelApresentacao = require('../../domain/projeto/model/model')
 
 exports.NovoProjeto = async (req, res) => {
@@ -8,7 +9,7 @@ exports.NovoProjeto = async (req, res) => {
 
     try {
         const novosDados = await Projeto.NovoProjeto(ProjetoNovo)
-        const eqs = await ProjetoEquipe.Associar(novosDados, equipes)
+        const eqs = await ProjetoEquipe.Associar(novosDados.dataValues.id, equipes)
         return res.status(201).json({message: "Criado com Sucesso", data: novosDados, equipes: eqs})
     } catch (error) {
         return res.status(400).json({message: "Não Foi possível cadastrar o Projeto", error: error.message})
@@ -65,6 +66,27 @@ exports.VerStatus = async (req, res) => {
         const status = await Projeto.VerStatus()
         return res.status(200).json({message: "Status de projetos obtidos com sucesso", data: status})
     } catch (error) {
-        return res.status(400).json({message: "Erro ao Buscar status"})
+        return res.status(400).json({message: "Erro ao Buscar status", error: error.message})
+    }
+}
+
+exports.BuscarPorStatus = async(req, res) => {
+    const { status } = req.params
+    try {
+        const projetosComOStatus = await Projeto.BuscarPorStatus(status)
+        return res.status(200).json({message: `${projetosComOStatus.length} Projetos com o status '${status}' foram encontrados!`, data: projetosComOStatus})
+    } catch (error) {
+        return res.status(400).json({message: "Erro ao filtrar projetos por status", error: error.message})
+    }
+}
+
+exports.VincularProjetoTarefa = async(req, res) => {
+    const { pr, tr } = req.params
+    try {
+        const vinculo = await ProjetoTarefa.VincularProjetoTarefa(pr, tr)
+        if (vinculo) var prAtualizado = await this.BuscarPorId(pr)
+        return res.status(201).json({message: `Projeto ${pr} foi vinculado com a tarefa ${tr}`, data: prAtualizado})
+    } catch (error) {
+        return res.status(400).json({message: "Erro ao vincular Projeto e Tarefa", error: error.message})
     }
 }
