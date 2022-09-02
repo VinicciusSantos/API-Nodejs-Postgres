@@ -22,7 +22,7 @@ exports.GetEquipes = async (projeto) => {
 exports.Associar = async (projeto, equipes) => {
     try {
         const checkPr = await Projeto.BuscarPorId(projeto)
-        if (!checkPr) throw new Error(`Projeto ${projeto} não encontrado!`) 
+        if (!checkPr) throw new Error(1) // Projeto não encontrado!`
 
         // Criando uma lista com os IDs de equipes para validar se a equipe associada existe
         const ids_equipes = await Equipe.BuscarCampos(['id'])
@@ -39,7 +39,7 @@ exports.Associar = async (projeto, equipes) => {
         });
 
         if (NaoExistentes.length > 0)
-            throw new Error(`${NaoExistentes.length} equipes não foram adicionadas: ${NaoExistentes}`)
+            throw new Error(`${NaoExistentes.length} equipes não foram adicionadas: ${NaoExistentes.toString().replace(',', ', ')}`)
     } catch (error) {
         throw new Error(error)
     }

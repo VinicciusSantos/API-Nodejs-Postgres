@@ -10,7 +10,22 @@ exports.VincularProjetoTarefa = async (pr, tr) => {
         if (!checkTr) throw new Error(`Tarefa ${tr} não encontrada`)
 
         ProjetoTarefa.VincularProjetoTarefa(pr, tr)
-        return true
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
+exports.getTarefas = async(pr) => {
+    try {
+        const todasTarefas = await Tarefa.BuscarTarefas()
+        const prTarefas = await ProjetoTarefa.BuscarDeProjeto(pr)
+
+        const ids_tarefas = []
+        prTarefas.forEach(eq => { ids_tarefas.push(eq.dataValues.tarefaId) })
+
+        const results = todasTarefas.filter(tr => ids_tarefas.includes(tr.dataValues.id))
+        console.log(results)
+        return results
     } catch (error) {
         throw new Error(error)
     }

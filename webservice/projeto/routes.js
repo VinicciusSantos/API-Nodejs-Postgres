@@ -10,9 +10,8 @@ app.group('/projetos', function(){
     app.post("/", handlerProjeto.NovoProjeto)
     app.put("/:id", handlerProjeto.Edit)
     app.delete("/:id", handlerProjeto.Delete)
-
+    
     app.post("/:pr/tarefas/:tr", handlerProjeto.VincularProjetoTarefa)
-
 })
 
 module.exports = app.router

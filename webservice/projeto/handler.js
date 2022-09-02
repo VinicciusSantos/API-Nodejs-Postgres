@@ -10,9 +10,10 @@ exports.NovoProjeto = async (req, res) => {
     try {
         const novosDados = await Projeto.NovoProjeto(ProjetoNovo)
         const eqs = await ProjetoEquipe.Associar(novosDados.dataValues.id, equipes)
+        
         return res.status(201).json({message: "Criado com Sucesso", data: novosDados, equipes: eqs})
     } catch (error) {
-        return res.status(400).json({message: "Não Foi possível cadastrar o Projeto", error: error.message})
+        return res.status(400).json({message: error.message})
     }
 }
 
@@ -27,11 +28,13 @@ exports.BuscarProjetos = async (req, res) => {
 
 exports.BuscarPorId = async (req, res) => {
     const { id } = req.params
-
+    
     try {
-        const pe = await Projeto.BuscarPorId(id)
+        const pr = await Projeto.BuscarPorId(id)
         const equipes = await ProjetoEquipe.GetEquipes(id)
-        return res.status(200).json({message: "Retornando o Projeto com sucesso", data: pe, equipes})
+        const trs = await ProjetoTarefa.getTarefas(pr.dataValues.id)
+
+        return res.status(200).json({message: "Retornando o Projeto com sucesso", data: pr, equipes, tarefas: trs})
     } catch (error) {
         return res.status(400).json({message: "Erro ao buscar Projeto", error: error.message})
     }
@@ -84,8 +87,7 @@ exports.VincularProjetoTarefa = async(req, res) => {
     const { pr, tr } = req.params
     try {
         const vinculo = await ProjetoTarefa.VincularProjetoTarefa(pr, tr)
-        if (vinculo) var prAtualizado = await this.BuscarPorId(pr)
-        return res.status(201).json({message: `Projeto ${pr} foi vinculado com a tarefa ${tr}`, data: prAtualizado})
+        return res.status(201).json({message: `Projeto ${pr} foi vinculado com a tarefa ${tr}`})
     } catch (error) {
         return res.status(400).json({message: "Erro ao vincular Projeto e Tarefa", error: error.message})
     }
