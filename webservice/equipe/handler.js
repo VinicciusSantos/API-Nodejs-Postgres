@@ -18,7 +18,7 @@ exports.BuscarEquipes = async (req, res) => {
         const todasEquipes = await Equipe.BuscarEquipes()
         return res.status(200).json({message: "Retornando todas as equipes com sucesso", data: todasEquipes})
     } catch (error) {
-        return res.status(400).json({message: "Erro ao Buscar as equipes", error: error})
+        return res.status(400).json({message: "Erro ao Buscar as equipes", error: error.message})
     }
 }
 
@@ -29,7 +29,7 @@ exports.BuscarPorId = async (req, res) => {
         const equipe = await Equipe.BuscarPorId(id)
         return res.status(200).json({message: "Retornando a equipe com sucesso", data: equipe})
     } catch (error) {
-        return res.status(400).json({message: "Erro ao buscar equipe", error: error})
+        return res.status(400).json({message: "Erro ao buscar equipe", error: error.message})
     }
 }
 
@@ -42,7 +42,7 @@ exports.Edit = async (req, res) => {
         const editada = await Equipe.Edit(id, equipe)
         return res.status(200).json({message: `Editado com Sucesso!`, data: editada})
     } catch (error) {
-        return res.status(400).json({message: "Erro ao Editar equipe", error: error})
+        return res.status(400).json({message: "Erro ao Editar equipe", error: error.message})
     }
 }
 
@@ -53,6 +53,6 @@ exports.Delete = async (req, res) => {
         await Equipe.Delete(id)
         return res.status(200).json({message: `Equipe ${id} Removida com sucesso`})
     } catch (error) {
-        return res.status(400).json({message: "Erro ao Deletar equipe", error: error})
+        return res.status(400).json({message: "Erro ao Deletar equipe", error: error.message})
     }
 }
