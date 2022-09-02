@@ -11,7 +11,7 @@ exports.NovaPessoa = async (req, res) => {
         const novosDados = await Pessoa.NovaPessoa(pessoaNova)
         return res.status(201).json({message: "Criado com Sucesso", data: novosDados})
     } catch (error) {
-        return res.status(400).json({message: "Não Foi possível cadastrar a Pessoa", error: error.message})
+        return res.status(400).json({message: "Não Foi possível cadastrar a Pessoa", error: error})
     }
 }
 
@@ -20,7 +20,7 @@ exports.BuscarPessoas = async (req, res) => {
         const todasPessoas = await Pessoa.BuscarPessoas()
         return res.status(200).json({message: "Retornando todas as Pessoas com sucesso", data: todasPessoas})
     } catch (error) {
-        return res.status(400).json({message: "Erro ao Buscar as Pessoas", error: error.message})
+        return res.status(400).json({message: "Erro ao Buscar as Pessoas", error: error})
     }
 }
 
@@ -31,7 +31,7 @@ exports.BuscarPorId = async (req, res) => {
         const pe = await Pessoa.BuscarPorId(id)
         return res.status(200).json({message: "Retornando a Pessoa com sucesso", data: pe})
     } catch (error) {
-        return res.status(400).json({message: "Erro ao buscar Pessoa", error: error.message})
+        return res.status(400).json({message: "Erro ao buscar Pessoa", error: error})
     }
 }
 
@@ -44,7 +44,7 @@ exports.Edit = async (req, res) => {
         const editada = await Pessoa.Edit(id, pessoaNova)
         return res.status(200).json({message: `Editado com Sucesso!`, data: editada})
     } catch (error) {
-        return res.status(400).json({message: "Erro ao Editar Pessoa", error: error.message})
+        return res.status(400).json({message: "Erro ao Editar Pessoa", error: error})
     }
 }
 
@@ -55,6 +55,6 @@ exports.Delete = async (req, res) => {
         await Pessoa.Delete(id)
         return res.status(200).json({message: `Pessoa ${id} Removida com sucesso`})
     } catch (error) {
-        return res.status(400).json({message: "Erro ao Deletar Pessoa", error: error.message})
+        return res.status(400).json({message: "Erro ao Deletar Pessoa", error: error})
     }
 }

@@ -12,7 +12,7 @@ exports.NovoProjeto = async (req, res) => {
         const eqs = await ProjetoEquipe.Associar(novosDados.dataValues.id, equipes)
         return res.status(201).json({message: "Criado com Sucesso", data: novosDados, equipes: eqs})
     } catch (error) {
-        return res.status(400).json({message: "Não Foi possível cadastrar o Projeto", error: error.message})
+        return res.status(400).json({message: "Não Foi possível cadastrar o Projeto", error: error})
     }
 }
 
@@ -21,7 +21,7 @@ exports.BuscarProjetos = async (req, res) => {
         const todosProjetos = await Projeto.BuscarProjetos()
         return res.status(200).json({message: "Retornando todas as Projetos com sucesso", data: todosProjetos})
     } catch (error) {
-        return res.status(400).json({message: "Erro ao Buscar as Projetos", error: error.message})
+        return res.status(400).json({message: "Erro ao Buscar as Projetos", error: error})
     }
 }
 
@@ -33,7 +33,7 @@ exports.BuscarPorId = async (req, res) => {
         const equipes = await ProjetoEquipe.GetEquipes(id)
         return res.status(200).json({message: "Retornando o Projeto com sucesso", data: pe, equipes})
     } catch (error) {
-        return res.status(400).json({message: "Erro ao buscar Projeto", error: error.message})
+        return res.status(400).json({message: "Erro ao buscar Projeto", error: error})
     }
 }
 
@@ -46,7 +46,7 @@ exports.Edit = async (req, res) => {
         const editada = await Projeto.Edit(id, projetoRecebido)
         return res.status(200).json({message: `Editado com Sucesso!`, data: editada})
     } catch (error) {
-        return res.status(400).json({message: "Erro ao Editar Projeto", error: error.message})
+        return res.status(400).json({message: "Erro ao Editar Projeto", error: error})
     }
 }
 
@@ -57,7 +57,7 @@ exports.Delete = async (req, res) => {
         await Projeto.Delete(id)
         return res.status(200).json({message: `Projeto ${id} Removido com sucesso`})
     } catch (error) {
-        return res.status(400).json({message: "Erro ao Deletar Projeto", error: error.message})
+        return res.status(400).json({message: "Erro ao Deletar Projeto", error: error})
     }
 }
 
@@ -66,7 +66,7 @@ exports.VerStatus = async (req, res) => {
         const status = await Projeto.VerStatus()
         return res.status(200).json({message: "Status de projetos obtidos com sucesso", data: status})
     } catch (error) {
-        return res.status(400).json({message: "Erro ao Buscar status", error: error.message})
+        return res.status(400).json({message: "Erro ao Buscar status", error: error})
     }
 }
 
@@ -76,7 +76,7 @@ exports.BuscarPorStatus = async(req, res) => {
         const projetosComOStatus = await Projeto.BuscarPorStatus(status)
         return res.status(200).json({message: `${projetosComOStatus.length} Projetos com o status '${status}' foram encontrados!`, data: projetosComOStatus})
     } catch (error) {
-        return res.status(400).json({message: "Erro ao filtrar projetos por status", error: error.message})
+        return res.status(400).json({message: "Erro ao filtrar projetos por status", error: error})
     }
 }
 
@@ -87,6 +87,6 @@ exports.VincularProjetoTarefa = async(req, res) => {
         if (vinculo) var prAtualizado = await this.BuscarPorId(pr)
         return res.status(201).json({message: `Projeto ${pr} foi vinculado com a tarefa ${tr}`, data: prAtualizado})
     } catch (error) {
-        return res.status(400).json({message: "Erro ao vincular Projeto e Tarefa", error: error.message})
+        return res.status(400).json({message: "Erro ao vincular Projeto e Tarefa", error: error})
     }
 }
