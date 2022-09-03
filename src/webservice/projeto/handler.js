@@ -1,6 +1,7 @@
 const Projeto = require('../../domain/projeto/usecase')
 const ProjetoEquipe = require('../../domain/projetoEquipe/usecase')
 const ProjetoTarefa = require('../../domain/projetoTarefa/usecase')
+const EquipePessoa = require('../../domain/equipePessoa/usecase')
 const ModelApresentacao = require('../../domain/projeto/model/model')
 
 exports.NovoProjeto = async (req, res) => {
@@ -31,10 +32,15 @@ exports.BuscarPorId = async (req, res) => {
     
     try {
         const pr = await Projeto.BuscarPorId(id)
-        const equipes = await ProjetoEquipe.GetEquipes(id)
-        const trs = await ProjetoTarefa.getTarefas(pr.dataValues.id)
+        const listaTarefas = await ProjetoTarefa.getTarefas(id)
+        const EquipesComPessoas = await EquipePessoa.getEquipesComPessoas()
 
-        return res.status(200).json({message: "Retornando o Projeto com sucesso", data: pr, equipes, tarefas: trs})
+        return res.status(200).json({
+            message: "Retornando o Projeto com sucesso",
+            data: pr,
+            equipes: EquipesComPessoas,
+            tarefas: listaTarefas
+        })
     } catch (error) {
         return res.status(400).json({message: "Erro ao buscar Projeto", error: error.message})
     }

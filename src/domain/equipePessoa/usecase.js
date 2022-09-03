@@ -26,6 +26,14 @@ exports.getPessoas = async (equipe) => {
     }
 }
 
+exports.getEquipesComPessoas = async () => {
+    try {
+        return Equipe.getEquipesComPessoas()
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
 exports.AssociaEquipePessoas = async (equipe, pessoas) => {
     try {
         // Verificando a existência da equipe

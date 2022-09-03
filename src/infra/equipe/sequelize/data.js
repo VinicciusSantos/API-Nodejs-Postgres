@@ -1,4 +1,6 @@
 const Equipe = require('../model/model')
+const EquipePessoa = require('../../equipePessoa/model/model')
+const Pessoa = require('../../pessoa/model/model')
 
 exports.NovaEquipe = (EquipeNova) => {
     return Equipe.create(EquipeNova)
@@ -22,4 +24,11 @@ exports.Edit = (id, equipe) => {
 
 exports.Delete = (id) => {
     return Equipe.destroy({ where: { id: id }})
+}
+
+exports.getEquipesComPessoas = () => {
+    return Equipe.findAll({
+        include: [{ model: EquipePessoa, required: true }],
+        include: [{ model: Pessoa, required: true }]
+    })
 }
