@@ -3,9 +3,8 @@ const ModelApresentacao = require('../../domain/pessoa/model/model')
 
 exports.NovaPessoa = async (req, res) => {
     const { id } = req.params
-    const { nome, nascimento, salario, foto } = req.body
-    let pessoaNova = new ModelApresentacao(nome, nascimento, salario, foto)
-    console.log(pessoaNova)
+    const { nome, nascimento, cargo, salario, foto } = req.body
+    let pessoaNova = new ModelApresentacao(nome, nascimento, cargo, salario, foto)
 
     try {
         const novosDados = await Pessoa.NovaPessoa(pessoaNova)
@@ -56,5 +55,14 @@ exports.Delete = async (req, res) => {
         return res.status(200).json({message: `Pessoa ${id} Removida com sucesso`})
     } catch (error) {
         return res.status(400).json({message: "Erro ao Deletar Pessoa", error: error.message})
+    }
+}
+
+exports.BuscarCargos = async (req, res) => {
+    try {
+        const cargos = await Pessoa.getCargos()
+        return res.status(200).json({message: `${cargos.length} cargos encontrados!`, data: cargos})
+    } catch (error) {
+        return res.status(400).json({message: "Erro ao Buscar cargos!", error: error.message})
     }
 }

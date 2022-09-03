@@ -14,6 +14,12 @@ exports.NovoProjeto = async (req, res) => {
         
         return res.status(201).json({message: "Criado com Sucesso", data: eqs })
     } catch (error) {
+
+        // Verificando se o nome passado está duplicado
+        const pr = await Projeto.BuscarPorNome(nome)
+        if (pr) return res.status(400).json({message: `Já existe um projeto com esse nome: (#${pr.id} - ${pr.nome})`})
+
+        // Mensagem Genérica
         return res.status(400).json({message: error.message})
     }
 }

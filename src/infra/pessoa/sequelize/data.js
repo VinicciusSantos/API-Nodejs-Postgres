@@ -1,3 +1,4 @@
+const sequelize = require('sequelize')
 const Pessoa = require('../model/model')
 
 exports.NovaPessoa = (pessoa) => {
@@ -18,4 +19,11 @@ exports.Edit = (id, pessoa) => {
 
 exports.Delete = (id) => {
     return Pessoa.destroy({ where: { id: id }})
+}
+
+exports.getCargos = () => {
+    return Pessoa.findAll({
+        attributes: ['cargo', [sequelize.fn('COUNT', '*'), 'count']],
+        group: ['cargo']
+    })
 }

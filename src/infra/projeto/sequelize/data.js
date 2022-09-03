@@ -18,6 +18,10 @@ exports.BuscarPorId = (id) => {
     })
 }
 
+exports.BuscarPorNome = (nome) => {
+    return Projeto.findOne({ where: { nome: nome } })
+}
+
 exports.Edit = (id, projeto) => {
     return Projeto.update(projeto, { where: { id: id }})
 }

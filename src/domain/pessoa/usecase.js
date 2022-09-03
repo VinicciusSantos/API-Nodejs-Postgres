@@ -38,3 +38,11 @@ exports.Delete = async (id) => {
         throw new Error(error)
     }
 }
+
+exports.getCargos = async () => {
+    try {
+        return Pessoa.getCargos()
+    } catch (error) {
+        throw new Error(error)
+    }
+}

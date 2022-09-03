@@ -2,23 +2,6 @@ const Projeto = require('../../infra/projeto/sequelize/data')
 const Equipe = require('../../infra/equipe/sequelize/data')
 const ProjetoEquipe = require('../../infra/projetoEquipe/sequelize/data')
 
-exports.GetEquipes = async (projeto) => {
-    try {
-        const todas_equipes =  await Equipe.BuscarEquipes()
-        const ids_equipes = await ProjetoEquipe.GetIdEquipes(projeto)
-        
-        // Gravando somente os ids das equipes na lista results
-        const results = ids_equipes.map(eq => { return eq.dataValues.equipeId })
-        
-        // Com os Id's do array results, pegamos as outras informações das equipes
-        return todas_equipes.filter(eq => 
-            results.includes(eq.dataValues.id)
-        ) 
-    } catch (error) {
-        throw new Error(error)
-    }
-}
-
 exports.Associar = async (projeto, equipes) => {
     try {
         const checkPr = await Projeto.BuscarPorId(projeto)

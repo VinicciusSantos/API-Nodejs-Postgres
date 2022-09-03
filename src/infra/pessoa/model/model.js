@@ -25,6 +25,10 @@ const Pessoa = database.define('pessoa',{
     }
   },
 
+  cargo: {
+    type: Sequelize.STRING(30)
+  },
+
   salario: {
     type: Sequelize.DECIMAL,
     validate: {

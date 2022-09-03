@@ -9,8 +9,7 @@ exports.NovaEquipe = (EquipeNova) => {
 
 exports.BuscarEquipes = () => {
     return Equipe.findAll({
-        include: [{ model: Pessoa, required: true }, 
-                  { model: Projeto, required: true }]
+        include: [{ model: Pessoa }]
     })
 }
 
@@ -22,7 +21,7 @@ exports.BuscarPorId = (id) => {
     return Equipe.findOne({
         include: [{ 
             model: Pessoa
-            // include: [{ model: Tarefa, required: true }]
+            // include: [{ model: Tarefa }]
         }],
         where: { id: id }
     })
@@ -34,10 +33,4 @@ exports.Edit = (id, equipe) => {
 
 exports.Delete = (id) => {
     return Equipe.destroy({ where: { id: id }})
-}
-
-exports.getEquipesComPessoas = () => {
-    return Equipe.findAll({
-        include: [{ model: Pessoa, required: true }]
-    })
 }
