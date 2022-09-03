@@ -29,13 +29,17 @@ exports.Associar = async (projeto, equipes) => {
         const results = ids_equipes.map(eq => { return eq.dataValues.id })
         
         // Se uma equipe passada não existir, ela não será associada com o projeto
-        let NaoExistentes = equipes.map( eq => {
+        let NaoExistentes = await Promise.all( equipes.map(async eq => {
             if (!results.includes(eq.id)) return eq.nome
-            else ProjetoEquipe.Associar(projeto, eq.id)
-        }).filter(eq => eq);
+            else await ProjetoEquipe.Associar(projeto, eq.id)
+        }))
+        
+        NaoExistentes = NaoExistentes.filter(eq => eq);
 
         if (NaoExistentes.length > 0)
             throw new Error(`${NaoExistentes.length} equipes não foram adicionadas: '${NaoExistentes.toString().replace(",", "', '")}'`)
+
+        return Projeto.BuscarPorId(projeto)
     } catch (error) {
         throw new Error(error)
     }

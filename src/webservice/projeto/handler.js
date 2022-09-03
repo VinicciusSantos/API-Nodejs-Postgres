@@ -12,7 +12,7 @@ exports.NovoProjeto = async (req, res) => {
         const novosDados = await Projeto.NovoProjeto(ProjetoNovo)
         const eqs = await ProjetoEquipe.Associar(novosDados.dataValues.id, equipes)
         
-        return res.status(201).json({message: "Criado com Sucesso", data: novosDados, equipes: eqs})
+        return res.status(201).json({message: "Criado com Sucesso", data: eqs })
     } catch (error) {
         return res.status(400).json({message: error.message})
     }
@@ -32,15 +32,7 @@ exports.BuscarPorId = async (req, res) => {
     
     try {
         const pr = await Projeto.BuscarPorId(id)
-        const listaTarefas = await ProjetoTarefa.getTarefas(id)
-        const EquipesComPessoas = await EquipePessoa.getEquipesComPessoas()
-
-        return res.status(200).json({
-            message: "Retornando o Projeto com sucesso",
-            data: pr,
-            equipes: EquipesComPessoas,
-            tarefas: listaTarefas
-        })
+        return res.status(200).json({ message: "Retornando o Projeto com sucesso", data: pr })
     } catch (error) {
         return res.status(400).json({message: "Erro ao buscar Projeto", error: error.message})
     }

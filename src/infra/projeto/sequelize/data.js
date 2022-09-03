@@ -1,5 +1,7 @@
 const sequelize = require('sequelize')
 const Projeto = require('../model/model')
+const Equipe = require('../../equipe/model/model')
+const Tarefa = require('../../tarefa/model/model')
 
 exports.NovoProjeto = (ProjetoNovo) => {
     return Projeto.create(ProjetoNovo)
@@ -10,7 +12,10 @@ exports.BuscarProjetos = () => {
 }
 
 exports.BuscarPorId = (id) => {
-    return Projeto.findByPk(id)
+    return Projeto.findOne({
+        include: [{ model: Equipe }, { model: Tarefa}],
+        where: { id: id }
+    })
 }
 
 exports.Edit = (id, projeto) => {
