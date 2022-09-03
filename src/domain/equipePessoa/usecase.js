@@ -55,7 +55,6 @@ exports.AssociaEquipePessoas = async (equipe, pessoas) => {
         // Retornando uma Mensagem avisando caso alguma pessoa não tenha sido associada
         if (listaInvalidos.length > 0) 
         throw new Error(`As pessoas: '${listaInvalidos.toString().replace(",", "', '")}' não foram adicionadas!`)
-
     } catch (error) {
         throw new Error(error)
     }

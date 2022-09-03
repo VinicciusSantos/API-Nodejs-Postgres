@@ -13,6 +13,7 @@ exports.BuscarEquipes = async () => {
 exports.BuscarPorId = async (id) => {
     try {
         const eq = await Equipe.BuscarPorId(id)
+        console.log(eq)
         if (!eq) throw new Error(`Equipe ${id} não foi encontrada`)
         return eq
     } catch (err) {

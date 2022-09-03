@@ -1,13 +1,17 @@
 const Equipe = require('../model/model')
-const EquipePessoa = require('../../equipePessoa/model/model')
 const Pessoa = require('../../pessoa/model/model')
+const Projeto = require('../../projeto/model/model')
+const Tarefa = require('../../tarefa/model/model')
 
 exports.NovaEquipe = (EquipeNova) => {
     return Equipe.create(EquipeNova)
 }
 
 exports.BuscarEquipes = () => {
-    return Equipe.findAll()
+    return Equipe.findAll({
+        include: [{ model: Pessoa, required: true }, 
+                  { model: Projeto, required: true }]
+    })
 }
 
 exports.BuscarCampos = (campos) => {
@@ -15,7 +19,13 @@ exports.BuscarCampos = (campos) => {
 }
 
 exports.BuscarPorId = (id) => {
-    return Equipe.findByPk(id)
+    return Equipe.findOne({
+        include: [{ 
+            model: Pessoa
+            // include: [{ model: Tarefa, required: true }]
+        }],
+        where: { id: id }
+    })
 }
 
 exports.Edit = (id, equipe) => {
@@ -28,7 +38,6 @@ exports.Delete = (id) => {
 
 exports.getEquipesComPessoas = () => {
     return Equipe.findAll({
-        include: [{ model: EquipePessoa, required: true }],
         include: [{ model: Pessoa, required: true }]
     })
 }

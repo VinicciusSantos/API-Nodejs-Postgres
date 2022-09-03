@@ -7,9 +7,9 @@ exports.NovaEquipe = async (req, res) => {
     let equipeNova = new ModelApresentacao(nome)
 
     try {
-        const novosDados = await Equipe.NovaEquipe(equipeNova)
-        const associaPessoa = await EquipePessoa.AssociaEquipePessoas(novosDados.dataValues.id, pessoas)
-        return res.status(201).json({message: "Criado com Sucesso", data: novosDados})
+        let novosDados = await Equipe.NovaEquipe(equipeNova)
+        const dados = await EquipePessoa.AssociaEquipePessoas(novosDados.dataValues.id, pessoas)
+        return res.status(201).json({message: "Criado com Sucesso", data: dados})
     } catch (error) {
         return res.status(400).json({message: error.message})
     }
@@ -29,8 +29,7 @@ exports.BuscarPorId = async (req, res) => {
 
     try {
         const equipe = await Equipe.BuscarPorId(id)
-        const pessoas = await EquipePessoa.getPessoas(id)
-        return res.status(200).json({message: "Retornando a equipe com sucesso", data: equipe, pessoas: pessoas})
+        return res.status(200).json({message: "Retornando a equipe com sucesso", data: equipe })
     } catch (error) {
         return res.status(400).json({message: "Erro ao buscar equipe", error: error.message})
     }
