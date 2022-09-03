@@ -1,12 +1,11 @@
-var app = require('@forkjs/group-router')
-var handlerEquipe = require('./handler')
+const express = require('express')
+const router = express.Router();
+const handlerEquipe = require('./handler')
 
-app.group('/equipes', function(){
-    app.get("/:id", handlerEquipe.BuscarPorId)
-    app.get("/", handlerEquipe.BuscarEquipes)
-    app.post("/", handlerEquipe.NovaEquipe)
-    app.put("/:id", handlerEquipe.Edit)
-    app.delete("/:id", handlerEquipe.Delete)
-})
+router.get("/:id", handlerEquipe.BuscarPorId)
+router.get("/", handlerEquipe.BuscarEquipes)
+router.post("/", handlerEquipe.NovaEquipe)
+router.put("/:id", handlerEquipe.Edit)
+router.delete("/:id", handlerEquipe.Delete)
 
-module.exports = app.router
+module.exports = router

@@ -14,10 +14,10 @@ const equipes = require('./equipe/routes')
 const pessoas = require('./pessoa/routes')
 const projetos = require('./projeto/routes')
 const tarefas = require('./tarefa/routes')
-app.use(equipes)
-app.use(pessoas)
-app.use(projetos)
-app.use(tarefas)
+app.use('/equipes', equipes)
+app.use('/pessoas', pessoas)
+app.use('/projetos', projetos)
+app.use('/tarefas', tarefas)
 
 const host = '0.0.0.0';
 const port = process.env.PORT || 8000;
