@@ -1,7 +1,6 @@
 class Equipe {
-    constructor(nome, foto){
+    constructor(nome){
         this.nome = nome;
-        this.foto = foto;
     }
 }
 

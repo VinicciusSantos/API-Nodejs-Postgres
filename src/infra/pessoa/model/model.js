@@ -36,8 +36,8 @@ const Pessoa = database.define('pessoa',{
   foto: {
     type: Sequelize.STRING(300),
     validate: {
-      isUrl: true,
-      notEmpty: false,
+      // isUrl: true,
+      notEmpty: false
     }
   }
 })

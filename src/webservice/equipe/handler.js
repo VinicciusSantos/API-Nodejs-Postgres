@@ -1,15 +1,17 @@
 const Equipe = require('../../domain/equipe/usecase')
+const EquipePessoa = require('../../domain/equipePessoa/usecase')
 const ModelApresentacao = require('../../domain/equipe/model/model')
 
 exports.NovaEquipe = async (req, res) => {
-    const { nome, foto } = req.body
-    let equipeNova = new ModelApresentacao(nome, foto)
+    const { nome, pessoas } = req.body
+    let equipeNova = new ModelApresentacao(nome)
 
     try {
         const novosDados = await Equipe.NovaEquipe(equipeNova)
+        const associaPessoa = await EquipePessoa.AssociaEquipePessoas(novosDados.dataValues.id, pessoas)
         return res.status(201).json({message: "Criado com Sucesso", data: novosDados})
     } catch (error) {
-        return res.status(400).json({message: "Não Foi possível criar a equipe", error: error.message})
+        return res.status(400).json({message: error.message})
     }
 }
 
@@ -27,7 +29,8 @@ exports.BuscarPorId = async (req, res) => {
 
     try {
         const equipe = await Equipe.BuscarPorId(id)
-        return res.status(200).json({message: "Retornando a equipe com sucesso", data: equipe})
+        const pessoas = await EquipePessoa.getPessoas(id)
+        return res.status(200).json({message: "Retornando a equipe com sucesso", data: equipe, pessoas: pessoas})
     } catch (error) {
         return res.status(400).json({message: "Erro ao buscar equipe", error: error.message})
     }
@@ -35,8 +38,8 @@ exports.BuscarPorId = async (req, res) => {
 
 exports.Edit = async (req, res) => {
     const { id } = req.params
-    const { nome, foto } = req.body
-    let equipe = new ModelApresentacao(nome, foto)
+    const { nome } = req.body
+    let equipe = new ModelApresentacao(nome)
 
     try {
         const editada = await Equipe.Edit(id, equipe)
