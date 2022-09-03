@@ -46,3 +46,13 @@ exports.getCargos = async () => {
         throw new Error(error)
     }
 }
+
+exports.getByCargos = async(cargo) => {
+    try {
+        const pessoas = await Pessoa.getByCargos(cargo)
+        if (pessoas.length === 0) throw new Error(`Nenhuma pessoa Encontrada com o cargo ${cargo}`)
+        return pessoas
+    } catch (error) {
+        throw new Error(error)
+    }
+}

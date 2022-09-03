@@ -27,3 +27,7 @@ exports.getCargos = () => {
         group: ['cargo']
     })
 }
+
+exports.getByCargos = (cargo) => {
+    return Pessoa.findAll({ where: { cargo: { [sequelize.Op.iLike]: cargo } } })
+}

@@ -66,3 +66,14 @@ exports.BuscarCargos = async (req, res) => {
         return res.status(400).json({message: "Erro ao Buscar cargos!", error: error.message})
     }
 }
+
+exports.BuscarPeloCargo = async (req, res) => {
+    const { cargo } = req.params
+
+    try {
+        const pessoas = await Pessoa.getByCargos(cargo)
+        return res.status(200).json({message: `Mostrando pessoas com o cargo: ${cargo}`, data: pessoas})
+    } catch (error) {
+        return res.status(400).json({message: error.message})
+    }
+}
