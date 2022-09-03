@@ -5,7 +5,7 @@ const sequelize = new Sequelize(process.env.DB_URL)
 
 async function Conectar() {
     try {
-        await sequelize.sync({ force: true })
+        await sequelize.sync({ force: false })
         console.log('Conexão Concluida')
     } catch (error) {
         console.error(error)

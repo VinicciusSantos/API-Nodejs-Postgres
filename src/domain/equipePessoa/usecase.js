@@ -47,14 +47,16 @@ exports.AssociaEquipePessoas = async (equipe, pessoas) => {
         // Associando os id de pessoas com equipes
         // caso algum id inválido seja passado no meio dos válidos, ele será guardado
         // para que depois que todos os válidos sejam associados, retorne um alerta
-        let listaInvalidos = pessoas?.map((p) => {
+        let listaInvalidos = await Promise.all( pessoas?.map(async (p) => {
             if (!lista_IDs.includes(p.id)) return p.id
-            else EquipePessoa.AssociaEquipePessoa(eq.dataValues.id, p.id)
-        }).filter(id => id)
+            else await EquipePessoa.AssociaEquipePessoa(eq.dataValues.id, p.id)
+        }))
 
+        if (listaInvalidos.filter(e => e).length === 0) return Equipe.BuscarPorId(equipe)
+        
         // Retornando uma Mensagem avisando caso alguma pessoa não tenha sido associada
-        if (listaInvalidos.length > 0) 
-        throw new Error(`As pessoas: '${listaInvalidos.toString().replace(",", "', '")}' não foram adicionadas!`)
+        const listaInvalidosString = `'${listaInvalidos.filter(eq => eq).toString().replace(",", "', '")}'`
+        throw new Error(`As pessoas: ${listaInvalidosString} não foram adicionadas!`)
     } catch (error) {
         throw new Error(error)
     }

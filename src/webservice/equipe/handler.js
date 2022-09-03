@@ -8,8 +8,8 @@ exports.NovaEquipe = async (req, res) => {
 
     try {
         let novosDados = await Equipe.NovaEquipe(equipeNova)
-        const dados = await EquipePessoa.AssociaEquipePessoas(novosDados.dataValues.id, pessoas)
-        return res.status(201).json({message: "Criado com Sucesso", data: dados})
+        novosDados = await EquipePessoa.AssociaEquipePessoas(novosDados.dataValues.id, pessoas)
+        return res.status(201).json({message: "Criado com Sucesso", data: novosDados})
     } catch (error) {
         return res.status(400).json({message: error.message})
     }
