@@ -1,13 +1,16 @@
 const Tarefa = require('../../domain/tarefa/usecase')
+const PessoaTarefa = require('../../domain/pessoaTarefa/usecase')
 const ModelApresentacao = require('../../domain/tarefa/model/model')
 
 exports.NovaTarefa = async (req, res) => {
-    const { nome, descricao, prioridade } = req.body
+    const { nome, descricao, prioridade, pessoas } = req.body
     let TarefaNova = new ModelApresentacao(nome, descricao, prioridade)
 
     try {
         const novosDados = await Tarefa.NovaTarefa(TarefaNova)
-        return res.status(201).json({message: "Criada com Sucesso", data: novosDados})
+        console.log(novosDados.dataValues.id)
+        const vinculo = await PessoaTarefa.VinculaPessoaTarefa(pessoas, novosDados.dataValues.id)
+        return res.status(201).json({message: "Criada com Sucesso", data: vinculo})
     } catch (error) {
         return res.status(400).json({message: "Não Foi possível criar a Tarefa", error: error.message})
     }

@@ -1,4 +1,5 @@
 const Pessoa = require('../../domain/pessoa/usecase')
+const PessoaTarefa = require('../../domain/pessoaTarefa/usecase')
 const ModelApresentacao = require('../../domain/pessoa/model/model')
 
 exports.NovaPessoa = async (req, res) => {
@@ -75,5 +76,16 @@ exports.BuscarPeloCargo = async (req, res) => {
         return res.status(200).json({message: `Mostrando pessoas com o cargo: ${cargo}`, data: pessoas})
     } catch (error) {
         return res.status(400).json({message: error.message})
+    }
+}
+
+exports.VinculaPessoaTarefa = async (req, res) => {
+    const { pe, tr } = req.params
+
+    try {
+        const vinculo = await PessoaTarefa.VinculaPessoaTarefa([{id: parseInt(pe)}], tr)
+        return res.status(200).json({ message: `Pessoa ${pe} vinculada com a tarefa ${tr}!`, data: vinculo })
+    } catch (error) {
+        return res.status(400).json({ message: `Não foi possivel vincular a tarefa ${tr} com a pessoa ${pe}`, error: error.message })
     }
 }

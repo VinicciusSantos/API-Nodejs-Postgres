@@ -1,5 +1,6 @@
 const sequelize = require('sequelize')
 const Pessoa = require('../model/model')
+const Tarefa = require('../../tarefa/model/model')
 
 exports.NovaPessoa = (pessoa) => {
     return Pessoa.create(pessoa)
@@ -10,7 +11,10 @@ exports.BuscarPessoas = () => {
 }
 
 exports.BuscarPorId = (id) => {
-    return Pessoa.findByPk(id)
+    return Pessoa.findOne({
+        include: [{ model: Tarefa }],
+        where: { id: id }
+    })
 }
 
 exports.Edit = (id, pessoa) => {

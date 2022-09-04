@@ -11,4 +11,6 @@ router.post("/", handlerPessoa.NovaPessoa)
 router.put("/:id", handlerPessoa.Edit)
 router.delete("/:id", handlerPessoa.Delete)
 
+router.post('/:pe/tarefas/:tr', handlerPessoa.VinculaPessoaTarefa)
+
 module.exports = router

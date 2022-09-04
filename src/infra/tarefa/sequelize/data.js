@@ -1,4 +1,5 @@
 const Tarefa = require('../model/model')
+const Pessoa = require('../../pessoa/model/model')
 
 exports.NovaTarefa = (tarefaNova) => {
     return Tarefa.create(tarefaNova)
@@ -9,7 +10,10 @@ exports.BuscarTarefas = () => {
 }
 
 exports.BuscarPorId = (id) => {
-    return Tarefa.findByPk(id)
+    return Tarefa.findOne({
+        include: [{ model : Pessoa }],
+        where: { id: id }
+    })
 }
 
 exports.Edit = (id, tarefa) => {
