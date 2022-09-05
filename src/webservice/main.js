@@ -15,11 +15,13 @@ const pessoas = require('./pessoa/routes')
 const projetos = require('./projeto/routes')
 const tarefas = require('./tarefa/routes')
 const subTarefas = require('./subTarefa/routes')
+const lembretes = require('./lembrete/routes')
 app.use('/equipes', equipes)
 app.use('/pessoas', pessoas)
 app.use('/projetos', projetos)
 app.use('/tarefas', tarefas)
 app.use('/subtarefas', subTarefas)
+app.use('/lembretes', lembretes)
 
 const host = '0.0.0.0';
 const port = process.env.PORT || 8000;

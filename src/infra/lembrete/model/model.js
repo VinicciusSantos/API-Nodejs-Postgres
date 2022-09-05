@@ -21,8 +21,8 @@ const Lembrete = database.define('lembrete',{
     type: Sequelize.DATE,
     allowNull: false,
     validate: {
-      isDate: true
-      // isAfter: new Date()
+      isDate: true,
+      isAfter: `${new Date()}`
     }
   },
 })
