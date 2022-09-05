@@ -1,6 +1,6 @@
 const PessoaTarefa = require(`../../infra/pessoaTarefa/sequelize/data`)
 const Pessoa = require(`../../infra/pessoa/sequelize/data`)
-const Tarefa = require(`../../infra/Tarefa/sequelize/data`)
+const Tarefa = require(`../../infra/tarefa/sequelize/data`)
 
 exports.VinculaPessoaTarefa = async (pes, tr) => {
     try {
