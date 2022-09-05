@@ -1,8 +1,7 @@
 const { Sequelize } = require('sequelize');
 const database = require('../../../config/database/dbpostgres')
-const SubTarefa = require('../../subTarefa/model/model')
 
-const Tarefa = database.define('tarefa',{
+const SubTarefa = database.define('subTarefa',{
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -19,15 +18,13 @@ const Tarefa = database.define('tarefa',{
     }
   },
 
-  descricao: Sequelize.STRING(400),
-
   status: {
-    type: Sequelize.STRING(20),
+    type: Sequelize.INTEGER,
     allowNull: false,
-    defaultValue: "Não Iniciada",
+    defaultValue: 0,
     validate: {
       notEmpty: true,
-      isIn: [["Em Desenvolvimento", "Não Iniciada", "Em Testes", "Concluido"]]
+      isIn: [[0, 1]]
     }
   },
 
@@ -41,7 +38,4 @@ const Tarefa = database.define('tarefa',{
   }
 })
 
-Tarefa.hasMany(SubTarefa)
-SubTarefa.belongsTo(Tarefa);
-
-module.exports = Tarefa;
+module.exports = SubTarefa;
