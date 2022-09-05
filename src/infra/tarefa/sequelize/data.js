@@ -1,6 +1,7 @@
 const Tarefa = require('../model/model')
 const Pessoa = require('../../pessoa/model/model')
 const SubTarefa = require('../../subTarefa/model/model')
+const sequelize = require('sequelize')
 
 exports.NovaTarefa = (tarefaNova) => {
     return Tarefa.create(tarefaNova)
@@ -31,4 +32,19 @@ exports.CheckAllSubTarefas = (id, status) => {
     return SubTarefa.update({ status: status}, {
         where: { tarefaId: id }
     })
+}
+
+exports.BuscarPelaPrioridade = (prioridade) => {
+    return Tarefa.findAll({ where: { prioridade }})
+}
+
+exports.VerStatus = () => {
+    return Tarefa.findAll({
+        attributes: ['status', [sequelize.fn('COUNT', '*'), 'count']],
+        group: ['status']
+    })
+}
+
+exports.BuscarPorStatus = (status) => {
+    return Tarefa.findAll({ where: { status: status }})
 }

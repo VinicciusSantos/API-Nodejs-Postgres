@@ -70,3 +70,44 @@ exports.CheckAllSubTarefas = async (req, res) => {
         return res.status(400).json({message: "Erro ao Mudar os Status", error: error.message})
     }
 }
+
+exports.BuscarPelaPrioridade = async (req, res) => {
+    const { prioridade } = req.params
+
+    try {
+        const dados = await Tarefa.BuscarPelaPrioridade(prioridade)
+        return res.status(200).json({message: `Retornando Todas as tarefas com prioridade: ${prioridade}`, data: dados})
+    } catch (error) {
+        return res.status(400).json({message: error.message})
+    }
+}
+
+exports.VerStatus = async (req, res) => {
+    try {
+        const status = await Tarefa.VerStatus()
+        return res.status(200).json({message: "Status de tarefas obtidos com sucesso", data: status})
+    } catch (error) {
+        return res.status(400).json({message: "Erro ao Buscar status", error: error.message})
+    }
+}
+
+exports.BuscarPorStatus = async(req, res) => {
+    const { status } = req.params
+    try {
+        const tarefasComOStatus = await Tarefa.BuscarPorStatus(status)
+        return res.status(200).json({message: `${tarefasComOStatus.length} tarefas com o status '${status}' foram encontrados!`, data: tarefasComOStatus})
+    } catch (error) {
+        return res.status(400).json({message: "Erro ao filtrar tarefas por status", error: error.message})
+    }
+}
+
+exports.MudarStatus = async (req,res) => {
+    const { id, status } = req.params
+
+    try {
+        const updated = await Tarefa.MudarStatus(id, status)
+        return res.status(200).json({message: "Status da tarefa alterado com sucesso", data: updated})
+    } catch (error) {
+        return res.status(400).json({message: "Erro ao Atualizar status", error: error.message})
+    }
+}

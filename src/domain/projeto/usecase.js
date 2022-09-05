@@ -66,7 +66,7 @@ exports.VerStatus = async () => {
         if (status.length === 0) throw new Error("Nenhum Status Cadastrado")
         return status
     } catch (error) {
-        throw new Error("Falha ao buscar status")
+        throw new Error(error)
     }
 }
 
@@ -86,6 +86,6 @@ exports.BuscarPorStatus = async (status) => {
         if (projetosFiltrados.length === 0) throw new Error(`Nenhum projeto encontrado com o status ${status}`)
         return projetosFiltrados
     } catch (error) {
-        throw new Error(`Falha ao buscar projetos com o status: ${status}`)
+        throw new Error(error)
     }
 }
