@@ -59,3 +59,14 @@ exports.Delete = async (req, res) => {
         return res.status(400).json({message: "Erro ao Deletar Tarefa", error: error.message})
     }
 }
+
+exports.CheckAllSubTarefas = async (req, res) => {
+    const { id, status } = req.params
+
+    try {
+        const dadosAtualizados = await Tarefa.CheckAllSubTarefas(id, status)
+        return res.status(200).json({message: `Subtarefas da Tarefa: ${id} atualizadas com Status: ${status}`, data: dadosAtualizados})
+    } catch (error) {
+        return res.status(400).json({message: "Erro ao Mudar os Status", error: error.message})
+    }
+}

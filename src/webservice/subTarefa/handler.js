@@ -26,8 +26,8 @@ exports.BuscarPorId = async (req, res) => {
     const { id } = req.params
 
     try {
-        const SubTarefa = await SubTarefa.BuscarPorId(id)
-        return res.status(200).json({message: "Retornando a SubTarefa com sucesso", data: SubTarefa})
+        const sub = await SubTarefa.BuscarPorId(id)
+        return res.status(200).json({message: "Retornando a SubTarefa com sucesso", data: sub})
     } catch (error) {
         return res.status(400).json({message: "Erro ao buscar SubTarefa", error: error.message})
     }
@@ -35,11 +35,11 @@ exports.BuscarPorId = async (req, res) => {
 
 exports.Edit = async (req, res) => {
     const { id } = req.params
-    const { nome, descricao, prioridade } = req.body
-    let SubTarefa = new ModelApresentacao(nome, descricao, prioridade)
+    const { nome, prioridade, tarefaId } = req.body
+    let subEdit = new ModelApresentacao(nome, prioridade, tarefaId)
 
     try {
-        const editada = await SubTarefa.Edit(id, SubTarefa)
+        const editada = await SubTarefa.Edit(id, subEdit)
         return res.status(200).json({message: `Editado com Sucesso!`, data: editada})
     } catch (error) {
         return res.status(400).json({message: "Erro ao Editar SubTarefa", error: error.message})
@@ -50,17 +50,22 @@ exports.Delete = async (req, res) => {
     const { id } = req.params
 
     try {
-        await SubTarefa.Delete(id)
-        return res.status(200).json({message: `SubTarefa ${id} Removida com sucesso`})
+        const dadosAtualizados = await SubTarefa.Delete(id)
+        return res.status(200).json({message: `SubTarefa ${id} Removida com sucesso`, data: dadosAtualizados})
     } catch (error) {
         return res.status(400).json({message: "Erro ao Deletar SubTarefa", error: error.message})
     }
 }
 
-exports.CheckSubTarefas = async (req, res) => {
-
-}
-
 exports.UpdateSubtarefaStatus = async (req, res) => {
+    const { id, status } = req.params
 
+    try {
+        const dados = await SubTarefa.BuscarPorId(id)
+        dados.dataValues.status = parseInt(status)
+        const dadosEdit = await SubTarefa.Edit(parseInt(id), dados.dataValues)
+        return res.status(200).json({message: `Status editado com sucesso!`, data: dadosEdit})
+    } catch (error) {
+        return res.status(400).json({message: "Erro ao Editar status", error: error.message})
+    }
 }

@@ -38,3 +38,12 @@ exports.Delete = async (id) => {
         throw new Error(error)
     }
 }
+
+exports.CheckAllSubTarefas = async (id, status) => {
+    try {
+        await Tarefa.CheckAllSubTarefas(id, status)
+        return this.BuscarPorId(id)
+    } catch (error) {
+        throw new Error(error)
+    }
+}

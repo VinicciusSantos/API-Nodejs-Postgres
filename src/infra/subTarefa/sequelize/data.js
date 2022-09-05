@@ -6,5 +6,20 @@ exports.NovaSubTarefa = async (subTarefa) => {
 }
 
 exports.BuscarSubTarefas = async () => {
-    return SubTarefa.FindAll()
+    return SubTarefa.findAll()
+}
+
+exports.BuscarPorId = (id) => {
+    return SubTarefa.findOne({
+        where: { id: id },
+        include: Tarefa
+    })
+}
+
+exports.Edit = (id, subTarefa) => {
+    return SubTarefa.update(subTarefa, { where: { id: id }})
+}
+
+exports.Delete = (id) => {
+    return SubTarefa.destroy({ where: { id: id }})
 }
