@@ -2,8 +2,8 @@ const SubTarefa = require('../../domain/subTarefa/usecase.js')
 const ModelApresentacao = require('../../domain/subTarefa/model/model.js')
 
 exports.NovaSubTarefa = async (req, res) => {
-    const { nome, prioridade, fk_tarefa } = req.body
-    let SubTarefaNova = new ModelApresentacao(nome, prioridade, fk_tarefa)
+    const { nome, prioridade, tarefaId } = req.body
+    let SubTarefaNova = new ModelApresentacao(nome, prioridade, tarefaId)
 
     try {
         const novosDados = await SubTarefa.NovaSubTarefa(SubTarefaNova)

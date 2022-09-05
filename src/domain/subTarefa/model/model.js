@@ -1,8 +1,8 @@
 class SubTarefa {
-    constructor(nome, prioridade, fk_tarefa){
+    constructor(nome, prioridade, tarefaId){
         this.nome = nome;
         this.prioridade = prioridade;
-        this.fk_tarefa = fk_tarefa;
+        this.tarefaId = tarefaId;
     }
 }
 
