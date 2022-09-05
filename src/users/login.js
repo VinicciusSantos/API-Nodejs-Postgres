@@ -7,13 +7,13 @@ const bcrypt = require('bcrypt')
 
 //Inserindo Tarefas
 user.post('/login', async (req, res) => {
-    let { usuario, senha } = req.body
+    let { email, senha } = req.body
 
-    if (!usuario || !senha)
+    if (!email || !senha)
         return res.status(400).json(`Valores Obrigatórios não recebidos`)
 
     const user = await cliente
-                            .query(`SELECT * FROM users WHERE usuario = $1`, [usuario])
+                            .query(`SELECT * FROM users WHERE email = $1`, [email])
                             .catch(e => {                                  
                                 return res.status(400).json(e)
                             })

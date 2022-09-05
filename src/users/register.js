@@ -5,25 +5,27 @@ const bcrypt = require('bcrypt')
 
 //Inserindo Tarefas
 user.post('/cadastro', async (req, res) => {
-    let { usuario, senha } = req.body
+    let { nome, email, senha, confirmacao } = req.body
 
-    if (!usuario || !senha)
-        return res.status(400).json(`Valores Obrigatórios não recebidos`)
-
+    if (!nome || !senha || !email || !confirmacao)
+    return res.status(400).json(`Valores Obrigatórios não recebidos`)
+    
+    if (senha !== confirmacao) return res.status(401).json(`As senhas não batem`)
+    
     let hashedPassword = await bcrypt.hash(senha, 10)
 
     const lista_usuarios = await cliente
-                                    .query(`SELECT * FROM users WHERE usuario = $1`, [usuario])
+                                    .query(`SELECT * FROM users WHERE email = $1`, [email])
                                     .catch(e => {                                  
                                         return res.status(400).json(e)
                                     })
 
     if (lista_usuarios.rows.length > 0) {
-        return res.status(400).json(`Esse nome de Usuário Já Existe`)
+        return res.status(400).json(`Esse email já foi cadastrado`)
     }
 
     const cadastro = await cliente
-                                .query(`INSERT INTO users (usuario, senha) VALUES ($1, $2) RETURNING id, senha`, [usuario, hashedPassword])
+                                .query(`INSERT INTO users (nome, senha, email) VALUES ($1, $2, $3) RETURNING id, nome, email`, [nome, hashedPassword, email])
                                 .catch(e => {                                  
                                     return res.status(400).json(e)
                                 })

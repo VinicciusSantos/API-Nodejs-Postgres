@@ -34,9 +34,13 @@ equipes.put('/equipes/:id', authenticateToken, async (req, res) => {
             await cliente.query(`DELETE FROM pessoas_pertencem_equipes WHERE fk_pessoa = $1`, [p.pe_id])
         })
 
-        body.pessoas.forEach(async p =>{
-            await cliente.query(`INSERT INTO pessoas_pertencem_equipes (fk_pessoa, fk_equipe) VALUES ($1, $2)`, [p.pe_id, id])
-        })
+        try {
+            body.pessoas.forEach(async p =>{
+                await cliente.query(`INSERT INTO pessoas_pertencem_equipes (fk_pessoa, fk_equipe) VALUES ($1, $2)`, [p.pe_id, id])
+            })
+        } catch (error) {
+            return res.json("Alterado!")
+        }
     }
     return res.json("Alterado com sucesso!")
 })
