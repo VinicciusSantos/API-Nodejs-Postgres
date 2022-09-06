@@ -1,13 +1,21 @@
 const Pessoa = require('../../domain/pessoa/usecase')
 const PessoaTarefa = require('../../domain/pessoaTarefa/usecase')
 const ModelApresentacao = require('../../domain/pessoa/model/model')
+const { s3Uploadv2 } = require("../../middlewares/s3Service");
 
 exports.NovaPessoa = async (req, res) => {
-    const { id } = req.params
-    const { nome, nascimento, cargo, salario, foto } = req.body
-    let pessoaNova = new ModelApresentacao(nome, nascimento, cargo, salario, foto)
-
+    
+    const { nome, nascimento, cargo, salario } = req.body
+    let pessoaNova = new ModelApresentacao(nome, nascimento, cargo, salario)
+    
     try {
+        // Verificando se um arquivo de foto foi recebido
+        if (req.file){
+            var result = await s3Uploadv2(req.file)
+            pessoaNova.foto = result.Location
+        } 
+        console.log(pessoaNova)
+
         const novosDados = await Pessoa.NovaPessoa(pessoaNova)
         return res.status(201).json({message: "Criado com Sucesso", data: novosDados})
     } catch (error) {
@@ -37,8 +45,8 @@ exports.BuscarPorId = async (req, res) => {
 
 exports.Edit = async (req, res) => {
     const { id } = req.params
-    const { nome, nascimento, salario, foto } = req.body
-    let pessoaNova = new ModelApresentacao(nome, nascimento, salario, foto)
+    const { nome, nascimento, salario } = req.body
+    let pessoaNova = new ModelApresentacao(nome, nascimento, salario)
 
     try {
         const editada = await Pessoa.Edit(id, pessoaNova)
