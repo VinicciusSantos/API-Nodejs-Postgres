@@ -21,7 +21,7 @@ exports.NovoLembrete = async (NovoLembrete) => {
 exports.BuscarLembretes = async () => {
     try {
         const lem = await Lembrete.BuscarLembretes()
-        if (lem.length === 0) throw new Error(`Nenhum Lembrete Encontrado`)
+        // if (lem.length === 0) throw new Error(`Nenhum Lembrete Encontrado`)
         return lem
     } catch (error) {
         throw new Error(error)

@@ -11,7 +11,7 @@ exports.NovaTarefa = async (NovaTarefa) => {
 exports.BuscarTarefas = async () => {
     try {
         const trs = await Tarefa.BuscarTarefas()
-        if (trs.length === 0) throw new Error(`Nenhuma Tarefa Encontrada`)
+        // if (trs.length === 0) throw new Error(`Nenhuma Tarefa Encontrada`)
         return trs
     } catch (error) {
         throw new Error(error)
@@ -59,7 +59,7 @@ exports.CheckAllSubTarefas = async (id, status) => {
 exports.BuscarPelaPrioridade = async (prioridade) => {
     try {
         const dados = await Tarefa.BuscarPelaPrioridade(prioridade)
-        if (dados.length === 0) throw new Error(`Nenhuma Tarefa Encontrada com a prioridade: ${prioridade}`)
+        // if (dados.length === 0) throw new Error(`Nenhuma Tarefa Encontrada com a prioridade: ${prioridade}`)
         return dados
     } catch (error) {
         throw new Error(error)
@@ -69,7 +69,7 @@ exports.BuscarPelaPrioridade = async (prioridade) => {
 exports.VerStatus = async () => {
     try {
         const status = await Tarefa.VerStatus()
-        if (status.length === 0) throw new Error("Nenhum Status Encontrado")
+        // if (status.length === 0) throw new Error("Nenhum Status Encontrado")
         return status
     } catch (error) {
         throw new Error(error)
@@ -79,7 +79,7 @@ exports.VerStatus = async () => {
 exports.BuscarPorStatus = async (status) => {
     try {
         const tarefasFiltradas = await Tarefa.BuscarPorStatus(status)
-        if (tarefasFiltradas.length === 0) throw new Error(`Nenhuma tarefa encontrada com o status ${status}`)
+        // if (tarefasFiltradas.length === 0) throw new Error(`Nenhuma tarefa encontrada com o status ${status}`)
         return tarefasFiltradas
     } catch (error) {
         throw new Error(error)

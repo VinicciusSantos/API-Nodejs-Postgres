@@ -11,7 +11,7 @@ exports.NovoProjeto = async (NovoProjeto) => {
 exports.BuscarProjetos = async () => {
     try {
         const prs = await Projeto.BuscarProjetos()
-        if (prs.length === 0) throw new Error(`Nenhum Projeto Encontrado`)
+        // if (prs.length === 0) throw new Error(`Nenhum Projeto Encontrado`)
         return prs
     } catch (error) {
         throw new Error(error)
@@ -53,7 +53,7 @@ exports.Delete = async (id) => {
 exports.VerStatus = async () => {
     try {
         const status = await Projeto.VerStatus()
-        if (status.length === 0) throw new Error("Nenhum Status Cadastrado")
+        // if (status.length === 0) throw new Error("Nenhum Status Cadastrado")
         return status
     } catch (error) {
         throw new Error(error)

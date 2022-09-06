@@ -15,8 +15,8 @@ exports.NovoLembrete = async (req, res) => {
 
 exports.BuscarLembretes = async (req, res) => {
     try {
-        const todasLembretes = await Lembrete.BuscarLembretes()
-        return res.status(200).json({message: "Retornando todos os Lembretes com sucesso", data: todasLembretes})
+        const todosLembretes = await Lembrete.BuscarLembretes()
+        return res.status(200).json({message: "Retornando todos os Lembretes com sucesso", data: todosLembretes})
     } catch (error) {
         return res.status(400).json({message: "Erro ao Buscar os Lembretes", error: error.message})
     }

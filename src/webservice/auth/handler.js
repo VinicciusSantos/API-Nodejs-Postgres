@@ -17,8 +17,8 @@ exports.Login = async (req, res) => {
     const { email, senha } = req.body
     try {
         const login = await Auth.Login(email, senha)  
-        return res.status(200).json({message: `Login Concluido!`, token: login})
+        return res.status(200).json({message: `Login Concluido!`, token: login, auth: true})
     } catch (error) {
-        return res.status(400).json({message: "Não foi possível fazer login", error: error.message})
+        return res.status(400).json({message: "Não foi possível fazer login", error: error.message, auth: false})
     }
 }

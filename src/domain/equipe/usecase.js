@@ -6,7 +6,7 @@ exports.NovaEquipe = async (NovaEquipe) => {
 
 exports.BuscarEquipes = async () => {
     const eqs = await Equipe.BuscarEquipes()
-    if (eqs.length === 0) throw new Error(`Nenhuma Equipe Encontrada`)
+    // if (eqs.length === 0) throw new Error(`Nenhuma Equipe Encontrada`)
     return eqs
 }
 
