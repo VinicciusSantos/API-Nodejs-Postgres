@@ -28,16 +28,6 @@ exports.BuscarPorId = async (id) => {
     }
 }
 
-exports.BuscarPorNome = async (nome) => {
-    try {
-        const pr = await Projeto.BuscarPorNome(nome)
-        if (!pr) throw new Error(`Projeto ${nome} não foi encontrado`)
-        return pr
-    } catch (error) {
-        throw new Error(error)
-    }
-}
-
 exports.Edit = async (id, projeto) => {
     try {
         const proj = await this.BuscarPorId(id)
