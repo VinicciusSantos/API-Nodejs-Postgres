@@ -1,6 +1,11 @@
 const express = require('express')
 const router = express.Router();
+const multer = require('multer');
+const multerConfig = require('../../middlewares/multer');
 const handlerEquipe = require('./handler')
+
+router.get("/fotos", handlerEquipe.BuscarFotos)
+router.post("/fotos", multer(multerConfig).single('foto'), handlerEquipe.AddFoto)
 
 router.post("/", handlerEquipe.NovaEquipe)
 router.get("/", handlerEquipe.BuscarEquipes)

@@ -29,7 +29,7 @@ app.use('/relatorios', authenticateToken, relatorios)
 app.use('/auth', auth)
 
 const host = '0.0.0.0';
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8000;
 
 app.listen(port, host, () => {
     console.log(`API funcionando no host:`, host, `e na porta:`, port)

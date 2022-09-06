@@ -1,6 +1,8 @@
 const Equipe = require('../../domain/equipe/usecase')
 const EquipePessoa = require('../../domain/equipePessoa/usecase')
 const ModelApresentacao = require('../../domain/equipe/model/model')
+const FotosPadrao = require('../../domain/fotoPadrao/usecase')
+const { s3Uploadv2 } = require("../../middlewares/s3Service");
 
 exports.NovaEquipe = async (req, res) => {
     const { nome, pessoas } = req.body
@@ -69,5 +71,26 @@ exports.AssociaPessoa = async (req, res) => {
         return res.status(201).json({ message: `Equipe ${eq} associada com a pessoa ${pe}`, data: vinculo}) 
     } catch (error) {
         return res.status(400).json({message: "Erro ao Associar Equipe", error: error.message})
+    }
+}
+
+exports.BuscarFotos = async (req, res) => {
+    try {
+        const fotos = await FotosPadrao.BuscarFotos() 
+        return res.status(200).json({message: `${fotos.length} fotos encontradas`, data: fotos})
+    } catch (error) {
+        return res.status(400).json({message: "Erro ao buscar as fotos", error: error.message})
+    }
+}
+
+exports.AddFoto = async (req, res) => {
+    try {
+        if (req.file) {
+            var result = await s3Uploadv2(req.file)
+        } else throw new Error("Nenhuma foto recebida")
+        const foto = await FotosPadrao.AddFoto(result.Location) 
+        return res.status(200).json({message: `Foto enviada com sucesso!`, data: foto})
+    } catch (error) {
+        return res.status(400).json({message: "Erro ao buscar as fotos", error: error.message})
     }
 }
