@@ -23,7 +23,7 @@ exports.Login = async (email, senha) => {
 
         // Verificando se existe um usuario com o email fornecido
         const user = await Usuario.BuscarUm(email)
-        if (!user) throw new Error(`EmailInválidos!`)
+        if (!user) throw new Error(`Email ou Senha Inválidos!`)
 
         console.log(user.senha)
         // Verificando se a senha que ele passou está correta e gerando um token caso afirmativo
@@ -32,7 +32,7 @@ exports.Login = async (email, senha) => {
             return jwt.sign({id: user.id}, process.env.SECRET, {
                 expiresIn: '5h'
             });
-        } else throw new Error(` senha Inválidos!`)
+        } else throw new Error(` Email ou Senha Inválidos!`)
     } catch (error) {
        throw new Error(error)
     }
