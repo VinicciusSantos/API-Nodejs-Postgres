@@ -17,6 +17,7 @@ const tarefas = require('./tarefa/routes')
 const subTarefas = require('./subTarefa/routes')
 const lembretes = require('./lembrete/routes')
 const relatorios = require('./relatorio/routes')
+const auth = require('./auth/routes')
 app.use('/equipes', equipes)
 app.use('/pessoas', pessoas)
 app.use('/projetos', projetos)
@@ -24,6 +25,7 @@ app.use('/tarefas', tarefas)
 app.use('/subtarefas', subTarefas)
 app.use('/lembretes', lembretes)
 app.use('/relatorios', relatorios)
+app.use('/auth', auth)
 
 const host = '0.0.0.0';
 const port = process.env.PORT || 8000;
