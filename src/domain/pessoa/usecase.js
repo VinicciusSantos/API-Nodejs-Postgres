@@ -1,4 +1,5 @@
 const Pessoa = require('../../infra/pessoa/sequelize/data')
+const Tarefa = require('../../infra/tarefa/sequelize/data')
 
 exports.NovaPessoa = async (pessoaNova) => {
     return await Pessoa.NovaPessoa(pessoaNova)
@@ -13,6 +14,13 @@ exports.BuscarPessoas = async () => {
 exports.BuscarPorId = async (id) => {
     try {
         const pe = await Pessoa.BuscarPorId(id)
+        const tarefas = await Tarefa.BuscarTarefasPessoa(id)
+        pe.dataValues.tarefas = {}
+
+        pe.dataValues.tarefas.NaoIniciadas = tarefas[0].filter((t) => t.status == "Não Iniciado")
+        pe.dataValues.tarefas.EmDesenvolvimento = tarefas[0].filter((t) => t.status == "Em Desenvolvimento")
+        pe.dataValues.tarefas.Testes = tarefas[0].filter((t) => t.status == "Em Testes")
+        pe.dataValues.tarefas.Concluidas = tarefas[0].filter((t) => t.status == "Concluido")
         if (!pe) throw new Error(`Pessoa ${id} não foi encontrada`)
         return pe
     } catch (err) {
