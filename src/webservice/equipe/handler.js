@@ -5,8 +5,8 @@ const FotosPadrao = require('../../domain/fotoPadrao/usecase')
 const { s3Uploadv2 } = require("../../middlewares/s3Service");
 
 exports.NovaEquipe = async (req, res) => {
-    const { nome, pessoas } = req.body
-    let equipeNova = new ModelApresentacao(nome)
+    const { nome, pessoas, fotoPadraoId } = req.body
+    let equipeNova = new ModelApresentacao(nome, fotoPadraoId)
 
     try {
         let novosDados = await Equipe.NovaEquipe(equipeNova)

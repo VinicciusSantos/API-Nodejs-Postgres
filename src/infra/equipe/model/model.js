@@ -21,6 +21,7 @@ const Equipe = database.define('equipe',{
   }
 })
 
-Equipe.foto = Equipe.hasOne(FotoPadrao);
+Equipe.belongsTo(FotoPadrao)
+FotoPadrao.hasOne(Equipe)
 
 module.exports = Equipe;

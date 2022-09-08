@@ -1,6 +1,7 @@
 class Equipe {
-    constructor(nome){
+    constructor(nome, fotoPadraoId){
         this.nome = nome;
+        this.fotoPadraoId = fotoPadraoId;
     }
 }
 

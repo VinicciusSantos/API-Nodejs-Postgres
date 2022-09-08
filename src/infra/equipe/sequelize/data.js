@@ -1,7 +1,7 @@
 const Equipe = require('../model/model')
 const Pessoa = require('../../pessoa/model/model')
-const Projeto = require('../../projeto/model/model')
 const Tarefa = require('../../tarefa/model/model')
+const FotoPadrao = require('../../fotoPadrao/model/model')
 
 exports.NovaEquipe = (EquipeNova) => {
     return Equipe.create(EquipeNova)
@@ -9,7 +9,7 @@ exports.NovaEquipe = (EquipeNova) => {
 
 exports.BuscarEquipes = () => {
     return Equipe.findAll({
-        include: [{ model: Pessoa }]
+        include: [{ model: Pessoa }, { model: FotoPadrao }]
     })
 }
 
@@ -19,9 +19,10 @@ exports.BuscarCampos = (campos) => {
 
 exports.BuscarPorId = (id) => {
     return Equipe.findOne({
-        include: [{ 
-            model: Pessoa
-            // include: [{ model: Tarefa }]
+        include: [{
+            model: FotoPadrao }, { 
+            model: Pessoa,
+            include: [{ model: Tarefa }]
         }],
         where: { id: id }
     })
