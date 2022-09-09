@@ -1,6 +1,6 @@
 <div align="center" display="flex">
   <img height="70px" src='https://cdn-icons-png.flaticon.com/512/5968/5968322.png'>
-  <h1 align="center">API com Node.js e PostgreSQL</h1>
+  <h1 align="center">API de Gerenciamento de Projetos</h1>
 </div>
 
 ![Badge Concluido](http://img.shields.io/static/v1?label=STATUS&message=EM-DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
