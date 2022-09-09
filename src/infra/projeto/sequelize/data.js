@@ -1,7 +1,9 @@
 const sequelize = require('sequelize')
+const db = require('../../../config/database/dbpostgres')
 const Projeto = require('../model/model')
 const Equipe = require('../../equipe/model/model')
 const Tarefa = require('../../tarefa/model/model')
+const Pessoa = require('../../pessoa/model/model')
 
 exports.NovoProjeto = (ProjetoNovo) => {
     return Projeto.create(ProjetoNovo)
@@ -13,7 +15,7 @@ exports.BuscarProjetos = () => {
 
 exports.BuscarPorId = (id) => {
     return Projeto.findOne({
-        include: [{ model: Equipe }, { model: Tarefa}],
+        include: [{ model: Equipe, include: Pessoa }],
         where: { id: id }
     })
 }
@@ -39,4 +41,12 @@ exports.VerStatus = () => {
 
 exports.BuscarPorStatus = (status) => {
     return Projeto.findAll({ where: { status: status }})
+}
+
+exports.BuscarTarefas = (projeto) => {
+    return db.query(`SELECT tr.* FROM projetos AS pr
+                     INNER JOIN "projetoTarefas" AS ppt ON ppt."projetoId" = pr.id
+                     INNER JOIN tarefas AS tr ON tr.id = ppt."tarefaId"
+                     WHERE pr.id = ${projeto}
+                     ORDER BY tr.prioridade desc, tr.nome`)
 }

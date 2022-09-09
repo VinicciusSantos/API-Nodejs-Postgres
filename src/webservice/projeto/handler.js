@@ -3,6 +3,7 @@ const ProjetoEquipe = require('../../domain/projetoEquipe/usecase')
 const ProjetoTarefa = require('../../domain/projetoTarefa/usecase')
 const EquipePessoa = require('../../domain/equipePessoa/usecase')
 const ModelApresentacao = require('../../domain/projeto/model/model')
+const Tarefa = require('../../domain/tarefa/usecase')
 
 exports.NovoProjeto = async (req, res) => {
     const { nome, descricao, equipes } = req.body

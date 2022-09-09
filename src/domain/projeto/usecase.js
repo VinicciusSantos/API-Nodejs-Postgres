@@ -1,4 +1,5 @@
 const Projeto = require('../../infra/projeto/sequelize/data')
+const Tarefa = require('../../infra/tarefa/sequelize/data')
 
 exports.NovoProjeto = async (NovoProjeto) => {
     try {
@@ -21,6 +22,14 @@ exports.BuscarProjetos = async () => {
 exports.BuscarPorId = async (id) => {
     try {
         const pr = await Projeto.BuscarPorId(id)
+
+        const tarefas = await Projeto.BuscarTarefas(id)
+        console.log(tarefas)
+        pr.dataValues.tarefas = {}
+        pr.dataValues.tarefas.NaoIniciadas = tarefas[0].filter((t) => t.status == "Não Iniciada")
+        pr.dataValues.tarefas.EmDesenvolvimento = tarefas[0].filter((t) => t.status == "Em Desenvolvimento")
+        pr.dataValues.tarefas.Testes = tarefas[0].filter((t) => t.status == "Em Testes")
+        pr.dataValues.tarefas.Concluidas = tarefas[0].filter((t) => t.status == "Concluido")
         if (!pr) throw new Error(`Projeto ${id} não foi encontrado`)
         return pr
     } catch (error) {
