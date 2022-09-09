@@ -24,10 +24,10 @@ const Projeto = database.define('projeto',{
   status: {
     type: Sequelize.STRING(20),
     allowNull: false,
-    defaultValue: 'Ativo',
+    defaultValue: 'Não Iniciado',
     validate: {
       notEmpty: true,
-      isIn: [["Ativo", "Concluido", "Em Andamento"]]
+      isIn: [["Não Iniciado", "Concluido", "Em Andamento"]]
     }
   }
 })
