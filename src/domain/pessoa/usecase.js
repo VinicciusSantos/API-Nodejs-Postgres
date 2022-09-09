@@ -17,7 +17,7 @@ exports.BuscarPorId = async (id) => {
         const tarefas = await Tarefa.BuscarTarefasPessoa(id)
         pe.dataValues.tarefas = {}
 
-        pe.dataValues.tarefas.NaoIniciadas = tarefas[0].filter((t) => t.status == "Não Iniciado")
+        pe.dataValues.tarefas.NaoIniciadas = tarefas[0].filter((t) => t.status == "Não Iniciada")
         pe.dataValues.tarefas.EmDesenvolvimento = tarefas[0].filter((t) => t.status == "Em Desenvolvimento")
         pe.dataValues.tarefas.Testes = tarefas[0].filter((t) => t.status == "Em Testes")
         pe.dataValues.tarefas.Concluidas = tarefas[0].filter((t) => t.status == "Concluido")

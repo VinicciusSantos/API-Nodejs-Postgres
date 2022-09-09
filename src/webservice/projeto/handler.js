@@ -41,11 +41,15 @@ exports.BuscarPorId = async (req, res) => {
 
 exports.Edit = async (req, res) => {
     const { id } = req.params
-    const { nome, descricao } = req.body
+    const { nome, descricao, equipes } = req.body
     let projetoRecebido = new ModelApresentacao(nome, descricao)
 
     try {
         const editada = await Projeto.Edit(id, projetoRecebido)
+        if (equipes){
+            await ProjetoEquipe.RemoverAssociacoes(id)
+            await ProjetoEquipe.Associar(id, equipes)
+        } 
         return res.status(200).json({message: `Editado com Sucesso!`, data: editada})
     } catch (error) {
         return res.status(400).json({message: "Erro ao Editar Projeto", error: error.message})

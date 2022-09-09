@@ -11,3 +11,7 @@ exports.GetIdEquipes = async (projeto) => {
 exports.Associar = async (projeto, equipe) => {
     return ProjetoEquipe.create({projetoId: projeto, equipeId: equipe})
 }
+
+exports.RemoverAssociacoes = async(projeto) => {
+    return ProjetoEquipe.destroy({ where: { projetoId: projeto } })
+}

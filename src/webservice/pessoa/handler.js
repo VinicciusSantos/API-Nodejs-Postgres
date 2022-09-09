@@ -14,7 +14,6 @@ exports.NovaPessoa = async (req, res) => {
             var result = await s3Uploadv2(req.file)
             pessoaNova.foto = result.Location
         } 
-        console.log(pessoaNova)
 
         const novosDados = await Pessoa.NovaPessoa(pessoaNova)
         return res.status(201).json({message: "Criado com Sucesso", data: novosDados})

@@ -25,7 +25,6 @@ exports.Login = async (email, senha) => {
         const user = await Usuario.BuscarUm(email)
         if (!user) throw new Error(`Email ou Senha Inválidos!`)
 
-        console.log(user.senha)
         // Verificando se a senha que ele passou está correta e gerando um token caso afirmativo
         const validPassword = await bcrypt.compare(senha, user.senha)
         if (validPassword) {

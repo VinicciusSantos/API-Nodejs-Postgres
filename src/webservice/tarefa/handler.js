@@ -9,7 +9,6 @@ exports.NovaTarefa = async (req, res) => {
 
     try {
         const novosDados = await Tarefa.NovaTarefa(TarefaNova)
-        console.log(novosDados.dataValues.id)
         const vinculo = await PessoaTarefa.VinculaPessoaTarefa(pessoas, novosDados.dataValues.id)
         const vinculoProjeto = await ProjetoTarefa.VincularProjetoTarefa(projetoId, novosDados.dataValues.id)
         return res.status(201).json({message: "Criada com Sucesso", data: vinculo})
