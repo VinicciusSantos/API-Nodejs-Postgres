@@ -8,20 +8,25 @@ const handlerEquipe = require('./handler')
  * @swagger
  * /equipes/fotos:
  *   get:
- *     description: Retorna os links com todas as fotos de perfil pré-definidas para equipes!
- *     responses:
- *       200:
- *         description: Retorna uma lista de links de fotos.
- *       401:
- *          description: Não Autorizado, faça login para continuar
+ *      summary: Buscar Fotos de Equipes
+ *      description: Retorna os links com todas as fotos de perfil pré-definidas para equipes!
+ *      tags: ["Equipes"]
+ *      responses:
+ *          200:
+ *              description: Retorna uma lista de links de fotos.
+ *          401:
+ *              description: Não Autorizado, faça login para continuar
  */
 router.get("/fotos", handlerEquipe.BuscarFotos)
+
 
 /**
  * @swagger
  * /equipes/fotos:
  *   post:
+ *     summary: Adicionar nova foto para Equipes 
  *     description: Permite adicionar uma nova foto de perfil que poderá ser usada por uma equipe!
+ *     tags: ["Equipes"]
  *     responses:
  *       200:
  *         description: Retorna uma lista de links de fotos.
@@ -30,11 +35,14 @@ router.get("/fotos", handlerEquipe.BuscarFotos)
  */
 router.post("/fotos", multer(multerConfig).single('foto'), handlerEquipe.AddFoto)
 
+
 /**
  * @swagger
  * /equipes:
  *   post:
+ *     summary: Cadastrar uma nova Equipe
  *     description: Permite criar uma nova equipe!
+ *     tags: ["Equipes"]
  *     responses:
  *       200:
  *         description: Retorna uma lista de links de fotos.
@@ -43,11 +51,14 @@ router.post("/fotos", multer(multerConfig).single('foto'), handlerEquipe.AddFoto
  */
 router.post("/", handlerEquipe.NovaEquipe)
 
+
 /**
  * @swagger
  * /equipes:
  *   get:
+ *     summary: Ver todas as Equipes 
  *     description: Busca todas as equipes cadastradas!
+ *     tags: ["Equipes"]
  *     responses:
  *       200:
  *         description: Retorna uma lista de equipes.
@@ -56,11 +67,14 @@ router.post("/", handlerEquipe.NovaEquipe)
  */
 router.get("/", handlerEquipe.BuscarEquipes)
 
+
 /**
  * @swagger
  * /equipes/{id}:
  *   get:
+ *     summary: Ver uma Equipe Específica
  *     description: Busca uma equipe específica pelo ID dela!
+ *     tags: ["Equipes"]
  *     parameters:
  *          -   in: path
  *              name: id
@@ -76,11 +90,14 @@ router.get("/", handlerEquipe.BuscarEquipes)
  */
 router.get("/:id", handlerEquipe.BuscarPorId)
 
+
 /**
  * @swagger
  * /equipes/{id}:
  *   put:
- *     description: Busca todas as equipes cadastradas!
+ *     summary: Atualizar Informações de uma Equipe
+ *     description: Atualiza os dados de uma equipe!
+ *     tags: ["Equipes"]
  *     parameters:
  *          -   in: path
  *              name: id
@@ -96,11 +113,14 @@ router.get("/:id", handlerEquipe.BuscarPorId)
  */
 router.put("/:id", handlerEquipe.Edit)
 
+
 /**
  * @swagger
  * /equipes/{id}:
  *   delete:
+ *     summary: Apagar uma Equipe
  *     description: Apaga uma Equipe!
+ *     tags: ["Equipes"]
  *     parameters:
  *          -   in: path
  *              name: id
@@ -116,11 +136,14 @@ router.put("/:id", handlerEquipe.Edit)
  */
 router.delete("/:id", handlerEquipe.Delete)
 
+
 /**
  * @swagger
  * /equipes/{eq}/pessoas/{pe}:
  *   post:
+ *     summary: Associar uma Equipe com uma Pessoa
  *     description: Associa pessoas com uma equipe!
+ *     tags: ["Equipes"]
  *     parameters:
  *          -   in: path
  *              name: eq
