@@ -12,7 +12,7 @@ const swaggerOptions = {
             title: "API de Gerenciamento de Projetos",
             version: '2.0.0',
         },
-        servers: [{url: "localhost:8000"}, {url: "https://api-brisa-nodejs-postgresql.herokuapp.com"}],
+        servers: [{url: "http://localhost:8000"}, {url: "https://api-brisa-nodejs-postgresql.herokuapp.com"}],
     },
     apis: ["./src/webservice/*/routes.js"]
 };
