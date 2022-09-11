@@ -1,0 +1,31 @@
+/**
+ * @swagger
+ * components:
+ *      schemas:
+ *          Equipe:
+ *              type: object
+ *              required: 
+ *                  - nome
+ *              properties:
+ *                  id:
+ *                      type: integer
+ *                      description: O Identificador Gerado Automaticamente na criação da equipe
+ *                  nome:
+ *                      type: string
+ *                      description: O Nome dado para a Equipe
+ *                  fotoPadraoId:
+ *                      type: integer
+ *                      description: Chave Estrangeira que define a foto que a equipe está utilizando
+ *                  createdAt:
+ *                      type: date
+ *                      description: Data de Criação da Equipe (Gerada Automaticamente)
+ *                  updatedAt:
+ *                      type: date
+ *                      description: Data da Ultima Atualização dos dados (Gerada Automaticamente)
+ *              example:
+ *                  id: 1
+ *                  nome: Equipe Komanda
+ *                  fotoPadraoId: 4
+ *                  createdAt: 2022-09-09 12:31:45.51+00
+ *                  updatedAt: 2022-09-09 12:31:45.51+00
+*/
