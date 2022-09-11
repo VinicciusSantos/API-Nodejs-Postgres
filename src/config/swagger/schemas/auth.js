@@ -2,7 +2,7 @@
  * @swagger
  * components:
  *      schemas:
- *          Usuario:
+ *          Usuario - Cadastro:
  *              type: object
  *              required: 
  *                  - nome
@@ -18,6 +18,9 @@
  *                  email:
  *                      type: email
  *                      description: Email do Usuário
+ *                  senha:
+ *                      type: string
+ *                      description: Senha definida pelo Usuário
  *                  createdAt:
  *                      type: date
  *                      description: Data de Cadastro do Usuario (Gerada Automaticamente)
@@ -28,7 +31,28 @@
  *                  id: 1
  *                  nome: Admin
  *                  email: admin@gmail.com
- *                  senha: admin123
+ *                  senha: admin
  *                  createdAt: 2022-09-09 12:31:45.51+00
  *                  updatedAt: 2022-09-09 12:31:45.51+00
+*/
+
+/**
+ * @swagger
+ * components:
+ *      schemas:
+ *          Usuario - Login:
+ *              type: object
+ *              required: 
+ *                  - senha
+ *                  - email
+ *              properties:
+ *                  email:
+ *                      type: email
+ *                      description: Email do Usuário
+ *                  senha:
+ *                      type: string
+ *                      description: Senha definida pelo Usuário
+ *              example:
+ *                  email: admin@gmail.com
+ *                  senha: admin
 */

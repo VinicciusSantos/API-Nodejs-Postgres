@@ -11,6 +11,8 @@ const handlerEquipe = require('./handler')
  *      summary: Buscar Fotos de Equipes
  *      description: Retorna os links com todas as fotos de perfil pré-definidas para equipes!
  *      tags: ["Equipes"]
+ *     security: 
+ *        - BearerAuth: []
  *      responses:
  *          200:
  *              description: Retorna uma lista de links de fotos.
@@ -27,6 +29,8 @@ router.get("/fotos", handlerEquipe.BuscarFotos)
  *     summary: Adicionar nova foto para Equipes 
  *     description: Permite adicionar uma nova foto de perfil que poderá ser usada por uma equipe!
  *     tags: ["Equipes"]
+ *     security: 
+ *        - BearerAuth: []
  *     responses:
  *       200:
  *         description: Retorna uma lista de links de fotos.
@@ -43,9 +47,11 @@ router.post("/fotos", multer(multerConfig).single('foto'), handlerEquipe.AddFoto
  *     summary: Cadastrar uma nova Equipe
  *     description: Permite criar uma nova equipe!
  *     tags: ["Equipes"]
+ *     security: 
+ *        - BearerAuth: []
  *     responses:
  *       200:
- *         description: Retorna uma lista de links de fotos.
+ *         description: Retorna uma lista de links de fotos.   
  *       401:
  *          description: Não Autorizado, faça login para continuar
  */
@@ -59,6 +65,8 @@ router.post("/", handlerEquipe.NovaEquipe)
  *     summary: Ver todas as Equipes 
  *     description: Busca todas as equipes cadastradas!
  *     tags: ["Equipes"]
+ *     security: 
+ *        - BearerAuth: []
  *     responses:
  *       200:
  *         description: Retorna uma lista de equipes.
@@ -75,6 +83,8 @@ router.get("/", handlerEquipe.BuscarEquipes)
  *     summary: Ver uma Equipe Específica
  *     description: Busca uma equipe específica pelo ID dela!
  *     tags: ["Equipes"]
+ *     security: 
+ *        - BearerAuth: []
  *     parameters:
  *          -   in: path
  *              name: id
@@ -85,6 +95,10 @@ router.get("/", handlerEquipe.BuscarEquipes)
  *     responses:
  *       200:
  *         description: Retorna uma lista de equipes.
+ *         contens:
+ *               aplication/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Equipe'  
  *       401:
  *          description: Não Autorizado, faça login para continuar
  */
@@ -98,6 +112,8 @@ router.get("/:id", handlerEquipe.BuscarPorId)
  *     summary: Atualizar Informações de uma Equipe
  *     description: Atualiza os dados de uma equipe!
  *     tags: ["Equipes"]
+ *     security: 
+ *        - BearerAuth: []
  *     parameters:
  *          -   in: path
  *              name: id
@@ -121,6 +137,8 @@ router.put("/:id", handlerEquipe.Edit)
  *     summary: Apagar uma Equipe
  *     description: Apaga uma Equipe!
  *     tags: ["Equipes"]
+ *     security: 
+ *        - BearerAuth: []
  *     parameters:
  *          -   in: path
  *              name: id
@@ -144,6 +162,8 @@ router.delete("/:id", handlerEquipe.Delete)
  *     summary: Associar uma Equipe com uma Pessoa
  *     description: Associa pessoas com uma equipe!
  *     tags: ["Equipes"]
+ *     security: 
+ *        - BearerAuth: []
  *     parameters:
  *          -   in: path
  *              name: eq
