@@ -5,7 +5,8 @@
   "main": "src/webservice/main.js",
   "scripts": {
     "dev": "nodemon src/webservice/main.js",
-    "start": "node src/webservice/main.js"
+    "start": "node src/webservice/main.js",
+    "doc": "nodemon src/config/swagger/swagger/js"
   },
   "author": "",
   "license": "ISC",
@@ -26,6 +27,9 @@
     "pg-hstore": "^2.3.4",
     "postgres": "^3.2.4",
     "sequelize": "^6.20.1",
+    "swagger-autogen": "^2.21.5",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.5.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
