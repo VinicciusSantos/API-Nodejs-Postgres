@@ -1,7 +1,6 @@
 const sequelize = require('sequelize')
 const Pessoa = require('../model/model')
-const Tarefa = require('../../tarefa/model/model')
-const Projeto = require("../../projeto/model/model")
+const db = require('../../../config/database/dbpostgres')
 const Equipe = require('../../equipe/model/model')
 
 exports.NovaPessoa = (pessoa) => {
@@ -14,7 +13,7 @@ exports.BuscarPessoas = () => {
 
 exports.BuscarPorId = (id) => {
     return Pessoa.findOne({
-        include: [{ model: Equipe, include: Projeto }],
+        include: [{ model: Equipe }],
         where: { id: id }
     })
 }
@@ -36,4 +35,13 @@ exports.getCargos = () => {
 
 exports.getByCargos = (cargo) => {
     return Pessoa.findAll({ where: { cargo: { [sequelize.Op.iLike]: cargo } } })
+}
+
+exports.getProjetosDaPessoa = (id) => {
+    return db.query(`SELECT pr.* FROM projetos AS pr
+                     INNER JOIN "projetoEquipes" AS ppe ON ppe."projetoId" = pr.id
+                     INNER JOIN equipes AS eq ON eq.id = ppe."equipeId"
+                     INNER JOIN "equipePessoas" as ppeq on ppeq."equipeId" = eq.id
+                     INNER JOIN pessoas AS pe ON pe.id = ppeq."pessoaId"
+                     WHERE pe.id = ${id}`)
 }

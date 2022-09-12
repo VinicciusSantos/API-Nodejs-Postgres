@@ -11,7 +11,7 @@ exports.BuscarEquipes = async () => {
     return eqs
 }
 
-exports.BuscarPorId = async (id) => {
+exports.    BuscarPorId = async (id) => {
     try {
         const eq = await Equipe.BuscarPorId(id)
         if (!eq) throw new Error(`Equipe ${id} não foi encontrada`)
@@ -19,7 +19,7 @@ exports.BuscarPorId = async (id) => {
         const tarefas = await Tarefa.BuscarTarefasEquipe(id)
         eq.dataValues.tarefas = {}
         eq.dataValues.tarefas.total = (tarefas[0].length)
-        eq.dataValues.tarefas.NaoIniciadas = tarefas[0].filter(t => t.status == "Não Iniciado").length
+        eq.dataValues.tarefas.NaoIniciadas = tarefas[0].filter(t => t.status == "Não Iniciada").length
         eq.dataValues.tarefas.EmAndamento = tarefas[0].filter(t => t.status == "Em Desenvolvimento").length
         eq.dataValues.tarefas.EmTestes = tarefas[0].filter(t => t.status == "Em Testes").length
         eq.dataValues.tarefas.Concluidas = tarefas[0].filter(t => t.status == "Concluido").length
