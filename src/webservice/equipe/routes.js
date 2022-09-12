@@ -8,12 +8,12 @@ const handlerEquipe = require('./handler')
  * @swagger
  * /equipes/fotos:
  *   get:
- *      summary: Buscar Fotos de Equipes
- *      description: Retorna os links com todas as fotos de perfil pré-definidas para equipes!
- *      tags: ["Equipes"]
+ *     summary: Buscar Fotos de Equipes
+ *     description: Retorna os links com todas as fotos de perfil pré-definidas para equipes!
+ *     tags: ["Equipes"]
  *     security: 
  *        - BearerAuth: []
- *      responses:
+ *     responses:
  *          200:
  *              description: Retorna uma lista de links de fotos.
  *          401:
