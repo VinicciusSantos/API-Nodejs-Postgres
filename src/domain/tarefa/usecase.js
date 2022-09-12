@@ -1,3 +1,4 @@
+const Projeto = require('../../infra/projeto/sequelize/data')
 const Tarefa = require('../../infra/tarefa/sequelize/data')
 
 exports.NovaTarefa = async (NovaTarefa) => {
@@ -90,7 +91,20 @@ exports.MudarStatus = async (id, status) => {
     try {
         const tr = this.BuscarPorId(id)
         tr.status = status
-        return this.Edit(id, tr)
+        const edited = await this.Edit(id, tr)
+
+         // Buscando o projeto que a tarefa está
+        const projeto = await Tarefa.BuscarProjeto(id)
+
+        // Verificando as tarefas do projeto para mudar o status dele, caso necessário
+        const tarefasDoProjeto = await Projeto.BuscarTarefas(projeto[0][0].projetoId)
+
+        if (tarefasDoProjeto[0].filter(tr => tr.status === "Não Iniciada").length === tarefasDoProjeto[0].length)
+            await Projeto.EditStatus(projeto[0][0].projetoId, "Não Iniciado")
+        else if (tarefasDoProjeto[0].filter(tr => tr.status === "Concluido").length === tarefasDoProjeto[0].length)
+            await Projeto.EditStatus(projeto[0][0].projetoId, "Concluido")
+        else await Projeto.EditStatus(projeto[0][0].projetoId, "Em Andamento")
+        return edited   
     } catch (error) {
         throw new Error(error)
     }

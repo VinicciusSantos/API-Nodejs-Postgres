@@ -50,3 +50,7 @@ exports.BuscarTarefas = (projeto) => {
                      WHERE pr.id = ${projeto}
                      ORDER BY tr.prioridade desc, tr.nome`)
 }
+
+exports.EditStatus = (id, novoStatus) => {
+    return Projeto.update({status: novoStatus}, {where: { id: id } })
+}

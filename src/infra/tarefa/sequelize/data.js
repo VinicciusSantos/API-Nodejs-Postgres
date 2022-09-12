@@ -3,6 +3,8 @@ const Pessoa = require('../../pessoa/model/model')
 const SubTarefa = require('../../subTarefa/model/model')
 const sequelize = require('sequelize')
 const db = require('../../../config/database/dbpostgres')
+const ProjetoTarefa = require('../../projetoTarefa/model/model')
+const Projeto = require('../../projeto/model/model')
 
 exports.NovaTarefa = (tarefaNova) => {
     return Tarefa.create(tarefaNova)
@@ -65,4 +67,10 @@ exports.BuscarTarefasEquipe = (id) => {
                     INNER JOIN "pessoaTarefas" AS pat ON pat."pessoaId" = pe.id
                     INNER JOIN tarefas AS tr ON tr.id = pat."tarefaId"
                     WHERE eq.id = ${id}`)
+}
+
+exports.BuscarProjeto = (id) => {
+    return db.query(`SELECT "projetoId" FROM "projetoTarefas" AS ppt
+                     INNER JOIN tarefas AS tr ON tr.id = ppt."tarefaId"
+                     WHERE "tarefaId" = ${id}`)
 }
