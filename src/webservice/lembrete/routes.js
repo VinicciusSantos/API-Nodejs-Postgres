@@ -11,6 +11,12 @@ var handlerLembrete = require('./handler')
  *      tags: ["Lembretes"]
  *      security: 
  *        - BearerAuth: []
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Lembrete (req)'
  *      responses:
  *          201:
  *              description: Lembrete Criado com sucesso.

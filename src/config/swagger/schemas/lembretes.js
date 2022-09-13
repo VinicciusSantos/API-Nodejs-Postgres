@@ -2,7 +2,28 @@
  * @swagger
  * components:
  *      schemas:
- *          Lembrete:
+ *          Lembrete (req):
+ *              type: object
+ *              required: 
+ *                  - descricao
+ *                  - data
+ *              properties:
+ *                  descricao:
+ *                      type: string
+ *                      description: Descrição do lembrete
+ *                  data:
+ *                      type: date
+ *                      description: A data que o evento do lembrete está marcado
+ *              example:
+ *                  descricao: Participar da Reunião
+ *                  data: 2022-12-09 10:13:50.51+00
+*/
+
+/**
+ * @swagger
+ * components:
+ *      schemas:
+ *          Lembrete (res):
  *              type: object
  *              required: 
  *                  - descricao
