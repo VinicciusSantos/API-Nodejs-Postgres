@@ -19,11 +19,12 @@ const Usuario = database.define('usuario',{
   },
 
   senha: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING(20),
     allowNull: false,
     validate: {
       notNull: true,
-      notEmpty: true, 
+      notEmpty: true,
+      min: 4,
     }
   },
 
