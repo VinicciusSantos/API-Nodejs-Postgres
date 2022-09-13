@@ -11,7 +11,7 @@ exports.BuscarEquipes = async () => {
     return eqs
 }
 
-exports.    BuscarPorId = async (id) => {
+exports.BuscarPorId = async (id) => {
     try {
         const eq = await Equipe.BuscarPorId(id)
         if (!eq) throw new Error(`Equipe ${id} não foi encontrada`)
