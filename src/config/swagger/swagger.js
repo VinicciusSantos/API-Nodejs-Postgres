@@ -15,7 +15,7 @@ const swaggerOptions = {
             }
         }
     },
-    apis: ["./src/webservice/*/routes.js", "./src/config/swagger/schemas/*.js"]
+    apis: ["./src/webservice/*/docs.js", "./src/config/swagger/schemas/*.js"]
 };
 
 module.exports = swaggerOptions
