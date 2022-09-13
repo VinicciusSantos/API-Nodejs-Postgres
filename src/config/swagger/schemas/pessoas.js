@@ -2,7 +2,41 @@
 * @swagger
 * components:
 *      schemas:
-*          Pessoa:
+*          Pessoa (req):
+*              type: object
+*              required: 
+*                  - nome
+*                  - nascimento
+*                  - email
+*              properties:
+*                  nome:
+*                      type: string
+*                      description: O Nome da Pessoa
+*                  nascimento:
+*                      type: date
+*                      description: Data de Nascimento da Pessoa
+*                  cargo:
+*                      type: string
+*                      description: Profissão que a pessoa ocupa
+*                  salario:
+*                      type: real
+*                      description: Quando a pessoa ganha
+*                  foto:
+*                      type: file
+*                      description: Arquivo de foto da pessoa
+*              example:
+*                  nome: Alice
+*                  nascimento: 2004-02-19 12:31:45.51+00
+*                  cargo: FrontEnd Pleno
+*                  salario: 8456.21
+*                  foto: Arquivo
+*/
+
+/**
+* @swagger
+* components:
+*      schemas:
+*          Pessoa (res):
 *              type: object
 *              required: 
 *                  - nome
