@@ -2,7 +2,38 @@
  * @swagger
  * components:
  *      schemas:
- *          Usuario - Cadastro:
+ *          Usuario - Cadastro (req):
+ *              type: object
+ *              required: 
+ *                  - nome
+ *                  - senha
+ *                  - confirmacao
+ *                  - email
+ *              properties:
+ *                  nome:
+ *                      type: string (3 - 100 caracteres)
+ *                      description: O Nome do Usuário
+ *                  email:
+ *                      type: email
+ *                      description: Email válido do Usuário
+ *                  senha:
+ *                      type: string (4 - 20 caracteres)
+ *                      description: Senha definida pelo Usuário
+ *                  confirmacao:
+ *                      type: string (4 - 20 caracteres)
+ *                      description: Confirmacao da senha definida pelo Usuário
+ *              example:
+ *                  nome: Admin
+ *                  email: admin@gmail.com
+ *                  senha: admin
+ *                  confirmacao: admin
+*/
+
+/**
+ * @swagger
+ * components:
+ *      schemas:
+ *          Usuario - Cadastro (res):
  *              type: object
  *              required: 
  *                  - nome

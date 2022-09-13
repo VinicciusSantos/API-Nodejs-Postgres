@@ -14,7 +14,7 @@ var handlerAuth = require('./handler')
  *          content:
  *              application/json:
  *                  schema:
- *                      $ref: '#/components/schemas/Usuario - Cadastro'
+ *                      $ref: '#/components/schemas/Usuario - Cadastro (req)'
  *     responses:
  *       200:
  *         description: Retorna uma lista de equipes.
@@ -39,7 +39,7 @@ router.post("/cadastro", handlerAuth.Cadastro)
  *                      $ref: '#/components/schemas/Usuario - Login'
  *     responses:
  *       200:
- *         description: Retorna uma lista de equipes.
+ *         description: Retorna um token de autorização.
  *       401:
  *          description: Não Autorizado, faça login para continuar
  */
