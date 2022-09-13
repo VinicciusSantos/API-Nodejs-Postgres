@@ -31,9 +31,17 @@ router.get("/fotos", handlerEquipe.BuscarFotos)
  *     tags: ["Equipes"]
  *     security: 
  *        - BearerAuth: []
+ *     consumes:
+ *        - multipart/form-data
+ *     parameters:
+ *        - in: formData
+ *          name: foto
+ *          type: file
+ *          required: true
+ *          description: Foto que será Postada.
  *     responses:
  *       200:
- *         description: Retorna uma lista de links de fotos.
+ *         description: Retorna o link da fotos postada.
  *       401:
  *          description: Não Autorizado, faça login para continuar
  */
@@ -49,9 +57,15 @@ router.post("/fotos", multer(multerConfig).single('foto'), handlerEquipe.AddFoto
  *     tags: ["Equipes"]
  *     security: 
  *        - BearerAuth: []
+ *     requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Equipe (req)'
  *     responses:
- *       200:
- *         description: Retorna uma lista de links de fotos.   
+ *       201:
+ *         description: Retorna todos os dados da nova equipe cadastrada.   
  *       401:
  *          description: Não Autorizado, faça login para continuar
  */
@@ -94,11 +108,7 @@ router.get("/", handlerEquipe.BuscarEquipes)
  *              description: O Id da equipe
  *     responses:
  *       200:
- *         description: Retorna uma lista de equipes.
- *         contens:
- *               aplication/json:
- *                  schema:
- *                      $ref: '#/components/schemas/Equipe'  
+ *         description: Retorna a equipe com o id definido.
  *       401:
  *          description: Não Autorizado, faça login para continuar
  */
@@ -114,6 +124,12 @@ router.get("/:id", handlerEquipe.BuscarPorId)
  *     tags: ["Equipes"]
  *     security: 
  *        - BearerAuth: []
+ *     requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Equipe (req)'
  *     parameters:
  *          -   in: path
  *              name: id
@@ -179,7 +195,7 @@ router.delete("/:id", handlerEquipe.Delete)
  *              description: O Id da pessoa
  *     responses:
  *       200:
- *         description: Retorna uma lista de equipes.
+ *         description: Pessoa associada com equipe.
  *       401:
  *          description: Não Autorizado, faça login para continuar
  */
