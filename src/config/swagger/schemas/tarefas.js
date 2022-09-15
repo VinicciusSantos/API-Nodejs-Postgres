@@ -2,7 +2,36 @@
 * @swagger
 * components:
 *      schemas:
-*          Tarefa:
+*          Tarefa (req):
+*              type: object
+*              required: 
+*                  - nome
+*                  - status
+*              properties:
+*                  nome:
+*                      type: string
+*                      description: O Nome da Tarefa
+*                  descricao:
+*                      type: string
+*                      description: decrição da Tarefa
+*                  prioridade:
+*                      type: integer
+*                      description: Prioridade da tarefa (1, 2 ou 3)
+*                  pessoas:
+*                      type: array
+*                      description: Lista de pessoas
+*              example:
+*                  id: 1
+*                  nome: GP Inovação
+*                  descricao: Uma corrida de inovação aberta em que equipes multidisciplinares, criam ideias de soluções para os problemas apresentados.
+*                  
+*/
+
+/**
+* @swagger
+* components:
+*      schemas:
+*          Tarefa (res):
 *              type: object
 *              required: 
 *                  - nome
@@ -21,7 +50,7 @@
 *                      type: string
 *                      description: Status que a Tarefa possui
 *                  prioridade:
-*                      type: string
+*                      type: integer
 *                      description: Prioridade da tarefa (1, 2 ou 3)
 *                  createdAt:
 *                      type: date
