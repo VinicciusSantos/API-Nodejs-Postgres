@@ -2,7 +2,28 @@
 * @swagger
 * components:
 *      schemas:
-*          SubTarefa:
+*          SubTarefa (req):
+*              type: object
+*              required: 
+*                  - nome
+*                  - prioridade
+*              properties:
+*                  nome:
+*                      type: string
+*                      description: O Nome da subTarefa
+*                  prioridade:
+*                      type: integer
+*                      description: prioridade da subTarefa, pode ser 1, 2 ou 3, quanto mais alto, maior
+*              example: 
+*                  nome: Fazer Alguma coisa
+*                  prioridade: 3
+*/
+
+/**
+* @swagger
+* components:
+*      schemas:
+*          SubTarefa (res):
 *              type: object
 *              required: 
 *                  - nome
