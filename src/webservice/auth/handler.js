@@ -7,7 +7,7 @@ exports.Cadastro = async (req, res) => {
 
     try {
         const cadastro = await Auth.Cadastro(newUser)  
-        return res.status(200).json({message: `Pessoa cadastrada com sucesso!`, data: cadastro})
+        return res.status(201).json({message: `Pessoa cadastrada com sucesso!`, data: cadastro})
     } catch (error) {
         return res.status(400).json({message: "Não foi possível fazer o cadastro", error: error.message})
     }

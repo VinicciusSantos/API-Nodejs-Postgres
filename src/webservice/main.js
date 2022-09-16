@@ -19,6 +19,6 @@ app.use('/', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 const host = '0.0.0.0';
 const port = process.env.PORT || 8000;
 
-app.listen(port, host, () => {
-    console.log(`API funcionando no host: ${host} e na porta: ${port}`)
-})
+const server = app.listen(port, host)
+
+module.exports = server

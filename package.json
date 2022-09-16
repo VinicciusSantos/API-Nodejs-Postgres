@@ -4,9 +4,10 @@
   "description": "Primeira API",
   "main": "src/webservice/main.js",
   "scripts": {
-    "dev": "nodemon src/webservice/main.js",
+    "dev": "nodemon src/webservice/main.js --ignore tests",
     "start": "node src/webservice/main.js",
-    "doc": "nodemon src/config/swagger/swagger/js"
+    "doc": "nodemon src/config/swagger/swagger/js",
+    "test": "jest --env node --forceExit"
   },
   "author": "",
   "license": "ISC",
@@ -27,12 +28,15 @@
     "pg-hstore": "^2.3.4",
     "postgres": "^3.2.4",
     "sequelize": "^6.20.1",
+    "supertest": "^6.2.4",
     "swagger-autogen": "^2.21.5",
     "swagger-jsdoc": "^6.2.5",
     "swagger-ui-express": "^4.5.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "axios": "^0.27.2",
+    "jest": "^29.0.3",
     "nodemon": "^2.0.19"
   }
 }

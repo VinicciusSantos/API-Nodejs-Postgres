@@ -13,7 +13,8 @@ const sequelize = new Sequelize({
             require: true,
             rejectUnauthorized: false
         }
-     },
+    },
+    logging: false
 });
 
 async function Conectar() {
