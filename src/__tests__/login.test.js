@@ -2,7 +2,7 @@ const server = require('../webservice/main')
 const request = require('supertest');
 const uuid = require('uuid').v4
 
-describe("Login Tests", () => {
+describe("Testes de Login", () => {
     // Cadastrando um usuario e vendo se é possível fazer login com ele
     it("should login", async () => {
         const senha = uuid()

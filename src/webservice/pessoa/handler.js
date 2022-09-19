@@ -44,8 +44,8 @@ exports.BuscarPorId = async (req, res) => {
 
 exports.Edit = async (req, res) => {
     const { id } = req.params
-    const { nome, nascimento, salario } = req.body
-    let pessoaNova = new ModelApresentacao(nome, nascimento, salario)
+    const { nome, nascimento, salario, cargo } = req.body
+    let pessoaNova = new ModelApresentacao(nome, nascimento, cargo, salario)
 
     try {
         const editada = await Pessoa.Edit(id, pessoaNova)

@@ -2,12 +2,12 @@ const server = require('../webservice/main')
 const request = require('supertest');
 const uuid = require('uuid').v4
 
-describe('Register tests', () => {
+describe('Testes de Cadastro', () => {
     // Criando um usuario normal com todos os dados corretos
     it('should create a new user', async () => {
         const senha = uuid()
         let user = {
-            nome: uuid(),
+            nome: `aaaa${uuid()}`,
             email: `${uuid()}@gmail.com`,
             senha: senha,
             confirmacao: senha
@@ -24,7 +24,7 @@ describe('Register tests', () => {
     // Criando um usuario, mas as senhas não batem
     it('should not post with a wrong password', async () => {
         let user = {
-            nome: uuid(),
+            nome: `aaaa${uuid()}`,
             email: `${uuid()}@gmail.com`,
             senha: uuid(),
             confirmacao: uuid()
@@ -40,7 +40,7 @@ describe('Register tests', () => {
     it('should not post with duplicated email', async () => {
         const senha = uuid()
         let user = {
-            nome: uuid(),
+            nome: `aaaa${uuid()}`,
             email: `${uuid()}@gmail.com`,
             senha: senha,
             confirmacao: senha
@@ -61,7 +61,7 @@ describe('Register tests', () => {
     it('should not post with an invalid email', async () => {
         const senha = uuid()
         let user = {
-            nome: uuid(),
+            nome: `aaaa${uuid()}`,
             email: uuid(),
             senha: senha,
             confirmacao: senha

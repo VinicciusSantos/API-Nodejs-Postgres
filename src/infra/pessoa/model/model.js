@@ -40,7 +40,7 @@ const Pessoa = database.define('pessoa',{
   foto: {
     type: Sequelize.STRING(300),
     validate: {
-      // isUrl: true,
+      isUrl: true,
       notEmpty: false
     }
   }

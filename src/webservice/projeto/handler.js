@@ -11,9 +11,11 @@ exports.NovoProjeto = async (req, res) => {
 
     try {
         const novosDados = await Projeto.NovoProjeto(ProjetoNovo)
-        const eqs = await ProjetoEquipe.Associar(novosDados.dataValues.id, equipes)
-        
-        return res.status(201).json({message: "Criado com Sucesso", data: eqs })
+        if (equipes) {
+            const eqs = await ProjetoEquipe.Associar(novosDados.dataValues.id, equipes)
+            return res.status(201).json({message: "Criado com Sucesso", data: eqs })
+        }
+        return res.status(201).json({message: "Criado com Sucesso, porém nenhuma equipe foi associada", data: novosDados })
     } catch (error) {
         return res.status(400).json({message: error.message})
     }
