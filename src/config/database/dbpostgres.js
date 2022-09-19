@@ -17,10 +17,9 @@ const sequelize = new Sequelize({
     logging: false
 });
 
-async function Conectar() {
+const Conectar = async () => {
     try {
         await sequelize.sync({ force: false })
-        console.log('Conexão Concluida')
     } catch (error) {
         console.error(error)
     }

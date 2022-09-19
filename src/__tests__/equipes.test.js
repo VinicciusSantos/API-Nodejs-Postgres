@@ -29,6 +29,10 @@ describe('Equipe Tests', () => {
         .send(equipe)
 
         expect(response.status).toBe(201)
+
+        await request(server)
+        .delete(`/equipes/${response.body.data.id}`)
+        .set("Authorization", `bearer ${token}`)
     })
 
     // Tentando cadastrar uma equipe com dados duplicados
@@ -52,10 +56,14 @@ describe('Equipe Tests', () => {
         .set("Authorization", `bearer ${token}`)
         .send(equipe)
         expect(response2.status).toBe(400)
+
+        await request(server)
+        .delete(`/equipes/${response1.body.data.id}`)
+        .set("Authorization", `bearer ${token}`)
     })
 
     // Tentando cadastrar com um nome vazio
-    it('should not create a duplicated Equipe', async () => {
+    it('should not create a Equipe with an invalid name', async () => {
         const token = await login()
         
         const equipe = {

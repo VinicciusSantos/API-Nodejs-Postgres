@@ -7,7 +7,7 @@
     "dev": "nodemon src/webservice/main.js --ignore tests",
     "start": "node src/webservice/main.js",
     "doc": "nodemon src/config/swagger/swagger/js",
-    "test": "jest --env node --forceExit"
+    "test": "jest --env node"
   },
   "author": "",
   "license": "ISC",

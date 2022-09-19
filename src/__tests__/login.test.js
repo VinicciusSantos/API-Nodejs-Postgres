@@ -26,7 +26,7 @@ describe("Login Tests", () => {
     })
     
     // Cadastrando um usuario e vendo se é possível fazer login com a senha errada
-    it("should login", async () => {
+    it("should not login with a wrong password", async () => {
         const senha = uuid()
         let user = {
             nome: uuid(),
@@ -51,7 +51,7 @@ describe("Login Tests", () => {
     })
 
     // Tentando fazer login com um usuário inexistente
-    it("should login", async () => {
+    it("should not login with a invalide user", async () => {
         let user = {
             nome: uuid(),
             senha: uuid()
